@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model name="" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="1487" systemVersion="12B19" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="CurrencyBalance" syncable="YES">
+        <attribute name="balance" attributeType="Transformable" valueTransformerName="NumberEncryptionTransformer" syncable="YES"/>
+        <attribute name="itemId" attributeType="Transformable" valueTransformerName="StringEncryptionTransformer" syncable="YES"/>
+    </entity>
+    <entity name="GoodBalance" syncable="YES">
+        <attribute name="balance" attributeType="Transformable" valueTransformerName="NumberEncryptionTransformer" syncable="YES"/>
+        <attribute name="itemId" attributeType="Transformable" valueTransformerName="StringEncryptionTransformer" syncable="YES"/>
+    </entity>
+    <entity name="Metadata" syncable="YES">
+        <attribute name="storefrontInfo" optional="YES" attributeType="Transformable" valueTransformerName="StringEncryptionTransformer" syncable="YES"/>
+        <attribute name="storeInfo" attributeType="Transformable" valueTransformerName="StringEncryptionTransformer" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="CurrencyBalance" positionX="0" positionY="0" width="128" height="73"/>
+        <element name="GoodBalance" positionX="0" positionY="0" width="128" height="73"/>
+        <element name="Metadata" positionX="0" positionY="0" width="128" height="73"/>
+    </elements>
+</model>

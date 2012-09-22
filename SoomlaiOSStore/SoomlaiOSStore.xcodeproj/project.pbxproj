@@ -1,0 +1,748 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		C02CEC46160DC870000AA0D2 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C02CEC45160DC870000AA0D2 /* Foundation.framework */; };
+		C02CEC55160DC870000AA0D2 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C02CEC54160DC870000AA0D2 /* SenTestingKit.framework */; };
+		C02CEC58160DC870000AA0D2 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C02CEC45160DC870000AA0D2 /* Foundation.framework */; };
+		C02CEC5B160DC870000AA0D2 /* libSoomlaiOSStore.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C02CEC42160DC870000AA0D2 /* libSoomlaiOSStore.a */; };
+		C02CEC61160DC870000AA0D2 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = C02CEC5F160DC870000AA0D2 /* InfoPlist.strings */; };
+		C02CEC64160DC870000AA0D2 /* SoomlaiOSStoreTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C02CEC63160DC870000AA0D2 /* SoomlaiOSStoreTests.m */; };
+		C02CEC77160DCA27000AA0D2 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C02CEC76160DCA27000AA0D2 /* CoreData.framework */; };
+		C02CEC79160DCA31000AA0D2 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C02CEC78160DCA31000AA0D2 /* StoreKit.framework */; };
+		C02CEC7B160DCA3A000AA0D2 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C02CEC7A160DCA3A000AA0D2 /* Security.framework */; };
+		C02CECD3160DCA67000AA0D2 /* JSONConsts.m in Sources */ = {isa = PBXBuildFile; fileRef = C02CEC7E160DCA67000AA0D2 /* JSONConsts.m */; };
+		C02CECD4160DCA67000AA0D2 /* StorageManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C02CEC80160DCA67000AA0D2 /* StorageManager.m */; };
+		C02CECD5160DCA67000AA0D2 /* StoreDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = C02CEC82160DCA67000AA0D2 /* StoreDatabase.m */; };
+		C02CECD6160DCA67000AA0D2 /* StoreInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = C02CEC84160DCA67000AA0D2 /* StoreInfo.m */; };
+		C02CECD7160DCA67000AA0D2 /* EncryptionTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = C02CEC87160DCA67000AA0D2 /* EncryptionTransformer.m */; };
+		C02CECD8160DCA67000AA0D2 /* NumberEncryptionTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = C02CEC89160DCA67000AA0D2 /* NumberEncryptionTransformer.m */; };
+		C02CECD9160DCA67000AA0D2 /* StringEncryptionTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = C02CEC8B160DCA67000AA0D2 /* StringEncryptionTransformer.m */; };
+		C02CECDA160DCA67000AA0D2 /* VirtualCurrencyStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = C02CEC8D160DCA67000AA0D2 /* VirtualCurrencyStorage.m */; };
+		C02CECDB160DCA67000AA0D2 /* VirtualGoodStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = C02CEC8F160DCA67000AA0D2 /* VirtualGoodStorage.m */; };
+		C02CECDC160DCA67000AA0D2 /* AppStoreItem.m in Sources */ = {isa = PBXBuildFile; fileRef = C02CEC93160DCA67000AA0D2 /* AppStoreItem.m */; };
+		C02CECDD160DCA67000AA0D2 /* BalanceDrivenPriceModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C02CEC95160DCA67000AA0D2 /* BalanceDrivenPriceModel.m */; };
+		C02CECDE160DCA67000AA0D2 /* PriceModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C02CEC97160DCA67000AA0D2 /* PriceModel.m */; };
+		C02CECDF160DCA67000AA0D2 /* StaticPriceModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C02CEC99160DCA67000AA0D2 /* StaticPriceModel.m */; };
+		C02CECE0160DCA67000AA0D2 /* VirtualCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = C02CEC9B160DCA67000AA0D2 /* VirtualCategory.m */; };
+		C02CECE1160DCA67000AA0D2 /* VirtualCurrency.m in Sources */ = {isa = PBXBuildFile; fileRef = C02CEC9D160DCA67000AA0D2 /* VirtualCurrency.m */; };
+		C02CECE2160DCA67000AA0D2 /* VirtualCurrencyPack.m in Sources */ = {isa = PBXBuildFile; fileRef = C02CEC9F160DCA67000AA0D2 /* VirtualCurrencyPack.m */; };
+		C02CECE3160DCA67000AA0D2 /* VirtualGood.m in Sources */ = {isa = PBXBuildFile; fileRef = C02CECA1160DCA67000AA0D2 /* VirtualGood.m */; };
+		C02CECE4160DCA67000AA0D2 /* VirtualItem.m in Sources */ = {isa = PBXBuildFile; fileRef = C02CECA3160DCA67000AA0D2 /* VirtualItem.m */; };
+		C02CECE5160DCA67000AA0D2 /* EventHandling.m in Sources */ = {isa = PBXBuildFile; fileRef = C02CECAC160DCA67000AA0D2 /* EventHandling.m */; };
+		C02CECE6160DCA67000AA0D2 /* InsufficientFundsException.m in Sources */ = {isa = PBXBuildFile; fileRef = C02CECAF160DCA67000AA0D2 /* InsufficientFundsException.m */; };
+		C02CECE7160DCA67000AA0D2 /* VirtualItemNotFoundException.m in Sources */ = {isa = PBXBuildFile; fileRef = C02CECB1160DCA67000AA0D2 /* VirtualItemNotFoundException.m */; };
+		C02CECE8160DCA67000AA0D2 /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = C02CECB6160DCA67000AA0D2 /* JSONKit.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		C02CECE9160DCA67000AA0D2 /* RNCryptor.m in Sources */ = {isa = PBXBuildFile; fileRef = C02CECBB160DCA67000AA0D2 /* RNCryptor.m */; };
+		C02CECEA160DCA67000AA0D2 /* RNCryptorEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = C02CECBD160DCA67000AA0D2 /* RNCryptorEngine.m */; };
+		C02CECEB160DCA67000AA0D2 /* RNDecryptor.m in Sources */ = {isa = PBXBuildFile; fileRef = C02CECBF160DCA67000AA0D2 /* RNDecryptor.m */; };
+		C02CECEC160DCA67000AA0D2 /* RNEncryptor.m in Sources */ = {isa = PBXBuildFile; fileRef = C02CECC1160DCA67000AA0D2 /* RNEncryptor.m */; };
+		C02CECED160DCA67000AA0D2 /* RNOpenSSLCryptor.m in Sources */ = {isa = PBXBuildFile; fileRef = C02CECC3160DCA67000AA0D2 /* RNOpenSSLCryptor.m */; };
+		C02CECEE160DCA67000AA0D2 /* RNOpenSSLDecryptor.m in Sources */ = {isa = PBXBuildFile; fileRef = C02CECC5160DCA67000AA0D2 /* RNOpenSSLDecryptor.m */; };
+		C02CECEF160DCA67000AA0D2 /* RNOpenSSLEncryptor.m in Sources */ = {isa = PBXBuildFile; fileRef = C02CECC7160DCA67000AA0D2 /* RNOpenSSLEncryptor.m */; };
+		C02CECF0160DCA67000AA0D2 /* store.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C02CECC8160DCA67000AA0D2 /* store.xcdatamodeld */; };
+		C02CECF1160DCA67000AA0D2 /* StoreConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = C02CECCB160DCA67000AA0D2 /* StoreConfig.m */; };
+		C02CECF2160DCA67000AA0D2 /* StoreController.m in Sources */ = {isa = PBXBuildFile; fileRef = C02CECCD160DCA67000AA0D2 /* StoreController.m */; };
+		C02CECF3160DCA67000AA0D2 /* NSString+MD5Addition.m in Sources */ = {isa = PBXBuildFile; fileRef = C02CECD0160DCA67000AA0D2 /* NSString+MD5Addition.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		C02CECF4160DCA67000AA0D2 /* UIDevice+IdentifierAddition.m in Sources */ = {isa = PBXBuildFile; fileRef = C02CECD2160DCA67000AA0D2 /* UIDevice+IdentifierAddition.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		C02CECF6160DCB4A000AA0D2 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C02CECF5160DCB4A000AA0D2 /* UIKit.framework */; };
+		C02CECFA160DCD7F000AA0D2 /* EventHandling.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C02CECAB160DCA67000AA0D2 /* EventHandling.h */; };
+		C02CECFB160DCDC9000AA0D2 /* AppStoreItem.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C02CEC92160DCA67000AA0D2 /* AppStoreItem.h */; };
+		C02CECFC160DCDC9000AA0D2 /* BalanceDrivenPriceModel.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C02CEC94160DCA67000AA0D2 /* BalanceDrivenPriceModel.h */; };
+		C02CECFD160DCDC9000AA0D2 /* PriceModel.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C02CEC96160DCA67000AA0D2 /* PriceModel.h */; };
+		C02CECFE160DCDC9000AA0D2 /* StaticPriceModel.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C02CEC98160DCA67000AA0D2 /* StaticPriceModel.h */; };
+		C02CECFF160DCDC9000AA0D2 /* VirtualCategory.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C02CEC9A160DCA67000AA0D2 /* VirtualCategory.h */; };
+		C02CED00160DCDC9000AA0D2 /* VirtualCurrency.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C02CEC9C160DCA67000AA0D2 /* VirtualCurrency.h */; };
+		C02CED01160DCDC9000AA0D2 /* VirtualCurrencyPack.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C02CEC9E160DCA67000AA0D2 /* VirtualCurrencyPack.h */; };
+		C02CED02160DCDC9000AA0D2 /* VirtualGood.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C02CECA0160DCA67000AA0D2 /* VirtualGood.h */; };
+		C02CED03160DCDC9000AA0D2 /* VirtualItem.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C02CECA2160DCA67000AA0D2 /* VirtualItem.h */; };
+		C02CED04160DCDC9000AA0D2 /* IStoreAsssets.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C02CECB2160DCA67000AA0D2 /* IStoreAsssets.h */; };
+		C02CED05160DCDC9000AA0D2 /* IStoreEventHandler.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C02CECB3160DCA67000AA0D2 /* IStoreEventHandler.h */; };
+		C02CED06160DCDC9000AA0D2 /* StoreConfig.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C02CECCA160DCA67000AA0D2 /* StoreConfig.h */; };
+		C02CED07160DCDC9000AA0D2 /* StoreController.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C02CECCC160DCA67000AA0D2 /* StoreController.h */; };
+		C02CED08160DCDE3000AA0D2 /* JSONConsts.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C02CEC7D160DCA67000AA0D2 /* JSONConsts.h */; };
+		C02CED09160DCDE3000AA0D2 /* StorageManager.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C02CEC7F160DCA67000AA0D2 /* StorageManager.h */; };
+		C02CED0A160DCDE3000AA0D2 /* StoreDatabase.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C02CEC81160DCA67000AA0D2 /* StoreDatabase.h */; };
+		C02CED0B160DCDE3000AA0D2 /* StoreInfo.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C02CEC83160DCA67000AA0D2 /* StoreInfo.h */; };
+		C02CED0C160DCDE3000AA0D2 /* EncryptionTransformer.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C02CEC86160DCA67000AA0D2 /* EncryptionTransformer.h */; };
+		C02CED0D160DCDE3000AA0D2 /* NumberEncryptionTransformer.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C02CEC88160DCA67000AA0D2 /* NumberEncryptionTransformer.h */; };
+		C02CED0E160DCDE3000AA0D2 /* StringEncryptionTransformer.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C02CEC8A160DCA67000AA0D2 /* StringEncryptionTransformer.h */; };
+		C02CED0F160DCDE3000AA0D2 /* VirtualCurrencyStorage.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C02CEC8C160DCA67000AA0D2 /* VirtualCurrencyStorage.h */; };
+		C02CED10160DCDE3000AA0D2 /* VirtualGoodStorage.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C02CEC8E160DCA67000AA0D2 /* VirtualGoodStorage.h */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		C02CEC59160DC870000AA0D2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C02CEC39160DC870000AA0D2 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = C02CEC41160DC870000AA0D2;
+			remoteInfo = SoomlaiOSStore;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		C02CEC40160DC870000AA0D2 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "include/${PRODUCT_NAME}";
+			dstSubfolderSpec = 16;
+			files = (
+				C02CECFA160DCD7F000AA0D2 /* EventHandling.h in CopyFiles */,
+				C02CECFB160DCDC9000AA0D2 /* AppStoreItem.h in CopyFiles */,
+				C02CECFC160DCDC9000AA0D2 /* BalanceDrivenPriceModel.h in CopyFiles */,
+				C02CECFD160DCDC9000AA0D2 /* PriceModel.h in CopyFiles */,
+				C02CECFE160DCDC9000AA0D2 /* StaticPriceModel.h in CopyFiles */,
+				C02CECFF160DCDC9000AA0D2 /* VirtualCategory.h in CopyFiles */,
+				C02CED00160DCDC9000AA0D2 /* VirtualCurrency.h in CopyFiles */,
+				C02CED01160DCDC9000AA0D2 /* VirtualCurrencyPack.h in CopyFiles */,
+				C02CED02160DCDC9000AA0D2 /* VirtualGood.h in CopyFiles */,
+				C02CED03160DCDC9000AA0D2 /* VirtualItem.h in CopyFiles */,
+				C02CED04160DCDC9000AA0D2 /* IStoreAsssets.h in CopyFiles */,
+				C02CED08160DCDE3000AA0D2 /* JSONConsts.h in CopyFiles */,
+				C02CED09160DCDE3000AA0D2 /* StorageManager.h in CopyFiles */,
+				C02CED0A160DCDE3000AA0D2 /* StoreDatabase.h in CopyFiles */,
+				C02CED0B160DCDE3000AA0D2 /* StoreInfo.h in CopyFiles */,
+				C02CED0C160DCDE3000AA0D2 /* EncryptionTransformer.h in CopyFiles */,
+				C02CED0D160DCDE3000AA0D2 /* NumberEncryptionTransformer.h in CopyFiles */,
+				C02CED0E160DCDE3000AA0D2 /* StringEncryptionTransformer.h in CopyFiles */,
+				C02CED0F160DCDE3000AA0D2 /* VirtualCurrencyStorage.h in CopyFiles */,
+				C02CED10160DCDE3000AA0D2 /* VirtualGoodStorage.h in CopyFiles */,
+				C02CED05160DCDC9000AA0D2 /* IStoreEventHandler.h in CopyFiles */,
+				C02CED06160DCDC9000AA0D2 /* StoreConfig.h in CopyFiles */,
+				C02CED07160DCDC9000AA0D2 /* StoreController.h in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		C02CEC42160DC870000AA0D2 /* libSoomlaiOSStore.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libSoomlaiOSStore.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		C02CEC45160DC870000AA0D2 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		C02CEC49160DC870000AA0D2 /* SoomlaiOSStore-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SoomlaiOSStore-Prefix.pch"; sourceTree = "<group>"; };
+		C02CEC53160DC870000AA0D2 /* SoomlaiOSStoreTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SoomlaiOSStoreTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
+		C02CEC54160DC870000AA0D2 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
+		C02CEC5E160DC870000AA0D2 /* SoomlaiOSStoreTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "SoomlaiOSStoreTests-Info.plist"; sourceTree = "<group>"; };
+		C02CEC60160DC870000AA0D2 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		C02CEC62160DC870000AA0D2 /* SoomlaiOSStoreTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SoomlaiOSStoreTests.h; sourceTree = "<group>"; };
+		C02CEC63160DC870000AA0D2 /* SoomlaiOSStoreTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SoomlaiOSStoreTests.m; sourceTree = "<group>"; };
+		C02CEC76160DCA27000AA0D2 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		C02CEC78160DCA31000AA0D2 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		C02CEC7A160DCA3A000AA0D2 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		C02CEC7D160DCA67000AA0D2 /* JSONConsts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONConsts.h; sourceTree = "<group>"; };
+		C02CEC7E160DCA67000AA0D2 /* JSONConsts.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSONConsts.m; sourceTree = "<group>"; };
+		C02CEC7F160DCA67000AA0D2 /* StorageManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StorageManager.h; sourceTree = "<group>"; };
+		C02CEC80160DCA67000AA0D2 /* StorageManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StorageManager.m; sourceTree = "<group>"; };
+		C02CEC81160DCA67000AA0D2 /* StoreDatabase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StoreDatabase.h; sourceTree = "<group>"; };
+		C02CEC82160DCA67000AA0D2 /* StoreDatabase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StoreDatabase.m; sourceTree = "<group>"; };
+		C02CEC83160DCA67000AA0D2 /* StoreInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StoreInfo.h; sourceTree = "<group>"; };
+		C02CEC84160DCA67000AA0D2 /* StoreInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StoreInfo.m; sourceTree = "<group>"; };
+		C02CEC86160DCA67000AA0D2 /* EncryptionTransformer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EncryptionTransformer.h; sourceTree = "<group>"; };
+		C02CEC87160DCA67000AA0D2 /* EncryptionTransformer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EncryptionTransformer.m; sourceTree = "<group>"; };
+		C02CEC88160DCA67000AA0D2 /* NumberEncryptionTransformer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NumberEncryptionTransformer.h; sourceTree = "<group>"; };
+		C02CEC89160DCA67000AA0D2 /* NumberEncryptionTransformer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NumberEncryptionTransformer.m; sourceTree = "<group>"; };
+		C02CEC8A160DCA67000AA0D2 /* StringEncryptionTransformer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StringEncryptionTransformer.h; sourceTree = "<group>"; };
+		C02CEC8B160DCA67000AA0D2 /* StringEncryptionTransformer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StringEncryptionTransformer.m; sourceTree = "<group>"; };
+		C02CEC8C160DCA67000AA0D2 /* VirtualCurrencyStorage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VirtualCurrencyStorage.h; sourceTree = "<group>"; };
+		C02CEC8D160DCA67000AA0D2 /* VirtualCurrencyStorage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VirtualCurrencyStorage.m; sourceTree = "<group>"; };
+		C02CEC8E160DCA67000AA0D2 /* VirtualGoodStorage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VirtualGoodStorage.h; sourceTree = "<group>"; };
+		C02CEC8F160DCA67000AA0D2 /* VirtualGoodStorage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VirtualGoodStorage.m; sourceTree = "<group>"; };
+		C02CEC92160DCA67000AA0D2 /* AppStoreItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppStoreItem.h; sourceTree = "<group>"; };
+		C02CEC93160DCA67000AA0D2 /* AppStoreItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppStoreItem.m; sourceTree = "<group>"; };
+		C02CEC94160DCA67000AA0D2 /* BalanceDrivenPriceModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BalanceDrivenPriceModel.h; sourceTree = "<group>"; };
+		C02CEC95160DCA67000AA0D2 /* BalanceDrivenPriceModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BalanceDrivenPriceModel.m; sourceTree = "<group>"; };
+		C02CEC96160DCA67000AA0D2 /* PriceModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PriceModel.h; sourceTree = "<group>"; };
+		C02CEC97160DCA67000AA0D2 /* PriceModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PriceModel.m; sourceTree = "<group>"; };
+		C02CEC98160DCA67000AA0D2 /* StaticPriceModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StaticPriceModel.h; sourceTree = "<group>"; };
+		C02CEC99160DCA67000AA0D2 /* StaticPriceModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StaticPriceModel.m; sourceTree = "<group>"; };
+		C02CEC9A160DCA67000AA0D2 /* VirtualCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VirtualCategory.h; sourceTree = "<group>"; };
+		C02CEC9B160DCA67000AA0D2 /* VirtualCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VirtualCategory.m; sourceTree = "<group>"; };
+		C02CEC9C160DCA67000AA0D2 /* VirtualCurrency.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VirtualCurrency.h; sourceTree = "<group>"; };
+		C02CEC9D160DCA67000AA0D2 /* VirtualCurrency.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VirtualCurrency.m; sourceTree = "<group>"; };
+		C02CEC9E160DCA67000AA0D2 /* VirtualCurrencyPack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VirtualCurrencyPack.h; sourceTree = "<group>"; };
+		C02CEC9F160DCA67000AA0D2 /* VirtualCurrencyPack.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VirtualCurrencyPack.m; sourceTree = "<group>"; };
+		C02CECA0160DCA67000AA0D2 /* VirtualGood.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VirtualGood.h; sourceTree = "<group>"; };
+		C02CECA1160DCA67000AA0D2 /* VirtualGood.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VirtualGood.m; sourceTree = "<group>"; };
+		C02CECA2160DCA67000AA0D2 /* VirtualItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VirtualItem.h; sourceTree = "<group>"; };
+		C02CECA3160DCA67000AA0D2 /* VirtualItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VirtualItem.m; sourceTree = "<group>"; };
+		C02CECAB160DCA67000AA0D2 /* EventHandling.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventHandling.h; sourceTree = "<group>"; };
+		C02CECAC160DCA67000AA0D2 /* EventHandling.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventHandling.m; sourceTree = "<group>"; };
+		C02CECAE160DCA67000AA0D2 /* InsufficientFundsException.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InsufficientFundsException.h; sourceTree = "<group>"; };
+		C02CECAF160DCA67000AA0D2 /* InsufficientFundsException.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InsufficientFundsException.m; sourceTree = "<group>"; };
+		C02CECB0160DCA67000AA0D2 /* VirtualItemNotFoundException.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VirtualItemNotFoundException.h; sourceTree = "<group>"; };
+		C02CECB1160DCA67000AA0D2 /* VirtualItemNotFoundException.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VirtualItemNotFoundException.m; sourceTree = "<group>"; };
+		C02CECB2160DCA67000AA0D2 /* IStoreAsssets.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IStoreAsssets.h; sourceTree = "<group>"; };
+		C02CECB3160DCA67000AA0D2 /* IStoreEventHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IStoreEventHandler.h; sourceTree = "<group>"; };
+		C02CECB5160DCA67000AA0D2 /* JSONKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONKit.h; sourceTree = "<group>"; };
+		C02CECB6160DCA67000AA0D2 /* JSONKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSONKit.m; sourceTree = "<group>"; };
+		C02CECB8160DCA67000AA0D2 /* RNCryptor+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "RNCryptor+Private.h"; sourceTree = "<group>"; };
+		C02CECB9160DCA67000AA0D2 /* RNCryptor-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "RNCryptor-Prefix.pch"; sourceTree = "<group>"; };
+		C02CECBA160DCA67000AA0D2 /* RNCryptor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RNCryptor.h; sourceTree = "<group>"; };
+		C02CECBB160DCA67000AA0D2 /* RNCryptor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RNCryptor.m; sourceTree = "<group>"; };
+		C02CECBC160DCA67000AA0D2 /* RNCryptorEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RNCryptorEngine.h; sourceTree = "<group>"; };
+		C02CECBD160DCA67000AA0D2 /* RNCryptorEngine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RNCryptorEngine.m; sourceTree = "<group>"; };
+		C02CECBE160DCA67000AA0D2 /* RNDecryptor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RNDecryptor.h; sourceTree = "<group>"; };
+		C02CECBF160DCA67000AA0D2 /* RNDecryptor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RNDecryptor.m; sourceTree = "<group>"; };
+		C02CECC0160DCA67000AA0D2 /* RNEncryptor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RNEncryptor.h; sourceTree = "<group>"; };
+		C02CECC1160DCA67000AA0D2 /* RNEncryptor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RNEncryptor.m; sourceTree = "<group>"; };
+		C02CECC2160DCA67000AA0D2 /* RNOpenSSLCryptor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RNOpenSSLCryptor.h; sourceTree = "<group>"; };
+		C02CECC3160DCA67000AA0D2 /* RNOpenSSLCryptor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RNOpenSSLCryptor.m; sourceTree = "<group>"; };
+		C02CECC4160DCA67000AA0D2 /* RNOpenSSLDecryptor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RNOpenSSLDecryptor.h; sourceTree = "<group>"; };
+		C02CECC5160DCA67000AA0D2 /* RNOpenSSLDecryptor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RNOpenSSLDecryptor.m; sourceTree = "<group>"; };
+		C02CECC6160DCA67000AA0D2 /* RNOpenSSLEncryptor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RNOpenSSLEncryptor.h; sourceTree = "<group>"; };
+		C02CECC7160DCA67000AA0D2 /* RNOpenSSLEncryptor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RNOpenSSLEncryptor.m; sourceTree = "<group>"; };
+		C02CECC9160DCA67000AA0D2 /* store.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = store.xcdatamodel; sourceTree = "<group>"; };
+		C02CECCA160DCA67000AA0D2 /* StoreConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StoreConfig.h; sourceTree = "<group>"; };
+		C02CECCB160DCA67000AA0D2 /* StoreConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StoreConfig.m; sourceTree = "<group>"; };
+		C02CECCC160DCA67000AA0D2 /* StoreController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StoreController.h; sourceTree = "<group>"; };
+		C02CECCD160DCA67000AA0D2 /* StoreController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StoreController.m; sourceTree = "<group>"; };
+		C02CECCF160DCA67000AA0D2 /* NSString+MD5Addition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+MD5Addition.h"; sourceTree = "<group>"; };
+		C02CECD0160DCA67000AA0D2 /* NSString+MD5Addition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+MD5Addition.m"; sourceTree = "<group>"; };
+		C02CECD1160DCA67000AA0D2 /* UIDevice+IdentifierAddition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIDevice+IdentifierAddition.h"; sourceTree = "<group>"; };
+		C02CECD2160DCA67000AA0D2 /* UIDevice+IdentifierAddition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIDevice+IdentifierAddition.m"; sourceTree = "<group>"; };
+		C02CECF5160DCB4A000AA0D2 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		C02CEC3F160DC870000AA0D2 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C02CECF6160DCB4A000AA0D2 /* UIKit.framework in Frameworks */,
+				C02CEC7B160DCA3A000AA0D2 /* Security.framework in Frameworks */,
+				C02CEC79160DCA31000AA0D2 /* StoreKit.framework in Frameworks */,
+				C02CEC77160DCA27000AA0D2 /* CoreData.framework in Frameworks */,
+				C02CEC46160DC870000AA0D2 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C02CEC4F160DC870000AA0D2 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C02CEC55160DC870000AA0D2 /* SenTestingKit.framework in Frameworks */,
+				C02CEC58160DC870000AA0D2 /* Foundation.framework in Frameworks */,
+				C02CEC5B160DC870000AA0D2 /* libSoomlaiOSStore.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		C02CEC37160DC870000AA0D2 = {
+			isa = PBXGroup;
+			children = (
+				C02CEC47160DC870000AA0D2 /* SoomlaiOSStore */,
+				C02CEC5C160DC870000AA0D2 /* SoomlaiOSStoreTests */,
+				C02CEC44160DC870000AA0D2 /* Frameworks */,
+				C02CEC43160DC870000AA0D2 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		C02CEC43160DC870000AA0D2 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				C02CEC42160DC870000AA0D2 /* libSoomlaiOSStore.a */,
+				C02CEC53160DC870000AA0D2 /* SoomlaiOSStoreTests.octest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		C02CEC44160DC870000AA0D2 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				C02CECF5160DCB4A000AA0D2 /* UIKit.framework */,
+				C02CEC7A160DCA3A000AA0D2 /* Security.framework */,
+				C02CEC78160DCA31000AA0D2 /* StoreKit.framework */,
+				C02CEC76160DCA27000AA0D2 /* CoreData.framework */,
+				C02CEC45160DC870000AA0D2 /* Foundation.framework */,
+				C02CEC54160DC870000AA0D2 /* SenTestingKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		C02CEC47160DC870000AA0D2 /* SoomlaiOSStore */ = {
+			isa = PBXGroup;
+			children = (
+				C02CEC7C160DCA67000AA0D2 /* data */,
+				C02CEC90160DCA67000AA0D2 /* domain */,
+				C02CECAD160DCA67000AA0D2 /* exceptions */,
+				C02CECB4160DCA67000AA0D2 /* JSON */,
+				C02CECB7160DCA67000AA0D2 /* RNCryptor */,
+				C02CECCE160DCA67000AA0D2 /* UIDevice-UUID */,
+				C02CECAB160DCA67000AA0D2 /* EventHandling.h */,
+				C02CECAC160DCA67000AA0D2 /* EventHandling.m */,
+				C02CECB2160DCA67000AA0D2 /* IStoreAsssets.h */,
+				C02CECB3160DCA67000AA0D2 /* IStoreEventHandler.h */,
+				C02CECC8160DCA67000AA0D2 /* store.xcdatamodeld */,
+				C02CECCA160DCA67000AA0D2 /* StoreConfig.h */,
+				C02CECCB160DCA67000AA0D2 /* StoreConfig.m */,
+				C02CECCC160DCA67000AA0D2 /* StoreController.h */,
+				C02CECCD160DCA67000AA0D2 /* StoreController.m */,
+				C02CEC48160DC870000AA0D2 /* Supporting Files */,
+			);
+			path = SoomlaiOSStore;
+			sourceTree = "<group>";
+		};
+		C02CEC48160DC870000AA0D2 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				C02CEC49160DC870000AA0D2 /* SoomlaiOSStore-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		C02CEC5C160DC870000AA0D2 /* SoomlaiOSStoreTests */ = {
+			isa = PBXGroup;
+			children = (
+				C02CEC62160DC870000AA0D2 /* SoomlaiOSStoreTests.h */,
+				C02CEC63160DC870000AA0D2 /* SoomlaiOSStoreTests.m */,
+				C02CEC5D160DC870000AA0D2 /* Supporting Files */,
+			);
+			path = SoomlaiOSStoreTests;
+			sourceTree = "<group>";
+		};
+		C02CEC5D160DC870000AA0D2 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				C02CEC5E160DC870000AA0D2 /* SoomlaiOSStoreTests-Info.plist */,
+				C02CEC5F160DC870000AA0D2 /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		C02CEC7C160DCA67000AA0D2 /* data */ = {
+			isa = PBXGroup;
+			children = (
+				C02CEC85160DCA67000AA0D2 /* transformer */,
+				C02CEC7D160DCA67000AA0D2 /* JSONConsts.h */,
+				C02CEC7E160DCA67000AA0D2 /* JSONConsts.m */,
+				C02CEC7F160DCA67000AA0D2 /* StorageManager.h */,
+				C02CEC80160DCA67000AA0D2 /* StorageManager.m */,
+				C02CEC81160DCA67000AA0D2 /* StoreDatabase.h */,
+				C02CEC82160DCA67000AA0D2 /* StoreDatabase.m */,
+				C02CEC83160DCA67000AA0D2 /* StoreInfo.h */,
+				C02CEC84160DCA67000AA0D2 /* StoreInfo.m */,
+				C02CEC8C160DCA67000AA0D2 /* VirtualCurrencyStorage.h */,
+				C02CEC8D160DCA67000AA0D2 /* VirtualCurrencyStorage.m */,
+				C02CEC8E160DCA67000AA0D2 /* VirtualGoodStorage.h */,
+				C02CEC8F160DCA67000AA0D2 /* VirtualGoodStorage.m */,
+			);
+			path = data;
+			sourceTree = "<group>";
+		};
+		C02CEC85160DCA67000AA0D2 /* transformer */ = {
+			isa = PBXGroup;
+			children = (
+				C02CEC86160DCA67000AA0D2 /* EncryptionTransformer.h */,
+				C02CEC87160DCA67000AA0D2 /* EncryptionTransformer.m */,
+				C02CEC88160DCA67000AA0D2 /* NumberEncryptionTransformer.h */,
+				C02CEC89160DCA67000AA0D2 /* NumberEncryptionTransformer.m */,
+				C02CEC8A160DCA67000AA0D2 /* StringEncryptionTransformer.h */,
+				C02CEC8B160DCA67000AA0D2 /* StringEncryptionTransformer.m */,
+			);
+			path = transformer;
+			sourceTree = "<group>";
+		};
+		C02CEC90160DCA67000AA0D2 /* domain */ = {
+			isa = PBXGroup;
+			children = (
+				C02CEC91160DCA67000AA0D2 /* data */,
+			);
+			path = domain;
+			sourceTree = "<group>";
+		};
+		C02CEC91160DCA67000AA0D2 /* data */ = {
+			isa = PBXGroup;
+			children = (
+				C02CEC92160DCA67000AA0D2 /* AppStoreItem.h */,
+				C02CEC93160DCA67000AA0D2 /* AppStoreItem.m */,
+				C02CEC94160DCA67000AA0D2 /* BalanceDrivenPriceModel.h */,
+				C02CEC95160DCA67000AA0D2 /* BalanceDrivenPriceModel.m */,
+				C02CEC96160DCA67000AA0D2 /* PriceModel.h */,
+				C02CEC97160DCA67000AA0D2 /* PriceModel.m */,
+				C02CEC98160DCA67000AA0D2 /* StaticPriceModel.h */,
+				C02CEC99160DCA67000AA0D2 /* StaticPriceModel.m */,
+				C02CEC9A160DCA67000AA0D2 /* VirtualCategory.h */,
+				C02CEC9B160DCA67000AA0D2 /* VirtualCategory.m */,
+				C02CEC9C160DCA67000AA0D2 /* VirtualCurrency.h */,
+				C02CEC9D160DCA67000AA0D2 /* VirtualCurrency.m */,
+				C02CEC9E160DCA67000AA0D2 /* VirtualCurrencyPack.h */,
+				C02CEC9F160DCA67000AA0D2 /* VirtualCurrencyPack.m */,
+				C02CECA0160DCA67000AA0D2 /* VirtualGood.h */,
+				C02CECA1160DCA67000AA0D2 /* VirtualGood.m */,
+				C02CECA2160DCA67000AA0D2 /* VirtualItem.h */,
+				C02CECA3160DCA67000AA0D2 /* VirtualItem.m */,
+			);
+			path = data;
+			sourceTree = "<group>";
+		};
+		C02CECAD160DCA67000AA0D2 /* exceptions */ = {
+			isa = PBXGroup;
+			children = (
+				C02CECAE160DCA67000AA0D2 /* InsufficientFundsException.h */,
+				C02CECAF160DCA67000AA0D2 /* InsufficientFundsException.m */,
+				C02CECB0160DCA67000AA0D2 /* VirtualItemNotFoundException.h */,
+				C02CECB1160DCA67000AA0D2 /* VirtualItemNotFoundException.m */,
+			);
+			path = exceptions;
+			sourceTree = "<group>";
+		};
+		C02CECB4160DCA67000AA0D2 /* JSON */ = {
+			isa = PBXGroup;
+			children = (
+				C02CECB5160DCA67000AA0D2 /* JSONKit.h */,
+				C02CECB6160DCA67000AA0D2 /* JSONKit.m */,
+			);
+			path = JSON;
+			sourceTree = "<group>";
+		};
+		C02CECB7160DCA67000AA0D2 /* RNCryptor */ = {
+			isa = PBXGroup;
+			children = (
+				C02CECB8160DCA67000AA0D2 /* RNCryptor+Private.h */,
+				C02CECB9160DCA67000AA0D2 /* RNCryptor-Prefix.pch */,
+				C02CECBA160DCA67000AA0D2 /* RNCryptor.h */,
+				C02CECBB160DCA67000AA0D2 /* RNCryptor.m */,
+				C02CECBC160DCA67000AA0D2 /* RNCryptorEngine.h */,
+				C02CECBD160DCA67000AA0D2 /* RNCryptorEngine.m */,
+				C02CECBE160DCA67000AA0D2 /* RNDecryptor.h */,
+				C02CECBF160DCA67000AA0D2 /* RNDecryptor.m */,
+				C02CECC0160DCA67000AA0D2 /* RNEncryptor.h */,
+				C02CECC1160DCA67000AA0D2 /* RNEncryptor.m */,
+				C02CECC2160DCA67000AA0D2 /* RNOpenSSLCryptor.h */,
+				C02CECC3160DCA67000AA0D2 /* RNOpenSSLCryptor.m */,
+				C02CECC4160DCA67000AA0D2 /* RNOpenSSLDecryptor.h */,
+				C02CECC5160DCA67000AA0D2 /* RNOpenSSLDecryptor.m */,
+				C02CECC6160DCA67000AA0D2 /* RNOpenSSLEncryptor.h */,
+				C02CECC7160DCA67000AA0D2 /* RNOpenSSLEncryptor.m */,
+			);
+			path = RNCryptor;
+			sourceTree = "<group>";
+		};
+		C02CECCE160DCA67000AA0D2 /* UIDevice-UUID */ = {
+			isa = PBXGroup;
+			children = (
+				C02CECCF160DCA67000AA0D2 /* NSString+MD5Addition.h */,
+				C02CECD0160DCA67000AA0D2 /* NSString+MD5Addition.m */,
+				C02CECD1160DCA67000AA0D2 /* UIDevice+IdentifierAddition.h */,
+				C02CECD2160DCA67000AA0D2 /* UIDevice+IdentifierAddition.m */,
+			);
+			path = "UIDevice-UUID";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		C02CEC41160DC870000AA0D2 /* SoomlaiOSStore */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C02CEC67160DC870000AA0D2 /* Build configuration list for PBXNativeTarget "SoomlaiOSStore" */;
+			buildPhases = (
+				C02CEC3E160DC870000AA0D2 /* Sources */,
+				C02CEC3F160DC870000AA0D2 /* Frameworks */,
+				C02CEC40160DC870000AA0D2 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = SoomlaiOSStore;
+			productName = SoomlaiOSStore;
+			productReference = C02CEC42160DC870000AA0D2 /* libSoomlaiOSStore.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+		C02CEC52160DC870000AA0D2 /* SoomlaiOSStoreTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C02CEC6A160DC870000AA0D2 /* Build configuration list for PBXNativeTarget "SoomlaiOSStoreTests" */;
+			buildPhases = (
+				C02CEC4E160DC870000AA0D2 /* Sources */,
+				C02CEC4F160DC870000AA0D2 /* Frameworks */,
+				C02CEC50160DC870000AA0D2 /* Resources */,
+				C02CEC51160DC870000AA0D2 /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				C02CEC5A160DC870000AA0D2 /* PBXTargetDependency */,
+			);
+			name = SoomlaiOSStoreTests;
+			productName = SoomlaiOSStoreTests;
+			productReference = C02CEC53160DC870000AA0D2 /* SoomlaiOSStoreTests.octest */;
+			productType = "com.apple.product-type.bundle";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		C02CEC39160DC870000AA0D2 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0450;
+				ORGANIZATIONNAME = SOOMLA;
+			};
+			buildConfigurationList = C02CEC3C160DC870000AA0D2 /* Build configuration list for PBXProject "SoomlaiOSStore" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = C02CEC37160DC870000AA0D2;
+			productRefGroup = C02CEC43160DC870000AA0D2 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				C02CEC41160DC870000AA0D2 /* SoomlaiOSStore */,
+				C02CEC52160DC870000AA0D2 /* SoomlaiOSStoreTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		C02CEC50160DC870000AA0D2 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C02CEC61160DC870000AA0D2 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		C02CEC51160DC870000AA0D2 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		C02CEC3E160DC870000AA0D2 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C02CECD3160DCA67000AA0D2 /* JSONConsts.m in Sources */,
+				C02CECD4160DCA67000AA0D2 /* StorageManager.m in Sources */,
+				C02CECD5160DCA67000AA0D2 /* StoreDatabase.m in Sources */,
+				C02CECD6160DCA67000AA0D2 /* StoreInfo.m in Sources */,
+				C02CECD7160DCA67000AA0D2 /* EncryptionTransformer.m in Sources */,
+				C02CECD8160DCA67000AA0D2 /* NumberEncryptionTransformer.m in Sources */,
+				C02CECD9160DCA67000AA0D2 /* StringEncryptionTransformer.m in Sources */,
+				C02CECDA160DCA67000AA0D2 /* VirtualCurrencyStorage.m in Sources */,
+				C02CECDB160DCA67000AA0D2 /* VirtualGoodStorage.m in Sources */,
+				C02CECDC160DCA67000AA0D2 /* AppStoreItem.m in Sources */,
+				C02CECDD160DCA67000AA0D2 /* BalanceDrivenPriceModel.m in Sources */,
+				C02CECDE160DCA67000AA0D2 /* PriceModel.m in Sources */,
+				C02CECDF160DCA67000AA0D2 /* StaticPriceModel.m in Sources */,
+				C02CECE0160DCA67000AA0D2 /* VirtualCategory.m in Sources */,
+				C02CECE1160DCA67000AA0D2 /* VirtualCurrency.m in Sources */,
+				C02CECE2160DCA67000AA0D2 /* VirtualCurrencyPack.m in Sources */,
+				C02CECE3160DCA67000AA0D2 /* VirtualGood.m in Sources */,
+				C02CECE4160DCA67000AA0D2 /* VirtualItem.m in Sources */,
+				C02CECE5160DCA67000AA0D2 /* EventHandling.m in Sources */,
+				C02CECE6160DCA67000AA0D2 /* InsufficientFundsException.m in Sources */,
+				C02CECE7160DCA67000AA0D2 /* VirtualItemNotFoundException.m in Sources */,
+				C02CECE8160DCA67000AA0D2 /* JSONKit.m in Sources */,
+				C02CECE9160DCA67000AA0D2 /* RNCryptor.m in Sources */,
+				C02CECEA160DCA67000AA0D2 /* RNCryptorEngine.m in Sources */,
+				C02CECEB160DCA67000AA0D2 /* RNDecryptor.m in Sources */,
+				C02CECEC160DCA67000AA0D2 /* RNEncryptor.m in Sources */,
+				C02CECED160DCA67000AA0D2 /* RNOpenSSLCryptor.m in Sources */,
+				C02CECEE160DCA67000AA0D2 /* RNOpenSSLDecryptor.m in Sources */,
+				C02CECEF160DCA67000AA0D2 /* RNOpenSSLEncryptor.m in Sources */,
+				C02CECF0160DCA67000AA0D2 /* store.xcdatamodeld in Sources */,
+				C02CECF1160DCA67000AA0D2 /* StoreConfig.m in Sources */,
+				C02CECF2160DCA67000AA0D2 /* StoreController.m in Sources */,
+				C02CECF3160DCA67000AA0D2 /* NSString+MD5Addition.m in Sources */,
+				C02CECF4160DCA67000AA0D2 /* UIDevice+IdentifierAddition.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C02CEC4E160DC870000AA0D2 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C02CEC64160DC870000AA0D2 /* SoomlaiOSStoreTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		C02CEC5A160DC870000AA0D2 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = C02CEC41160DC870000AA0D2 /* SoomlaiOSStore */;
+			targetProxy = C02CEC59160DC870000AA0D2 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		C02CEC5F160DC870000AA0D2 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				C02CEC60160DC870000AA0D2 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		C02CEC65160DC870000AA0D2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		C02CEC66160DC870000AA0D2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		C02CEC68160DC870000AA0D2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DSTROOT = /tmp/SoomlaiOSStore.dst;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "SoomlaiOSStore/SoomlaiOSStore-Prefix.pch";
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		C02CEC69160DC870000AA0D2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DSTROOT = /tmp/SoomlaiOSStore.dst;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "SoomlaiOSStore/SoomlaiOSStore-Prefix.pch";
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		C02CEC6B160DC870000AA0D2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
+					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "SoomlaiOSStore/SoomlaiOSStore-Prefix.pch";
+				INFOPLIST_FILE = "SoomlaiOSStoreTests/SoomlaiOSStoreTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Debug;
+		};
+		C02CEC6C160DC870000AA0D2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
+					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "SoomlaiOSStore/SoomlaiOSStore-Prefix.pch";
+				INFOPLIST_FILE = "SoomlaiOSStoreTests/SoomlaiOSStoreTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		C02CEC3C160DC870000AA0D2 /* Build configuration list for PBXProject "SoomlaiOSStore" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C02CEC65160DC870000AA0D2 /* Debug */,
+				C02CEC66160DC870000AA0D2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C02CEC67160DC870000AA0D2 /* Build configuration list for PBXNativeTarget "SoomlaiOSStore" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C02CEC68160DC870000AA0D2 /* Debug */,
+				C02CEC69160DC870000AA0D2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		C02CEC6A160DC870000AA0D2 /* Build configuration list for PBXNativeTarget "SoomlaiOSStoreTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C02CEC6B160DC870000AA0D2 /* Debug */,
+				C02CEC6C160DC870000AA0D2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		C02CECC8160DCA67000AA0D2 /* store.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				C02CECC9160DCA67000AA0D2 /* store.xcdatamodel */,
+			);
+			currentVersion = C02CECC9160DCA67000AA0D2 /* store.xcdatamodel */;
+			path = store.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = C02CEC39160DC870000AA0D2 /* Project object */;
+}
