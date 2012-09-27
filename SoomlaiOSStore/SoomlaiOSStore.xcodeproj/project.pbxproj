@@ -7,6 +7,18 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C018B58316105105000FE817 /* StorefrontInfo.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C018B57D160FC702000FE817 /* StorefrontInfo.h */; };
+		C018B58B161052D9000FE817 /* StorefrontController.m in Sources */ = {isa = PBXBuildFile; fileRef = C018B586161052D9000FE817 /* StorefrontController.m */; };
+		C018B58C161052D9000FE817 /* StorefrontJS.m in Sources */ = {isa = PBXBuildFile; fileRef = C018B588161052D9000FE817 /* StorefrontJS.m */; };
+		C018B58D161052D9000FE817 /* StorefrontViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C018B58A161052D9000FE817 /* StorefrontViewController.m */; };
+		C018B58E161052F4000FE817 /* StorefrontController.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C018B585161052D9000FE817 /* StorefrontController.h */; };
+		C018B58F161052F4000FE817 /* StorefrontJS.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C018B587161052D9000FE817 /* StorefrontJS.h */; };
+		C018B590161052F4000FE817 /* StorefrontViewController.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C018B589161052D9000FE817 /* StorefrontViewController.h */; };
+		C018B64F16105F77000FE817 /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C018B47B160F5B23000FE817 /* CoreFoundation.framework */; };
+		C018B7141610EE89000FE817 /* StorefrontInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = C018B57E160FC702000FE817 /* StorefrontInfo.m */; };
+		C018B73716110475000FE817 /* NSString+MD5Addition.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C02CECCF160DCA67000AA0D2 /* NSString+MD5Addition.h */; };
+		C018B73816110475000FE817 /* UIDevice+IdentifierAddition.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C02CECD1160DCA67000AA0D2 /* UIDevice+IdentifierAddition.h */; };
+		C018B77316110B56000FE817 /* JSONKit.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C02CECB5160DCA67000AA0D2 /* JSONKit.h */; };
 		C02CEC46160DC870000AA0D2 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C02CEC45160DC870000AA0D2 /* Foundation.framework */; };
 		C02CEC55160DC870000AA0D2 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C02CEC54160DC870000AA0D2 /* SenTestingKit.framework */; };
 		C02CEC58160DC870000AA0D2 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C02CEC45160DC870000AA0D2 /* Foundation.framework */; };
@@ -45,11 +57,10 @@
 		C02CECED160DCA67000AA0D2 /* RNOpenSSLCryptor.m in Sources */ = {isa = PBXBuildFile; fileRef = C02CECC3160DCA67000AA0D2 /* RNOpenSSLCryptor.m */; };
 		C02CECEE160DCA67000AA0D2 /* RNOpenSSLDecryptor.m in Sources */ = {isa = PBXBuildFile; fileRef = C02CECC5160DCA67000AA0D2 /* RNOpenSSLDecryptor.m */; };
 		C02CECEF160DCA67000AA0D2 /* RNOpenSSLEncryptor.m in Sources */ = {isa = PBXBuildFile; fileRef = C02CECC7160DCA67000AA0D2 /* RNOpenSSLEncryptor.m */; };
-		C02CECF0160DCA67000AA0D2 /* store.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C02CECC8160DCA67000AA0D2 /* store.xcdatamodeld */; };
 		C02CECF1160DCA67000AA0D2 /* StoreConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = C02CECCB160DCA67000AA0D2 /* StoreConfig.m */; };
 		C02CECF2160DCA67000AA0D2 /* StoreController.m in Sources */ = {isa = PBXBuildFile; fileRef = C02CECCD160DCA67000AA0D2 /* StoreController.m */; };
-		C02CECF3160DCA67000AA0D2 /* NSString+MD5Addition.m in Sources */ = {isa = PBXBuildFile; fileRef = C02CECD0160DCA67000AA0D2 /* NSString+MD5Addition.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		C02CECF4160DCA67000AA0D2 /* UIDevice+IdentifierAddition.m in Sources */ = {isa = PBXBuildFile; fileRef = C02CECD2160DCA67000AA0D2 /* UIDevice+IdentifierAddition.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		C02CECF3160DCA67000AA0D2 /* NSString+MD5Addition.m in Sources */ = {isa = PBXBuildFile; fileRef = C02CECD0160DCA67000AA0D2 /* NSString+MD5Addition.m */; settings = {COMPILER_FLAGS = ""; }; };
+		C02CECF4160DCA67000AA0D2 /* UIDevice+IdentifierAddition.m in Sources */ = {isa = PBXBuildFile; fileRef = C02CECD2160DCA67000AA0D2 /* UIDevice+IdentifierAddition.m */; settings = {COMPILER_FLAGS = ""; }; };
 		C02CECF6160DCB4A000AA0D2 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C02CECF5160DCB4A000AA0D2 /* UIKit.framework */; };
 		C02CECFA160DCD7F000AA0D2 /* EventHandling.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C02CECAB160DCA67000AA0D2 /* EventHandling.h */; };
 		C02CECFB160DCDC9000AA0D2 /* AppStoreItem.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C02CEC92160DCA67000AA0D2 /* AppStoreItem.h */; };
@@ -93,6 +104,7 @@
 			dstPath = "include/${PRODUCT_NAME}";
 			dstSubfolderSpec = 16;
 			files = (
+				C018B58316105105000FE817 /* StorefrontInfo.h in CopyFiles */,
 				C02CECFA160DCD7F000AA0D2 /* EventHandling.h in CopyFiles */,
 				C02CECFB160DCDC9000AA0D2 /* AppStoreItem.h in CopyFiles */,
 				C02CECFC160DCDC9000AA0D2 /* BalanceDrivenPriceModel.h in CopyFiles */,
@@ -105,6 +117,7 @@
 				C02CED03160DCDC9000AA0D2 /* VirtualItem.h in CopyFiles */,
 				C02CED04160DCDC9000AA0D2 /* IStoreAsssets.h in CopyFiles */,
 				C02CED08160DCDE3000AA0D2 /* JSONConsts.h in CopyFiles */,
+				C018B77316110B56000FE817 /* JSONKit.h in CopyFiles */,
 				C02CED09160DCDE3000AA0D2 /* StorageManager.h in CopyFiles */,
 				C02CED0A160DCDE3000AA0D2 /* StoreDatabase.h in CopyFiles */,
 				C02CED0B160DCDE3000AA0D2 /* StoreInfo.h in CopyFiles */,
@@ -116,12 +129,26 @@
 				C02CED05160DCDC9000AA0D2 /* IStoreEventHandler.h in CopyFiles */,
 				C02CED06160DCDC9000AA0D2 /* StoreConfig.h in CopyFiles */,
 				C02CED07160DCDC9000AA0D2 /* StoreController.h in CopyFiles */,
+				C018B58E161052F4000FE817 /* StorefrontController.h in CopyFiles */,
+				C018B58F161052F4000FE817 /* StorefrontJS.h in CopyFiles */,
+				C018B73716110475000FE817 /* NSString+MD5Addition.h in CopyFiles */,
+				C018B73816110475000FE817 /* UIDevice+IdentifierAddition.h in CopyFiles */,
+				C018B590161052F4000FE817 /* StorefrontViewController.h in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		C018B47B160F5B23000FE817 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
+		C018B57D160FC702000FE817 /* StorefrontInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StorefrontInfo.h; sourceTree = "<group>"; };
+		C018B57E160FC702000FE817 /* StorefrontInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StorefrontInfo.m; sourceTree = "<group>"; };
+		C018B585161052D9000FE817 /* StorefrontController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StorefrontController.h; path = storefront/StorefrontController.h; sourceTree = "<group>"; };
+		C018B586161052D9000FE817 /* StorefrontController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = StorefrontController.m; path = storefront/StorefrontController.m; sourceTree = "<group>"; };
+		C018B587161052D9000FE817 /* StorefrontJS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StorefrontJS.h; path = storefront/StorefrontJS.h; sourceTree = "<group>"; };
+		C018B588161052D9000FE817 /* StorefrontJS.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = StorefrontJS.m; path = storefront/StorefrontJS.m; sourceTree = "<group>"; };
+		C018B589161052D9000FE817 /* StorefrontViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StorefrontViewController.h; path = storefront/StorefrontViewController.h; sourceTree = "<group>"; };
+		C018B58A161052D9000FE817 /* StorefrontViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = StorefrontViewController.m; path = storefront/StorefrontViewController.m; sourceTree = "<group>"; };
 		C02CEC42160DC870000AA0D2 /* libSoomlaiOSStore.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libSoomlaiOSStore.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		C02CEC45160DC870000AA0D2 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		C02CEC49160DC870000AA0D2 /* SoomlaiOSStore-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SoomlaiOSStore-Prefix.pch"; sourceTree = "<group>"; };
@@ -196,7 +223,6 @@
 		C02CECC5160DCA67000AA0D2 /* RNOpenSSLDecryptor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RNOpenSSLDecryptor.m; sourceTree = "<group>"; };
 		C02CECC6160DCA67000AA0D2 /* RNOpenSSLEncryptor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RNOpenSSLEncryptor.h; sourceTree = "<group>"; };
 		C02CECC7160DCA67000AA0D2 /* RNOpenSSLEncryptor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RNOpenSSLEncryptor.m; sourceTree = "<group>"; };
-		C02CECC9160DCA67000AA0D2 /* store.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = store.xcdatamodel; sourceTree = "<group>"; };
 		C02CECCA160DCA67000AA0D2 /* StoreConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StoreConfig.h; sourceTree = "<group>"; };
 		C02CECCB160DCA67000AA0D2 /* StoreConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StoreConfig.m; sourceTree = "<group>"; };
 		C02CECCC160DCA67000AA0D2 /* StoreController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StoreController.h; sourceTree = "<group>"; };
@@ -213,6 +239,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C018B64F16105F77000FE817 /* CoreFoundation.framework in Frameworks */,
 				C02CECF6160DCB4A000AA0D2 /* UIKit.framework in Frameworks */,
 				C02CEC7B160DCA3A000AA0D2 /* Security.framework in Frameworks */,
 				C02CEC79160DCA31000AA0D2 /* StoreKit.framework in Frameworks */,
@@ -234,6 +261,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C018B58416105290000FE817 /* storefront */ = {
+			isa = PBXGroup;
+			children = (
+				C018B585161052D9000FE817 /* StorefrontController.h */,
+				C018B586161052D9000FE817 /* StorefrontController.m */,
+				C018B587161052D9000FE817 /* StorefrontJS.h */,
+				C018B588161052D9000FE817 /* StorefrontJS.m */,
+				C018B589161052D9000FE817 /* StorefrontViewController.h */,
+				C018B58A161052D9000FE817 /* StorefrontViewController.m */,
+			);
+			name = storefront;
+			sourceTree = "<group>";
+		};
 		C02CEC37160DC870000AA0D2 = {
 			isa = PBXGroup;
 			children = (
@@ -262,6 +302,7 @@
 				C02CEC76160DCA27000AA0D2 /* CoreData.framework */,
 				C02CEC45160DC870000AA0D2 /* Foundation.framework */,
 				C02CEC54160DC870000AA0D2 /* SenTestingKit.framework */,
+				C018B47B160F5B23000FE817 /* CoreFoundation.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -269,22 +310,22 @@
 		C02CEC47160DC870000AA0D2 /* SoomlaiOSStore */ = {
 			isa = PBXGroup;
 			children = (
+				C018B58416105290000FE817 /* storefront */,
 				C02CEC7C160DCA67000AA0D2 /* data */,
 				C02CEC90160DCA67000AA0D2 /* domain */,
 				C02CECAD160DCA67000AA0D2 /* exceptions */,
 				C02CECB4160DCA67000AA0D2 /* JSON */,
 				C02CECB7160DCA67000AA0D2 /* RNCryptor */,
 				C02CECCE160DCA67000AA0D2 /* UIDevice-UUID */,
+				C02CEC48160DC870000AA0D2 /* Supporting Files */,
 				C02CECAB160DCA67000AA0D2 /* EventHandling.h */,
 				C02CECAC160DCA67000AA0D2 /* EventHandling.m */,
 				C02CECB2160DCA67000AA0D2 /* IStoreAsssets.h */,
 				C02CECB3160DCA67000AA0D2 /* IStoreEventHandler.h */,
-				C02CECC8160DCA67000AA0D2 /* store.xcdatamodeld */,
 				C02CECCA160DCA67000AA0D2 /* StoreConfig.h */,
 				C02CECCB160DCA67000AA0D2 /* StoreConfig.m */,
 				C02CECCC160DCA67000AA0D2 /* StoreController.h */,
 				C02CECCD160DCA67000AA0D2 /* StoreController.m */,
-				C02CEC48160DC870000AA0D2 /* Supporting Files */,
 			);
 			path = SoomlaiOSStore;
 			sourceTree = "<group>";
@@ -332,6 +373,8 @@
 				C02CEC8D160DCA67000AA0D2 /* VirtualCurrencyStorage.m */,
 				C02CEC8E160DCA67000AA0D2 /* VirtualGoodStorage.h */,
 				C02CEC8F160DCA67000AA0D2 /* VirtualGoodStorage.m */,
+				C018B57D160FC702000FE817 /* StorefrontInfo.h */,
+				C018B57E160FC702000FE817 /* StorefrontInfo.m */,
 			);
 			path = data;
 			sourceTree = "<group>";
@@ -563,11 +606,14 @@
 				C02CECED160DCA67000AA0D2 /* RNOpenSSLCryptor.m in Sources */,
 				C02CECEE160DCA67000AA0D2 /* RNOpenSSLDecryptor.m in Sources */,
 				C02CECEF160DCA67000AA0D2 /* RNOpenSSLEncryptor.m in Sources */,
-				C02CECF0160DCA67000AA0D2 /* store.xcdatamodeld in Sources */,
 				C02CECF1160DCA67000AA0D2 /* StoreConfig.m in Sources */,
 				C02CECF2160DCA67000AA0D2 /* StoreController.m in Sources */,
 				C02CECF3160DCA67000AA0D2 /* NSString+MD5Addition.m in Sources */,
 				C02CECF4160DCA67000AA0D2 /* UIDevice+IdentifierAddition.m in Sources */,
+				C018B58B161052D9000FE817 /* StorefrontController.m in Sources */,
+				C018B58C161052D9000FE817 /* StorefrontJS.m in Sources */,
+				C018B58D161052D9000FE817 /* StorefrontViewController.m in Sources */,
+				C018B7141610EE89000FE817 /* StorefrontInfo.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -650,6 +696,7 @@
 		C02CEC68160DC870000AA0D2 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_ARC = YES;
 				DSTROOT = /tmp/SoomlaiOSStore.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "SoomlaiOSStore/SoomlaiOSStore-Prefix.pch";
@@ -662,6 +709,7 @@
 		C02CEC69160DC870000AA0D2 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_ARC = YES;
 				DSTROOT = /tmp/SoomlaiOSStore.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "SoomlaiOSStore/SoomlaiOSStore-Prefix.pch";
@@ -720,6 +768,7 @@
 				C02CEC69160DC870000AA0D2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		C02CEC6A160DC870000AA0D2 /* Build configuration list for PBXNativeTarget "SoomlaiOSStoreTests" */ = {
 			isa = XCConfigurationList;
@@ -728,21 +777,9 @@
 				C02CEC6C160DC870000AA0D2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCVersionGroup section */
-		C02CECC8160DCA67000AA0D2 /* store.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				C02CECC9160DCA67000AA0D2 /* store.xcdatamodel */,
-			);
-			currentVersion = C02CECC9160DCA67000AA0D2 /* store.xcdatamodel */;
-			path = store.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
-/* End XCVersionGroup section */
 	};
 	rootObject = C02CEC39160DC870000AA0D2 /* Project object */;
 }
