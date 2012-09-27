@@ -22,7 +22,7 @@
 
 - (id)initWithName:(NSString*)oName andDescription:(NSString*)oDescription
     andImgFilePath:(NSString*)oImgFilePath andItemId:(NSString*)oItemId andPriceModel:(PriceModel*)oPriceModel
-    andCategory:(VirtualCategory*)category;
+       andCategory:(VirtualCategory*)oCategory;
 - (id)initWithDictionary:(NSDictionary*)dict;
 - (NSDictionary*)toDictionary;
 - (NSDictionary*)currencyValues;

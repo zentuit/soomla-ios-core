@@ -33,7 +33,7 @@
 - (id)initWithDictionary:(NSDictionary*)dict{
     self = [super initWithDictionary:dict];
     if (self) {
-        self.priceModel = [dict objectForKey:JSON_GOOD_PRICE_MODEL];
+        self.priceModel = [PriceModel priceModelWithNSDictionary:[dict objectForKey:JSON_GOOD_PRICE_MODEL]];
         int categoryId = [[dict objectForKey:JSON_CURRENCYPACK_CATEGORY_ID] intValue];
         @try {
             if (categoryId > -1){
