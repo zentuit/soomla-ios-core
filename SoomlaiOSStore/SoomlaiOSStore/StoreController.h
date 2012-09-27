@@ -15,7 +15,9 @@
     SKProductsRequest *productsRequest;
 }
 
-- (void)initializeWithManagedContext:(NSManagedObjectContext*)context andStoreAssets:(id<IStoreAsssets>)storeAssets;
++ (StoreController*)getInstance;
+
+- (void)initializeWithStoreAssets:(id<IStoreAsssets>)storeAssets;
 - (void)buyCurrencyPackWithProcuctId:(NSString*)productId;
 - (void)buyVirtualGood:(NSString*)itemId;
 - (void)storeOpening;

@@ -21,10 +21,22 @@
 
 @implementation StoreController
 
-- (void)initializeWithManagedContext:(NSManagedObjectContext*)context andStoreAssets:(id<IStoreAsssets>)storeAssets{
++ (StoreController*)getInstance{
+    static StoreController* _instance = nil;
+    
+    @synchronized( self ) {
+        if( _instance == nil ) {
+            _instance = [[StoreController alloc ] init];
+        }
+    }
+    
+    return _instance;
+}
+
+- (void)initializeWithStoreAssets:(id<IStoreAsssets>)storeAssets{
     STORE_DEBUG = YES;
     
-    [[StorageManager getInstance] initializeWithManagedContext:context];
+    [StorageManager getInstance];
     [[StoreInfo getInstance] initializeWithIStoreAsssets:storeAssets];
 }
 
