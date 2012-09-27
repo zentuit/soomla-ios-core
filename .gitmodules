@@ -1,0 +1,3 @@
+[submodule "SoomlaiOSStoreExample/SoomlaiOSStoreExample/resources/soomla_ui"]
+	path = SoomlaiOSStoreExample/SoomlaiOSStoreExample/resources/soomla_ui
+	url = git@github.com:soomla/storefront.git
