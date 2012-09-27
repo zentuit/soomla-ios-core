@@ -12,5 +12,14 @@
 
 @synthesize consumable, productId;
 
+- (id)initWithProductId:(NSString*)oProductId andConsumable:(Consumable)oConsumable{
+    self = [super init];
+    if (self){
+        self.productId = oProductId;
+        self.consumable = oConsumable;
+    }
+    
+    return self;
+}
 
 @end

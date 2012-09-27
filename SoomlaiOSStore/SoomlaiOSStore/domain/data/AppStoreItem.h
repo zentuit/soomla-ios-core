@@ -22,4 +22,6 @@ typedef enum {
 @property (nonatomic, retain) NSString* productId;
 @property Consumable consumable;
 
+- (id)initWithProductId:(NSString*)oProductId andConsumable:(Consumable)oConsumable;
+
 @end
