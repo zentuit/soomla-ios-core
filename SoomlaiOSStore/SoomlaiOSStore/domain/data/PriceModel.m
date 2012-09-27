@@ -9,14 +9,19 @@
 #import "PriceModel.h"
 #import "JSONConsts.h"
 #import "StaticPriceModel.h"
+#import "BalanceDrivenPriceModel.h"
 
 @implementation PriceModel
 
 @synthesize type;
 
 - (id)init{
-    @throw [NSException exceptionWithName:NSInternalInconsistencyException
+    self = [super init];
+    if ([self class] == [PriceModel class]) {
+        @throw [NSException exceptionWithName:NSInternalInconsistencyException
                                    reason:@"Error, attempting to instantiate AbstractClass directly." userInfo:nil];
+    }
+    return self;
 }
 
 - (NSDictionary*)getCurrentPriceForVirtualGood:(VirtualGood*)virtualGood{
@@ -28,17 +33,17 @@
 
 - (NSDictionary*)toDictionary{
     return [[NSDictionary alloc] initWithObjectsAndKeys:
-            JSON_GOOD_PRICE_MODEL_TYPE, self.type,
+            self.type, JSON_GOOD_PRICE_MODEL_TYPE,
             nil];
 }
 
 + (PriceModel*)priceModelWithNSDictionary:(NSDictionary*)dict{
     NSString* type = [dict valueForKey:JSON_GOOD_PRICE_MODEL_TYPE];
     if ([type isEqualToString:@"static"]) {
-        [StaticPriceModel modelWithNSDictionary:dict];
+        return [StaticPriceModel modelWithNSDictionary:dict];
     }
     else if ([type isEqualToString:@"balance"]) {
-        
+        return [BalanceDrivenPriceModel modelWithNSDictionary:dict];
     }
     
     return nil;
