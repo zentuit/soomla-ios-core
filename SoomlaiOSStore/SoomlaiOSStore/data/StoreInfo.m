@@ -46,6 +46,7 @@
         self.virtualGoods = [storeAssets virtualGoods];
         
         NSString* storeInfoJSON = [[self toDictionary] JSONString];
+        NSLog(@"%@", storeInfoJSON);
         [[[StorageManager getInstance] database] setStoreInfo:storeInfoJSON];
     }
 }
@@ -82,7 +83,7 @@
     NSMutableArray* goods = [[NSMutableArray alloc] init];
     NSArray* goodsDicts = [storeInfo objectForKey:JSON_STORE_VIRTUALGOODS];
     for(NSDictionary* goodDict in goodsDicts){
-        [goods addObject:[[VirtualCurrencyPack alloc] initWithDictionary: goodDict]];
+        [goods addObject:[[VirtualGood alloc] initWithDictionary: goodDict]];
     }
     self.virtualGoods = goods;
     
@@ -90,12 +91,33 @@
 }
 
 - (NSDictionary*)toDictionary{
+    
+    NSMutableArray* categories = [[NSMutableArray alloc] init];
+    for(VirtualCategory* c in self.virtualCategories){
+        [categories addObject:[c toDictionary]];
+    }
+    
+    NSMutableArray* currencies = [[NSMutableArray alloc] init];
+    for(VirtualCurrency* c in self.virtualCurrencies){
+        [currencies addObject:[c toDictionary]];
+    }
+    
+    NSMutableArray* goods = [[NSMutableArray alloc] init];
+    for(VirtualGood* c in self.virtualGoods){
+        [goods addObject:[c toDictionary]];
+    }
+    
+    NSMutableArray* packs = [[NSMutableArray alloc] init];
+    for(VirtualCurrencyPack* c in self.virtualCurrencyPacks){
+        [packs addObject:[c toDictionary]];
+    }
+    
     NSMutableDictionary* dict = [[NSMutableDictionary alloc] init];
     
-    [dict setObject:self.virtualCategories forKey:JSON_STORE_VIRTUALCATEGORIES];
-    [dict setObject:self.virtualCurrencies forKey:JSON_STORE_VIRTUALCURRENCIES];
-    [dict setObject:self.virtualCurrencyPacks forKey:JSON_STORE_CURRENCYPACKS];
-    [dict setObject:self.virtualGoods forKey:JSON_STORE_VIRTUALGOODS];
+    [dict setObject:categories forKey:JSON_STORE_VIRTUALCATEGORIES];
+    [dict setObject:currencies forKey:JSON_STORE_VIRTUALCURRENCIES];
+    [dict setObject:packs forKey:JSON_STORE_CURRENCYPACKS];
+    [dict setObject:goods forKey:JSON_STORE_VIRTUALGOODS];
     
     return dict;
 }
