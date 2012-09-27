@@ -10,22 +10,25 @@
 
 @class VirtualCurrency;
 @class VirtualCategory;
+@class AppStoreItem;
 
 @interface VirtualCurrencyPack : VirtualItem{
     double  price;
     int     currencyAmount;
     VirtualCurrency* currency;
     VirtualCategory* category;
+    AppStoreItem* appstoreItem;
 }
 
 @property double  price;
 @property int     currencyAmount;
 @property (retain, nonatomic) VirtualCurrency* currency;
 @property (retain, nonatomic) VirtualCategory* category;
+@property (retain, nonatomic) AppStoreItem* appstoreItem;
 
 - (id)initWithName:(NSString*)oName andDescription:(NSString*)oDescription
     andImgFilePath:(NSString*)oImgFilePath andItemId:(NSString*)oItemId andPrice:(double)oPrice
-    andCurrencyAmount:(int)oCurrencyAmount andCurrency:(VirtualCurrency*)currency andCategory:(VirtualCategory*)oCategory;
+    andProductId:(NSString*)productId andCurrencyAmount:(int)oCurrencyAmount andCurrency:(VirtualCurrency*)currency andCategory:(VirtualCategory*)oCategory;
 - (id)initWithDictionary:(NSDictionary*)dict;
 - (NSDictionary*)toDictionary;
 
