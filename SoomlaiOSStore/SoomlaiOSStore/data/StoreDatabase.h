@@ -9,13 +9,13 @@
 #import <Foundation/Foundation.h>
 
 @interface StoreDatabase : NSObject {
-    @private
-    NSManagedObjectContext* managedContext;
+
 }
 
-@property (nonatomic, retain) NSManagedObjectContext* managedContext;
+@property (readonly, strong, nonatomic) NSManagedObjectContext *managedObjectContext;
+@property (readonly, strong, nonatomic) NSManagedObjectModel *managedObjectModel;
+@property (readonly, strong, nonatomic) NSPersistentStoreCoordinator *persistentStoreCoordinator;
 
-- (id)initWithContext:(NSManagedObjectContext*)oManagedContext;
 - (void)updateCurrencyBalanceWithItemID:(NSString*)itemId andBalance:(NSNumber*)balance;
 - (void)updateGoodBalanceWithItemId:(NSString*)itemId andBalance:(NSNumber*)balance;
 - (NSDictionary*)getCurrencyBalanceWithItemId:(NSString*)itemId;
@@ -25,4 +25,6 @@
 - (NSString*)getStoreInfo;
 - (NSString*)getStorefrontInfo;
 
+- (void)saveContext;
+- (NSURL *)applicationDocumentsDirectory;
 @end
