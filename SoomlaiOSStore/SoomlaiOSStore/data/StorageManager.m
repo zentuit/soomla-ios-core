@@ -25,8 +25,13 @@
     return _instance;
 }
 
-- (void)initializeWithManagedContext:(NSManagedObjectContext*)context{
-    database = [[StoreDatabase alloc] initWithContext:context];
+- (id)init{
+    self = [super init];
+    if (self){
+        database = [[StoreDatabase alloc] init];
+    }
+    
+    return self;
 }
 
 @end

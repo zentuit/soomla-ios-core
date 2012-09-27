@@ -24,6 +24,6 @@
 
 + (StorageManager*)getInstance;
 
-- (void)initializeWithManagedContext:(NSManagedObjectContext*)context;
+- (id)init;
 
 @end
