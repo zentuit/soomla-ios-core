@@ -10,11 +10,14 @@
 
 @implementation InsufficientFundsException
 
-- (id)initWithItemId:(NSString*)itemId{
-    NSString* reason = [NSString stringWithFormat:@"You tried to buy with itemId: %@ but you don't have enough money to buy it." ,itemId];
+@synthesize itemId;
+
+- (id)initWithItemId:(NSString*)oItemId{
+    NSString* reason = [NSString stringWithFormat:@"You tried to buy with itemId: %@ but you don't have enough money to buy it." ,oItemId];
+    
     self = [super initWithName:@"InsufficientFundsException" reason:reason userInfo:nil];
     if (self){
-        
+        self.itemId = oItemId;
     }
     
     return self;

@@ -8,7 +8,11 @@
 
 #import <Foundation/Foundation.h>
 
-@interface InsufficientFundsException : NSException
+@interface InsufficientFundsException : NSException{
+    NSString* itemId;
+}
+
+@property (nonatomic, retain) NSString* itemId;
 
 - (id)initWithItemId:(NSString*)itemId;
 
