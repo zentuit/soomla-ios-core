@@ -38,8 +38,8 @@
 
 - (NSDictionary*)toDictionary{
     return [[NSDictionary alloc] initWithObjectsAndKeys:
-            JSON_CATEGORY_NAME, self.name,
-            JSON_CATEGORY_ID, self.Id,
+            self.name, JSON_CATEGORY_NAME,
+            [NSNumber numberWithInt:self.Id], JSON_CATEGORY_ID,
             nil];
 }
 
