@@ -1,21 +1,32 @@
-//
-//  StoreDatabase.m
-//  SoomlaStore
-//
-//  Created by Refael Dakar on 9/18/12.
-//  Copyright (c) 2012 SOOMLA. All rights reserved.
-//
+/*
+ * Copyright (C) 2012 Soomla Inc.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 
 #import "StoreDatabase.h"
 #import "NumberEncryptionTransformer.h"
 #import "StringEncryptionTransformer.h"
 
+// Database file
 #define DATABASE_FILE_NAME           @"store.sqlite"
 
+// Entities
 #define ENTITY_NAME_CURRENCY_BALANCE @"CurrencyBalance"
 #define ENTITY_NAME_GOOD_BALANCE     @"GoodBalance"
 #define ENTITY_NAME_METADATA         @"Metadata"
 
+// Attributes
 #define ATTR_NAME_BALANCE            @"balance"
 #define ATTR_NAME_ITEMID             @"itemId"
 #define ATTR_NAME_STOREINFO          @"storeInfo"
@@ -210,12 +221,17 @@
 
 // Returns the managed object model for the application.
 // If the model doesn't already exist, it is created from the application's model.
+
 - (NSManagedObjectModel *)managedObjectModel
 {
+    if (_managedObjectModel != nil) {
+        return _managedObjectModel;
+    }
+    
     [NSValueTransformer setValueTransformer:[[NumberEncryptionTransformer alloc] init] forName:@"NumberEncryptionTransformer"];
     [NSValueTransformer setValueTransformer:[[StringEncryptionTransformer alloc] init] forName:@"StringEncryptionTransformer"];
     
-    NSManagedObjectModel *mom = [[NSManagedObjectModel alloc] init];
+    _managedObjectModel = [[NSManagedObjectModel alloc] init];
     
     
     // CurrencyBalance
@@ -250,8 +266,8 @@
     
     
     
-    [mom setEntities:@[currencyBalanceEntity, goodBalanceEntity, metadataBalanceEntity]];
-    return mom;
+    [_managedObjectModel setEntities:@[currencyBalanceEntity, goodBalanceEntity, metadataBalanceEntity]];
+    return _managedObjectModel;
 }
 
 // Returns the persistent store coordinator for the application.

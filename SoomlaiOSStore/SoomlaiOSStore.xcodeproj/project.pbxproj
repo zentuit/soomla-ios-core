@@ -73,7 +73,6 @@
 		C02CED02160DCDC9000AA0D2 /* VirtualGood.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C02CECA0160DCA67000AA0D2 /* VirtualGood.h */; };
 		C02CED03160DCDC9000AA0D2 /* VirtualItem.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C02CECA2160DCA67000AA0D2 /* VirtualItem.h */; };
 		C02CED04160DCDC9000AA0D2 /* IStoreAsssets.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C02CECB2160DCA67000AA0D2 /* IStoreAsssets.h */; };
-		C02CED05160DCDC9000AA0D2 /* IStoreEventHandler.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C02CECB3160DCA67000AA0D2 /* IStoreEventHandler.h */; };
 		C02CED06160DCDC9000AA0D2 /* StoreConfig.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C02CECCA160DCA67000AA0D2 /* StoreConfig.h */; };
 		C02CED07160DCDC9000AA0D2 /* StoreController.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C02CECCC160DCA67000AA0D2 /* StoreController.h */; };
 		C02CED08160DCDE3000AA0D2 /* JSONConsts.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C02CEC7D160DCA67000AA0D2 /* JSONConsts.h */; };
@@ -126,7 +125,6 @@
 				C02CED0E160DCDE3000AA0D2 /* StringEncryptionTransformer.h in CopyFiles */,
 				C02CED0F160DCDE3000AA0D2 /* VirtualCurrencyStorage.h in CopyFiles */,
 				C02CED10160DCDE3000AA0D2 /* VirtualGoodStorage.h in CopyFiles */,
-				C02CED05160DCDC9000AA0D2 /* IStoreEventHandler.h in CopyFiles */,
 				C02CED06160DCDC9000AA0D2 /* StoreConfig.h in CopyFiles */,
 				C02CED07160DCDC9000AA0D2 /* StoreController.h in CopyFiles */,
 				C018B58E161052F4000FE817 /* StorefrontController.h in CopyFiles */,
@@ -204,7 +202,6 @@
 		C02CECB0160DCA67000AA0D2 /* VirtualItemNotFoundException.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VirtualItemNotFoundException.h; sourceTree = "<group>"; };
 		C02CECB1160DCA67000AA0D2 /* VirtualItemNotFoundException.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VirtualItemNotFoundException.m; sourceTree = "<group>"; };
 		C02CECB2160DCA67000AA0D2 /* IStoreAsssets.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IStoreAsssets.h; sourceTree = "<group>"; };
-		C02CECB3160DCA67000AA0D2 /* IStoreEventHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IStoreEventHandler.h; sourceTree = "<group>"; };
 		C02CECB5160DCA67000AA0D2 /* JSONKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONKit.h; sourceTree = "<group>"; };
 		C02CECB6160DCA67000AA0D2 /* JSONKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSONKit.m; sourceTree = "<group>"; };
 		C02CECB8160DCA67000AA0D2 /* RNCryptor+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "RNCryptor+Private.h"; sourceTree = "<group>"; };
@@ -321,7 +318,6 @@
 				C02CECAB160DCA67000AA0D2 /* EventHandling.h */,
 				C02CECAC160DCA67000AA0D2 /* EventHandling.m */,
 				C02CECB2160DCA67000AA0D2 /* IStoreAsssets.h */,
-				C02CECB3160DCA67000AA0D2 /* IStoreEventHandler.h */,
 				C02CECCA160DCA67000AA0D2 /* StoreConfig.h */,
 				C02CECCB160DCA67000AA0D2 /* StoreConfig.m */,
 				C02CECCC160DCA67000AA0D2 /* StoreController.h */,

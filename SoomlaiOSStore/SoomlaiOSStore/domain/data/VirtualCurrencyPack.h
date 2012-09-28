@@ -1,10 +1,18 @@
-//
-//  VirtualCurrencyPack.h
-//  SoomlaStore
-//
-//  Created by Refael Dakar on 9/16/12.
-//  Copyright (c) 2012 SOOMLA. All rights reserved.
-//
+/*
+ * Copyright (C) 2012 Soomla Inc.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 
 #import "VirtualItem.h"
 
@@ -12,6 +20,13 @@
 @class VirtualCategory;
 @class AppStoreItem;
 
+/**
+ * This class represents a pack of the game's virtual currency.
+ * For example: If you have a "Coin" as a virtual currency, you might
+ * want to sell packs of "Coins". e.g. "10 Coins Set" or "Super Saver Pack".
+ * The currency pack usually has an AppStoreItem related to it. As a developer,
+ * you'll define the app store's item in Itunes Connect.
+ */
 @interface VirtualCurrencyPack : VirtualItem{
     double  price;
     int     currencyAmount;
@@ -26,9 +41,22 @@
 @property (retain, nonatomic) VirtualCategory* category;
 @property (retain, nonatomic) AppStoreItem* appstoreItem;
 
+/**
+* oName is the name of the virtual currency pack.
+* oDescription is the description of the virtual currency pack. This will show up
+*                in the store in the description section.
+* oImgFilePath is the path to the image that corresponds to the currency pack.
+* oItemId is the id of the virtual currency pack.
+* productId is the product id on Google Market..
+* oPrice is the actual $$ cost of the virtual currency pack.
+* oCurrencyAmout is the amount of currency in the pack.
+* oCurrency is the currency associated with this pack.
+* oCategory is the category this currency pack is associated with.
+*/
 - (id)initWithName:(NSString*)oName andDescription:(NSString*)oDescription
     andImgFilePath:(NSString*)oImgFilePath andItemId:(NSString*)oItemId andPrice:(double)oPrice
-    andProductId:(NSString*)productId andCurrencyAmount:(int)oCurrencyAmount andCurrency:(VirtualCurrency*)currency andCategory:(VirtualCategory*)oCategory;
+    andProductId:(NSString*)productId andCurrencyAmount:(int)oCurrencyAmount andCurrency:(VirtualCurrency*)oCurrency andCategory:(VirtualCategory*)oCategory;
+
 - (id)initWithDictionary:(NSDictionary*)dict;
 - (NSDictionary*)toDictionary;
 

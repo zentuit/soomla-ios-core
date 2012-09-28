@@ -1,10 +1,18 @@
-//
-//  StorefrontController.m
-//  SoomlaiOSStoreExample
-//
-//  Created by Refael Dakar on 9/23/12.
-//  Copyright (c) 2012 SOOMLA. All rights reserved.
-//
+/*
+ * Copyright (C) 2012 Soomla Inc.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 
 #import "StorefrontJS.h"
 #import "InsufficientFundsException.h"
@@ -19,6 +27,7 @@
 #import "VirtualGoodStorage.h"
 #import "JSONKit.h"
 #import "StoreController.h"
+
 
 @implementation StorefrontJS
 
@@ -41,6 +50,10 @@
 	if ([components count] > 1 &&
 		[(NSString *)[components objectAtIndex:0] isEqualToString:@"soomla"]) {
         
+        /**
+         * The user wants to buy a virtual currency pack.
+         * productId is the product id of the pack.
+         */
         if([(NSString *)[components objectAtIndex:1] isEqualToString:@"wantsToBuyCurrencyPacks"])
 		{
             NSString* productId = [components objectAtIndex:2];
@@ -49,6 +62,10 @@
             [[StoreController getInstance] buyCurrencyPackWithProcuctId:productId];
         }
         
+        /**
+         * The user wants to buy a virtual good.
+         * itemId is the item id of the virtual good.
+         */
         if([(NSString *)[components objectAtIndex:1] isEqualToString:@"wantsToBuyVirtualGoods"])
 		{
             NSString* itemId = [components objectAtIndex:2];
@@ -70,6 +87,10 @@
             }
         }
         
+        /**
+         * The user wants to leave the store.
+         * Clicked on "close" button.
+         */
         if([(NSString *)[components objectAtIndex:1] isEqualToString:@"wantsToLeaveStore"])
 		{
             NSLog(@"wantsToLeaveStore");
@@ -77,6 +98,9 @@
             [sfViewController closeStore];
         }
         
+        /**
+         * The store's storefront is ready to receive calls.
+         */
 		if([(NSString *)[components objectAtIndex:1] isEqualToString:@"uiReady"])
 		{
             NSLog(@"uiReady");
@@ -96,6 +120,9 @@
             [self updateContentInJS];
 		}
         
+        /**
+         * The store is initialized (everything is loaded and ready for the user).
+         */
         if([(NSString *)[components objectAtIndex:1] isEqualToString:@"storeInitialized"])
 		{
             NSLog(@"storeInitialized");
