@@ -1,10 +1,18 @@
-//
-//  AppDelegate.m
-//  SoomlaiOSStoreExample
-//
-//  Created by Refael Dakar on 9/22/12.
-//  Copyright (c) 2012 SOOMLA. All rights reserved.
-//
+/*
+ * Copyright (C) 2012 Soomla Inc.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 
 #import "AppDelegate.h"
 #import "StoreController.h"
@@ -17,17 +25,11 @@
 {
     [[UIApplication sharedApplication]setStatusBarHidden:YES withAnimation:UIStatusBarAnimationNone];
     
-//    NSString *jsonPath = [[NSBundle mainBundle] pathForResource:@"muffinRushTheme" ofType:@"json"];
-//    NSString *json = [NSString stringWithContentsOfFile:jsonPath encoding:NSUTF8StringEncoding error:nil];
-//    
-//    NSMutableDictionary* d = [NSMutableDictionary dictionaryWithDictionary:[json objectFromJSONString]];
-//    [d setObject:[NSArray arrayWithObject:@"HAHAHAAH"] forKey:@"AAA"];
-//    NSString* j = [d JSONString];
-    
+    /**
+     * We initialize StoreController when the application laods !
+     */
     [[StoreController getInstance] initializeWithStoreAssets:[[MuffinRushAssets alloc] init]];
     
-//    [NSClassFromString(@"WebView") performSelector:@selector(_enableRemoteInspector)];
-    // Override point for customization after application launch.
     return YES;
 }
 							

@@ -132,9 +132,6 @@
         NSLog(@"Invalid product id: %@" , invalidProductId);
     }
     
-    // finally release the reqest we alloc/init’ed in requestProUpgradeProductData
-    //    [productsRequest release];
-    
     [[NSNotificationCenter defaultCenter] postNotificationName:kInAppPurchaseManagerProductsFetchedNotification object:self userInfo:nil];
 }
 
