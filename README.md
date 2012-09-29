@@ -15,11 +15,7 @@ Getting Started
 
  `git clone git@github.com:soomla/ios-store.git`
 
-2. Make sure you have the following frameworks in your application's project:
-
-     * Security
-     * CoreData
-     * StoreKit
+2. Make sure you have the following frameworks in your application's project: Security, CoreData, StoreKit.
 
 3. Import CoreData in your application's 'pch' file:
 
@@ -29,7 +25,7 @@ Getting Started
     #ifdef __OBJC__
     	...
     	#import <CoreData/CoreData.h>
-	#endif
+    #endif
     ```
         
 4. Create your own implementation of _IStoreAssets_ in order to describe your specific game's assets. Initialize _StoreController_ with the class you just created:
