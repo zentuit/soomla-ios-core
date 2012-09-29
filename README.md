@@ -89,21 +89,24 @@ Security
 
 If you want to protect your application from 'bad people' (and who doesn't?!), you might want to follow some guidelines:
 
-+ SOOMLA keeps the game's data in an encrypted database. In order to encrypt your data, SOOMLA generates a private key out of several parts of information. StoreInfo.customSecret is one of them. SOOMLA recommends that you change this value before you release your game. BE CAREFUL: You can always change this value once! If you try to change it again, old data from the database will become unavailable.
-+ Following Google's recommendation, SOOMLA also recommends that you split your public key and construct it on runtime or even use bit manipulation on it in order to hide it. The key itself is not secret information but if someone replaces it, your application might get fake messages that might harm it.
++ SOOMLA keeps the game's data in an encrypted database. In order to encrypt your data, SOOMLA generates a private key out of several parts of information. StoreConfig's STORE_CUSTOM_SECRET is one of them. SOOMLA recommends that you change this value before you release your game. BE CAREFUL: You can change this value once! If you try to change it again, old data from the database will become unavailable.
+
 
 Event Handling
 ---
 
-SOOMLA lets you create your own event handler and add it to StoreEventHandlers. That way you'll be able to get notifications on various events and implement your own application specific behaviour to those events.
+SOOMLA lets you get notifications on various events and implement your own application specific behaviour.
 
 NOTE: Your behaviour is an addition to the default behaviour implemented by SOOMLA. You don't replace SOOMLA's behaviour.
 
-In order to create your event handler:
-
-1. create a class that implements IStoreEventHandler.
-2. Add the created class to StoreEventHandlers:
- `StoreEventHandlers.getInstance().addEventHandler(new YourEventHandler());`
+In order to observe store events you need to import EventHandling.h and than you can add a notification to *NSNotificationCenter*:
+    ```objective-c
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector([YOUR SELECTOR HERE]:) name:EVENT_VIRTUAL_CURRENCY_PACK_PURCHASED object:nil];
+    ```
+**OR**, you can observe all events with the same selector by calling:
+    ```objective-c
+    [EventHandling observeAllEventsWithObserver:self withSelector:@selector([YOUR SELECTOR HERE]:)];
+    ```
 
 Contribution
 ---
