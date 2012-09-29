@@ -100,11 +100,13 @@ SOOMLA lets you get notifications on various events and implement your own appli
 NOTE: Your behaviour is an addition to the default behaviour implemented by SOOMLA. You don't replace SOOMLA's behaviour.
 
 In order to observe store events you need to import EventHandling.h and than you can add a notification to *NSNotificationCenter*:
+
     ```objective-c
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector([YOUR SELECTOR HERE]:) name:EVENT_VIRTUAL_CURRENCY_PACK_PURCHASED object:nil];
     ```
     
 **OR**, you can observe all events with the same selector by calling:
+
     ```objective-c
     [EventHandling observeAllEventsWithObserver:self withSelector:@selector([YOUR SELECTOR HERE]:)];
     ```
