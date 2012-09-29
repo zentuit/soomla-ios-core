@@ -42,6 +42,11 @@
  * virtualGood is the virtual good to fetch the price for.
  */
 - (NSDictionary*)getCurrentPriceForVirtualGood:(VirtualGood*)virtualGood;
+/**
+ * NOTE: This function is not abstract but surely needs to be overriden by classes that extends PriceModel.
+ * 
+ * Creates and returns a NSDictionary representation of the PriceModel.
+ */
 - (NSDictionary*)toDictionary;
 
 /**

@@ -25,7 +25,7 @@
 		C02CED37160DDCB7000AA0D2 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C02CED36160DDCB7000AA0D2 /* AppDelegate.m */; };
 		C02CED40160DDCB7000AA0D2 /* MainStoryboard_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C02CED3E160DDCB7000AA0D2 /* MainStoryboard_iPhone.storyboard */; };
 		C02CED43160DDCB7000AA0D2 /* MainStoryboard_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C02CED41160DDCB7000AA0D2 /* MainStoryboard_iPad.storyboard */; };
-		C02CED46160DDCB7000AA0D2 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C02CED45160DDCB7000AA0D2 /* ViewController.m */; };
+		C02CED46160DDCB7000AA0D2 /* StoreExampleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C02CED45160DDCB7000AA0D2 /* StoreExampleViewController.m */; };
 		C02CED5A160DE081000AA0D2 /* GoodDog.otf in Resources */ = {isa = PBXBuildFile; fileRef = C02CED56160DE081000AA0D2 /* GoodDog.otf */; };
 		C02CED5B160DE081000AA0D2 /* img_direct.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C02CED58160DE081000AA0D2 /* img_direct.jpg */; };
 		C02CED5C160DE081000AA0D2 /* soomla_logo_new.png in Resources */ = {isa = PBXBuildFile; fileRef = C02CED59160DE081000AA0D2 /* soomla_logo_new.png */; };
@@ -91,8 +91,8 @@
 		C02CED36160DDCB7000AA0D2 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		C02CED3F160DDCB7000AA0D2 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard_iPhone.storyboard; sourceTree = "<group>"; };
 		C02CED42160DDCB7000AA0D2 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard_iPad.storyboard; sourceTree = "<group>"; };
-		C02CED44160DDCB7000AA0D2 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		C02CED45160DDCB7000AA0D2 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		C02CED44160DDCB7000AA0D2 /* StoreExampleViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StoreExampleViewController.h; sourceTree = "<group>"; };
+		C02CED45160DDCB7000AA0D2 /* StoreExampleViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = StoreExampleViewController.m; sourceTree = "<group>"; };
 		C02CED56160DE081000AA0D2 /* GoodDog.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = GoodDog.otf; path = resources/GoodDog.otf; sourceTree = "<group>"; };
 		C02CED58160DE081000AA0D2 /* img_direct.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = img_direct.jpg; sourceTree = "<group>"; };
 		C02CED59160DE081000AA0D2 /* soomla_logo_new.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = soomla_logo_new.png; sourceTree = "<group>"; };
@@ -203,8 +203,8 @@
 				C02CED36160DDCB7000AA0D2 /* AppDelegate.m */,
 				C02CED3E160DDCB7000AA0D2 /* MainStoryboard_iPhone.storyboard */,
 				C02CED41160DDCB7000AA0D2 /* MainStoryboard_iPad.storyboard */,
-				C02CED44160DDCB7000AA0D2 /* ViewController.h */,
-				C02CED45160DDCB7000AA0D2 /* ViewController.m */,
+				C02CED44160DDCB7000AA0D2 /* StoreExampleViewController.h */,
+				C02CED45160DDCB7000AA0D2 /* StoreExampleViewController.m */,
 				C018B7031610CFD3000FE817 /* MuffinRushAssets.h */,
 				C018B7041610CFD3000FE817 /* MuffinRushAssets.m */,
 			);
@@ -330,7 +330,7 @@
 			files = (
 				C02CED33160DDCB7000AA0D2 /* main.m in Sources */,
 				C02CED37160DDCB7000AA0D2 /* AppDelegate.m in Sources */,
-				C02CED46160DDCB7000AA0D2 /* ViewController.m in Sources */,
+				C02CED46160DDCB7000AA0D2 /* StoreExampleViewController.m in Sources */,
 				C018B7051610CFD3000FE817 /* MuffinRushAssets.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

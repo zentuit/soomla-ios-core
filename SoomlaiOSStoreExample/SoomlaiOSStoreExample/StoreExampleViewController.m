@@ -14,19 +14,19 @@
  * limitations under the License.
  */
 
-#import "ViewController.h"
+#import "StoreExampleViewController.h"
 #import <QuartzCore/QuartzCore.h>
 #import "StorefrontController.h"
 #import "JSONKit.h"
 #import "EventHandling.h"
 
-@interface ViewController (){
+@interface StoreExampleViewController (){
     BOOL dragging;
     BOOL onDropZone;
 }
 @end
 
-@implementation ViewController
+@implementation StoreExampleViewController
 
 @synthesize titleLabel, logoImageView, leftView, rightView, rightBg;
 
@@ -110,6 +110,8 @@
     {
         [rightView addSubview:logoImageView];
         [rightView bringSubviewToFront:logoImageView];
+        
+        /** Opening storefront **/
         
         NSString *jsonPath = [[NSBundle mainBundle] pathForResource:@"muffinRushTheme" ofType:@"json"];
         NSString *json = [NSString stringWithContentsOfFile:jsonPath encoding:NSUTF8StringEncoding error:nil];

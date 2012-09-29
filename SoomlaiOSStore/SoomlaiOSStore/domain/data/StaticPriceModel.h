@@ -29,6 +29,7 @@
 
 // docs in parent
 - (NSDictionary*)getCurrentPriceForVirtualGood:(VirtualGood*)virtualGood;
+// docs in parent
 - (NSDictionary*)toDictionary;
 
 + (StaticPriceModel*)modelWithNSDictionary:(NSDictionary*)dict;
