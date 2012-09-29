@@ -52,7 +52,7 @@ Getting Started (using static library)
 
 2. Add libSoomlaiOSStore.a and add it to your project's library dependencies. Add SooomlaiOSStore headers forder to your project as a source folder.
 
-3. Go through steps 2-4 from [Getting Started (using srouce code)](https://github.com/soomla/ios-store/blob/master/README.md#getting-started).
+3. Go through steps 2-4 from [Getting Started (using srouce code)](https://github.com/refaelos/ios-store#getting-started-using-srouce-code).
 
 Storage & Meta-Data
 ---
