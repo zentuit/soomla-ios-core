@@ -15,7 +15,13 @@ Getting Started
 
  `git clone git@github.com:soomla/ios-store.git`
 
-2. Import CoreData in your application's 'pch' file:
+2. Make sure you have the following frameworks in your application's project:
+
+* Security
+* CoreData
+* StoreKit
+
+3. Import CoreData in your application's 'pch' file:
 
 	go to [Application Name]-prefix.pch and add:
 
@@ -26,13 +32,10 @@ Getting Started
 	#endif
     ```
         
-3. Create your own implementation of _IStoreAssets_ in order to describe your specific game's assets. Initialize _StoreController_ with the class you just created:
+4. Create your own implementation of _IStoreAssets_ in order to describe your specific game's assets. Initialize _StoreController_ with the class you just created:
 
-      ```Java
-       StoreController.getInstance().initialize(getApplicationContext(), 
-                                           new YourStoreAssetsImplementation(),
-                                           "YOUR PUBLIC KEY FROM GOOGLE PLAY",
-                                           false);
+      ```objective-c
+       [[StoreController getInstance] initializeWithStoreAssets:[[MuffinRushAssets alloc] init]];
       ```
 
 And that's it ! You have Storage and in-app purchesing capabilities... ALL-IN-ONE.
