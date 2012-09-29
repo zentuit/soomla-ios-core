@@ -65,23 +65,23 @@ The on-device storage is encrypted and kept in a SQLite database. SOOMLA is prep
 
 * Add 10 coins to the virtual currency with itemId "currency_coin":
 
-    ```Java
-    VirtualCurrency coin = StoreInfo.getInstance().getVirtualCurrencyByItemId("currency_coin");
-    StorageManager.getInstance().getVirtualCurrencyStorage().add(coin, 10);
+    ```objective-c
+    VirtualCurrency* coin = [[StoreInfo getInstance] currencyWithItemId:@"currency_coin"];
+    [[[StorageManager getInstance] virtualCurrencyStorage] addAmount:10 toCurrency:coin];
     ```
     
 * Remove 10 virtual goods with itemId "green_hat":
 
-    ```Java
-    VirtualGood greenHat = StoreInfo.getInstance().getVirtualGoodByItemId("green_hat");
-    StorageManager.getInstance().getVirtualGoodsStorage().remove(greenHat, 10);
+    ```objective-c
+    VirtualGood* greenHat = [[StoreInfo getInstance] goodWithItemId:@"green_hat"];
+    [[[StorageManager getInstance] virtualGoodStorage] removeAmount:10 fromGood:greenHat];
     ```
     
 * Get the current balance of green hats (virtual goods with itemId "green_hat"):
 
-    ```Java
-    VirtualGood greenHat = StoreInfo.getInstance().getVirtualGoodByItemId("green_hat");
-    int greenHatsBalance = StorageManager.getInstance().getVirtualGoodsStorage().getBalance(greenHat);
+    ```objective-c
+    VirtualGood* greenHat = [[StoreInfo getInstance] goodWithItemId:@"green_hat"];
+    int greenHatsBalance = [[[StorageManager getInstance] virtualGoodStorage] getBalanceForGood:greenHat];
     ```
     
 Security
