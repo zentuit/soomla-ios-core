@@ -101,7 +101,9 @@ NOTE: Your behaviour is an addition to the default behaviour implemented by SOOM
 
 In order to observe store events you need to import EventHandling.h and than you can add a notification to *NSNotificationCenter*:
 
+    ```
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(yourCustomSelector:) name:EVENT_VIRTUAL_CURRENCY_PACK_PURCHASED object:nil];
+    ```
     
 OR, you can observe all events with the same selector by calling:
 
