@@ -7,8 +7,12 @@ The ios-store is our ios-falvored code initiative part of The SOOMLA Project. It
 
 Check out our [Wiki] (https://github.com/soomla/ios-store/wiki) for more information about the project and how to use it better.
 
-Getting Started    **WE USE ARC !**
+Getting Started
 ---
+
+#### **WE USE ARC !**
+
+
 * Before doing anything, SOOMLA recommends that you go through [Selling with In-App Purchase](https://developer.apple.com/appstore/in-app-purchase/index.html).
 
 1. Clone ios-store. Copy all files from ../ios-store/SoomlaiOSStore/SoomlaiOSStore into your iOS project:
