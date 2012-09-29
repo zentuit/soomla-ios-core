@@ -17,9 +17,9 @@ Getting Started
 
 2. Make sure you have the following frameworks in your application's project:
 
-* Security
-* CoreData
-* StoreKit
+	* Security
+	* CoreData
+	* StoreKit
 
 3. Import CoreData in your application's 'pch' file:
 
