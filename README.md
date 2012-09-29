@@ -7,7 +7,7 @@ The ios-store is our ios-falvored code initiative part of The SOOMLA Project. It
 
 Check out our [Wiki] (https://github.com/soomla/ios-store/wiki) for more information about the project and how to use it better.
 
-Getting Started
+Getting Started (using srouce code)
 ---
 
 #### **WE USE ARC !**
@@ -39,6 +39,20 @@ Getting Started
       ```
 
 And that's it ! You have Storage and in-app purchesing capabilities... ALL-IN-ONE.
+
+Getting Started (using static library)
+---
+
+#### **WE USE ARC !**
+
+
+* Before doing anything, SOOMLA recommends that you go through [Selling with In-App Purchase](https://developer.apple.com/appstore/in-app-purchase/index.html).
+
+1. Download SoomlaiOSStore.zip and unpack it.
+
+2. Add libSoomlaiOSStore.a and add it to your project's library dependencies. Add SooomlaiOSStore headers forder to your project as a source folder.
+
+3. Go through steps 2-4 from [Getting Started (using srouce code)](https://github.com/soomla/ios-store/blob/master/README.md#getting-started).
 
 Storage & Meta-Data
 ---
