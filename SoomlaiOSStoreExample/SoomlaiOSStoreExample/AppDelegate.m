@@ -17,7 +17,6 @@
 #import "AppDelegate.h"
 #import "StoreController.h"
 #import "MuffinRushAssets.h"
-#import "JSONKit.h"
 
 @implementation AppDelegate
 

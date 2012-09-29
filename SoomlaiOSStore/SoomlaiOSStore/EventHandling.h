@@ -38,7 +38,7 @@ extern NSString * EVENT_UNEXPECTED_ERROR_IN_STORE;
  */
 @interface EventHandling : NSObject
 
-+ (void)observeAllEventsWithObserver:(id)observer andSelector:(SEL)selector;
++ (void)observeAllEventsWithObserver:(id)observer withSelector:(SEL)selector;
 
 + (void)postVirtualCurrencyPackPurchased:(VirtualCurrencyPack*)pack;
 + (void)postVirtualGoodPurchased:(VirtualGood*)good;
