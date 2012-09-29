@@ -11,11 +11,13 @@ Getting Started
 ---
 * Before doing anything, SOOMLA recommends that you go through [Selling with In-App Purchase](https://developer.apple.com/appstore/in-app-purchase/index.html).
 
+**WE USE ARC !**
+
 1. Clone ios-store. Copy all files from ../ios-store/SoomlaiOSStore/SoomlaiOSStore into your iOS project:
 
  `git clone git@github.com:soomla/ios-store.git`
 
-2. Make sure you have the following frameworks in your application's project: Security, CoreData, StoreKit.
+2. Make sure you have the following frameworks in your application's project: **Security, CoreData, StoreKit**.
 
 3. Import CoreData in your application's 'pch' file:
 
