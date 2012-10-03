@@ -25,7 +25,7 @@ NSString* const MUFFIN_CURRENCY_ITEM_ID      = @"currency_muffin";
 NSString* const TENMUFF_PACK_PRODUCT_ID      = @"";
 NSString* const FIFTYMUFF_PACK_PRODUCT_ID    = @"";
 NSString* const FORTYMUFF_PACK_PRODUCT_ID    = @"purchase_test";
-NSString* const THOUSANDMUFF_PACK_PRODUCT_ID = @"";
+NSString* const THOUSANDMUFF_PACK_PRODUCT_ID = @"com.soomla.SoomlaiOSExample.second_test";
 
 @implementation MuffinRushAssets
 
