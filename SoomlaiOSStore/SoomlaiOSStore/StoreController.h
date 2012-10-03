@@ -58,5 +58,18 @@
  * Call this function when you close the actual store window.
  */
 - (void)storeClosing;
+/**
+* Make a VirtualGood equipped by the user.
+* itemId is the item id of the required virtual good.
+* throws NotEnoughGoodsException
+* throws VirtualItemNotFoundException
+*/
+- (void) equipVirtualGood:(NSString*) itemId;
+/**
+* Make a VirtualGood unequipped by the user.
+* itemId is the item id of the required virtual good.
+* throws VirtualItemNotFoundException
+*/
+- (void) unequipVirtualGood:(NSString*) itemId;
 
 @end

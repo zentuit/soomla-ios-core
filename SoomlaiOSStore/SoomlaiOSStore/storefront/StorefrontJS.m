@@ -27,6 +27,7 @@
 #import "VirtualGoodStorage.h"
 #import "JSONKit.h"
 #import "StoreController.h"
+#import "NotEnoughGoodsException.h"
 
 
 @implementation StorefrontJS
@@ -83,6 +84,50 @@
             
             @catch (VirtualItemNotFoundException *e) {
                 NSLog(@"Couldn't find a VirtualGood with itemId: %@. Purchase is cancelled.", itemId);
+                [sfViewController sendToJSWithAction:@"unexpectedError" andData:@""];
+            }
+        }
+        
+        /**
+         * The user wants to equip a virtual good.
+         * itemId is the item id of the virtual good.
+         */
+        if([(NSString *)[components objectAtIndex:1] isEqualToString:@"wantsToEquipGoods"])
+		{
+            NSString* itemId = [components objectAtIndex:2];
+            NSLog(@"wantsToEquipGoods %@", itemId);
+            
+            @try {
+                [[StoreController getInstance] equipVirtualGood:itemId];
+            }
+            
+            @catch (NotEnoughGoodsException *e) {
+                NSLog(@"%@", e.reason);
+                
+                [sfViewController sendToJSWithAction:@"notEnoughGoods" andData:[NSString stringWithFormat:@"'%@'", itemId]];
+            }
+            
+            @catch (VirtualItemNotFoundException *e) {
+                NSLog(@"Couldn't find a VirtualGood with itemId: %@. Equipping is cancelled.", itemId);
+                [sfViewController sendToJSWithAction:@"unexpectedError" andData:@""];
+            }
+        }
+        
+        /**
+        * The user wants to unequip a virtual good.
+        * itemId is the item id of the virtual good.
+        */
+        if([(NSString *)[components objectAtIndex:1] isEqualToString:@"wantsToUnequipGoods"])
+		{
+            NSString* itemId = [components objectAtIndex:2];
+            NSLog(@"wantsToUnequipGoods %@", itemId);
+            
+            @try {
+                [[StoreController getInstance] unequipVirtualGood:itemId];
+            }
+            
+            @catch (VirtualItemNotFoundException *e) {
+                NSLog(@"Couldn't find a VirtualGood with itemId: %@. Equipping is cancelled.", itemId);
                 [sfViewController sendToJSWithAction:@"unexpectedError" andData:@""];
             }
         }
@@ -149,9 +194,11 @@
     NSMutableDictionary* goodsDict = [[NSMutableDictionary alloc] init];
     for(VirtualGood* good in [[StoreInfo getInstance] virtualGoods]){
         int balance = [[[StorageManager getInstance] virtualGoodStorage] getBalanceForGood:good];
+        BOOL equipped = [[[StorageManager getInstance] virtualGoodStorage] isGoodEquipped:good];
         NSDictionary* updatedValues = [NSDictionary dictionaryWithObjectsAndKeys:
                                        @"balance", [NSNumber numberWithInt:balance],
                                        @"price", [good currencyValues],
+                                       @"equipped", [NSNumber numberWithBool:equipped],
                                        nil];
         [goodsDict setValue:updatedValues forKey:good.itemId];
     }

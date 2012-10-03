@@ -22,20 +22,20 @@
 #define DATABASE_FILE_NAME           @"store.sqlite"
 
 // Entities
-#define ENTITY_NAME_CURRENCY_BALANCE @"CurrencyBalance"
-#define ENTITY_NAME_GOOD_BALANCE     @"GoodBalance"
+#define ENTITY_NAME_CURRENCIES       @"CurrencyBalance"
+#define ENTITY_NAME_GOODS            @"GoodBalance"
 #define ENTITY_NAME_METADATA         @"Metadata"
 
 // Attributes
 #define ATTR_NAME_BALANCE            @"balance"
+#define ATTR_NAME_EQUIPPED           @"equipped"
 #define ATTR_NAME_ITEMID             @"itemId"
 #define ATTR_NAME_STOREINFO          @"storeInfo"
 #define ATTR_NAME_STOREFRONTINFO     @"storefrontInfo"
 
 @interface StoreDatabase()
 
-- (void)saveOrUpdateItem:(NSString*)itemId withBalance:(NSNumber*)balance andEntityName:(NSString*)entityName;
-- (NSDictionary*)getItem:(NSString*)itemId andEntityName:(NSString*)entityName;
+- (void)saveOrUpdateNumber:(NSNumber*)num forAttribute:(NSString*)attrName withTargetEntity:(NSString*)entityName forItemId:(NSString*)itemId;
 - (NSManagedObject *)getManagedObjectWithValue:(NSString *)value forAttribute:(NSString*)attr andEntityName:(NSString*)entityName;
 - (void)saveOrUpdateStoreInfo:(NSString*)storeInfo withData:(NSString*)storeInfoData;
 - (NSString*)getStoreInfo:(NSString*)storeInfo;
@@ -64,20 +64,47 @@
     return [self getStoreInfo:ATTR_NAME_STOREFRONTINFO];
 }
 
-- (void)updateCurrencyBalanceWithItemID:(NSString*)itemId andBalance:(NSNumber*)balance{
-    [self saveOrUpdateItem:itemId withBalance:balance andEntityName:ENTITY_NAME_CURRENCY_BALANCE];
+- (void)updateCurrencyBalance:(NSNumber*)balance forItemId:(NSString*)itemId{
+    [self saveOrUpdateNumber:balance forAttribute:ATTR_NAME_BALANCE withTargetEntity:ENTITY_NAME_CURRENCIES forItemId:itemId];
 }
 
-- (void)updateGoodBalanceWithItemId:(NSString*)itemId andBalance:(NSNumber*)balance{
-    [self saveOrUpdateItem:itemId withBalance:balance andEntityName:ENTITY_NAME_GOOD_BALANCE];
+- (void)updateGoodBalance:(NSNumber*)balance forItemId:(NSString*)itemId{
+    [self saveOrUpdateNumber:balance forAttribute:ATTR_NAME_BALANCE withTargetEntity:ENTITY_NAME_GOODS forItemId:itemId];
 }
 
-- (NSDictionary*)getCurrencyBalanceWithItemId:(NSString*)itemId{
-    return [self getItem:itemId andEntityName:ENTITY_NAME_CURRENCY_BALANCE];
+- (void)updateGoodEquipped:(NSNumber*)equip forItemId:(NSString*)itemId{
+    [self saveOrUpdateNumber:equip forAttribute:ATTR_NAME_EQUIPPED withTargetEntity:ENTITY_NAME_GOODS forItemId:itemId];
 }
 
-- (NSDictionary*)getGoodBalanceWithItemId:(NSString*)itemId{
-    return [self getItem:itemId andEntityName:ENTITY_NAME_GOOD_BALANCE];
+- (NSDictionary*)getCurrencyWithItemId:(NSString*)itemId{
+    NSManagedObject *managedObject = [self getManagedObjectWithValue:itemId forAttribute:ATTR_NAME_ITEMID andEntityName:ENTITY_NAME_CURRENCIES];
+    
+    if (managedObject != NULL){
+        NSLog(@"found currency with itemId: %@", itemId);
+        return [NSDictionary dictionaryWithObjectsAndKeys:
+                itemId, DICT_KEY_ITEM_ID,
+                [managedObject valueForKey:ATTR_NAME_BALANCE], DICT_KEY_BALANCE,
+                nil];
+    }
+    
+    NSLog(@"couldn't find currency for itemId %@. returning a NULL dictionary.", itemId);
+    return NULL;
+}
+
+- (NSDictionary*)getGoodWithItemId:(NSString*)itemId{
+    NSManagedObject *managedObject = [self getManagedObjectWithValue:itemId forAttribute:ATTR_NAME_ITEMID andEntityName:ENTITY_NAME_GOODS];
+    
+    if (managedObject != NULL){
+        NSLog(@"found good with itemId: %@", itemId);
+        return [NSDictionary dictionaryWithObjectsAndKeys:
+                itemId, DICT_KEY_ITEM_ID,
+                [managedObject valueForKey:ATTR_NAME_BALANCE], DICT_KEY_BALANCE,
+                [managedObject valueForKey:ATTR_NAME_EQUIPPED], DICT_KEY_EQUIP,
+                nil];
+    }
+    
+    NSLog(@"couldn't find good for itemId %@. returning a NULL dictionary.", itemId);
+    return NULL;
 }
 
 - (void)saveOrUpdateStoreInfo:(NSString*)storeInfo withData:(NSString*)storeInfoData{
@@ -99,23 +126,22 @@
 }
 
 
-- (void)saveOrUpdateItem:(NSString*)itemId withBalance:(NSNumber*)balance andEntityName:(NSString*)entityName{
+- (void)saveOrUpdateNumber:(NSNumber*)num forAttribute:(NSString*)attrName withTargetEntity:(NSString*)entityName forItemId:(NSString*)itemId{
     NSManagedObject *managedObject = [self getManagedObjectWithValue:itemId forAttribute:ATTR_NAME_ITEMID andEntityName:entityName];
     
     if (managedObject != NULL){
         NSLog(@"setting value for existing itemId: %@", itemId);
-        [managedObject setValue:balance forKey:ATTR_NAME_BALANCE];
-        [self saveContext];
+        [managedObject setValue:num forKey:attrName];
     }
     else{
         NSLog(@"setting value for new itemId: %@", itemId);
         managedObject = [NSEntityDescription
                          insertNewObjectForEntityForName:entityName
                          inManagedObjectContext:self.managedObjectContext];
-        [managedObject setValue:balance forKey:ATTR_NAME_BALANCE];
+        [managedObject setValue:num forKey:attrName];
         [managedObject setValue:itemId forKey:ATTR_NAME_ITEMID];
-        [self saveContext];
     }
+    [self saveContext];
 }
 
 - (NSString*)getStoreInfo:(NSString*)storeInfo{
@@ -128,19 +154,6 @@
 
     NSLog(@"can't find the storeInfo %@. returning an empty string.", storeInfo);
     return @"";
-}
-
-- (NSDictionary*)getItem:(NSString*)itemId andEntityName:(NSString*)entityName{
-    NSManagedObject *managedObject = [self getManagedObjectWithValue:itemId forAttribute:ATTR_NAME_ITEMID andEntityName:entityName];
-    
-    if (managedObject != NULL){
-        NSLog(@"found object with itemId: %@", itemId);
-        return [NSDictionary dictionaryWithObjectsAndKeys:itemId, ATTR_NAME_ITEMID,
-                [managedObject valueForKey:ATTR_NAME_BALANCE], ATTR_NAME_BALANCE, nil];
-    }
-    
-    NSLog(@"coouldn't find object for itemId %@. returning a NULL dictionary.", itemId);
-    return NULL;
 }
 
 /**
@@ -234,30 +247,31 @@
     _managedObjectModel = [[NSManagedObjectModel alloc] init];
     
     
-    // CurrencyBalance
+    // Currencies
     NSEntityDescription *currencyBalanceEntity = [[NSEntityDescription alloc] init];
-    [currencyBalanceEntity setName:ENTITY_NAME_CURRENCY_BALANCE];
-    [currencyBalanceEntity setManagedObjectClassName:ENTITY_NAME_CURRENCY_BALANCE];
+    [currencyBalanceEntity setName:ENTITY_NAME_CURRENCIES];
+    [currencyBalanceEntity setManagedObjectClassName:ENTITY_NAME_CURRENCIES];
     
     NSMutableArray *currencyBalanceProperties = [NSMutableArray array];
     [currencyBalanceProperties addObject:[self attributeWithName:ATTR_NAME_BALANCE andTrasformableName:@"NumberEncryptionTransformer" andOptional:NO]];
     [currencyBalanceProperties addObject:[self attributeWithName:ATTR_NAME_ITEMID andTrasformableName:@"StringEncryptionTransformer" andOptional:NO]];
     [currencyBalanceEntity setProperties:currencyBalanceProperties];
 
-    // GoodBalance
+    // Goods
     NSEntityDescription *goodBalanceEntity = [[NSEntityDescription alloc] init];
-    [goodBalanceEntity setName:ENTITY_NAME_GOOD_BALANCE];
-    [goodBalanceEntity setManagedObjectClassName:ENTITY_NAME_GOOD_BALANCE];
+    [goodBalanceEntity setName:ENTITY_NAME_GOODS];
+    [goodBalanceEntity setManagedObjectClassName:ENTITY_NAME_GOODS];
     
     NSMutableArray *goodBalanceProperties = [NSMutableArray array];
     [goodBalanceProperties addObject:[self attributeWithName:ATTR_NAME_BALANCE andTrasformableName:@"NumberEncryptionTransformer" andOptional:NO]];
+    [goodBalanceProperties addObject:[self attributeWithName:ATTR_NAME_EQUIPPED andTrasformableName:@"NumberEncryptionTransformer" andOptional:NO]];
     [goodBalanceProperties addObject:[self attributeWithName:ATTR_NAME_ITEMID andTrasformableName:@"StringEncryptionTransformer" andOptional:NO]];
     [goodBalanceEntity setProperties:goodBalanceProperties];
     
     // Metadata
     NSEntityDescription *metadataBalanceEntity = [[NSEntityDescription alloc] init];
     [metadataBalanceEntity setName:ENTITY_NAME_METADATA];
-    [metadataBalanceEntity setManagedObjectClassName:ENTITY_NAME_GOOD_BALANCE];
+    [metadataBalanceEntity setManagedObjectClassName:ENTITY_NAME_GOODS];
     
     NSMutableArray *metadataBalanceProperties = [NSMutableArray array];
     [metadataBalanceProperties addObject:[self attributeWithName:ATTR_NAME_STOREINFO andTrasformableName:@"StringEncryptionTransformer" andOptional:YES]];

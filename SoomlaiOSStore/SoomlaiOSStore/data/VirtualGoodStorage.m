@@ -23,19 +23,19 @@
 
 - (int)getBalanceForGood:(VirtualGood*)virtualGood{
     NSString* itemId = virtualGood.itemId;
-    NSDictionary* goodBalance = [[[StorageManager getInstance] database] getGoodBalanceWithItemId:itemId];
+    NSDictionary* goodDict = [[[StorageManager getInstance] database] getGoodWithItemId:itemId];
     
-    if (!goodBalance){
+    if (!goodDict){
         return 0;
     }
     
-    return [[goodBalance valueForKey:@"balance"] intValue];
+    return [[goodDict valueForKey:DICT_KEY_BALANCE] intValue];
 }
 
 - (int)addAmount:(int)amount toGood:(VirtualGood*)virtualGood{
     NSString* itemId = virtualGood.itemId;
     int balance = [self getBalanceForGood:virtualGood] + amount;
-    [[[StorageManager getInstance] database] updateGoodBalanceWithItemId:itemId andBalance:[NSNumber numberWithInt:balance]];
+    [[[StorageManager getInstance] database] updateGoodBalance:[NSNumber numberWithInt:balance] forItemId:itemId];
     
     return balance;
 }
@@ -44,9 +44,25 @@
     NSString* itemId = virtualGood.itemId;
     int balance = [self getBalanceForGood:virtualGood] - amount;
     balance = balance > 0 ? balance : 0;
-    [[[StorageManager getInstance] database] updateGoodBalanceWithItemId:itemId andBalance:[NSNumber numberWithInt:balance]];
+    [[[StorageManager getInstance] database] updateGoodBalance:[NSNumber numberWithInt:balance] forItemId:itemId];
     
     return balance;
+}
+
+- (BOOL)isGoodEquipped:(VirtualGood*)virtualGood{
+    NSString* itemId = virtualGood.itemId;
+    NSDictionary* goodDict = [[[StorageManager getInstance] database] getGoodWithItemId:itemId];
+    
+    if (!goodDict){
+        return 0;
+    }
+    
+    return [[goodDict valueForKey:DICT_KEY_EQUIP] boolValue];
+}
+
+- (void)equipGood:(VirtualGood*)virtualGood withEquipValue:(BOOL)equip{
+    NSString* itemId = virtualGood.itemId;
+    [[[StorageManager getInstance] database] updateGoodEquipped:[NSNumber numberWithBool:equip] forItemId:itemId];
 }
 
 @end

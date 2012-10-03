@@ -21,6 +21,8 @@
 
 NSString * EVENT_VIRTUAL_CURRENCY_PACK_PURCHASED = @"VirtualCurrencyPackPurchased";
 NSString * EVENT_VIRTUAL_GOOD_PURCHASED          = @"VirtualGoodPurchased";
+NSString * EVENT_VIRTUAL_GOOD_EQUIPPED           = @"VirtualGoodEquipped";
+NSString * EVENT_VIRTUAL_GOOD_UNEQUIPPED         = @"VirtualGoodUNEQUIPPED";
 NSString * EVENT_BILLING_SUPPORTED               = @"BillingSupported";
 NSString * EVENT_BILLING_NOT_SUPPORTED           = @"BillingNotSupported";
 NSString * EVENT_MARKET_PURCHASE_STARTED         = @"MarketPurchaseProcessStarted";
@@ -34,6 +36,8 @@ NSString * EVENT_UNEXPECTED_ERROR_IN_STORE       = @"UnexpectedErrorInStore";
 + (void)observeAllEventsWithObserver:(id)observer withSelector:(SEL)selector{
     [[NSNotificationCenter defaultCenter] addObserver:observer selector:selector name:EVENT_VIRTUAL_CURRENCY_PACK_PURCHASED object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:observer selector:selector name:EVENT_VIRTUAL_GOOD_PURCHASED object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:observer selector:selector name:EVENT_VIRTUAL_GOOD_EQUIPPED object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:observer selector:selector name:EVENT_VIRTUAL_GOOD_UNEQUIPPED object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:observer selector:selector name:EVENT_BILLING_SUPPORTED object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:observer selector:selector name:EVENT_BILLING_NOT_SUPPORTED object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:observer selector:selector name:EVENT_MARKET_PURCHASE_STARTED object:nil];
@@ -51,6 +55,16 @@ NSString * EVENT_UNEXPECTED_ERROR_IN_STORE       = @"UnexpectedErrorInStore";
 + (void)postVirtualGoodPurchased:(VirtualGood*)good{
     NSDictionary *userInfo = [NSDictionary dictionaryWithObject:good forKey:@"VirtualGood"];
     [[NSNotificationCenter defaultCenter] postNotificationName:EVENT_VIRTUAL_GOOD_PURCHASED object:self userInfo:userInfo];
+}
+
++ (void)postVirtualGoodEquipped:(VirtualGood*)good{
+    NSDictionary *userInfo = [NSDictionary dictionaryWithObject:good forKey:@"VirtualGood"];
+    [[NSNotificationCenter defaultCenter] postNotificationName:EVENT_VIRTUAL_GOOD_EQUIPPED object:self userInfo:userInfo];
+}
+
++ (void)postVirtualGoodUnEquipped:(VirtualGood*)good{
+    NSDictionary *userInfo = [NSDictionary dictionaryWithObject:good forKey:@"VirtualGood"];
+    [[NSNotificationCenter defaultCenter] postNotificationName:EVENT_VIRTUAL_GOOD_UNEQUIPPED object:self userInfo:userInfo];
 }
 
 + (void)postBillingSupported{

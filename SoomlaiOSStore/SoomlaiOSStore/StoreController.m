@@ -24,6 +24,7 @@
 #import "VirtualCurrencyStorage.h"
 #import "VirtualGoodStorage.h"
 #import "InsufficientFundsException.h"
+#import "NotEnoughGoodsException.h"
 
 #define kInAppPurchaseManagerProductsFetchedNotification @"kInAppPurchaseManagerProductsFetchedNotification"
 
@@ -110,6 +111,28 @@
 
 - (void)storeClosing{
     [EventHandling postClosingStore];
+}
+
+
+- (void) equipVirtualGood:(NSString*) itemId{
+    VirtualGood* good = [[StoreInfo getInstance] goodWithItemId:itemId];
+    
+    // if the user has enough, the virtual good is purchased.
+    if ([[[StorageManager getInstance] virtualGoodStorage] getBalanceForGood:good] > 0){
+        [[[StorageManager getInstance] virtualGoodStorage] equipGood:good withEquipValue:true];
+        
+        [EventHandling postVirtualGoodEquipped:good];
+    }
+
+    @throw [[NotEnoughGoodsException alloc] initWithItemId:itemId];
+}
+                         
+- (void) unequipVirtualGood:(NSString*) itemId{
+    VirtualGood* good = [[StoreInfo getInstance] goodWithItemId:itemId];
+    
+    [[[StorageManager getInstance] virtualGoodStorage] equipGood:good withEquipValue:false];
+    
+    [EventHandling postVirtualGoodUnEquipped:good];
 }
 
 #pragma mark -

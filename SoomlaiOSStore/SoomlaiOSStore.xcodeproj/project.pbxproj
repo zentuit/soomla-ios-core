@@ -84,6 +84,7 @@
 		C02CED0E160DCDE3000AA0D2 /* StringEncryptionTransformer.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C02CEC8A160DCA67000AA0D2 /* StringEncryptionTransformer.h */; };
 		C02CED0F160DCDE3000AA0D2 /* VirtualCurrencyStorage.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C02CEC8C160DCA67000AA0D2 /* VirtualCurrencyStorage.h */; };
 		C02CED10160DCDE3000AA0D2 /* VirtualGoodStorage.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C02CEC8E160DCA67000AA0D2 /* VirtualGoodStorage.h */; };
+		C0780EA0161B8EFE00F43934 /* NotEnoughGoodsException.m in Sources */ = {isa = PBXBuildFile; fileRef = C0780E9F161B8EFE00F43934 /* NotEnoughGoodsException.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -229,6 +230,8 @@
 		C02CECD1160DCA67000AA0D2 /* UIDevice+IdentifierAddition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIDevice+IdentifierAddition.h"; sourceTree = "<group>"; };
 		C02CECD2160DCA67000AA0D2 /* UIDevice+IdentifierAddition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIDevice+IdentifierAddition.m"; sourceTree = "<group>"; };
 		C02CECF5160DCB4A000AA0D2 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		C0780E9E161B8EFE00F43934 /* NotEnoughGoodsException.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotEnoughGoodsException.h; sourceTree = "<group>"; };
+		C0780E9F161B8EFE00F43934 /* NotEnoughGoodsException.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotEnoughGoodsException.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -428,6 +431,8 @@
 				C02CECAF160DCA67000AA0D2 /* InsufficientFundsException.m */,
 				C02CECB0160DCA67000AA0D2 /* VirtualItemNotFoundException.h */,
 				C02CECB1160DCA67000AA0D2 /* VirtualItemNotFoundException.m */,
+				C0780E9E161B8EFE00F43934 /* NotEnoughGoodsException.h */,
+				C0780E9F161B8EFE00F43934 /* NotEnoughGoodsException.m */,
 			);
 			path = exceptions;
 			sourceTree = "<group>";
@@ -610,6 +615,7 @@
 				C018B58C161052D9000FE817 /* StorefrontJS.m in Sources */,
 				C018B58D161052D9000FE817 /* StorefrontViewController.m in Sources */,
 				C018B7141610EE89000FE817 /* StorefrontInfo.m in Sources */,
+				C0780EA0161B8EFE00F43934 /* NotEnoughGoodsException.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

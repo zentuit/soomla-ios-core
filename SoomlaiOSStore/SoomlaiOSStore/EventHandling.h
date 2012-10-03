@@ -19,6 +19,8 @@
 
 extern NSString * EVENT_VIRTUAL_CURRENCY_PACK_PURCHASED;
 extern NSString * EVENT_VIRTUAL_GOOD_PURCHASED;
+extern NSString * EVENT_VIRTUAL_GOOD_EQUIPPED;
+extern NSString * EVENT_VIRTUAL_GOOD_UNEQUIPPED;
 extern NSString * EVENT_BILLING_SUPPORTED;
 extern NSString * EVENT_BILLING_NOT_SUPPORTED;
 extern NSString * EVENT_MARKET_PURCHASE_STARTED;
@@ -42,6 +44,8 @@ extern NSString * EVENT_UNEXPECTED_ERROR_IN_STORE;
 
 + (void)postVirtualCurrencyPackPurchased:(VirtualCurrencyPack*)pack;
 + (void)postVirtualGoodPurchased:(VirtualGood*)good;
++ (void)postVirtualGoodEquipped:(VirtualGood*)good;
++ (void)postVirtualGoodUnEquipped:(VirtualGood*)good;
 + (void)postBillingSupported;
 + (void)postBillingNotSupported;
 + (void)postGoodsPurchaseStarted;

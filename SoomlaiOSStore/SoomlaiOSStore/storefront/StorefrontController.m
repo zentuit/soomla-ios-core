@@ -51,7 +51,9 @@
     [viewController presentViewController:svc animated:YES completion:nil];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(virtualCurrencyPackPurchased:) name:EVENT_VIRTUAL_CURRENCY_PACK_PURCHASED object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(virtualGoodPurchased:) name:EVENT_VIRTUAL_GOOD_PURCHASED object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(virtualGoodPurchased:) name:EVENT_VIRTUAL_GOOD_EQUIPPED object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(virtualGoodEquipped:) name:EVENT_VIRTUAL_GOOD_UNEQUIPPED object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(virtualGoodUnEquipped:) name:EVENT_VIRTUAL_GOOD_PURCHASED object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(billingNotSupported:) name:EVENT_BILLING_NOT_SUPPORTED object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(closingStore:) name:EVENT_CLOSING_STORE object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(unexpectedError:) name:EVENT_UNEXPECTED_ERROR_IN_STORE object:nil];
@@ -69,6 +71,14 @@
 }
 
 - (void)virtualGoodPurchased:(NSNotification*)notification{
+    [sfViewController.storefrontJS updateContentInJS];
+}
+
+- (void)virtualGoodEquipped:(NSNotification*)notification{
+    [sfViewController.storefrontJS updateContentInJS];
+}
+
+- (void)virtualGoodUnEquipped:(NSNotification*)notification{
     [sfViewController.storefrontJS updateContentInJS];
 }
 

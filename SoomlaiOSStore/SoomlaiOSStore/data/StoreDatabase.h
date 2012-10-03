@@ -16,6 +16,10 @@
 
 #import <Foundation/Foundation.h>
 
+#define DICT_KEY_BALANCE @"balance"
+#define DICT_KEY_EQUIP   @"equip"
+#define DICT_KEY_ITEM_ID @"itemId"
+
 /**
  * The StoreDatabase provides basic Coredata database functions for specific needs around the SDK.
  */
@@ -32,23 +36,29 @@
  * itemId is the item id of the required virtual currency.
  * balance is the required virtual currency's new balance.
  */
-- (void)updateCurrencyBalanceWithItemID:(NSString*)itemId andBalance:(NSNumber*)balance;
+- (void)updateCurrencyBalance:(NSNumber*)balance forItemId:(NSString*)itemId;
 /**
  * Updates the balance of the virtual good with the given itemId.
  * itemId is the item id of the required virtual good.
  * balance is the required virtual good's new balance.
  */
-- (void)updateGoodBalanceWithItemId:(NSString*)itemId andBalance:(NSNumber*)balance;
+- (void)updateGoodBalance:(NSNumber*)balance forItemId:(NSString*)itemId;
+/**
+ * Updates the equipe status of the virtual good with the given itemId.
+ * itemId is the item id of the required virtual good.
+ * equip is the required virtual good's new equip status.
+ */
+- (void)updateGoodEquipped:(NSNumber*)equip forItemId:(NSString*)itemId;
 /**
  * Fetch a single virtual currency information with the given itemId.
  * itemId is the required currency's item id.
  */
-- (NSDictionary*)getCurrencyBalanceWithItemId:(NSString*)itemId;
+- (NSDictionary*)getCurrencyWithItemId:(NSString*)itemId;
 /**
  * Fetch a single virtual good information with the given itemId.
  * itemId is the required good's item id.
  */
-- (NSDictionary*)getGoodBalanceWithItemId:(NSString*)itemId;
+- (NSDictionary*)getGoodWithItemId:(NSString*)itemId;
 /**
  * Overwrites the current storeinfo information with a new one.
  * storeinfo is the new store information.

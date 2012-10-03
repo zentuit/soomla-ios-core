@@ -17,6 +17,7 @@
 #import "StorefrontViewController.h"
 #import "StoreController.h"
 #import "StorefrontJS.h"
+#import "StorefrontInfo.h"
 
 @interface StorefrontViewController ()
 
@@ -50,8 +51,12 @@
 }
 
 -(BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation{
-    BOOL isLandscapeRight = (UIInterfaceOrientationLandscapeRight == toInterfaceOrientation);
-    return isLandscapeRight;
+    if ([[StorefrontInfo getInstance] orientationLandscape]){
+        return UIInterfaceOrientationIsLandscape(toInterfaceOrientation);
+    }
+
+    return UIInterfaceOrientationIsPortrait(toInterfaceOrientation);
+//    return NO;
 }
 
 - (void)loadWebView{

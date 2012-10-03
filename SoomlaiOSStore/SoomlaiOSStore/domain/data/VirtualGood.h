@@ -28,10 +28,12 @@
     @private
     PriceModel* priceModel;
     VirtualCategory* category;
+    BOOL equipped;
 }
 
 @property (retain, nonatomic) PriceModel* priceModel;
 @property (retain, nonatomic) VirtualCategory* category;
+@property BOOL equipped;
 
 /**
  * oName is the name of the virtual good.
@@ -44,7 +46,7 @@
  */
 - (id)initWithName:(NSString*)oName andDescription:(NSString*)oDescription
     andImgFilePath:(NSString*)oImgFilePath andItemId:(NSString*)oItemId andPriceModel:(PriceModel*)oPriceModel
-       andCategory:(VirtualCategory*)oCategory;
+       andCategory:(VirtualCategory*)oCategory andEquipStatus:(BOOL)oEquipped;
 
 - (id)initWithDictionary:(NSDictionary*)dict;
 - (NSDictionary*)toDictionary;

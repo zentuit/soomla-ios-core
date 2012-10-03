@@ -40,5 +40,15 @@
  * amount is the amount to remove.
  */
 - (int)removeAmount:(int)amount fromGood:(VirtualGood*)virtualGood;
+/**
+ * Fetch the equip status of the given VirtualGood.
+ */
+- (BOOL)isGoodEquipped:(VirtualGood*)virtualGood;
+/**
+ * Sets the equip status of the given VirtualGood.
+ * virtualGood is the required VirtualGood
+ * equip is the boolean equip status of the VirtualGood
+ */
+- (void)equipGood:(VirtualGood*)virtualGood withEquipValue:(BOOL)equip;
 
 @end
