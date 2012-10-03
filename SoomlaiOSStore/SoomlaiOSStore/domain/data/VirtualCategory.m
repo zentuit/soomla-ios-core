@@ -19,14 +19,16 @@
 
 @implementation VirtualCategory
 
-@synthesize Id, name;
+@synthesize Id, name, title, imgFilePath;
 
-- (id)initWithName:(NSString*)oName andId:(int)oId{
+- (id)initWithName:(NSString*)oName andId:(int)oId andTitle:(NSString*)oTitle andImgFilePath:(NSString*)oImgFilePath{
     
     self = [super init];
     if (self) {
         self.name = oName;
         self.Id = oId;
+        self.title = oTitle;
+        self.imgFilePath = oImgFilePath;
     }
     
     return self;
@@ -39,6 +41,8 @@
         self.name = [dict objectForKey:JSON_CATEGORY_NAME];
         NSNumber* numId = [dict objectForKey:JSON_CATEGORY_ID];
         self.Id = [numId intValue];
+        self.title = [dict objectForKey:JSON_CATEGORY_TITLE];
+        self.imgFilePath = [dict objectForKey:JSON_CATEGORY_IMAGEFILEPATH];
     }
     
     return self;
@@ -48,6 +52,8 @@
     return [[NSDictionary alloc] initWithObjectsAndKeys:
             self.name, JSON_CATEGORY_NAME,
             [NSNumber numberWithInt:self.Id], JSON_CATEGORY_ID,
+            self.title, JSON_CATEGORY_TITLE,
+            self.imgFilePath, JSON_CATEGORY_IMAGEFILEPATH,
             nil];
 }
 

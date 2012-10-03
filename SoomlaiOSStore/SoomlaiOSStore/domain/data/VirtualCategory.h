@@ -25,16 +25,20 @@
 @interface VirtualCategory : NSObject{
     NSString* name;
     int       Id;
+    NSString* title;
+    NSString* imgFilePath;
 }
 
 @property (retain, nonatomic) NSString* name;
 @property int Id;
+@property (retain, nonatomic) NSString* title;
+@property (retain, nonatomic) NSString* imgFilePath;
 
 /**
 * oName is the category's name.
 * oId is the category's unique id.
 */
-- (id)initWithName:(NSString*)oName andId:(int)oId;
+- (id)initWithName:(NSString*)oName andId:(int)oId andTitle:(NSString*)oTitle andImgFilePath:(NSString*)oImgFilePath;
 - (id)initWithDictionary:(NSDictionary*)dict;
 - (NSDictionary*)toDictionary;
 
