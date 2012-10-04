@@ -18,6 +18,7 @@
 
 @interface StoreExampleViewController : UIViewController{
     UILabel* titleLabel;
+    UILabel* infoLabel;
     UIImageView* logoImageView;
     UIView* leftView;
     UIView* rightView;
@@ -25,6 +26,7 @@
 }
 
 @property (nonatomic, retain) IBOutlet UILabel* titleLabel;
+@property (nonatomic, retain) IBOutlet UILabel* infoLabel;
 @property (nonatomic, retain) IBOutlet UIImageView* logoImageView;
 @property (nonatomic, retain) IBOutlet UIImageView* rightBg;
 @property (nonatomic, retain) IBOutlet UIView* leftView;

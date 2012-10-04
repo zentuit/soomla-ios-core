@@ -28,13 +28,14 @@
 
 @implementation StoreExampleViewController
 
-@synthesize titleLabel, logoImageView, leftView, rightView, rightBg;
+@synthesize titleLabel, infoLabel, logoImageView, leftView, rightView, rightBg;
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
     [titleLabel setFont:[UIFont fontWithName:@"GoodDog" size:50]];
+    [infoLabel setFont:[UIFont fontWithName:@"GoodDog" size:20]];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(closingStore:) name:EVENT_CLOSING_STORE object:nil];
     
@@ -54,6 +55,7 @@
 }
 
 - (void)closingStore:(NSNotification*)notification{
+    [rightBg setImage:[UIImage imageNamed:@"right_bg.png"]];
     [leftView addSubview:logoImageView];
     [leftView bringSubviewToFront:logoImageView];
     logoImageView.frame = CGRectMake(0, 0, logoImageView.frame.size.width, logoImageView.frame.size.height);
