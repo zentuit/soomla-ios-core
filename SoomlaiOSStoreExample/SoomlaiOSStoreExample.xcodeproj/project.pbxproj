@@ -75,36 +75,6 @@
 		C018B7031610CFD3000FE817 /* MuffinRushAssets.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MuffinRushAssets.h; sourceTree = "<group>"; };
 		C018B7041610CFD3000FE817 /* MuffinRushAssets.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MuffinRushAssets.m; sourceTree = "<group>"; };
 		C018B70C1610EB85000FE817 /* muffinRushTheme.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = muffinRushTheme.json; path = resources/muffinRushTheme.json; sourceTree = "<group>"; };
-		C018B756161104BA000FE817 /* AppStoreItem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppStoreItem.h; sourceTree = "<group>"; };
-		C018B757161104BA000FE817 /* BalanceDrivenPriceModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BalanceDrivenPriceModel.h; sourceTree = "<group>"; };
-		C018B758161104BA000FE817 /* EncryptionTransformer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EncryptionTransformer.h; sourceTree = "<group>"; };
-		C018B759161104BA000FE817 /* EventHandling.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EventHandling.h; sourceTree = "<group>"; };
-		C018B75A161104BA000FE817 /* IStoreAsssets.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IStoreAsssets.h; sourceTree = "<group>"; };
-		C018B75B161104BA000FE817 /* IStoreEventHandler.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IStoreEventHandler.h; sourceTree = "<group>"; };
-		C018B75C161104BA000FE817 /* JSONConsts.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JSONConsts.h; sourceTree = "<group>"; };
-		C018B75D161104BA000FE817 /* NSString+MD5Addition.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSString+MD5Addition.h"; sourceTree = "<group>"; };
-		C018B75E161104BA000FE817 /* NumberEncryptionTransformer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NumberEncryptionTransformer.h; sourceTree = "<group>"; };
-		C018B75F161104BA000FE817 /* PriceModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PriceModel.h; sourceTree = "<group>"; };
-		C018B760161104BA000FE817 /* StaticPriceModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StaticPriceModel.h; sourceTree = "<group>"; };
-		C018B761161104BA000FE817 /* StorageManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StorageManager.h; sourceTree = "<group>"; };
-		C018B762161104BA000FE817 /* StoreConfig.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StoreConfig.h; sourceTree = "<group>"; };
-		C018B763161104BA000FE817 /* StoreController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StoreController.h; sourceTree = "<group>"; };
-		C018B764161104BA000FE817 /* StoreDatabase.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StoreDatabase.h; sourceTree = "<group>"; };
-		C018B765161104BA000FE817 /* StorefrontController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StorefrontController.h; sourceTree = "<group>"; };
-		C018B766161104BA000FE817 /* StorefrontInfo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StorefrontInfo.h; sourceTree = "<group>"; };
-		C018B767161104BA000FE817 /* StorefrontJS.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StorefrontJS.h; sourceTree = "<group>"; };
-		C018B768161104BA000FE817 /* StorefrontViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StorefrontViewController.h; sourceTree = "<group>"; };
-		C018B769161104BA000FE817 /* StoreInfo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StoreInfo.h; sourceTree = "<group>"; };
-		C018B76A161104BA000FE817 /* StringEncryptionTransformer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StringEncryptionTransformer.h; sourceTree = "<group>"; };
-		C018B76B161104BA000FE817 /* UIDevice+IdentifierAddition.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIDevice+IdentifierAddition.h"; sourceTree = "<group>"; };
-		C018B76C161104BA000FE817 /* VirtualCategory.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VirtualCategory.h; sourceTree = "<group>"; };
-		C018B76D161104BA000FE817 /* VirtualCurrency.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VirtualCurrency.h; sourceTree = "<group>"; };
-		C018B76E161104BA000FE817 /* VirtualCurrencyPack.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VirtualCurrencyPack.h; sourceTree = "<group>"; };
-		C018B76F161104BA000FE817 /* VirtualCurrencyStorage.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VirtualCurrencyStorage.h; sourceTree = "<group>"; };
-		C018B770161104BA000FE817 /* VirtualGood.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VirtualGood.h; sourceTree = "<group>"; };
-		C018B771161104BA000FE817 /* VirtualGoodStorage.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VirtualGoodStorage.h; sourceTree = "<group>"; };
-		C018B772161104BA000FE817 /* VirtualItem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VirtualItem.h; sourceTree = "<group>"; };
-		C018B77416110B6D000FE817 /* JSONKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JSONKit.h; sourceTree = "<group>"; };
 		C02CED22160DDCB7000AA0D2 /* SoomlaiOSStoreExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SoomlaiOSStoreExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C02CED26160DDCB7000AA0D2 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		C02CED28160DDCB7000AA0D2 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -128,7 +98,7 @@
 		C0E5B37F1614F3C700778386 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		C0E5B3831614F42C00778386 /* SoomlaiOSStoreExample.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = SoomlaiOSStoreExample.entitlements; sourceTree = "<group>"; };
 		C0E5B3851618856100778386 /* StoreExampleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StoreExampleViewController.h; sourceTree = "<group>"; };
-		C0E5B386161895C700778386 /* libSoomlaiOSStore.a */ = {isa = PBXFileReference; lastKnownFileType = file; name = libSoomlaiOSStore.a; path = "../SoomlaiOSStore/build/Release-iphoneos/libSoomlaiOSStore.a"; sourceTree = "<group>"; };
+		C0E5B386161895C700778386 /* libSoomlaiOSStore.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libSoomlaiOSStore.a; path = "../SoomlaiOSStore/build/Release-iphoneos/libSoomlaiOSStore.a"; sourceTree = "<group>"; };
 		C0E5B3AA1618B00800778386 /* SoomlaiOSStoreExampleDevice.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SoomlaiOSStoreExampleDevice.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C0E5B3AC1618B00800778386 /* SoomlaiOSStoreExampleDevice-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "SoomlaiOSStoreExampleDevice-Info.plist"; path = "/Users/refaelos/work/ios-store/SoomlaiOSStoreExample/SoomlaiOSStoreExampleDevice-Info.plist"; sourceTree = "<absolute>"; };
 /* End PBXFileReference section */
@@ -165,49 +135,10 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		C018B7151610F6A6000FE817 /* SoomlaiOSStore */ = {
-			isa = PBXGroup;
-			children = (
-				C018B77416110B6D000FE817 /* JSONKit.h */,
-				C018B756161104BA000FE817 /* AppStoreItem.h */,
-				C018B757161104BA000FE817 /* BalanceDrivenPriceModel.h */,
-				C018B758161104BA000FE817 /* EncryptionTransformer.h */,
-				C018B759161104BA000FE817 /* EventHandling.h */,
-				C018B75A161104BA000FE817 /* IStoreAsssets.h */,
-				C018B75B161104BA000FE817 /* IStoreEventHandler.h */,
-				C018B75C161104BA000FE817 /* JSONConsts.h */,
-				C018B75D161104BA000FE817 /* NSString+MD5Addition.h */,
-				C018B75E161104BA000FE817 /* NumberEncryptionTransformer.h */,
-				C018B75F161104BA000FE817 /* PriceModel.h */,
-				C018B760161104BA000FE817 /* StaticPriceModel.h */,
-				C018B761161104BA000FE817 /* StorageManager.h */,
-				C018B762161104BA000FE817 /* StoreConfig.h */,
-				C018B763161104BA000FE817 /* StoreController.h */,
-				C018B764161104BA000FE817 /* StoreDatabase.h */,
-				C018B765161104BA000FE817 /* StorefrontController.h */,
-				C018B766161104BA000FE817 /* StorefrontInfo.h */,
-				C018B767161104BA000FE817 /* StorefrontJS.h */,
-				C018B768161104BA000FE817 /* StorefrontViewController.h */,
-				C018B769161104BA000FE817 /* StoreInfo.h */,
-				C018B76A161104BA000FE817 /* StringEncryptionTransformer.h */,
-				C018B76B161104BA000FE817 /* UIDevice+IdentifierAddition.h */,
-				C018B76C161104BA000FE817 /* VirtualCategory.h */,
-				C018B76D161104BA000FE817 /* VirtualCurrency.h */,
-				C018B76E161104BA000FE817 /* VirtualCurrencyPack.h */,
-				C018B76F161104BA000FE817 /* VirtualCurrencyStorage.h */,
-				C018B770161104BA000FE817 /* VirtualGood.h */,
-				C018B771161104BA000FE817 /* VirtualGoodStorage.h */,
-				C018B772161104BA000FE817 /* VirtualItem.h */,
-			);
-			name = SoomlaiOSStore;
-			path = "../DerivedData/ios-store/Build/Products/Debug-iphonesimulator/include/SoomlaiOSStore";
-			sourceTree = "<group>";
-		};
 		C02CED17160DDCB7000AA0D2 = {
 			isa = PBXGroup;
 			children = (
 				C0E5B386161895C700778386 /* libSoomlaiOSStore.a */,
-				C018B7151610F6A6000FE817 /* SoomlaiOSStore */,
 				C02CED2C160DDCB7000AA0D2 /* SoomlaiOSStoreExample */,
 				C02CED25160DDCB7000AA0D2 /* Frameworks */,
 				C02CED23160DDCB7000AA0D2 /* Products */,
@@ -570,6 +501,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "SoomlaiOSStoreExample/SoomlaiOSStoreExample-Prefix.pch";
+				HEADER_SEARCH_PATHS = "../DerivedData/ios-store/Build/Products/Debug-iphoneos/include/SoomlaiOSStore";
 				INFOPLIST_FILE = "SoomlaiOSStoreExampleDevice-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				LIBRARY_SEARCH_PATHS = (
@@ -594,6 +526,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Refael Dakar";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "SoomlaiOSStoreExample/SoomlaiOSStoreExample-Prefix.pch";
+				HEADER_SEARCH_PATHS = "../DerivedData/ios-store/Build/Products/Debug-iphoneos/include/SoomlaiOSStore";
 				INFOPLIST_FILE = "SoomlaiOSStoreExampleDevice-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				LIBRARY_SEARCH_PATHS = (
