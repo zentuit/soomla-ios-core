@@ -47,19 +47,16 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-{
-    // Return YES for supported orientations
-    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
-        return (interfaceOrientation != UIInterfaceOrientationPortraitUpsideDown);
-    } else {
-        return YES;
-    }
+-(BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation{
+    
+    return UIInterfaceOrientationIsPortrait(interfaceOrientation);
+    //    return NO;
 }
 
 - (void)closingStore:(NSNotification*)notification{
     [leftView addSubview:logoImageView];
     [leftView bringSubviewToFront:logoImageView];
+    logoImageView.frame = CGRectMake(0, 0, logoImageView.frame.size.width, logoImageView.frame.size.height);
 }
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
@@ -110,6 +107,7 @@
     {
         [rightView addSubview:logoImageView];
         [rightView bringSubviewToFront:logoImageView];
+        logoImageView.frame = CGRectMake(0, 0, logoImageView.frame.size.width, logoImageView.frame.size.height);
         
         /** Opening storefront **/
         
