@@ -45,7 +45,9 @@ VirtualCurrencyPack* THOUSANDMUFF_PACK;
     // The muffin rush theme doesn't support categories, so we just put everything under a general category.
     
     GENERAL_CATEGORY = [[VirtualCategory alloc] initWithName:@"General"
-                                                       andId:0];
+                                                       andId:0
+                                                    andTitle:@"GENERAL"
+                                              andImgFilePath:@""];
     
     /** Virtual Currencies **/
     
@@ -65,7 +67,8 @@ VirtualCurrencyPack* THOUSANDMUFF_PACK;
                                          andImgFilePath:@"themes/muffinRush/img/items/fruit_cake.png"
                                               andItemId:@"fruit_cake"
                                           andPriceModel:[[StaticPriceModel alloc] initWithCurrencyValue:MUFFINCAKE_PRICE]
-                                            andCategory:GENERAL_CATEGORY];
+                                            andCategory:GENERAL_CATEGORY
+                                         andEquipStatus:NO];
     
     NSDictionary* PAVLOVA_PRICE = [[NSDictionary alloc] initWithObjectsAndKeys:
                                       [NSNumber numberWithInt:175], MUFFIN_CURRENCY_ITEM_ID,
@@ -75,7 +78,8 @@ VirtualCurrencyPack* THOUSANDMUFF_PACK;
                                          andImgFilePath:@"themes/muffinRush/img/items/pavlova.png"
                                               andItemId:@"pavlova"
                                           andPriceModel:[[StaticPriceModel alloc] initWithCurrencyValue:PAVLOVA_PRICE]
-                                            andCategory:GENERAL_CATEGORY];
+                                            andCategory:GENERAL_CATEGORY
+                                         andEquipStatus:NO];
     
     NSDictionary* CHOCLATECAKE_PRICE = [[NSDictionary alloc] initWithObjectsAndKeys:
                                    [NSNumber numberWithInt:250], MUFFIN_CURRENCY_ITEM_ID,
@@ -85,7 +89,8 @@ VirtualCurrencyPack* THOUSANDMUFF_PACK;
                                       andImgFilePath:@"themes/muffinRush/img/items/chocolate_cake.png"
                                            andItemId:@"chocolate_cake"
                                        andPriceModel:[[StaticPriceModel alloc] initWithCurrencyValue:CHOCLATECAKE_PRICE]
-                                         andCategory:GENERAL_CATEGORY];
+                                         andCategory:GENERAL_CATEGORY
+                                      andEquipStatus:NO];
     
 
     NSDictionary* CREAMCUP_PRICE = [[NSDictionary alloc] initWithObjectsAndKeys:
@@ -96,7 +101,8 @@ VirtualCurrencyPack* THOUSANDMUFF_PACK;
                                            andImgFilePath:@"themes/muffinRush/img/items/cream_cup.png"
                                                 andItemId:@"cream_cup"
                                             andPriceModel:[[StaticPriceModel alloc] initWithCurrencyValue:CREAMCUP_PRICE]
-                                              andCategory:GENERAL_CATEGORY];
+                                              andCategory:GENERAL_CATEGORY
+                                           andEquipStatus:NO];
     
     
     /** Virtual Currency Pack **/
