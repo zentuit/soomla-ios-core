@@ -17,7 +17,7 @@
                BlueprintIdentifier = "C0E5B3881618B00800778386"
                BuildableName = "SoomlaiOSStoreExampleDevice.app"
                BlueprintName = "SoomlaiOSStoreExampleDevice"
-               ReferencedContainer = "container:../SoomlaiOSStoreExample/SoomlaiOSStoreExample.xcodeproj">
+               ReferencedContainer = "container:SoomlaiOSStoreExample.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
          <BuildActionEntry
@@ -31,7 +31,7 @@
                BlueprintIdentifier = "C02CEC41160DC870000AA0D2"
                BuildableName = "libSoomlaiOSStore.a"
                BlueprintName = "SoomlaiOSStore"
-               ReferencedContainer = "container:SoomlaiOSStore.xcodeproj">
+               ReferencedContainer = "container:../SoomlaiOSStore/SoomlaiOSStore.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -43,6 +43,15 @@
       buildConfiguration = "Debug">
       <Testables>
       </Testables>
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "C0E5B3881618B00800778386"
+            BuildableName = "SoomlaiOSStoreExampleDevice.app"
+            BlueprintName = "SoomlaiOSStoreExampleDevice"
+            ReferencedContainer = "container:SoomlaiOSStoreExample.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
    </TestAction>
    <LaunchAction
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
@@ -53,6 +62,15 @@
       ignoresPersistentStateOnLaunch = "NO"
       debugDocumentVersioning = "YES"
       allowLocationSimulation = "YES">
+      <BuildableProductRunnable>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "C0E5B3881618B00800778386"
+            BuildableName = "SoomlaiOSStoreExampleDevice.app"
+            BlueprintName = "SoomlaiOSStoreExampleDevice"
+            ReferencedContainer = "container:SoomlaiOSStoreExample.xcodeproj">
+         </BuildableReference>
+      </BuildableProductRunnable>
       <AdditionalOptions>
       </AdditionalOptions>
    </LaunchAction>
@@ -62,6 +80,15 @@
       useCustomWorkingDirectory = "NO"
       buildConfiguration = "Release"
       debugDocumentVersioning = "YES">
+      <BuildableProductRunnable>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "C0E5B3881618B00800778386"
+            BuildableName = "SoomlaiOSStoreExampleDevice.app"
+            BlueprintName = "SoomlaiOSStoreExampleDevice"
+            ReferencedContainer = "container:SoomlaiOSStoreExample.xcodeproj">
+         </BuildableReference>
+      </BuildableProductRunnable>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">
