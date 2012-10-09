@@ -30,6 +30,8 @@ NSString * EVENT_GOODS_PURCHASE_STARTED          = @"GoodsPurchaseProcessStarted
 NSString * EVENT_CLOSING_STORE                   = @"ClosingStore";
 NSString * EVENT_OPENING_STORE                   = @"OpeningStore";
 NSString * EVENT_UNEXPECTED_ERROR_IN_STORE       = @"UnexpectedErrorInStore";
+NSString * EVENT_TRANSACTION_RESTORED            = @"TransactionRestored";
+
 
 @implementation EventHandling
 
@@ -93,6 +95,11 @@ NSString * EVENT_UNEXPECTED_ERROR_IN_STORE       = @"UnexpectedErrorInStore";
 
 + (void)postUnexpectedError{
     [[NSNotificationCenter defaultCenter] postNotificationName:EVENT_UNEXPECTED_ERROR_IN_STORE object:self];
+}
+
++ (void)postTransactionRestored:(NSString*)productId{
+    NSDictionary *userInfo = [NSDictionary dictionaryWithObject:productId forKey:@"RestoredProductId"];
+    [[NSNotificationCenter defaultCenter] postNotificationName:EVENT_TRANSACTION_RESTORED object:self userInfo:userInfo];
 }
 
 @end

@@ -28,6 +28,7 @@ extern NSString * EVENT_GOODS_PURCHASE_STARTED;
 extern NSString * EVENT_CLOSING_STORE;
 extern NSString * EVENT_OPENING_STORE;
 extern NSString * EVENT_UNEXPECTED_ERROR_IN_STORE;
+extern NSString * EVENT_TRANSACTION_RESTORED;
 
 @class VirtualCurrencyPack;
 @class VirtualGood;
@@ -53,5 +54,6 @@ extern NSString * EVENT_UNEXPECTED_ERROR_IN_STORE;
 + (void)postClosingStore;
 + (void)postOpeningStore;
 + (void)postUnexpectedError;
++ (void)postTransactionRestored:(NSString*)productId;
 
 @end

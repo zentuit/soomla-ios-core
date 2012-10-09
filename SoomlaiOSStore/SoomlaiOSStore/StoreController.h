@@ -30,7 +30,7 @@
  * IMPORTANT: if you use the SOOMLA storefront (SOOMLA Storefront), than DON'T call these 2 functions. SOOMLA
  * storefront takes care of it for you.
  */
-@interface StoreController : NSObject <SKProductsRequestDelegate>{
+@interface StoreController : NSObject <SKProductsRequestDelegate, SKPaymentTransactionObserver>{
     SKProduct *proUpgradeProduct;
     SKProductsRequest *productsRequest;
 }

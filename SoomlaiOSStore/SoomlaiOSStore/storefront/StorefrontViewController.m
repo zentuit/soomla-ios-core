@@ -41,6 +41,7 @@
     /* Setting up the store WebView */
     storeWebview = [[UIWebView alloc] initWithFrame:self.view.frame];
     storeWebview.delegate = self.storefrontJS;
+    storeWebview.userInteractionEnabled = YES;
     NSURL *url = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"store" ofType:@"html" inDirectory:@"soomla_ui"]];
     [storeWebview loadRequest:[NSURLRequest requestWithURL:url]];
 
@@ -56,7 +57,6 @@
     }
 
     return UIInterfaceOrientationIsPortrait(toInterfaceOrientation);
-//    return NO;
 }
 
 - (void)loadWebView{

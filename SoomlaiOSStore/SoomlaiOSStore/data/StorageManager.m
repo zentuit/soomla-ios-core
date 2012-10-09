@@ -16,6 +16,8 @@
 
 #import "StorageManager.h"
 #import "StoreDatabase.h"
+#import "VirtualCurrencyStorage.h"
+#import "VirtualGoodStorage.h"
 
 @implementation StorageManager
 
@@ -37,6 +39,8 @@
     self = [super init];
     if (self){
         database = [[StoreDatabase alloc] init];
+        virtualCurrencyStorage = [[VirtualCurrencyStorage alloc] init];
+        virtualGoodStorage = [[VirtualGoodStorage alloc] init];
     }
     
     return self;

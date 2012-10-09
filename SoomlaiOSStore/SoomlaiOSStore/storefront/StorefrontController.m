@@ -46,9 +46,9 @@
     [[StorefrontInfo getInstance] initializeWithJSON:storefrontJSON];
     
 //    UIStoryboard *storyboard = [viewController storyboard];
-    StorefrontViewController *svc = [[StorefrontViewController alloc] init];
+    sfViewController = [[StorefrontViewController alloc] init];
     
-    [viewController presentViewController:svc animated:YES completion:nil];
+    [viewController presentViewController:sfViewController animated:YES completion:nil];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(virtualCurrencyPackPurchased:) name:EVENT_VIRTUAL_CURRENCY_PACK_PURCHASED object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(virtualGoodPurchased:) name:EVENT_VIRTUAL_GOOD_EQUIPPED object:nil];
@@ -66,7 +66,8 @@
     
     int balance = [[[StorageManager getInstance] virtualCurrencyStorage] getBalanceForCurrency:currency];
     NSDictionary* currencyBalanceDict = [NSDictionary dictionaryWithObjectsAndKeys:
-                                         currency.itemId, [NSNumber numberWithInt:balance], nil];
+                                         [NSNumber numberWithInt:balance], currency.itemId,
+                                         nil];
     [sfViewController sendToJSWithAction:@"currencyBalanceChanged" andData:[currencyBalanceDict JSONString]];
 }
 

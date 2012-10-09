@@ -23,7 +23,9 @@
 #import "VirtualGood.h"
 #import "VirtualCurrency.h"
 #import "VirtualCurrencyPack.h"
+#import "AppStoreItem.h"
 #import "VirtualItemNotFoundException.h"
+#import "StoreEncryptor.h"
 
 @implementation StoreInfo
 
@@ -56,17 +58,21 @@
         
         // put StoreInfo in the database as JSON
         NSString* storeInfoJSON = [[self toDictionary] JSONString];
-        NSLog(@"%@", storeInfoJSON);
-        [[[StorageManager getInstance] database] setStoreInfo:storeInfoJSON];
+//        NSLog(@"%@", storeInfoJSON);
+        NSString* ec = [[NSString alloc] initWithData:[storeInfoJSON dataUsingEncoding:NSUTF8StringEncoding] encoding:NSUTF8StringEncoding];
+        NSString* enc = [StoreEncryptor encryptString:ec];
+        [[[StorageManager getInstance] database] setStoreInfo:enc];
     }
 }
 
 - (BOOL)initializeFromDB{
     // first, trying to load StoreInfo from the local DB.
     NSString* storeInfoJSON = [[[StorageManager getInstance] database] getStoreInfo];
-    if([storeInfoJSON length] == 0){
+    if(!storeInfoJSON || [storeInfoJSON isEqual:[NSNull null]] || [storeInfoJSON length] == 0){
         return false;
     }
+    
+    storeInfoJSON = [StoreEncryptor decryptToString:storeInfoJSON];
     
     NSDictionary* storeInfo = [storeInfoJSON objectFromJSONString];
     
@@ -161,6 +167,16 @@
     }
     
     @throw [[VirtualItemNotFoundException alloc] initWithLookupField:@"itemId" andLookupValue:itemId];
+}
+
+- (VirtualCurrencyPack*)currencyPackWithProductId:(NSString*)productId{
+    for(VirtualCurrencyPack* p in self.virtualCurrencyPacks){
+        if ([p.appstoreItem.productId isEqualToString:productId]){
+            return p;
+        }
+    }
+    
+    @throw [[VirtualItemNotFoundException alloc] initWithLookupField:@"productId" andLookupValue:productId];
 }
 
 @end

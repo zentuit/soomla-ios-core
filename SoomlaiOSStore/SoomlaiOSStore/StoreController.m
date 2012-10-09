@@ -21,10 +21,12 @@
 #import "EventHandling.h"
 #import "VirtualGood.h"
 #import "VirtualCurrency.h"
+#import "VirtualCurrencyPack.h"
 #import "VirtualCurrencyStorage.h"
 #import "VirtualGoodStorage.h"
 #import "InsufficientFundsException.h"
 #import "NotEnoughGoodsException.h"
+#import "VirtualItemNotFoundException.h"
 
 #define kInAppPurchaseManagerProductsFetchedNotification @"kInAppPurchaseManagerProductsFetchedNotification"
 
@@ -47,15 +49,35 @@
     
     [StorageManager getInstance];
     [[StoreInfo getInstance] initializeWithIStoreAsssets:storeAssets];
+    
+    if ([SKPaymentQueue canMakePayments]) {
+        [[SKPaymentQueue defaultQueue] addTransactionObserver:self];
+        
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Can Make Payments !"
+                                                        message:@"Woohoo !"
+                                                       delegate:nil
+                                              cancelButtonTitle:@"OK"
+                                              otherButtonTitles:nil];
+        
+        [alert show];
+    } else {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Can't Make Payments !"
+                                                        message:@"Crap !"
+                                                       delegate:nil
+                                              cancelButtonTitle:@"OK"
+                                              otherButtonTitles:nil];
+        [alert show];
+    }
 }
 
 - (void)buyCurrencyPackWithProcuctId:(NSString*)productId{
     [EventHandling postMarketPurchaseStarted];
     
-    NSSet *productIdentifiers = [NSSet setWithObject:productId];
-    productsRequest = [[SKProductsRequest alloc] initWithProductIdentifiers:productIdentifiers];
-    productsRequest.delegate = self;
-    [productsRequest start];
+    SKMutablePayment *payment = [[SKMutablePayment alloc] init] ;
+    payment.productIdentifier = productId;
+    payment.quantity = 1;
+    [[SKPaymentQueue defaultQueue] addPayment:payment];
+    
 }
 
 - (void)buyVirtualGood:(NSString*)itemId{
@@ -136,26 +158,99 @@
 }
 
 #pragma mark -
+#pragma mark SKPaymentTransactionObserver methods
+
+- (void)paymentQueue:(SKPaymentQueue *)queue updatedTransactions:(NSArray *)transactions
+{
+    for (SKPaymentTransaction *transaction in transactions)
+    {
+        switch (transaction.transactionState)
+        {
+            case SKPaymentTransactionStatePurchased:
+                [self completeTransaction:transaction];
+                break;
+            case SKPaymentTransactionStateFailed:
+                [self failedTransaction:transaction];
+                break;
+            case SKPaymentTransactionStateRestored:
+                [self restoreTransaction:transaction];
+            default:
+                break;
+        }
+    }
+}
+
+- (void) completeTransaction: (SKPaymentTransaction *)transaction
+{
+
+    NSLog(@"Transaction completed for product: %@", transaction.payment.productIdentifier);
+    
+    @try{
+        VirtualCurrencyPack* pack = [[StoreInfo getInstance] currencyPackWithProductId:transaction.payment.productIdentifier];
+    
+        // updating the currency balance
+        // note that a refunded purchase is treated as a purchase.
+        // a friendly refund policy is nice for the user.
+        [[[StorageManager getInstance] virtualCurrencyStorage] addAmount:pack.currencyAmount toCurrency:pack.currency];
+        
+        [EventHandling postVirtualCurrencyPackPurchased:pack];
+    }
+    @catch (VirtualItemNotFoundException* e) {
+        NSLog(@"Hey man... This is serious !!! Some of the items' productIds you provided "
+              @"ios-store doesn't correlate to the productId on itunes connect. "
+              @"Your user was charged but she won't get the actual product in your game. "
+              @"You will have to issue a refund now. Check the CurrencyPacks' productIds now! "
+              @"Couldn't find a VirtualCurrencyPack with productId: %@", transaction.payment.productIdentifier);
+        [EventHandling postUnexpectedError];
+    }
+    
+    // Remove the transaction from the payment queue.
+    [[SKPaymentQueue defaultQueue] finishTransaction: transaction];
+}
+
+- (void) restoreTransaction: (SKPaymentTransaction *)transaction
+{
+    NSLog(@"Restore transaction for product: %@", transaction.payment.productIdentifier);
+    [EventHandling postTransactionRestored:transaction.payment.productIdentifier];
+    [[SKPaymentQueue defaultQueue] finishTransaction: transaction];
+}
+
+- (void) failedTransaction: (SKPaymentTransaction *)transaction
+{
+    if (transaction.error.code != SKErrorPaymentCancelled) {
+        NSLog(@"An error occured for product id \"%@\" with code \"%d\" and description \"%@\"", transaction.payment.productIdentifier, transaction.error.code, transaction.error.localizedDescription);
+        
+        [EventHandling postUnexpectedError];
+    }
+    else{
+        NSLog(@"payment was canceled by the user. doing nothing for now.");
+    }
+    [[SKPaymentQueue defaultQueue] finishTransaction: transaction];
+}
+
+#pragma mark -
 #pragma mark SKProductsRequestDelegate methods
 
+// When using SOOMLA's server you don't need to get information about your products. SOOMLA will keep this information
+// for you and will automatically load it into your game.
 - (void)productsRequest:(SKProductsRequest *)request didReceiveResponse:(SKProductsResponse *)response
 {
-    NSArray *products = response.products;
-    proUpgradeProduct = [products count] == 1 ? [products objectAtIndex:0] : nil;
-    if (proUpgradeProduct)
-    {
-        NSLog(@"Product title: %@" , proUpgradeProduct.localizedTitle);
-        NSLog(@"Product description: %@" , proUpgradeProduct.localizedDescription);
-        NSLog(@"Product price: %@" , proUpgradeProduct.price);
-        NSLog(@"Product id: %@" , proUpgradeProduct.productIdentifier);
-    }
-    
-    for (NSString *invalidProductId in response.invalidProductIdentifiers)
-    {
-        NSLog(@"Invalid product id: %@" , invalidProductId);
-    }
-    
-    [[NSNotificationCenter defaultCenter] postNotificationName:kInAppPurchaseManagerProductsFetchedNotification object:self userInfo:nil];
+//    NSArray *products = response.products;
+//    proUpgradeProduct = [products count] == 1 ? [products objectAtIndex:0] : nil;
+//    if (proUpgradeProduct)
+//    {
+//        NSLog(@"Product title: %@" , proUpgradeProduct.localizedTitle);
+//        NSLog(@"Product description: %@" , proUpgradeProduct.localizedDescription);
+//        NSLog(@"Product price: %@" , proUpgradeProduct.price);
+//        NSLog(@"Product id: %@" , proUpgradeProduct.productIdentifier);
+//    }
+//
+//    for (NSString *invalidProductId in response.invalidProductIdentifiers)
+//    {
+//        NSLog(@"Invalid product id: %@" , invalidProductId);
+//    }
+//
+//    [[NSNotificationCenter defaultCenter] postNotificationName:kInAppPurchaseManagerProductsFetchedNotification object:self userInfo:nil];
 }
 
 

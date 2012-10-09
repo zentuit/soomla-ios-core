@@ -12,7 +12,6 @@
 		C018B46E160F108B000FE817 /* right_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = C018B46C160F108B000FE817 /* right_bg.png */; };
 		C018B473160F2B8D000FE817 /* soomla_ui in Resources */ = {isa = PBXBuildFile; fileRef = C018B472160F2B8D000FE817 /* soomla_ui */; };
 		C018B56F160FAA1D000FE817 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C018B56E160FAA1D000FE817 /* StoreKit.framework */; };
-		C018B571160FAA28000FE817 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C018B570160FAA28000FE817 /* CoreData.framework */; };
 		C018B573160FAA2F000FE817 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C018B572160FAA2F000FE817 /* Security.framework */; };
 		C018B7051610CFD3000FE817 /* MuffinRushAssets.m in Sources */ = {isa = PBXBuildFile; fileRef = C018B7041610CFD3000FE817 /* MuffinRushAssets.m */; };
 		C018B70D1610EB85000FE817 /* muffinRushTheme.json in Resources */ = {isa = PBXBuildFile; fileRef = C018B70C1610EB85000FE817 /* muffinRushTheme.json */; };
@@ -28,6 +27,8 @@
 		C02CED5A160DE081000AA0D2 /* GoodDog.otf in Resources */ = {isa = PBXBuildFile; fileRef = C02CED56160DE081000AA0D2 /* GoodDog.otf */; };
 		C02CED5B160DE081000AA0D2 /* img_direct.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C02CED58160DE081000AA0D2 /* img_direct.jpg */; };
 		C02CED5C160DE081000AA0D2 /* soomla_logo_new.png in Resources */ = {isa = PBXBuildFile; fileRef = C02CED59160DE081000AA0D2 /* soomla_logo_new.png */; };
+		C07DA3C61621C2D2005792DD /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = C07DA3C51621C2D2005792DD /* libsqlite3.0.dylib */; };
+		C07DA3CA16230D43005792DD /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = C07DA3C51621C2D2005792DD /* libsqlite3.0.dylib */; };
 		C0E5B37B1614F27900778386 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = C0E5B3791614F27900778386 /* Icon.png */; };
 		C0E5B37C1614F27900778386 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C0E5B37A1614F27900778386 /* Icon@2x.png */; };
 		C0E5B3801614F3C700778386 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = C0E5B37D1614F3C700778386 /* Default.png */; };
@@ -39,7 +40,6 @@
 		C0E5B38C1618B00800778386 /* StoreExampleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C02CED45160DDCB7000AA0D2 /* StoreExampleViewController.m */; };
 		C0E5B38D1618B00800778386 /* MuffinRushAssets.m in Sources */ = {isa = PBXBuildFile; fileRef = C018B7041610CFD3000FE817 /* MuffinRushAssets.m */; };
 		C0E5B38F1618B00800778386 /* libSoomlaiOSStore.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C0E5B386161895C700778386 /* libSoomlaiOSStore.a */; };
-		C0E5B3901618B00800778386 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C018B570160FAA28000FE817 /* CoreData.framework */; };
 		C0E5B3911618B00800778386 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C018B572160FAA2F000FE817 /* Security.framework */; };
 		C0E5B3921618B00800778386 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C018B56E160FAA1D000FE817 /* StoreKit.framework */; };
 		C0E5B3931618B00800778386 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C02CED26160DDCB7000AA0D2 /* UIKit.framework */; };
@@ -69,7 +69,6 @@
 		C018B46C160F108B000FE817 /* right_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = right_bg.png; sourceTree = "<group>"; };
 		C018B472160F2B8D000FE817 /* soomla_ui */ = {isa = PBXFileReference; lastKnownFileType = folder; name = soomla_ui; path = resources/soomla_ui; sourceTree = "<group>"; };
 		C018B56E160FAA1D000FE817 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
-		C018B570160FAA28000FE817 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		C018B572160FAA2F000FE817 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		C018B574160FAA79000FE817 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
 		C018B7031610CFD3000FE817 /* MuffinRushAssets.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MuffinRushAssets.h; sourceTree = "<group>"; };
@@ -91,6 +90,7 @@
 		C02CED56160DE081000AA0D2 /* GoodDog.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = GoodDog.otf; path = resources/GoodDog.otf; sourceTree = "<group>"; };
 		C02CED58160DE081000AA0D2 /* img_direct.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = img_direct.jpg; sourceTree = "<group>"; };
 		C02CED59160DE081000AA0D2 /* soomla_logo_new.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = soomla_logo_new.png; sourceTree = "<group>"; };
+		C07DA3C51621C2D2005792DD /* libsqlite3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.0.dylib; path = usr/lib/libsqlite3.0.dylib; sourceTree = SDKROOT; };
 		C0E5B3791614F27900778386 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
 		C0E5B37A1614F27900778386 /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
 		C0E5B37D1614F3C700778386 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
@@ -108,8 +108,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C07DA3C61621C2D2005792DD /* libsqlite3.0.dylib in Frameworks */,
 				C0E5B387161895C700778386 /* libSoomlaiOSStore.a in Frameworks */,
-				C018B571160FAA28000FE817 /* CoreData.framework in Frameworks */,
 				C018B573160FAA2F000FE817 /* Security.framework in Frameworks */,
 				C018B56F160FAA1D000FE817 /* StoreKit.framework in Frameworks */,
 				C02CED27160DDCB7000AA0D2 /* UIKit.framework in Frameworks */,
@@ -122,8 +122,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C07DA3CA16230D43005792DD /* libsqlite3.0.dylib in Frameworks */,
 				C0E5B38F1618B00800778386 /* libSoomlaiOSStore.a in Frameworks */,
-				C0E5B3901618B00800778386 /* CoreData.framework in Frameworks */,
 				C0E5B3911618B00800778386 /* Security.framework in Frameworks */,
 				C0E5B3921618B00800778386 /* StoreKit.framework in Frameworks */,
 				C0E5B3931618B00800778386 /* UIKit.framework in Frameworks */,
@@ -157,9 +157,9 @@
 		C02CED25160DDCB7000AA0D2 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				C07DA3C51621C2D2005792DD /* libsqlite3.0.dylib */,
 				C018B574160FAA79000FE817 /* CoreFoundation.framework */,
 				C018B572160FAA2F000FE817 /* Security.framework */,
-				C018B570160FAA28000FE817 /* CoreData.framework */,
 				C018B56E160FAA1D000FE817 /* StoreKit.framework */,
 				C02CED26160DDCB7000AA0D2 /* UIKit.framework */,
 				C02CED28160DDCB7000AA0D2 /* Foundation.framework */,
@@ -447,19 +447,17 @@
 		C02CED4A160DDCB7000AA0D2 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_CXX_LANGUAGE_STANDARD = "compiler-default";
 				CLANG_CXX_LIBRARY = "compiler-default";
 				CODE_SIGN_ENTITLEMENTS = SoomlaiOSStoreExample/SoomlaiOSStoreExample.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "SoomlaiOSStoreExample/SoomlaiOSStoreExample-Prefix.pch";
+				HEADER_SEARCH_PATHS = "$(SRCROOT)/../DerivedData/ios-store/Build/Products/Debug-iphonesimulator/include/SoomlaiOSStore/**";
 				INFOPLIST_FILE = "SoomlaiOSStoreExample/SoomlaiOSStoreExample-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"../DerivedData/ios-store/Build/Products/Debug-iphonesimulator",
-					"\"$(SRCROOT)/../DerivedData/ios-store/Build/Products/Debug-iphonesimulator\"",
-				);
+				LIBRARY_SEARCH_PATHS = "\"$(SRCROOT)/../DerivedData/ios-store/Build/Products/Debug-iphonesimulator\"";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -471,19 +469,17 @@
 		C02CED4B160DDCB7000AA0D2 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_CXX_LANGUAGE_STANDARD = "compiler-default";
 				CLANG_CXX_LIBRARY = "compiler-default";
 				CODE_SIGN_ENTITLEMENTS = SoomlaiOSStoreExample/SoomlaiOSStoreExample.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Refael Dakar";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "SoomlaiOSStoreExample/SoomlaiOSStoreExample-Prefix.pch";
+				HEADER_SEARCH_PATHS = "$(SRCROOT)/../DerivedData/ios-store/Build/Products/Debug-iphonesimulator/include/SoomlaiOSStore/**";
 				INFOPLIST_FILE = "SoomlaiOSStoreExample/SoomlaiOSStoreExample-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"../DerivedData/ios-store/Build/Products/Debug-iphonesimulator",
-					"\"$(SRCROOT)/../DerivedData/ios-store/Build/Products/Debug-iphonesimulator\"",
-				);
+				LIBRARY_SEARCH_PATHS = "\"$(SRCROOT)/../DerivedData/ios-store/Build/Products/Debug-iphonesimulator\"";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -501,12 +497,11 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "SoomlaiOSStoreExample/SoomlaiOSStoreExample-Prefix.pch";
-				HEADER_SEARCH_PATHS = "../DerivedData/ios-store/Build/Products/Debug-iphoneos/include/SoomlaiOSStore";
+				HEADER_SEARCH_PATHS = "\"$(SRCROOT)/../DerivedData/ios-store/Build/Products/Debug-iphoneos/include/SoomlaiOSStore\"";
 				INFOPLIST_FILE = "SoomlaiOSStoreExampleDevice-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"../DerivedData/ios-store/Build/Products/Debug-iphoneos",
 					"\"$(SRCROOT)/../DerivedData/ios-store/Build/Products/Debug-iphoneos\"",
 				);
 				OTHER_LDFLAGS = "-ObjC";
@@ -526,12 +521,11 @@
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Refael Dakar";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "SoomlaiOSStoreExample/SoomlaiOSStoreExample-Prefix.pch";
-				HEADER_SEARCH_PATHS = "../DerivedData/ios-store/Build/Products/Debug-iphoneos/include/SoomlaiOSStore";
+				HEADER_SEARCH_PATHS = "\"$(SRCROOT)/../DerivedData/ios-store/Build/Products/Debug-iphoneos/include/SoomlaiOSStore\"";
 				INFOPLIST_FILE = "SoomlaiOSStoreExampleDevice-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"../DerivedData/ios-store/Build/Products/Debug-iphoneos",
 					"\"$(SRCROOT)/../DerivedData/ios-store/Build/Products/Debug-iphoneos\"",
 				);
 				OTHER_LDFLAGS = "-ObjC";

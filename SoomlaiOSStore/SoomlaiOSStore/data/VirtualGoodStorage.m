@@ -18,51 +18,59 @@
 #import "VirtualGood.h"
 #import "StorageManager.h"
 #import "StoreDatabase.h"
+#import "StoreEncryptor.h"
 
 @implementation VirtualGoodStorage
 
 - (int)getBalanceForGood:(VirtualGood*)virtualGood{
-    NSString* itemId = virtualGood.itemId;
+    NSString* itemId = [StoreEncryptor encryptString:virtualGood.itemId];
     NSDictionary* goodDict = [[[StorageManager getInstance] database] getGoodWithItemId:itemId];
     
-    if (!goodDict){
+    NSString* balanceStr = [goodDict valueForKey:DICT_KEY_BALANCE];
+    
+    if (!goodDict || !balanceStr || [balanceStr isEqual:[NSNull null]] || [balanceStr length]==0){
         return 0;
     }
     
-    return [[goodDict valueForKey:DICT_KEY_BALANCE] intValue];
+    NSNumber* balance = [StoreEncryptor decryptToNumber:balanceStr];
+    return [balance intValue];
 }
 
 - (int)addAmount:(int)amount toGood:(VirtualGood*)virtualGood{
-    NSString* itemId = virtualGood.itemId;
+    NSString* itemId = [StoreEncryptor encryptString:virtualGood.itemId];
     int balance = [self getBalanceForGood:virtualGood] + amount;
-    [[[StorageManager getInstance] database] updateGoodBalance:[NSNumber numberWithInt:balance] forItemId:itemId];
+    [[[StorageManager getInstance] database] updateGoodBalance:[StoreEncryptor encryptNumber:[NSNumber numberWithInt:balance]] forItemId:itemId];
     
     return balance;
 }
 
 - (int)removeAmount:(int)amount fromGood:(VirtualGood*)virtualGood{
-    NSString* itemId = virtualGood.itemId;
+    NSString* itemId = [StoreEncryptor encryptString:virtualGood.itemId];
     int balance = [self getBalanceForGood:virtualGood] - amount;
     balance = balance > 0 ? balance : 0;
-    [[[StorageManager getInstance] database] updateGoodBalance:[NSNumber numberWithInt:balance] forItemId:itemId];
+    [[[StorageManager getInstance] database] updateGoodBalance:[StoreEncryptor encryptNumber:[NSNumber numberWithInt:balance]] forItemId:itemId];
     
     return balance;
 }
 
 - (BOOL)isGoodEquipped:(VirtualGood*)virtualGood{
-    NSString* itemId = virtualGood.itemId;
+    NSString* itemId = [StoreEncryptor encryptString:virtualGood.itemId];
     NSDictionary* goodDict = [[[StorageManager getInstance] database] getGoodWithItemId:itemId];
     
-    if (!goodDict){
-        return 0;
+    NSString* equipStr = [goodDict valueForKey:DICT_KEY_EQUIP];
+    
+    if (!goodDict || !equipStr || [equipStr isEqual:[NSNull null]] || [equipStr length]==0){
+        return NO;
     }
     
-    return [[goodDict valueForKey:DICT_KEY_EQUIP] boolValue];
+    BOOL equip = [StoreEncryptor decryptToBoolean:equipStr];
+    
+    return equip;
 }
 
 - (void)equipGood:(VirtualGood*)virtualGood withEquipValue:(BOOL)equip{
-    NSString* itemId = virtualGood.itemId;
-    [[[StorageManager getInstance] database] updateGoodEquipped:[NSNumber numberWithBool:equip] forItemId:itemId];
+    NSString* itemId = [StoreEncryptor encryptString:virtualGood.itemId];
+    [[[StorageManager getInstance] database] updateGoodEquipped:[StoreEncryptor encryptBoolean:equip] forItemId:itemId];
 }
 
 @end

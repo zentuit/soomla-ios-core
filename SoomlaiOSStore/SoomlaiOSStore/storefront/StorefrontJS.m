@@ -196,13 +196,19 @@
         int balance = [[[StorageManager getInstance] virtualGoodStorage] getBalanceForGood:good];
         BOOL equipped = [[[StorageManager getInstance] virtualGoodStorage] isGoodEquipped:good];
         NSDictionary* updatedValues = [NSDictionary dictionaryWithObjectsAndKeys:
-                                       @"balance", [NSNumber numberWithInt:balance],
-                                       @"price", [good currencyValues],
-                                       @"equipped", [NSNumber numberWithBool:equipped],
+                                       [NSNumber numberWithInt:balance], @"balance",
+                                       [good currencyValues], @"price",
+                                       [NSNumber numberWithBool:equipped], @"equipped",
                                        nil];
         [goodsDict setValue:updatedValues forKey:good.itemId];
     }
 
+    for (NSString* str in goodsDict.allKeys){
+        NSLog(@"%@", str);
+        NSLog(@"%d", ((NSDictionary*)[goodsDict valueForKey:str]).count);
+    }
+    
+    NSLog(@"%@", [goodsDict JSONString]);
     [sfViewController sendToJSWithAction:@"goodsUpdated" andData:[goodsDict JSONString]];
 
 }

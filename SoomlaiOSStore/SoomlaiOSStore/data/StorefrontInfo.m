@@ -18,6 +18,7 @@
 #import "StorageManager.h"
 #import "StoreDatabase.h"
 #import "JSONKit.h"
+#import "StoreEncryptor.h"
 
 @implementation StorefrontInfo
 
@@ -44,6 +45,8 @@
     if (![self initializeFromDB]){
         self.storefrontJson = sfJSON;
         
+        [[[StorageManager getInstance] database] setStorefrontInfo:[StoreEncryptor encryptString:sfJSON]];
+        
         NSDictionary* sfDict = [self.storefrontJson objectFromJSONString];
         //TODO: check that this value is parsed
         self.orientationLandscape = [(NSNumber*)[[sfDict objectForKey:@"theme"] objectForKey:@"isOrientationLandscape"] boolValue];
@@ -52,10 +55,12 @@
 
 - (BOOL)initializeFromDB{
     NSString* sfJSON = [[[StorageManager getInstance] database] getStorefrontInfo];
-    if (sfJSON == NULL || sfJSON.length == 0){
+    if (!sfJSON || [sfJSON isEqual:[NSNull null]] || sfJSON.length == 0){
         NSLog(@"storefront json is not in DB yet");
         return NO;
     }
+    
+    sfJSON = [StoreEncryptor decryptToString:sfJSON];
     
     self.storefrontJson = sfJSON;
     

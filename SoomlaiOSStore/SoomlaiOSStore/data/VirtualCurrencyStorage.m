@@ -18,33 +18,38 @@
 #import "VirtualCurrency.h"
 #import "StorageManager.h"
 #import "StoreDatabase.h"
+#import "StoreEncryptor.h"
 
 @implementation VirtualCurrencyStorage
 
 - (int)getBalanceForCurrency:(VirtualCurrency*)virtualCurrency{
-    NSString* itemId = virtualCurrency.itemId;
-    NSDictionary* currencyBalance = [[[StorageManager getInstance] database] getCurrencyWithItemId:itemId];
+    NSString* itemId = [StoreEncryptor encryptString:virtualCurrency.itemId];
+    NSDictionary* currencyDict = [[[StorageManager getInstance] database] getCurrencyWithItemId:itemId];
     
-    if (!currencyBalance){
+    NSString* balanceStr = [currencyDict valueForKey:DICT_KEY_BALANCE];
+    
+    if (!currencyDict || !balanceStr || [balanceStr isEqual:[NSNull null]] || [balanceStr length]==0){
         return 0;
     }
     
-    return [[currencyBalance valueForKey:DICT_KEY_BALANCE] intValue];
+    NSNumber* balance = [StoreEncryptor decryptToNumber:balanceStr];
+    
+    return [balance intValue];
 }
 
 - (int)addAmount:(int)amount toCurrency:(VirtualCurrency*)virtualCurrency{
-    NSString* itemId = virtualCurrency.itemId;
+    NSString* itemId = [StoreEncryptor encryptString:virtualCurrency.itemId];
     int balance = [self getBalanceForCurrency:virtualCurrency] + amount;
-    [[[StorageManager getInstance] database] updateCurrencyBalance:[NSNumber numberWithInt:balance] forItemId:itemId];
+    [[[StorageManager getInstance] database] updateCurrencyBalance:[StoreEncryptor encryptNumber:[NSNumber numberWithInt:balance]] forItemId:itemId];
     
     return balance;
 }
 
 - (int)removeAmount:(int)amount fromCurrency:(VirtualCurrency*)virtualCurrency{
-    NSString* itemId = virtualCurrency.itemId;
+    NSString* itemId = [StoreEncryptor encryptString:virtualCurrency.itemId];
     int balance = [self getBalanceForCurrency:virtualCurrency] - amount;
     balance = balance > 0 ? balance : 0;
-    [[[StorageManager getInstance] database] updateCurrencyBalance:[NSNumber numberWithInt:balance] forItemId:itemId];
+    [[[StorageManager getInstance] database] updateCurrencyBalance:[StoreEncryptor encryptNumber:[NSNumber numberWithInt:balance]] forItemId:itemId];
     
     return balance;
 }
