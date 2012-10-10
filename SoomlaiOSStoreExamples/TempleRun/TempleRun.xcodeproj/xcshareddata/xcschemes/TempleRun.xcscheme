@@ -14,24 +14,10 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "C0ABC15B16259A5F00632364"
-               BuildableName = "MuffinRush.app"
-               BlueprintName = "MuffinRushDevice"
-               ReferencedContainer = "container:MuffinRush.xcodeproj">
-            </BuildableReference>
-         </BuildActionEntry>
-         <BuildActionEntry
-            buildForTesting = "YES"
-            buildForRunning = "YES"
-            buildForProfiling = "YES"
-            buildForArchiving = "YES"
-            buildForAnalyzing = "YES">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "C02CEC41160DC870000AA0D2"
-               BuildableName = "libSoomlaiOSStore.a"
-               BlueprintName = "SoomlaiOSStore"
-               ReferencedContainer = "container:../../SoomlaiOSStore/SoomlaiOSStore.xcodeproj">
+               BlueprintIdentifier = "C0F019871625E7C40087F99D"
+               BuildableName = "TempleRun.app"
+               BlueprintName = "TempleRun"
+               ReferencedContainer = "container:TempleRun.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -46,10 +32,10 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "C0ABC15B16259A5F00632364"
-            BuildableName = "MuffinRush.app"
-            BlueprintName = "MuffinRushDevice"
-            ReferencedContainer = "container:MuffinRush.xcodeproj">
+            BlueprintIdentifier = "C0F019871625E7C40087F99D"
+            BuildableName = "TempleRun.app"
+            BlueprintName = "TempleRun"
+            ReferencedContainer = "container:TempleRun.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </TestAction>
@@ -65,10 +51,10 @@
       <BuildableProductRunnable>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "C0ABC15B16259A5F00632364"
-            BuildableName = "MuffinRush.app"
-            BlueprintName = "MuffinRushDevice"
-            ReferencedContainer = "container:MuffinRush.xcodeproj">
+            BlueprintIdentifier = "C0F019871625E7C40087F99D"
+            BuildableName = "TempleRun.app"
+            BlueprintName = "TempleRun"
+            ReferencedContainer = "container:TempleRun.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -83,10 +69,10 @@
       <BuildableProductRunnable>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "C0ABC15B16259A5F00632364"
-            BuildableName = "MuffinRush.app"
-            BlueprintName = "MuffinRushDevice"
-            ReferencedContainer = "container:MuffinRush.xcodeproj">
+            BlueprintIdentifier = "C0F019871625E7C40087F99D"
+            BuildableName = "TempleRun.app"
+            BlueprintName = "TempleRun"
+            ReferencedContainer = "container:TempleRun.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>
