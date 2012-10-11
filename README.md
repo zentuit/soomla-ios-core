@@ -35,6 +35,20 @@ Getting Started (using srouce code)
        [[StoreController getInstance] initializeWithStoreAssets:[[MuffinRushAssets alloc] init]];
       ```
 
+5. Now, that you have StoreController loaded, just decide when you want to show/hide your store's UI to the user and let StoreController know about it:
+
+When you show the store call:
+
+```objective-c
+    [[StoreController getInstance] storeOpening];
+```
+
+When you hide the store call:
+
+```objective-c
+    [[StoreController getInstance] storeClosing];
+```
+
 And that's it ! You have Storage and in-app purchesing capabilities... ALL-IN-ONE.
 
 Getting Started (using static library)
