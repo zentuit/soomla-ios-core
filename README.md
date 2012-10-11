@@ -76,6 +76,26 @@ Example:
 
 Lets say you have a VirtualCurrencyPack you call TEN_COINS_PACK, a VirtualCurrency you call COIN_CURRENCY and a VirtualCategory you call CURRENCYPACKS_CATEGORY:
 
+```objective-c
+VirtualCurrencyPack* TEN_COINS_PACK = [[VirtualCurrencyPack alloc] initWithName:@"10 Coins"
+                                              andDescription:@"A pack of 10 coins"
+                                              andImgFilePath:@"themes/awsomegame/img/coins/10_coins.png"
+                                                   andItemId:@"10_coins"
+                                                    andPrice:0.99
+                                                andProductId:TEN_COINS_PACK_PRODUCT_ID
+                                           andCurrencyAmount:10
+                                                 andCurrency:COIN_CURRENCY
+                                                 andCategory:CURRENCYPACKS_CATEGORY];
+```
+
+Now you can use StoreController to call Google Play's in-app purchasing mechanism:
+
+```objective-c
+    [[StoreController getInstance] buyCurrencyPackWithProcuctId:TEN_COINS_PACK.productId];
+```
+
+And that's it! android-store knows how to contact Google Play for you and redirect the user to the purchasing mechanis. Don't forget to define your IStoreEventHandler in order to get the events of successful or failed purchase (see [Event Handling](https://github.com/soomla/ios-store#event-handling)).
+
 Storage & Meta-Data
 ---
 
