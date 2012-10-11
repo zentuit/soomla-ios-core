@@ -8,7 +8,7 @@ Didn't you ever wanted an in-app purchase one liner that looks like this ?!
 
 ios-store
 ---
-The ios-store is our ios-falvored code initiative part of The SOOMLA Project. It is an iOS SDK that simplifies the App Store's in-app purchasing API and complements it with storage, security and event handling. The project also includes a sample app for reference. As an optional (and currently EXPERIMENTAL) part of our open-source projects you can also get the storefront's theme which you can customize with your own game's assets. To use our storefront, refer to [Get your own Storefront](https://github.com/soomla/android-store/wiki/Get-your-own-Storefront-%5BEXPERIMENTAL%5D).
+The ios-store is our ios-falvored code initiative part of The SOOMLA Project. It is an iOS SDK that simplifies the App Store's in-app purchasing API and complements it with storage, security and event handling. The project also includes a sample app for reference. As an optional (and currently EXPERIMENTAL) part of our open-source projects you can also get the storefront's theme which you can customize with your own game's assets. To use our storefront, refer to [Get your own Storefront](https://github.com/soomla/ios-store/wiki/Get-your-own-Storefront-%5BEXPERIMENTAL%5D).
 
 
 Check out our [Wiki] (https://github.com/soomla/ios-store/wiki) for more information about the project and how to use it better.
@@ -65,12 +65,12 @@ Getting Started (using static library)
 
 3. Got to your project's "Build Phases" and set the value "-ObjC" for the key "Other Linker Flags".
 
-4. Go through steps 3-5 from [Getting Started (using srouce code)](https://github.com/refaelos/ios-store#getting-started-using-srouce-code).
+4. Go through steps 3-5 from [Getting Started (using srouce code)](https://github.com/soomla/ios-store#getting-started-using-srouce-code).
 
 What's next? In App Purchasing.
 ---
 
-ios-store provides you with VirtualCurrencyPacks. VirtualCurrencyPack is a representation of a "bag" of currencies that you want to let your users purchase in the App Store. You define VirtualCurrencyPacks in your game specific assets file which is your implemetation of IStoreAssets ([example]()). After you do that you can call StoreController to make actual purchases and ios-store will take care of the rest.
+ios-store provides you with VirtualCurrencyPacks. VirtualCurrencyPack is a representation of a "bag" of currencies that you want to let your users purchase in the App Store. You define VirtualCurrencyPacks in your game specific assets file which is your implemetation of IStoreAssets ([example](https://github.com/soomla/ios-store/blob/master/SoomlaiOSStoreExamples/MuffinRush/MuffinRush/MuffinRushAssets.m)). After you do that you can call StoreController to make actual purchases and ios-store will take care of the rest.
 
 Example:
 
@@ -94,7 +94,7 @@ Now you can use StoreController to call Google Play's in-app purchasing mechanis
     [[StoreController getInstance] buyCurrencyPackWithProcuctId:TEN_COINS_PACK.productId];
 ```
 
-And that's it! android-store knows how to contact Google Play for you and redirect the user to the purchasing mechanis. Don't forget to define your IStoreEventHandler in order to get the events of successful or failed purchase (see [Event Handling](https://github.com/soomla/ios-store#event-handling)).
+And that's it! ios-store knows how to contact Google Play for you and redirect the user to the purchasing mechanis. Don't forget to define your IStoreEventHandler in order to get the events of successful or failed purchase (see [Event Handling](https://github.com/soomla/ios-store#event-handling)).
 
 Storage & Meta-Data
 ---
