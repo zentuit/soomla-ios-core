@@ -25,18 +25,9 @@ Getting Started (using srouce code)
 
  `git clone git@github.com:soomla/ios-store.git`
 
-2. Make sure you have the following frameworks in your application's project: **Security, CoreData, StoreKit**.
+2. Make sure you have the following frameworks in your application's project: **Security, libsqlite3.0.dylib, StoreKit**.
 
-3. Import CoreData in your application's 'pch' file:
-
-	go to [Application Name]-prefix.pch and add:
-
-    ```objective-c
-    #ifdef __OBJC__
-    	...
-    	#import <CoreData/CoreData.h>
-    #endif
-    ```
+3. We use JSONKit but it doesn't use ARC. Go to your project's "Build Phases" and expand "Compile Sources". Add the flag "-fno-objc-arc" to the file JSONKit.m.
         
 4. Create your own implementation of _IStoreAssets_ in order to describe your specific game's assets. Initialize _StoreController_ with the class you just created:
 
