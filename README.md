@@ -63,7 +63,18 @@ Getting Started (using static library)
 
 2. Add libSoomlaiOSStore.a and add it to your project's library dependencies. Add SooomlaiOSStore headers forder to your project as a source folder.
 
-3. Go through steps 2-4 from [Getting Started (using srouce code)](https://github.com/refaelos/ios-store#getting-started-using-srouce-code).
+3. Got to your project's "Build Phases" and set the value "-ObjC" for the key "Other Linker Flags".
+
+4. Go through steps 3-5 from [Getting Started (using srouce code)](https://github.com/refaelos/ios-store#getting-started-using-srouce-code).
+
+What's next? In App Purchasing.
+---
+
+ios-store provides you with VirtualCurrencyPacks. VirtualCurrencyPack is a representation of a "bag" of currencies that you want to let your users purchase in the App Store. You define VirtualCurrencyPacks in your game specific assets file which is your implemetation of IStoreAssets ([example]()). After you do that you can call StoreController to make actual purchases and ios-store will take care of the rest.
+
+Example:
+
+Lets say you have a VirtualCurrencyPack you call TEN_COINS_PACK, a VirtualCurrency you call COIN_CURRENCY and a VirtualCategory you call CURRENCYPACKS_CATEGORY:
 
 Storage & Meta-Data
 ---
