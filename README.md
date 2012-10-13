@@ -152,7 +152,7 @@ OR, you can observe all events with the same selector by calling:
 Our way of saying "Thanks !"
 ---
 
-In this project we use other open-source projects so we mention them:
+Other open-source projects that we use:
 
 * [FBEncryptor](https://github.com/dev5tec/FBEncryptor)
 * [JSONKit](https://github.com/johnezang/JSONKit)
