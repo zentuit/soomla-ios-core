@@ -149,6 +149,15 @@ OR, you can observe all events with the same selector by calling:
 
     [EventHandling observeAllEventsWithObserver:self withSelector:@selector(yourCustomSelector:)];
 
+Our way of saying "Thanks !"
+---
+
+In this project we use other open-source projects so we mention them:
+
+* [FBEncryptor](https://github.com/dev5tec/FBEncryptor)
+* [JSONKit](https://github.com/johnezang/JSONKit)
+* [UIDevice-with-UniqueIdentifier-for-iOS-5](https://github.com/gekitz/UIDevice-with-UniqueIdentifier-for-iOS-5)
+
 Contribution
 ---
 
