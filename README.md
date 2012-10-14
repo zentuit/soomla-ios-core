@@ -88,13 +88,13 @@ VirtualCurrencyPack* TEN_COINS_PACK = [[VirtualCurrencyPack alloc] initWithName:
                                                  andCategory:CURRENCYPACKS_CATEGORY];
 ```
 
-Now you can use StoreController to call Google Play's in-app purchasing mechanism:
+Now you can use StoreController to call the App Store's in-app purchasing mechanism:
 
 ```objective-c
     [[StoreController getInstance] buyCurrencyPackWithProcuctId:TEN_COINS_PACK.productId];
 ```
 
-And that's it! ios-store knows how to contact Google Play for you and redirect the user to the purchasing mechanis. Don't forget to define your IStoreEventHandler in order to get the events of successful or failed purchase (see [Event Handling](https://github.com/soomla/ios-store#event-handling)).
+And that's it! ios-store knows how to contact the App Store for you and redirect the user to the purchasing mechanis. Don't forget to define your IStoreEventHandler in order to get the events of successful or failed purchase (see [Event Handling](https://github.com/soomla/ios-store#event-handling)).
 
 Storage & Meta-Data
 ---
