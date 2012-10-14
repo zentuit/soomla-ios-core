@@ -13,7 +13,7 @@ The ios-store is our ios-falvored code initiative part of The SOOMLA Project. It
 
 Check out our [Wiki] (https://github.com/soomla/ios-store/wiki) for more information about the project and how to use it better.
 
-Getting Started (using srouce code)
+Getting Started (using source code)
 ---
 
 #### **WE USE ARC !**
@@ -65,7 +65,7 @@ Getting Started (using static library)
 
 3. Got to your project's "Build Phases" and set the value "-ObjC" for the key "Other Linker Flags".
 
-4. Go through steps 3-5 from [Getting Started (using srouce code)](https://github.com/soomla/ios-store#getting-started-using-srouce-code).
+4. Go through steps 3-5 from [Getting Started (using source code)](https://github.com/soomla/ios-store#getting-started-using-source-code).
 
 What's next? In App Purchasing.
 ---
