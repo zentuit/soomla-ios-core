@@ -1,13 +1,19 @@
 *This project is a part of [The SOOMLA Project](http://project.soom.la) which is a series of open source initiatives with a joint goal to help mobile game developers get better stores and more in-app purchases.*
 
+Didn't you ever wanted an in-app purchase one liner that looks like this ?!
+
+```objective-c
+    [[StoreController getInstance] buyCurrencyPackWithProcuctId:@"[Your product id here]"]
+```
+
 ios-store
 ---
-The ios-store is our ios-falvored code initiative part of The SOOMLA Project. It is an iOS SDK that simplifies the App Store's in-app purchasing API and complements it with storage, security and event handling. The project also includes a sample app for reference. As an optional (and currently EXPERIMENTAL) part of our open-source projects you can also get the storefront's theme which you can customize with your own game's assets. To use our storefront, refer to [Get your own Storefront](https://github.com/soomla/android-store/wiki/Get-your-own-Storefront-%5BEXPERIMENTAL%5D).
+The ios-store is our ios-falvored code initiative part of The SOOMLA Project. It is an iOS SDK that simplifies the App Store's in-app purchasing API and complements it with storage, security and event handling. The project also includes a sample app for reference. As an optional (and currently EXPERIMENTAL) part of our open-source projects you can also get the storefront's theme which you can customize with your own game's assets. To use our storefront, refer to [Get your own Storefront](https://github.com/soomla/ios-store/wiki/Get-your-own-Storefront-%5BEXPERIMENTAL%5D).
 
 
 Check out our [Wiki] (https://github.com/soomla/ios-store/wiki) for more information about the project and how to use it better.
 
-Getting Started (using srouce code)
+Getting Started (using source code)
 ---
 
 #### **WE USE ARC !**
@@ -19,24 +25,29 @@ Getting Started (using srouce code)
 
  `git clone git@github.com:soomla/ios-store.git`
 
-2. Make sure you have the following frameworks in your application's project: **Security, CoreData, StoreKit**.
+2. We use JSONKit but it doesn't use ARC. Go to your project's "Build Phases" and expand "Compile Sources". Add the flag "-fno-objc-arc" to the file JSONKit.m.
 
-3. Import CoreData in your application's 'pch' file:
+3. Make sure you have the following frameworks in your application's project: **Security, libsqlite3.0.dylib, StoreKit**.
 
-	go to [Application Name]-prefix.pch and add:
-
-    ```objective-c
-    #ifdef __OBJC__
-    	...
-    	#import <CoreData/CoreData.h>
-    #endif
-    ```
-        
 4. Create your own implementation of _IStoreAssets_ in order to describe your specific game's assets. Initialize _StoreController_ with the class you just created:
 
       ```objective-c
        [[StoreController getInstance] initializeWithStoreAssets:[[MuffinRushAssets alloc] init]];
       ```
+
+5. Now, that you have StoreController loaded, just decide when you want to show/hide your store's UI to the user and let StoreController know about it:
+
+When you show the store call:
+
+```objective-c
+    [[StoreController getInstance] storeOpening];
+```
+
+When you hide the store call:
+
+```objective-c
+    [[StoreController getInstance] storeClosing];
+```
 
 And that's it ! You have Storage and in-app purchesing capabilities... ALL-IN-ONE.
 
@@ -52,7 +63,38 @@ Getting Started (using static library)
 
 2. Add libSoomlaiOSStore.a and add it to your project's library dependencies. Add SooomlaiOSStore headers forder to your project as a source folder.
 
-3. Go through steps 2-4 from [Getting Started (using srouce code)](https://github.com/refaelos/ios-store#getting-started-using-srouce-code).
+3. Got to your project's "Build Phases" and set the value "-ObjC" for the key "Other Linker Flags".
+
+4. Go through steps 3-5 from [Getting Started (using source code)](https://github.com/soomla/ios-store#getting-started-using-source-code).
+
+What's next? In App Purchasing.
+---
+
+ios-store provides you with VirtualCurrencyPacks. VirtualCurrencyPack is a representation of a "bag" of currencies that you want to let your users purchase in the App Store. You define VirtualCurrencyPacks in your game specific assets file which is your implemetation of IStoreAssets ([example](https://github.com/soomla/ios-store/blob/master/SoomlaiOSStoreExamples/MuffinRush/MuffinRush/MuffinRushAssets.m)). After you do that you can call StoreController to make actual purchases and ios-store will take care of the rest.
+
+Example:
+
+Lets say you have a VirtualCurrencyPack you call TEN_COINS_PACK, a VirtualCurrency you call COIN_CURRENCY and a VirtualCategory you call CURRENCYPACKS_CATEGORY:
+
+```objective-c
+VirtualCurrencyPack* TEN_COINS_PACK = [[VirtualCurrencyPack alloc] initWithName:@"10 Coins"
+                                              andDescription:@"A pack of 10 coins"
+                                              andImgFilePath:@"themes/awsomegame/img/coins/10_coins.png"
+                                                   andItemId:@"10_coins"
+                                                    andPrice:0.99
+                                                andProductId:TEN_COINS_PACK_PRODUCT_ID
+                                           andCurrencyAmount:10
+                                                 andCurrency:COIN_CURRENCY
+                                                 andCategory:CURRENCYPACKS_CATEGORY];
+```
+
+Now you can use StoreController to call the App Store's in-app purchasing mechanism:
+
+```objective-c
+    [[StoreController getInstance] buyCurrencyPackWithProcuctId:TEN_COINS_PACK.productId];
+```
+
+And that's it! ios-store knows how to contact the App Store for you and redirect the user to the purchasing mechanis. Don't forget to define your IStoreEventHandler in order to get the events of successful or failed purchase (see [Event Handling](https://github.com/soomla/ios-store#event-handling)).
 
 Storage & Meta-Data
 ---
@@ -106,6 +148,15 @@ In order to observe store events you need to import EventHandling.h and than you
 OR, you can observe all events with the same selector by calling:
 
     [EventHandling observeAllEventsWithObserver:self withSelector:@selector(yourCustomSelector:)];
+
+Our way of saying "Thanks !"
+---
+
+Other open-source projects that we use:
+
+* [FBEncryptor](https://github.com/dev5tec/FBEncryptor)
+* [JSONKit](https://github.com/johnezang/JSONKit)
+* [UIDevice-with-UniqueIdentifier-for-iOS-5](https://github.com/gekitz/UIDevice-with-UniqueIdentifier-for-iOS-5)
 
 Contribution
 ---
