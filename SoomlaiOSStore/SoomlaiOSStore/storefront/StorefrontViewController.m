@@ -30,6 +30,11 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    activity = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+    activity.frame = self.view.frame;
+    [activity startAnimating];
+    [self.view addSubview:activity];
 
     pendingMessages = [[NSMutableArray alloc] init];
     jsUIReady = NO;
@@ -62,6 +67,8 @@
 - (void)loadWebView{
     [self.view addSubview:storeWebview];
     [self.view bringSubviewToFront:storeWebview];
+    
+    [activity stopAnimating];
 }
 
 - (void)sendToJSWithAction:(NSString*)action andData:(NSString*)data{

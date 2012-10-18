@@ -20,6 +20,7 @@
 
 @interface StorefrontViewController : UIViewController{
     @private
+    UIActivityIndicatorView* activity;
     UIWebView* storeWebview;
     NSMutableArray* pendingMessages;
     @public
