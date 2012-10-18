@@ -19,9 +19,9 @@
 @implementation VirtualCurrency
     
 - (id)initWithName:(NSString*)oName andDescription:(NSString*)oDescription
-    andImgFilePath:(NSString*)oImgFilePath andItemId:(NSString*)oItemId{
+    andItemId:(NSString*)oItemId{
     
-    self = [super initWithName:oName andDescription:oDescription andImgFilePath:oImgFilePath andItemId:oItemId];
+    self = [super initWithName:oName andDescription:oDescription andItemId:oItemId];
     if (self) {
         // Nothing to initialize
     }

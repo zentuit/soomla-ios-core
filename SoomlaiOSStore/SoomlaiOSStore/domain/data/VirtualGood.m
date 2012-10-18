@@ -26,10 +26,10 @@
 @synthesize priceModel, category, equipped;
 
 - (id)initWithName:(NSString*)oName andDescription:(NSString*)oDescription
-    andImgFilePath:(NSString*)oImgFilePath andItemId:(NSString*)oItemId andPriceModel:(PriceModel*)oPriceModel
+    andItemId:(NSString*)oItemId andPriceModel:(PriceModel*)oPriceModel
        andCategory:(VirtualCategory*)oCategory andEquipStatus:(BOOL)oEquipped{
     
-    self = [super initWithName:oName andDescription:oDescription andImgFilePath:oImgFilePath andItemId:oItemId];
+    self = [super initWithName:oName andDescription:oDescription andItemId:oItemId];
     if (self){
         self.priceModel = oPriceModel;
         self.category = oCategory;
@@ -44,7 +44,7 @@
     if (self) {
         self.priceModel = [PriceModel priceModelWithNSDictionary:[dict objectForKey:JSON_GOOD_PRICE_MODEL]];
         self.equipped = [[dict objectForKey:JSON_GOOD_EQUIPPED] boolValue];
-        int categoryId = [[dict objectForKey:JSON_CURRENCYPACK_CATEGORY_ID] intValue];
+        int categoryId = [[dict objectForKey:JSON_GOOD_CATEGORY_ID] intValue];
         @try {
             if (categoryId > -1){
                 self.category = [[StoreInfo getInstance] categoryWithId:categoryId];
@@ -62,7 +62,7 @@
     NSDictionary* parentDict = [super toDictionary];
     NSMutableDictionary* toReturn = [[NSMutableDictionary alloc] initWithDictionary:parentDict];
     [toReturn setValue:[self.priceModel toDictionary] forKey:JSON_GOOD_PRICE_MODEL];
-    [toReturn setValue:[NSNumber numberWithInt:self.category.Id] forKey:JSON_CURRENCYPACK_CATEGORY_ID];
+    [toReturn setValue:[NSNumber numberWithInt:self.category.Id] forKey:JSON_GOOD_CATEGORY_ID];
     [toReturn setValue:[NSNumber numberWithBool:self.equipped] forKey:JSON_GOOD_EQUIPPED];
     
     return toReturn;

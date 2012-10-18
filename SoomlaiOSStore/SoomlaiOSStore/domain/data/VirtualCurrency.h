@@ -25,7 +25,7 @@
 }
 
 - (id)initWithName:(NSString*)name andDescription:(NSString*)description
-    andImgFilePath:(NSString*)imgFilePath andItemId:(NSString*)itemId;
+    andItemId:(NSString*)itemId;
 - (id)initWithDictionary:(NSDictionary*)dict;
 - (NSDictionary*)toDictionary;
 

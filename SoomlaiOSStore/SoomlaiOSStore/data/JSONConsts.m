@@ -58,5 +58,4 @@ NSString *const JSON_CATEGORY_IMAGEFILEPATH   = @"categoryImage";
 
 NSString *const JSON_ITEM_NAME                = @"name";
 NSString *const JSON_ITEM_DESCRIPTION         = @"description";
-NSString *const JSON_ITEM_IMAGEFILEPATH       = @"imgFilePath";
 NSString *const JSON_ITEM_ITEMID              = @"itemId";

@@ -45,7 +45,6 @@ extern NSString *const JSON_CURRENCYPACK_PRODUCT_ID;
 extern NSString *const JSON_CURRENCYPACK_PRICE;
 extern NSString *const JSON_CURRENCYPACK_AMOUNT;
 extern NSString *const JSON_CURRENCYPACK_CURRENCYITEMID;
-extern NSString *const JSON_CURRENCYPACK_CATEGORY_ID;
 
 extern NSString *const JSON_GOOD_PRICE_MODEL;
 extern NSString *const JSON_GOOD_CATEGORY_ID;

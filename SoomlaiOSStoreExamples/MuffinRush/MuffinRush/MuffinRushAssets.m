@@ -51,7 +51,6 @@ VirtualCurrencyPack* THOUSANDMUFF_PACK;
     
     MUFFIN_CURRENCY = [[VirtualCurrency alloc] initWithName:@"Muffins"
                                              andDescription:@""
-                                             andImgFilePath:@"themes/muffinRush/img/muffin.png"
                                                   andItemId:MUFFIN_CURRENCY_ITEM_ID];
     
     
@@ -62,7 +61,6 @@ VirtualCurrencyPack* THOUSANDMUFF_PACK;
                                       nil];
     MUFFINCAKE_GOOD = [[VirtualGood alloc] initWithName:@"Fruit Cake"
                                          andDescription:@"Customers buy a double portion on each purchase of this cake"
-                                         andImgFilePath:@"themes/muffinRush/img/items/fruit_cake.png"
                                               andItemId:@"fruit_cake"
                                           andPriceModel:[[StaticPriceModel alloc] initWithCurrencyValue:MUFFINCAKE_PRICE]
                                             andCategory:GENERAL_CATEGORY
@@ -73,7 +71,6 @@ VirtualCurrencyPack* THOUSANDMUFF_PACK;
                                       nil];
     PAVLOVA_GOOD = [[VirtualGood alloc] initWithName:@"Pavlova"
                                          andDescription:@"Gives customers a sugar rush and they call their friends"
-                                         andImgFilePath:@"themes/muffinRush/img/items/pavlova.png"
                                               andItemId:@"pavlova"
                                           andPriceModel:[[StaticPriceModel alloc] initWithCurrencyValue:PAVLOVA_PRICE]
                                             andCategory:GENERAL_CATEGORY
@@ -84,7 +81,6 @@ VirtualCurrencyPack* THOUSANDMUFF_PACK;
                                    nil];
     CHOCLATECAKE_GOOD = [[VirtualGood alloc] initWithName:@"Chocolate Cake"
                                       andDescription:@"A classic cake to maximize customer satisfaction"
-                                      andImgFilePath:@"themes/muffinRush/img/items/chocolate_cake.png"
                                            andItemId:@"chocolate_cake"
                                        andPriceModel:[[StaticPriceModel alloc] initWithCurrencyValue:CHOCLATECAKE_PRICE]
                                          andCategory:GENERAL_CATEGORY
@@ -96,7 +92,6 @@ VirtualCurrencyPack* THOUSANDMUFF_PACK;
                                         nil];
     CREAMCUP_GOOD = [[VirtualGood alloc] initWithName:@"Cream Cup"
                                            andDescription:@"Increase bakery reputation with this original pastry"
-                                           andImgFilePath:@"themes/muffinRush/img/items/cream_cup.png"
                                                 andItemId:@"cream_cup"
                                             andPriceModel:[[StaticPriceModel alloc] initWithCurrencyValue:CREAMCUP_PRICE]
                                               andCategory:GENERAL_CATEGORY
@@ -107,39 +102,31 @@ VirtualCurrencyPack* THOUSANDMUFF_PACK;
     
     TENMUFF_PACK = [[VirtualCurrencyPack alloc] initWithName:@"10 Muffins"
                                               andDescription:@" (refund test)"
-                                              andImgFilePath:@"themes/muffinRush/img/currencyPacks/muffins01.png"
                                                    andItemId:@"muffins_10"
                                                     andPrice:0.99
                                                 andProductId:TENMUFF_PACK_PRODUCT_ID
                                            andCurrencyAmount:10
-                                                 andCurrency:MUFFIN_CURRENCY
-                                                 andCategory:GENERAL_CATEGORY];
+                                                 andCurrency:MUFFIN_CURRENCY];
     FIFTYMUFF_PACK = [[VirtualCurrencyPack alloc] initWithName:@"50 Muffins"
                                                 andDescription:@" (canceled test)"
-                                                andImgFilePath:@"themes/muffinRush/img/currencyPacks/muffins02.png"
                                                      andItemId:@"muffins_50"
                                                       andPrice:1.99
                                                   andProductId:FIFTYMUFF_PACK_PRODUCT_ID
-                                             andCurrencyAmount:50 andCurrency:MUFFIN_CURRENCY
-                                                   andCategory:GENERAL_CATEGORY];
+                                             andCurrencyAmount:50 andCurrency:MUFFIN_CURRENCY];
     FORTYMUFF_PACK = [[VirtualCurrencyPack alloc] initWithName:@"400 Muffins"
                                                 andDescription:@"ONLY THIS WORKS IN THIS EXAMPLE (purchase test)"
-                                                andImgFilePath:@"themes/muffinRush/img/currencyPacks/muffins03.png"
                                                      andItemId:@"muffins_400"
                                                       andPrice:4.99
                                                   andProductId:FORTYMUFF_PACK_PRODUCT_ID
                                              andCurrencyAmount:400
-                                                   andCurrency:MUFFIN_CURRENCY
-                                                   andCategory:GENERAL_CATEGORY];
+                                                   andCurrency:MUFFIN_CURRENCY];
     THOUSANDMUFF_PACK = [[VirtualCurrencyPack alloc] initWithName:@"1000 Muffins"
                                                    andDescription:@" (item_unavailable test)"
-                                                   andImgFilePath:@"themes/muffinRush/img/currencyPacks/muffins04.png"
                                                         andItemId:@"muffins_1000"
                                                          andPrice:8.99
                                                      andProductId:THOUSANDMUFF_PACK_PRODUCT_ID
                                                 andCurrencyAmount:1000
-                                                      andCurrency:MUFFIN_CURRENCY
-                                                      andCategory:GENERAL_CATEGORY];
+                                                      andCurrency:MUFFIN_CURRENCY];
     
 }
 

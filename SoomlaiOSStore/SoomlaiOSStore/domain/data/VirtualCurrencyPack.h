@@ -31,21 +31,18 @@
     double  price;
     int     currencyAmount;
     VirtualCurrency* currency;
-    VirtualCategory* category;
     AppStoreItem* appstoreItem;
 }
 
 @property double  price;
 @property int     currencyAmount;
 @property (retain, nonatomic) VirtualCurrency* currency;
-@property (retain, nonatomic) VirtualCategory* category;
 @property (retain, nonatomic) AppStoreItem* appstoreItem;
 
 /**
 * oName is the name of the virtual currency pack.
 * oDescription is the description of the virtual currency pack. This will show up
 *                in the store in the description section.
-* oImgFilePath is the path to the image that corresponds to the currency pack.
 * oItemId is the id of the virtual currency pack.
 * productId is the product id on Google Market..
 * oPrice is the actual $$ cost of the virtual currency pack.
@@ -54,8 +51,8 @@
 * oCategory is the category this currency pack is associated with.
 */
 - (id)initWithName:(NSString*)oName andDescription:(NSString*)oDescription
-    andImgFilePath:(NSString*)oImgFilePath andItemId:(NSString*)oItemId andPrice:(double)oPrice
-    andProductId:(NSString*)productId andCurrencyAmount:(int)oCurrencyAmount andCurrency:(VirtualCurrency*)oCurrency andCategory:(VirtualCategory*)oCategory;
+    andItemId:(NSString*)oItemId andPrice:(double)oPrice
+    andProductId:(NSString*)productId andCurrencyAmount:(int)oCurrencyAmount andCurrency:(VirtualCurrency*)oCurrency;
 
 - (id)initWithDictionary:(NSDictionary*)dict;
 - (NSDictionary*)toDictionary;

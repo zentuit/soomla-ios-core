@@ -39,13 +39,12 @@
  * oName is the name of the virtual good.
  * oDescription is the description of the virtual good. This will show up
  *                in the store in the description section.
- * oImgFilePath is the path to the image that corresponds to the virtual good.
  * oPriceModel is the way the price of the current virtual good is calculated.
  * oItemId is the id of the virtual good.
  * oCategory is the category this virtual good is associated with.
  */
 - (id)initWithName:(NSString*)oName andDescription:(NSString*)oDescription
-    andImgFilePath:(NSString*)oImgFilePath andItemId:(NSString*)oItemId andPriceModel:(PriceModel*)oPriceModel
+    andItemId:(NSString*)oItemId andPriceModel:(PriceModel*)oPriceModel
        andCategory:(VirtualCategory*)oCategory andEquipStatus:(BOOL)oEquipped;
 
 - (id)initWithDictionary:(NSDictionary*)dict;

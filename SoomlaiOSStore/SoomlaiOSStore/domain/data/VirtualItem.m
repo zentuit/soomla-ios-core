@@ -19,7 +19,7 @@
 
 @implementation VirtualItem
 
-@synthesize name, description, imgFilePath, itemId;
+@synthesize name, description, itemId;
 
 - (id)init{
     self = [super init];
@@ -31,7 +31,7 @@
     return self;
 }
 - (id)initWithName:(NSString*)oName andDescription:(NSString*)oDescription
-    andImgFilePath:(NSString*)oImgFilePath andItemId:(NSString*)oItemId{
+    andItemId:(NSString*)oItemId{
     self = [super init];
     if ([self class] == [VirtualItem class]) {
         @throw [NSException exceptionWithName:NSInternalInconsistencyException
@@ -41,7 +41,6 @@
     if (self) {
         self.name = oName;
         self.description = oDescription;
-        self.imgFilePath = oImgFilePath;
         self.itemId = oItemId;
     }
     
@@ -58,7 +57,6 @@
     if (self) {
         self.name = [dict objectForKey:JSON_ITEM_NAME];
         self.description = [dict objectForKey:JSON_ITEM_DESCRIPTION];
-        self.imgFilePath = [dict objectForKey:JSON_ITEM_IMAGEFILEPATH];
         self.itemId = [dict objectForKey:JSON_ITEM_ITEMID];
     }
     
@@ -69,7 +67,6 @@
     return [[NSDictionary alloc] initWithObjectsAndKeys:
                           self.name, JSON_ITEM_NAME,
                           self.description, JSON_ITEM_DESCRIPTION,
-                          self.imgFilePath, JSON_ITEM_IMAGEFILEPATH,
                           self.itemId, JSON_ITEM_ITEMID,
                           nil];
 }

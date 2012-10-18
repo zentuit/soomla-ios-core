@@ -22,18 +22,16 @@
 @interface VirtualItem : NSObject {
     NSString* name;
     NSString* description;
-    NSString* imgFilePath;
     NSString* itemId;
 }
 
 @property (retain, nonatomic) NSString* name;
 @property (retain, nonatomic) NSString* description;
-@property (retain, nonatomic) NSString* imgFilePath;
 @property (retain, nonatomic) NSString* itemId;
 
 - (id)init;
 - (id)initWithName:(NSString*)name andDescription:(NSString*)description
-     andImgFilePath:(NSString*)imgFilePath andItemId:(NSString*)itemId;
+    andItemId:(NSString*)itemId;
 - (id)initWithDictionary:(NSDictionary*)dict;
 - (NSDictionary*)toDictionary;
 
