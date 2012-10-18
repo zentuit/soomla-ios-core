@@ -55,8 +55,6 @@ extern NSString *const JSON_GOOD_EQUIPPED;
 
 extern NSString *const JSON_CATEGORY_NAME;
 extern NSString *const JSON_CATEGORY_ID;
-extern NSString *const JSON_CATEGORY_TITLE;
-extern NSString *const JSON_CATEGORY_IMAGEFILEPATH;
 
 extern NSString *const JSON_ITEM_NAME;
 extern NSString *const JSON_ITEM_DESCRIPTION;

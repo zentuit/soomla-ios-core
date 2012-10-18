@@ -17,28 +17,24 @@
 #import <Foundation/Foundation.h>
 
 /**
- * This class is a definition of a category. A single category can be associated with many virtual items.
+ * This class is a definition of a category. A single category can be associated with many virtual goods.
  * The purposes of virtual category are:
- * 1. You can use it to arrange virtual items to their specific categories.
- * 2. SOOMLA's storefront uses this to show the items in their categories on the UI (for supported themes only).
+ * 1. You can use it to arrange virtual goods to their specific categories.
+ * 2. SOOMLA's storefront uses this to show the goods in their categories on the UI (for supported themes only).
  */
 @interface VirtualCategory : NSObject{
     NSString* name;
     int       Id;
-    NSString* title;
-    NSString* imgFilePath;
 }
 
 @property (retain, nonatomic) NSString* name;
 @property int Id;
-@property (retain, nonatomic) NSString* title;
-@property (retain, nonatomic) NSString* imgFilePath;
 
 /**
 * oName is the category's name.
 * oId is the category's unique id.
 */
-- (id)initWithName:(NSString*)oName andId:(int)oId andTitle:(NSString*)oTitle andImgFilePath:(NSString*)oImgFilePath;
+- (id)initWithName:(NSString*)oName andId:(int)oId;
 - (id)initWithDictionary:(NSDictionary*)dict;
 - (NSDictionary*)toDictionary;
 

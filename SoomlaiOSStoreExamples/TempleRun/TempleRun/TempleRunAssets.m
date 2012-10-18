@@ -82,21 +82,13 @@ VirtualCurrencyPack* _200_000_COINS_PACK;
     /** Virtual Categories **/
     
     POWERUPS_CATEGORY = [[VirtualCategory alloc] initWithName:@"POWERUPS"
-                                    andId:1
-                                 andTitle:@""
-                           andImgFilePath:@""];
+                                    andId:1];
     UTILITIES_CATEGORY = [[VirtualCategory alloc] initWithName:@"UTILITIES"
-                                    andId:2
-                                 andTitle:@""
-                           andImgFilePath:@""];
+                                    andId:2];
     GODS_CATEGORY = [[VirtualCategory alloc] initWithName:@"GODS"
-                                    andId:3
-                                 andTitle:@""
-                           andImgFilePath:@""];
+                                    andId:3];
     FRIENDS_CATEGORY = [[VirtualCategory alloc] initWithName:@"FRIENDS"
-                                    andId:4
-                                 andTitle:@""
-                           andImgFilePath:@""];
+                                    andId:4];
 
 
     /** Virtual Currencies **/
@@ -104,7 +96,7 @@ VirtualCurrencyPack* _200_000_COINS_PACK;
     
     COINS_CURRENCY = [[VirtualCurrency alloc] initWithName:@"Coins"
                            andDescription:@""
-                           andImgFilePath:@"themes/templeRun/img/Item Price.png"
+                           andImgFilePath:@"themes/templeRun/img/Item_Price.png"
                                 andItemId:COINS_CURRENCY_ITEM_ID];
 
 
@@ -116,7 +108,7 @@ VirtualCurrencyPack* _200_000_COINS_PACK;
                                       nil];
     BOOST_AHEAD_GOOD = [[VirtualGood alloc] initWithName:@"Boost Ahead"
                           andDescription:@"Get a head start of 100 miles"
-                          andImgFilePath:@"themes/templeRun/img/Powerups/Object 11.png"
+                          andImgFilePath:@"themes/templeRun/img/Powerups/Object_11.png"
                                andItemId:@"boost_ahead"
                            andPriceModel:[[StaticPriceModel alloc] initWithCurrencyValue:BOOST_AHEAD_PRICE]
                              andCategory:POWERUPS_CATEGORY
@@ -127,7 +119,7 @@ VirtualCurrencyPack* _200_000_COINS_PACK;
                                       nil];
     EXTRA_HEALTH_GOOD = [[VirtualGood alloc] initWithName:@"Extra Health"
                           andDescription:@"Find hearts in the game to recover your health points"
-                          andImgFilePath:@"themes/templeRun/img/Powerups/Object 12.png"
+                          andImgFilePath:@"themes/templeRun/img/Powerups/Object_12.png"
                                andItemId:@"extra_health"
                            andPriceModel:[[StaticPriceModel alloc] initWithCurrencyValue:EXTRA_HEALTH_PRICE]
                              andCategory:POWERUPS_CATEGORY
@@ -138,7 +130,7 @@ VirtualCurrencyPack* _200_000_COINS_PACK;
                                       nil];
     INVISIBILITY_HAT_GOOD = [[VirtualGood alloc] initWithName:@"Invisibility Hat"
                           andDescription:@"Find the invisibility hat to suprise your enemies"
-                          andImgFilePath:@"themes/templeRun/img/Powerups/Object 14.png"
+                          andImgFilePath:@"themes/templeRun/img/Powerups/Object_14.png"
                                andItemId:@"invisibility_hat"
                            andPriceModel:[[StaticPriceModel alloc] initWithCurrencyValue:INVISIBILITY_HAT_PRICE]
                              andCategory:POWERUPS_CATEGORY
@@ -149,7 +141,7 @@ VirtualCurrencyPack* _200_000_COINS_PACK;
                                       nil];
     HORN_OF_WAR_GOOD = [[VirtualGood alloc] initWithName:@"Horn of War"
                           andDescription:@"Pass the word to your fleet quicker"
-                          andImgFilePath:@"themes/templeRun/img/Utilities/Object 1.png"
+                          andImgFilePath:@"themes/templeRun/img/Utilities/Object_1.png"
                                andItemId:@"horn_of_war"
                            andPriceModel:[[StaticPriceModel alloc] initWithCurrencyValue:HORN_OF_WAR_PRICE]
                              andCategory:UTILITIES_CATEGORY
@@ -160,7 +152,7 @@ VirtualCurrencyPack* _200_000_COINS_PACK;
                                       nil];
     FLAGSHIP_GOOD = [[VirtualGood alloc] initWithName:@"Flagship"
                           andDescription:@"Use the power of the wind to move faster"
-                          andImgFilePath:@"themes/templeRun/img/Utilities/Object 2.png"
+                          andImgFilePath:@"themes/templeRun/img/Utilities/Object_2.png"
                                andItemId:@"flagship"
                            andPriceModel:[[StaticPriceModel alloc] initWithCurrencyValue:FLAGSHIP_PRICE]
                              andCategory:UTILITIES_CATEGORY
@@ -171,7 +163,7 @@ VirtualCurrencyPack* _200_000_COINS_PACK;
                                       nil];
     MYSTERY_BOX_GOOD = [[VirtualGood alloc] initWithName:@"Mystery Box"
                           andDescription:@"Special utility that will be revealed once you open the box"
-                          andImgFilePath:@"themes/templeRun/img/Utilities/Object 10.png"
+                          andImgFilePath:@"themes/templeRun/img/Utilities/Object_10.png"
                                andItemId:@"mystery_box"
                            andPriceModel:[[StaticPriceModel alloc] initWithCurrencyValue:MYSTERY_BOX_PRICE]
                              andCategory:UTILITIES_CATEGORY
@@ -182,7 +174,7 @@ VirtualCurrencyPack* _200_000_COINS_PACK;
                                       nil];
     WISDOM_GOD_GOOD = [[VirtualGood alloc] initWithName:@"Wisdom God"
                           andDescription:@"Fight in the name of Wisdom God and get more powerful weapons"
-                          andImgFilePath:@"themes/templeRun/img/Gods/Object 4.png"
+                          andImgFilePath:@"themes/templeRun/img/Gods/Object_4.png"
                                andItemId:@"science_god"
                            andPriceModel:[[StaticPriceModel alloc] initWithCurrencyValue:WISDOM_GOD_PRICE]
                              andCategory:GODS_CATEGORY
@@ -193,7 +185,7 @@ VirtualCurrencyPack* _200_000_COINS_PACK;
                                       nil];
     WIND_GOD_GOOD = [[VirtualGood alloc] initWithName:@"Wind God"
                           andDescription:@"Fight in the name of the Wind God and the wind will always be at your side"
-                          andImgFilePath:@"themes/templeRun/img/Gods/Object 5.png"
+                          andImgFilePath:@"themes/templeRun/img/Gods/Object_5.png"
                                andItemId:@"wind_god"
                            andPriceModel:[[StaticPriceModel alloc] initWithCurrencyValue:WIND_GOD_PRICE]
                              andCategory:GODS_CATEGORY
@@ -204,7 +196,7 @@ VirtualCurrencyPack* _200_000_COINS_PACK;
                                       nil];
     WINTER_GOD_GOOD = [[VirtualGood alloc] initWithName:@"Winter God"
                           andDescription:@"Fight in the name of the Winter God and avoid glaciers and frost"
-                          andImgFilePath:@"themes/templeRun/img/Gods/Object 7.png"
+                          andImgFilePath:@"themes/templeRun/img/Gods/Object_7.png"
                                andItemId:@"winter_god"
                            andPriceModel:[[StaticPriceModel alloc] initWithCurrencyValue:WINTER_GOD_PRICE]
                              andCategory:GODS_CATEGORY
@@ -215,7 +207,7 @@ VirtualCurrencyPack* _200_000_COINS_PACK;
                                       nil];
     STARS_GOD_GOOD = [[VirtualGood alloc] initWithName:@"Stars God"
                           andDescription:@"Fight in the name of the Stars God and never be lost"
-                          andImgFilePath:@"themes/templeRun/img/Gods/Object 8.png"
+                          andImgFilePath:@"themes/templeRun/img/Gods/Object_8.png"
                                andItemId:@"stars_god"
                            andPriceModel:[[StaticPriceModel alloc] initWithCurrencyValue:STARS_GOD_PRICE]
                              andCategory:GODS_CATEGORY
@@ -226,7 +218,7 @@ VirtualCurrencyPack* _200_000_COINS_PACK;
                                       nil];
     ARGRICULTURE_GOD_GOOD = [[VirtualGood alloc] initWithName:@"Argriculture God"
                           andDescription:@"Fight in the name of Agriculture God and never run out of food"
-                          andImgFilePath:@"themes/templeRun/img/Gods/Object 15.png"
+                          andImgFilePath:@"themes/templeRun/img/Gods/Object_15.png"
                                andItemId:@"chocolate_cake"
                            andPriceModel:[[StaticPriceModel alloc] initWithCurrencyValue:ARGRICULTURE_GOD_PRICE]
                              andCategory:GODS_CATEGORY
@@ -237,7 +229,7 @@ VirtualCurrencyPack* _200_000_COINS_PACK;
                                       nil];
     EAGLE_GOOD = [[VirtualGood alloc] initWithName:@"Eagle"
                           andDescription:@"The eagle can tell you about enemies ahead of time up to 100 miles away"
-                          andImgFilePath:@"themes/templeRun/img/Friends/Object 3.png"
+                          andImgFilePath:@"themes/templeRun/img/Friends/Object_3.png"
                                andItemId:@"eagle"
                            andPriceModel:[[StaticPriceModel alloc] initWithCurrencyValue:EAGLE_PRICE]
                              andCategory:FRIENDS_CATEGORY
@@ -248,7 +240,7 @@ VirtualCurrencyPack* _200_000_COINS_PACK;
                                       nil];
     BUTTERFLY_GOOD = [[VirtualGood alloc] initWithName:@"Butterfly"
                           andDescription:@"The butterfly can help you control your crew and protect against mutiny"
-                          andImgFilePath:@"themes/templeRun/img/Friends/Object 9.png"
+                          andImgFilePath:@"themes/templeRun/img/Friends/Object_9.png"
                                andItemId:@"butterfly"
                            andPriceModel:[[StaticPriceModel alloc] initWithCurrencyValue:BUTTERFLY_PRICE]
                              andCategory:FRIENDS_CATEGORY
@@ -259,7 +251,7 @@ VirtualCurrencyPack* _200_000_COINS_PACK;
                                       nil];
     FISH_GOOD = [[VirtualGood alloc] initWithName:@"Fish"
                           andDescription:@"Fish can help you trick your enemy into a trap"
-                          andImgFilePath:@"themes/templeRun/img/Friends/Object 13.png"
+                          andImgFilePath:@"themes/templeRun/img/Friends/Object_13.png"
                                andItemId:@"fish"
                            andPriceModel:[[StaticPriceModel alloc] initWithCurrencyValue:FISH_PRICE]
                              andCategory:FRIENDS_CATEGORY
@@ -272,7 +264,7 @@ VirtualCurrencyPack* _200_000_COINS_PACK;
     
     _2_500_COINS_PACK = [[VirtualCurrencyPack alloc] initWithName:@"2,500 Coins"
                           andDescription:@""
-                          andImgFilePath:@"themes/templeRun/img/CurrencyPacks/GetCoins 1.png"
+                          andImgFilePath:@"themes/templeRun/img/CurrencyPacks/GetCoins_1.png"
                                andItemId:@"muffins_10"
                                 andPrice:0.99
                             andProductId:_2_500_COINS_PACK_PRODUCT_ID
@@ -281,7 +273,7 @@ VirtualCurrencyPack* _200_000_COINS_PACK;
                              andCategory:POWERUPS_CATEGORY];
     _25_000_COINS_PACK = [[VirtualCurrencyPack alloc] initWithName:@"25,000 Coins"
                           andDescription:@""
-                          andImgFilePath:@"themes/templeRun/img/CurrencyPacks/GetCoins 2.png"
+                          andImgFilePath:@"themes/templeRun/img/CurrencyPacks/GetCoins_2.png"
                                andItemId:@"muffins_50"
                                 andPrice:4.99
                             andProductId:_25_000_COINS_PACK_PRODUCT_ID
@@ -290,7 +282,7 @@ VirtualCurrencyPack* _200_000_COINS_PACK;
                              andCategory:POWERUPS_CATEGORY];
     _75_000_COINS_PACK = [[VirtualCurrencyPack alloc] initWithName:@"75,000 Coins"
                           andDescription:@""
-                          andImgFilePath:@"themes/templeRun/img/CurrencyPacks/GetCoins 3.png"
+                          andImgFilePath:@"themes/templeRun/img/CurrencyPacks/GetCoins_3.png"
                                andItemId:@"muffins_400"
                                 andPrice:9.99
                             andProductId:_75_000_COINS_PACK_PRODUCT_ID
@@ -299,7 +291,7 @@ VirtualCurrencyPack* _200_000_COINS_PACK;
                              andCategory:POWERUPS_CATEGORY];
     _200_000_COINS_PACK = [[VirtualCurrencyPack alloc] initWithName:@"200,000 Coins"
                           andDescription:@""
-                          andImgFilePath:@"themes/templeRun/img/CurrencyPacks/GetCoins 4.png"
+                          andImgFilePath:@"themes/templeRun/img/CurrencyPacks/GetCoins_4.png"
                                andItemId:@"muffins_1000"
                                 andPrice:19.99
                             andProductId:_200_000_COINS_PACK_PRODUCT_ID
