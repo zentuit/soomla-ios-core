@@ -1,6 +1,0 @@
-[submodule "SoomlaiOSStoreExamples/MuffinRush/MuffinRush/resources/soomla_ui"]
-	path = SoomlaiOSStoreExamples/MuffinRush/MuffinRush/resources/soomla_ui
-	url = git@github.com:soomla/storefront.git
-[submodule "SoomlaiOSStoreExamples/TempleRun/TempleRun/resources/soomla_ui"]
-	path = SoomlaiOSStoreExamples/TempleRun/TempleRun/resources/soomla_ui
-	url = git@github.com:soomla/storefront.git
