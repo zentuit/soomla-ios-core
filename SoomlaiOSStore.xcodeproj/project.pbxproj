@@ -83,6 +83,9 @@
 		C07DA3DD162474AC005792DD /* FBEncryptorAES.m in Sources */ = {isa = PBXBuildFile; fileRef = C07DA3D9162474AC005792DD /* FBEncryptorAES.m */; };
 		C07DA3DE162474AC005792DD /* NSData+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = C07DA3DB162474AC005792DD /* NSData+Base64.m */; };
 		C07DA3DF162474AC005792DD /* NSData+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = C07DA3DB162474AC005792DD /* NSData+Base64.m */; };
+		C0B04316163C6F3E0015400E /* StoreInventory.h in Headers */ = {isa = PBXBuildFile; fileRef = C0B04314163C6F3E0015400E /* StoreInventory.h */; };
+		C0B04317163C6F3E0015400E /* StoreInventory.m in Sources */ = {isa = PBXBuildFile; fileRef = C0B04315163C6F3E0015400E /* StoreInventory.m */; };
+		C0B04318163C6F3E0015400E /* StoreInventory.m in Sources */ = {isa = PBXBuildFile; fileRef = C0B04315163C6F3E0015400E /* StoreInventory.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -173,6 +176,8 @@
 		C07DA3D9162474AC005792DD /* FBEncryptorAES.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBEncryptorAES.m; sourceTree = "<group>"; };
 		C07DA3DA162474AC005792DD /* NSData+Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+Base64.h"; sourceTree = "<group>"; };
 		C07DA3DB162474AC005792DD /* NSData+Base64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+Base64.m"; sourceTree = "<group>"; };
+		C0B04314163C6F3E0015400E /* StoreInventory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StoreInventory.h; sourceTree = "<group>"; };
+		C0B04315163C6F3E0015400E /* StoreInventory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StoreInventory.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -266,6 +271,8 @@
 				C02CECCB160DCA67000AA0D2 /* StoreConfig.m */,
 				C02CECCC160DCA67000AA0D2 /* StoreController.h */,
 				C02CECCD160DCA67000AA0D2 /* StoreController.m */,
+				C0B04314163C6F3E0015400E /* StoreInventory.h */,
+				C0B04315163C6F3E0015400E /* StoreInventory.m */,
 			);
 			path = SoomlaiOSStore;
 			sourceTree = "<group>";
@@ -436,6 +443,7 @@
 				C062235216257B0D00101FE8 /* NSData+Base64.h in Headers */,
 				C062235016257B0700101FE8 /* UIDevice+IdentifierAddition.h in Headers */,
 				C062235116257B0B00101FE8 /* FBEncryptorAES.h in Headers */,
+				C0B04316163C6F3E0015400E /* StoreInventory.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -568,6 +576,7 @@
 				C07DA3C91622FF6E005792DD /* StoreEncryptor.m in Sources */,
 				C07DA3DC162474AC005792DD /* FBEncryptorAES.m in Sources */,
 				C07DA3DE162474AC005792DD /* NSData+Base64.m in Sources */,
+				C0B04317163C6F3E0015400E /* StoreInventory.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -578,6 +587,7 @@
 				C02CEC64160DC870000AA0D2 /* SoomlaiOSStoreTests.m in Sources */,
 				C07DA3DD162474AC005792DD /* FBEncryptorAES.m in Sources */,
 				C07DA3DF162474AC005792DD /* NSData+Base64.m in Sources */,
+				C0B04318163C6F3E0015400E /* StoreInventory.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
