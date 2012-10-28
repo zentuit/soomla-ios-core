@@ -79,5 +79,12 @@
  * throws VirtualItemNotFoundException
  */
 - (VirtualCurrencyPack*)currencyPackWithProductId:(NSString*)productId;
+/**
+ * Use this function if you need to know the definition of a specific virtual currency pack.
+ * itemId is the requested currency pack's item id.
+ * throws VirtualItemNotFoundException
+ */
+- (VirtualCurrencyPack*)currencyPackWithItemId:(NSString*)itemId;
+
 
 @end

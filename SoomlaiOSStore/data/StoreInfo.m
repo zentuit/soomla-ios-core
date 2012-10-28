@@ -179,4 +179,14 @@
     @throw [[VirtualItemNotFoundException alloc] initWithLookupField:@"productId" andLookupValue:productId];
 }
 
+- (VirtualCurrencyPack*)currencyPackWithItemId:(NSString*)itemId{
+    for(VirtualCurrencyPack* p in self.virtualCurrencyPacks){
+        if ([p.itemId isEqualToString:itemId]){
+            return p;
+        }
+    }
+    
+    @throw [[VirtualItemNotFoundException alloc] initWithLookupField:@"itemId" andLookupValue:itemId];
+}
+
 @end
