@@ -15,6 +15,7 @@
  */
 
 #import "StoreDatabase.h"
+#import "StoreConfig.h"
 
 #define DATABASE_NAME @"store.db"
 
@@ -121,32 +122,53 @@
     return @"";
 }
 
+- (void)createDBWithPath:(const char *)dbpath {
+    if (sqlite3_open(dbpath, &database) == SQLITE_OK)
+    {
+        char *errMsg;
+        
+        NSString* createStmt = [NSString stringWithFormat:@"CREATE TABLE IF NOT EXISTS %@ (%@ TEXT PRIMARY KEY, %@ TEXT)", VIRTUAL_CURRENCY_TABLE_NAME, ALL_COLUMN_ITEM_ID, VIRTUAL_CURRENCY_COLUMN_BALANCE];
+        if (sqlite3_exec(database, [createStmt UTF8String], NULL, NULL, &errMsg) != SQLITE_OK)
+        {
+            NSLog(@"Failed to create virtual currency table");
+        }
+        
+        createStmt = [NSString stringWithFormat:@"CREATE TABLE IF NOT EXISTS %@ (%@ TEXT PRIMARY KEY, %@ TEXT, %@ TEXT)", VIRTUAL_GOODS_TABLE_NAME, ALL_COLUMN_ITEM_ID, VIRTUAL_GOODS_COLUMN_BALANCE, VIRTUAL_GOODS_COLUMN_EQUIPPED];
+        if (sqlite3_exec(database, [createStmt UTF8String], NULL, NULL, &errMsg) != SQLITE_OK)
+        {
+            NSLog(@"Failed to create virtual good table");
+        }
+        
+        createStmt = [NSString stringWithFormat:@"CREATE TABLE IF NOT EXISTS %@ (%@ TEXT PRIMARY KEY, %@ TEXT, %@ TEXT)", METADATA_TABLE_NAME, ALL_COLUMN_ITEM_ID, METADATA_COLUMN_STOREINFO, METADATA_COLUMN_STOREFRONTINFO];
+        if (sqlite3_exec(database, [createStmt UTF8String], NULL, NULL, &errMsg) != SQLITE_OK)
+        {
+            NSLog(@"Failed to create metadata table");
+        }
+        
+        sqlite3_close(database);
+        
+    } else {
+        NSLog(@"Failed to open/create database (createDBWithPath)");
+    }
+}
+
 - (id)init{
     if (self = [super init]) {
         NSString* databasebPath = [[self applicationDocumentsDirectory] stringByAppendingPathComponent:DATABASE_NAME];
         
         NSFileManager *filemgr = [NSFileManager defaultManager];
         
-        if ([filemgr fileExistsAtPath: databasebPath] == NO)
-        {
-            const char *dbpath = [databasebPath UTF8String];
-            if (sqlite3_open(dbpath, &database) == SQLITE_OK)
+        
+        if ([filemgr fileExistsAtPath: databasebPath] == NO) {
+
+            [self createDBWithPath:[databasebPath UTF8String]];
+            
+        } else if (DB_VOLATILE_METADATA == YES) {
+            if (sqlite3_open([databasebPath UTF8String], &database) == SQLITE_OK)
             {
                 char *errMsg;
-                
-                NSString* createStmt = [NSString stringWithFormat:@"CREATE TABLE IF NOT EXISTS %@ (%@ TEXT PRIMARY KEY, %@ TEXT)", VIRTUAL_CURRENCY_TABLE_NAME, ALL_COLUMN_ITEM_ID, VIRTUAL_CURRENCY_COLUMN_BALANCE];
-                if (sqlite3_exec(database, [createStmt UTF8String], NULL, NULL, &errMsg) != SQLITE_OK)
-                {
-                    NSLog(@"Failed to create virtual currency table");
-                }
-                
-                createStmt = [NSString stringWithFormat:@"CREATE TABLE IF NOT EXISTS %@ (%@ TEXT PRIMARY KEY, %@ TEXT, %@ TEXT)", VIRTUAL_GOODS_TABLE_NAME, ALL_COLUMN_ITEM_ID, VIRTUAL_GOODS_COLUMN_BALANCE, VIRTUAL_GOODS_COLUMN_EQUIPPED];
-                if (sqlite3_exec(database, [createStmt UTF8String], NULL, NULL, &errMsg) != SQLITE_OK)
-                {
-                    NSLog(@"Failed to create virtual good table");
-                }
-                
-                createStmt = [NSString stringWithFormat:@"CREATE TABLE IF NOT EXISTS %@ (%@ TEXT PRIMARY KEY, %@ TEXT, %@ TEXT)", METADATA_TABLE_NAME, ALL_COLUMN_ITEM_ID, METADATA_COLUMN_STOREINFO, METADATA_COLUMN_STOREFRONTINFO];
+            
+                NSString* createStmt = [NSString stringWithFormat:@"DROP TABLE IF EXISTS %@", METADATA_TABLE_NAME];
                 if (sqlite3_exec(database, [createStmt UTF8String], NULL, NULL, &errMsg) != SQLITE_OK)
                 {
                     NSLog(@"Failed to create metadata table");
@@ -154,8 +176,10 @@
                 
                 sqlite3_close(database);
                 
+                [self createDBWithPath:[databasebPath UTF8String]];
+                
             } else {
-                NSLog(@"Failed to open/create database");
+                NSLog(@"Failed to open/create database (DB_VOLATILE_METADATA)");
             }
         }
     }

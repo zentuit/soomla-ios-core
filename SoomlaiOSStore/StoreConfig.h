@@ -19,6 +19,14 @@
  */
 
 /*
+ if the value of this variable is true, metadata (or more specifically your IStoreAssets) that was previously
+ saved in the local DB will be deleted every time you start the application.
+ 
+ another way to delete just the METADATA table is to upgrade the database version.
+ */
+extern BOOL DB_VOLATILE_METADATA;
+
+/*
  * do you want to print out debug messages?
  */
 extern BOOL STORE_DEBUG;

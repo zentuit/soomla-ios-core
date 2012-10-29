@@ -16,6 +16,8 @@
 
 #import "StoreConfig.h"
 
+BOOL DB_VOLATILE_METADATA       = YES;
+
 BOOL STORE_DEBUG                = NO;
 
 /*
