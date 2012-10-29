@@ -49,7 +49,7 @@ When you hide the store call:
     [[StoreController getInstance] storeClosing];
 ```
 
-And that's it ! You have Storage and in-app purchesing capabilities... ALL-IN-ONE.
+And that's it ! You have Storage and in-app purchasing capabilities... ALL-IN-ONE.
 
 Getting Started (using static library)
 ---
