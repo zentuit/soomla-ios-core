@@ -32,7 +32,7 @@ Getting Started (using source code)
 4. Create your own implementation of _IStoreAssets_ in order to describe your specific game's assets. Initialize _StoreController_ with the class you just created:
 
       ```objective-c
-       [[StoreController getInstance] initializeWithStoreAssets:[[MuffinRushAssets alloc] init]];
+       [[StoreController getInstance] initializeWithStoreAssets:[[YourStoreAssetsImplementation alloc] init]];
       ```
 
 5. Now, that you have StoreController loaded, just decide when you want to show/hide your store's UI to the user and let StoreController know about it:
