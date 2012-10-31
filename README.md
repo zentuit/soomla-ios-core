@@ -34,6 +34,7 @@ Getting Started (using source code)
       ```objective-c
        [[StoreController getInstance] initializeWithStoreAssets:[[YourStoreAssetsImplementation alloc] init]];
       ```
+> Initialize StoreController ONLY ONCE when your application loads.
 
 5. Now, that you have StoreController loaded, just decide when you want to show/hide your store's UI to the user and let StoreController know about it:
 
@@ -79,13 +80,11 @@ Lets say you have a VirtualCurrencyPack you call TEN_COINS_PACK, a VirtualCurren
 ```objective-c
 VirtualCurrencyPack* TEN_COINS_PACK = [[VirtualCurrencyPack alloc] initWithName:@"10 Coins"
                                               andDescription:@"A pack of 10 coins"
-                                              andImgFilePath:@"themes/awsomegame/img/coins/10_coins.png"
                                                    andItemId:@"10_coins"
                                                     andPrice:0.99
                                                 andProductId:TEN_COINS_PACK_PRODUCT_ID
                                            andCurrencyAmount:10
-                                                 andCurrency:COIN_CURRENCY
-                                                 andCategory:CURRENCYPACKS_CATEGORY];
+                                                 andCurrency:COIN_CURRENCY];
 ```
 
 Now you can use StoreController to call the App Store's in-app purchasing mechanism:
@@ -94,7 +93,7 @@ Now you can use StoreController to call the App Store's in-app purchasing mechan
     [[StoreController getInstance] buyCurrencyPackWithProcuctId:TEN_COINS_PACK.productId];
 ```
 
-And that's it! ios-store knows how to contact the App Store for you and redirect the user to the purchasing mechanis. Don't forget to define your IStoreEventHandler in order to get the events of successful or failed purchase (see [Event Handling](https://github.com/soomla/ios-store#event-handling)).
+And that's it! ios-store knows how to contact the App Store for you and redirect the user to the purchasing mechanis. Don't forget to subscribe to events of successful or failed purchase (see [Event Handling](https://github.com/soomla/ios-store#event-handling)).
 
 Storage & Meta-Data
 ---
@@ -139,7 +138,7 @@ Event Handling
 
 SOOMLA lets you get notifications on various events and implement your own application specific behaviour.
 
-NOTE: Your behaviour is an addition to the default behaviour implemented by SOOMLA. You don't replace SOOMLA's behaviour.
+> Your behaviour is an addition to the default behaviour implemented by SOOMLA. You don't replace SOOMLA's behaviour.
 
 In order to observe store events you need to import EventHandling.h and than you can add a notification to *NSNotificationCenter*:
 
