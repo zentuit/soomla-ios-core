@@ -53,20 +53,20 @@
     if ([SKPaymentQueue canMakePayments]) {
         [[SKPaymentQueue defaultQueue] addTransactionObserver:self];
         
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Can Make Payments !"
-                                                        message:@"Woohoo !"
-                                                       delegate:nil
-                                              cancelButtonTitle:@"OK"
-                                              otherButtonTitles:nil];
-        
-        [alert show];
+//        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Can Make Payments !"
+//                                                        message:@"Woohoo !"
+//                                                       delegate:nil
+//                                              cancelButtonTitle:@"OK"
+//                                              otherButtonTitles:nil];
+//        
+//        [alert show];
     } else {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Can't Make Payments !"
-                                                        message:@"Crap !"
-                                                       delegate:nil
-                                              cancelButtonTitle:@"OK"
-                                              otherButtonTitles:nil];
-        [alert show];
+//        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Can't Make Payments !"
+//                                                        message:@"Crap !"
+//                                                       delegate:nil
+//                                              cancelButtonTitle:@"OK"
+//                                              otherButtonTitles:nil];
+//        [alert show];
     }
 }
 

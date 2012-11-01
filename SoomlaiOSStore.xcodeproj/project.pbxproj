@@ -7,15 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		C018B58B161052D9000FE817 /* StorefrontController.m in Sources */ = {isa = PBXBuildFile; fileRef = C018B586161052D9000FE817 /* StorefrontController.m */; };
-		C018B58C161052D9000FE817 /* StorefrontJS.m in Sources */ = {isa = PBXBuildFile; fileRef = C018B588161052D9000FE817 /* StorefrontJS.m */; };
-		C018B58D161052D9000FE817 /* StorefrontViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C018B58A161052D9000FE817 /* StorefrontViewController.m */; };
 		C018B64F16105F77000FE817 /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C018B47B160F5B23000FE817 /* CoreFoundation.framework */; };
 		C018B7141610EE89000FE817 /* StorefrontInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = C018B57E160FC702000FE817 /* StorefrontInfo.m */; };
 		C02CEC46160DC870000AA0D2 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C02CEC45160DC870000AA0D2 /* Foundation.framework */; };
 		C02CEC55160DC870000AA0D2 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C02CEC54160DC870000AA0D2 /* SenTestingKit.framework */; };
 		C02CEC58160DC870000AA0D2 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C02CEC45160DC870000AA0D2 /* Foundation.framework */; };
-		C02CEC5B160DC870000AA0D2 /* libSoomlaiOSStore.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C02CEC42160DC870000AA0D2 /* libSoomlaiOSStore.a */; };
 		C02CEC61160DC870000AA0D2 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = C02CEC5F160DC870000AA0D2 /* InfoPlist.strings */; };
 		C02CEC64160DC870000AA0D2 /* SoomlaiOSStoreTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C02CEC63160DC870000AA0D2 /* SoomlaiOSStoreTests.m */; };
 		C02CEC79160DCA31000AA0D2 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C02CEC78160DCA31000AA0D2 /* StoreKit.framework */; };
@@ -72,9 +68,6 @@
 		C062236516257B3F00101FE8 /* StorefrontInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = C018B57D160FC702000FE817 /* StorefrontInfo.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C062236616257B3F00101FE8 /* StoreDatabase.h in Headers */ = {isa = PBXBuildFile; fileRef = C07DA3BE162182F2005792DD /* StoreDatabase.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C062236716257B3F00101FE8 /* StoreEncryptor.h in Headers */ = {isa = PBXBuildFile; fileRef = C07DA3C71622FF6E005792DD /* StoreEncryptor.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		C062236816257B4800101FE8 /* StorefrontController.h in Headers */ = {isa = PBXBuildFile; fileRef = C018B585161052D9000FE817 /* StorefrontController.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		C062236916257B4800101FE8 /* StorefrontJS.h in Headers */ = {isa = PBXBuildFile; fileRef = C018B587161052D9000FE817 /* StorefrontJS.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		C062236A16257B4800101FE8 /* StorefrontViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = C018B589161052D9000FE817 /* StorefrontViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C0780EA0161B8EFE00F43934 /* NotEnoughGoodsException.m in Sources */ = {isa = PBXBuildFile; fileRef = C0780E9F161B8EFE00F43934 /* NotEnoughGoodsException.m */; };
 		C07DA3C0162182F2005792DD /* StoreDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = C07DA3BF162182F2005792DD /* StoreDatabase.m */; };
 		C07DA3C316218309005792DD /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = C07DA3C216218309005792DD /* libsqlite3.0.dylib */; };
@@ -83,6 +76,7 @@
 		C07DA3DD162474AC005792DD /* FBEncryptorAES.m in Sources */ = {isa = PBXBuildFile; fileRef = C07DA3D9162474AC005792DD /* FBEncryptorAES.m */; };
 		C07DA3DE162474AC005792DD /* NSData+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = C07DA3DB162474AC005792DD /* NSData+Base64.m */; };
 		C07DA3DF162474AC005792DD /* NSData+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = C07DA3DB162474AC005792DD /* NSData+Base64.m */; };
+		C08CF2611641CF39007603E8 /* libSoomlaiOSStore.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C02CEC42160DC870000AA0D2 /* libSoomlaiOSStore.a */; };
 		C0B04316163C6F3E0015400E /* StoreInventory.h in Headers */ = {isa = PBXBuildFile; fileRef = C0B04314163C6F3E0015400E /* StoreInventory.h */; };
 		C0B04317163C6F3E0015400E /* StoreInventory.m in Sources */ = {isa = PBXBuildFile; fileRef = C0B04315163C6F3E0015400E /* StoreInventory.m */; };
 		C0B04318163C6F3E0015400E /* StoreInventory.m in Sources */ = {isa = PBXBuildFile; fileRef = C0B04315163C6F3E0015400E /* StoreInventory.m */; };
@@ -200,7 +194,7 @@
 			files = (
 				C02CEC55160DC870000AA0D2 /* SenTestingKit.framework in Frameworks */,
 				C02CEC58160DC870000AA0D2 /* Foundation.framework in Frameworks */,
-				C02CEC5B160DC870000AA0D2 /* libSoomlaiOSStore.a in Frameworks */,
+				C08CF2611641CF39007603E8 /* libSoomlaiOSStore.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -411,9 +405,6 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C062236816257B4800101FE8 /* StorefrontController.h in Headers */,
-				C062236916257B4800101FE8 /* StorefrontJS.h in Headers */,
-				C062236A16257B4800101FE8 /* StorefrontViewController.h in Headers */,
 				C062234B16257AF100101FE8 /* EventHandling.h in Headers */,
 				C062234C16257AF300101FE8 /* IStoreAsssets.h in Headers */,
 				C062234E16257AFB00101FE8 /* StoreController.h in Headers */,
@@ -567,9 +558,6 @@
 				C02CECF2160DCA67000AA0D2 /* StoreController.m in Sources */,
 				C02CECF3160DCA67000AA0D2 /* NSString+MD5Addition.m in Sources */,
 				C02CECF4160DCA67000AA0D2 /* UIDevice+IdentifierAddition.m in Sources */,
-				C018B58B161052D9000FE817 /* StorefrontController.m in Sources */,
-				C018B58C161052D9000FE817 /* StorefrontJS.m in Sources */,
-				C018B58D161052D9000FE817 /* StorefrontViewController.m in Sources */,
 				C018B7141610EE89000FE817 /* StorefrontInfo.m in Sources */,
 				C0780EA0161B8EFE00F43934 /* NotEnoughGoodsException.m in Sources */,
 				C07DA3C0162182F2005792DD /* StoreDatabase.m in Sources */,
