@@ -36,5 +36,7 @@ typedef enum {
 @property Consumable consumable;
 
 - (id)initWithProductId:(NSString*)oProductId andConsumable:(Consumable)oConsumable;
+- (id)initWithDictionary:(NSDictionary*)dict;
+- (NSDictionary*)toDictionary;
 
 @end

@@ -51,6 +51,11 @@
  */
 - (void)buyVirtualGood:(NSString*)itemId;
 /**
+ * Start a NON-CONSUMABLE item purchase process.
+ * productId is the product id of the NON-CONSUMABLE item to purchase.
+ */
+- (void)buyNonConsumableItem:(NSString*)productId;
+/**
  * Call this function when you open the actual store window
  */
 - (void)storeOpening;

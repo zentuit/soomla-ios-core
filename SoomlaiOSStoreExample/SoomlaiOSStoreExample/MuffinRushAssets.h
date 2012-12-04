@@ -19,6 +19,8 @@ extern NSString* const _50_MUFFINS_PACK_PRODUCT_ID;
 extern NSString* const _400_MUFFINS_PACK_PRODUCT_ID;
 extern NSString* const _1000_MUFFINS_PACK_PRODUCT_ID;
 
+extern NSString* const NO_ADDS_MANAGED_PRODUCT_ID;
+
 @interface MuffinRushAssets : NSObject <IStoreAsssets>{
 
 }

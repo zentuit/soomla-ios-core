@@ -21,6 +21,10 @@
 
 #define ALL_COLUMN_ITEM_ID  @"item_id"
 
+// Non Consumable Table
+#define NONCONSUMABLE_ITEMS_TABLE_NAME   @"non_consumable_items"
+#define NONCONSUMABLE_ITEMS_COLUMN_PRODUCTID @"product_id"
+
 // Virtual Currency Table
 #define VIRTUAL_CURRENCY_TABLE_NAME      @"virtual_currency"
 #define VIRTUAL_CURRENCY_COLUMN_BALANCE  @"balance"
@@ -38,23 +42,33 @@
 
 @implementation StoreDatabase
 
+- (BOOL)getAppStoreNonConsumableExists:(NSString*)productId{
+    NSArray* table = [self getEntity:NONCONSUMABLE_ITEMS_TABLE_NAME withField:NONCONSUMABLE_ITEMS_COLUMN_PRODUCTID andValue:productId];
+    
+    return table.count > 0;
+}
+
+- (void)setAppStoreNonConsumable:(NSString*)productId purchased:(BOOL)purchased{
+    [self saveData:productId forAttr:NONCONSUMABLE_ITEMS_COLUMN_PRODUCTID toEntiry:NONCONSUMABLE_ITEMS_TABLE_NAME withKeyFieldName:NONCONSUMABLE_ITEMS_COLUMN_PRODUCTID andKeyFieldVal:productId];
+}
+
 - (void)updateCurrencyBalance:(NSString*)balance forItemId:(NSString*)itemId{
     NSLog(@"Updating currency with itemId %@ and balance %@", itemId, balance);
-    [self saveData:balance forAttr:VIRTUAL_CURRENCY_COLUMN_BALANCE toEntiry:VIRTUAL_CURRENCY_TABLE_NAME withItemId:itemId];
+    [self saveData:balance forAttr:VIRTUAL_CURRENCY_COLUMN_BALANCE toEntiry:VIRTUAL_CURRENCY_TABLE_NAME withKeyFieldName:ALL_COLUMN_ITEM_ID andKeyFieldVal:itemId];
 }
 
 - (void)updateGoodBalance:(NSString*)balance forItemId:(NSString*)itemId{
     NSLog(@"Updating good with itemId %@ and balance %@", itemId, balance);
-    [self saveData:balance forAttr:VIRTUAL_GOODS_COLUMN_BALANCE toEntiry:VIRTUAL_GOODS_TABLE_NAME withItemId:itemId];
+    [self saveData:balance forAttr:VIRTUAL_GOODS_COLUMN_BALANCE toEntiry:VIRTUAL_GOODS_TABLE_NAME withKeyFieldName:ALL_COLUMN_ITEM_ID andKeyFieldVal:itemId];
 }
 
 - (void)updateGoodEquipped:(NSString*)equip forItemId:(NSString*)itemId{
     NSLog(@"Updating good with itemId %@ and equipped status %@", itemId, equip);
-    [self saveData:equip forAttr:VIRTUAL_GOODS_COLUMN_EQUIPPED toEntiry:VIRTUAL_GOODS_TABLE_NAME withItemId:itemId];
+    [self saveData:equip forAttr:VIRTUAL_GOODS_COLUMN_EQUIPPED toEntiry:VIRTUAL_GOODS_TABLE_NAME withKeyFieldName:ALL_COLUMN_ITEM_ID andKeyFieldVal:itemId];
 }
 
 - (NSDictionary*)getCurrencyWithItemId:(NSString*)itemId{
-    NSArray* table = [self getEntity:VIRTUAL_CURRENCY_TABLE_NAME withItemId:itemId];
+    NSArray* table = [self getEntity:VIRTUAL_CURRENCY_TABLE_NAME withField:ALL_COLUMN_ITEM_ID andValue:itemId];
     
     if (table.count > 0){
         NSLog(@"found currency with itemId: %@", itemId);
@@ -70,7 +84,7 @@
 }
 
 - (NSDictionary*)getGoodWithItemId:(NSString*)itemId{
-    NSArray* table = [self getEntity:VIRTUAL_GOODS_TABLE_NAME withItemId:itemId];
+    NSArray* table = [self getEntity:VIRTUAL_GOODS_TABLE_NAME withField:ALL_COLUMN_ITEM_ID andValue:itemId];
     
     if (table.count > 0){
         NSLog(@"found good with itemId: %@", itemId);
@@ -88,16 +102,16 @@
 
 - (void)setStoreInfo:(NSString*)storeInfoData{
     NSLog(@"Updating store info to %@", storeInfoData);
-    [self saveData:storeInfoData forAttr:METADATA_COLUMN_STOREINFO toEntiry:METADATA_TABLE_NAME withItemId:@"INFO"];
+    [self saveData:storeInfoData forAttr:METADATA_COLUMN_STOREINFO toEntiry:METADATA_TABLE_NAME withKeyFieldName:ALL_COLUMN_ITEM_ID andKeyFieldVal:@"INFO"];
 }
 
 - (void)setStorefrontInfo:(NSString*)storefrontInfoData{
     NSLog(@"Updating storefront info to %@", storefrontInfoData);
-    [self saveData:storefrontInfoData forAttr:METADATA_COLUMN_STOREFRONTINFO toEntiry:METADATA_TABLE_NAME withItemId:@"INFO"];
+    [self saveData:storefrontInfoData forAttr:METADATA_COLUMN_STOREFRONTINFO toEntiry:METADATA_TABLE_NAME withKeyFieldName:ALL_COLUMN_ITEM_ID andKeyFieldVal:@"INFO"];
 }
 
 - (NSString*)getStoreInfo{
-    NSArray* table = [self getEntity:METADATA_TABLE_NAME withItemId:@"INFO"];
+    NSArray* table = [self getEntity:METADATA_TABLE_NAME withField:ALL_COLUMN_ITEM_ID andValue:@"INFO"];
     
     if (table.count > 0){
         NSLog(@"found storeInfo");
@@ -110,7 +124,7 @@
 }
 
 - (NSString*)getStorefrontInfo{
-    NSArray* table = [self getEntity:METADATA_TABLE_NAME withItemId:@"INFO"];
+    NSArray* table = [self getEntity:METADATA_TABLE_NAME withField:ALL_COLUMN_ITEM_ID andValue:@"INFO"];
     
     if (table.count > 0){
         NSLog(@"found storefrontInfo");
@@ -143,6 +157,12 @@
         if (sqlite3_exec(database, [createStmt UTF8String], NULL, NULL, &errMsg) != SQLITE_OK)
         {
             NSLog(@"Failed to create metadata table");
+        }
+        
+        createStmt = [NSString stringWithFormat:@"CREATE TABLE IF NOT EXISTS %@ (%@ TEXT PRIMARY KEY)", NONCONSUMABLE_ITEMS_TABLE_NAME, NONCONSUMABLE_ITEMS_COLUMN_PRODUCTID];
+        if (sqlite3_exec(database, [createStmt UTF8String], NULL, NULL, &errMsg) != SQLITE_OK)
+        {
+            NSLog(@"Failed to create non-consumables table");
         }
         
         sqlite3_close(database);
@@ -186,15 +206,15 @@
     return self;
 }
 
-- (NSArray*)getEntity:(NSString *)entityName withItemId:(NSString *)itemId{
+- (NSArray*)getEntity:(NSString *)entityName withField:(NSString*)field andValue:(NSString *)val{
     NSString* databasebPath = [[self applicationDocumentsDirectory] stringByAppendingPathComponent:DATABASE_NAME];
     if (sqlite3_open([databasebPath UTF8String], &database) == SQLITE_OK)
     {
         NSMutableArray *result = [NSMutableArray array];
         sqlite3_stmt *statement = nil;
-        const char *sql = [[NSString stringWithFormat:@"SELECT * FROM %@ WHERE %@='%@'", entityName, ALL_COLUMN_ITEM_ID, itemId] UTF8String];
+        const char *sql = [[NSString stringWithFormat:@"SELECT * FROM %@ WHERE %@='%@'", entityName, field, val] UTF8String];
         if (sqlite3_prepare_v2(database, sql, -1, &statement, NULL) != SQLITE_OK) {
-            NSLog(@"Error while fetching %@ : %s", itemId, sqlite3_errmsg(database));
+            NSLog(@"Error while fetching %@=%@ : %s", field, val, sqlite3_errmsg(database));
         } else {
             while (sqlite3_step(statement) == SQLITE_ROW) {
                 NSMutableDictionary *row = [NSMutableDictionary dictionary];
@@ -237,20 +257,20 @@
 }
 
 
-- (void)saveData:(NSString *)data forAttr:(NSString *)attrName toEntiry:(NSString *)entityName withItemId:(NSString *)itemId{
+- (void)saveData:(NSString *)data forAttr:(NSString *)attrName toEntiry:(NSString *)entityName withKeyFieldName:(NSString *)keyName andKeyFieldVal:(NSString*)keyVal{
     NSString* databasebPath = [[self applicationDocumentsDirectory] stringByAppendingPathComponent:DATABASE_NAME];
     if (sqlite3_open([databasebPath UTF8String], &database) == SQLITE_OK)
     {
         
         NSString* updateStmt = [NSString stringWithFormat:@"UPDATE %@ SET %@=? WHERE %@=?",
-                                entityName, attrName, ALL_COLUMN_ITEM_ID];
+                                entityName, attrName, keyName];
         sqlite3_stmt *statement;
         if (sqlite3_prepare_v2(database, [updateStmt UTF8String], -1, &statement, NULL) != SQLITE_OK){
-            NSLog(@"Updating itemId %@ failed: %s.", itemId, sqlite3_errmsg(database));
+            NSLog(@"Updating %@ %@ failed: %s.", keyName, keyVal, sqlite3_errmsg(database));
         }
         else{
             sqlite3_bind_text(statement, 1, [data UTF8String], -1, SQLITE_TRANSIENT);
-            sqlite3_bind_text(statement, 2, [itemId UTF8String], -1, SQLITE_TRANSIENT);
+            sqlite3_bind_text(statement, 2, [keyVal UTF8String], -1, SQLITE_TRANSIENT);
             
             if(SQLITE_DONE != sqlite3_step(statement)){
                 NSAssert1(0, @"Error while updating. '%s'", sqlite3_errmsg(database));
@@ -262,9 +282,9 @@
                 if (rowsaffected == 0){
                     NSLog(@"Can't update item b/c it doesn't exist. Trying to add a new one.");
                     NSString* addStmt = [NSString stringWithFormat:@"INSERT INTO %@ (%@, %@) VALUES('%@', '%@')",
-                                         entityName, ALL_COLUMN_ITEM_ID, attrName, itemId, data];
+                                         entityName, keyName, attrName, keyVal, data];
                     if (sqlite3_prepare_v2(database, [addStmt UTF8String], -1, &statement, NULL) != SQLITE_OK){
-                        NSLog(@"Adding new item failed: %s. George is upset!", sqlite3_errmsg(database));
+                        NSLog(@"Adding new item failed: %s. George is getting upset!", sqlite3_errmsg(database));
                     }
                     
                     if(SQLITE_DONE != sqlite3_step(statement)){

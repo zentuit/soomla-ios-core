@@ -21,6 +21,7 @@
 @class VirtualCurrency;
 @class VirtualGood;
 @class VirtualCurrencyPack;
+@class AppStoreItem;
 
 /**
  * This class holds the store's meta data including:
@@ -33,12 +34,14 @@
     NSArray* virtualCurrencies;
     NSArray* virtualGoods;
     NSArray* virtualCurrencyPacks;
+    NSArray* appStoreNonConsumableItems;
     NSArray* virtualCategories;
 }
 
 @property (nonatomic, retain) NSArray* virtualCurrencies;
 @property (nonatomic, retain) NSArray* virtualGoods;
 @property (nonatomic, retain) NSArray* virtualCurrencyPacks;
+@property (nonatomic, retain) NSArray* appStoreNonConsumableItems;
 @property (nonatomic, retain) NSArray* virtualCategories;
 
 + (StoreInfo*)getInstance;
@@ -85,6 +88,11 @@
  * throws VirtualItemNotFoundException
  */
 - (VirtualCurrencyPack*)currencyPackWithItemId:(NSString*)itemId;
-
+/**
+ * Use this function if you need to know the definition of a specific App Store NON-CONSUMABLE item.
+ * productId is the requested NON-CONSUMABLE item's product id.
+ * throws VirtualItemNotFoundException
+ */
+- (AppStoreItem*)appStoreNonConsumableItemWithProductId:(NSString*)productId;
 
 @end

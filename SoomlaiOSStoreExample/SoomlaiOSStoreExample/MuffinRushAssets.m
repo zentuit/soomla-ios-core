@@ -4,6 +4,7 @@
 #import "VirtualGood.h"
 #import "VirtualCurrencyPack.h"
 #import "StaticPriceModel.h"
+#import "AppStoreItem.h"
 
 
 NSString* const MUFFINS_CURRENCY_ITEM_ID = @"currency_muffin";
@@ -23,6 +24,8 @@ NSString* const _50_MUFFINS_PACK_PRODUCT_ID = @"muffins_50";
 NSString* const _400_MUFFINS_PACK_PRODUCT_ID = @"muffins_400";
 NSString* const _1000_MUFFINS_PACK_PRODUCT_ID = @"muffins_1000";
 
+NSString* const NO_ADDS_MANAGED_PRODUCT_ID = @"no_ads";
+
 @implementation MuffinRushAssets
 
 VirtualCategory* GENERAL_CATEGORY;
@@ -38,6 +41,8 @@ VirtualCurrencyPack* _10_MUFFINS_PACK;
 VirtualCurrencyPack* _50_MUFFINS_PACK;
 VirtualCurrencyPack* _400_MUFFINS_PACK;
 VirtualCurrencyPack* _1000_MUFFINS_PACK;
+
+AppStoreItem* NO_ADDS_NON_CONS;
 
 + (void)initialize{
 
@@ -77,6 +82,8 @@ VirtualCurrencyPack* _1000_MUFFINS_PACK;
     _400_MUFFINS_PACK = [[VirtualCurrencyPack alloc] initWithName:@"400 Muffins" andDescription:@"" andItemId:_400_MUFFINS_PACK_ITEM_ID andPrice:4.99 andProductId:_400_MUFFINS_PACK_PRODUCT_ID andCurrencyAmount:400 andCurrency:MUFFINS_CURRENCY];
     _1000_MUFFINS_PACK = [[VirtualCurrencyPack alloc] initWithName:@"1000 Muffins" andDescription:@"" andItemId:_1000_MUFFINS_PACK_ITEM_ID andPrice:8.99 andProductId:_1000_MUFFINS_PACK_PRODUCT_ID andCurrencyAmount:1000 andCurrency:MUFFINS_CURRENCY];
     
+    NO_ADDS_NON_CONS = [[AppStoreItem alloc] initWithProductId:NO_ADDS_MANAGED_PRODUCT_ID andConsumable:kNonConsumable];
+    
 }
 
 - (NSArray*)virtualCurrencies{
@@ -93,6 +100,10 @@ VirtualCurrencyPack* _1000_MUFFINS_PACK;
 
 - (NSArray*)virtualCategories{
     return @[GENERAL_CATEGORY];
+}
+
+- (NSArray*)appStoreNonConsumableItems{
+    return @[NO_ADDS_NON_CONS];
 }
 
 @end

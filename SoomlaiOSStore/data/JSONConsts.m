@@ -22,6 +22,7 @@ NSString *const JSON_STORE_BACKGROUND         = @"background";
 NSString *const JSON_STORE_ISCURRENCYDISABLED = @"isCurrencyStoreDisabled";
 NSString *const JSON_STORE_VIRTUALCURRENCIES  = @"virtualCurrencies";
 NSString *const JSON_STORE_CURRENCYPACKS      = @"currencyPacks";
+NSString *const JSON_STORE_NONCONSUMABLE      = @"nonConsumables";
 NSString *const JSON_STORE_VIRTUALGOODS       = @"virtualGoods";
 NSString *const JSON_STORE_VIRTUALCATEGORIES  = @"categories";
 
@@ -38,6 +39,9 @@ NSString *const JSON_STORE_VIEW_ITEM          = @"item";
 
 NSString *const JSON_STORE_VIEWITEM_TYPE      = @"type";
 NSString *const JSON_STORE_VIEWITEM_TEMPLATE  = @"template";
+
+NSString *const JSON_NONCONSUMABLE_PRODUCT_ID = @"productId";
+NSString *const JSON_NONCONSUMABLE_CONSUMABLE = @"consumable";
 
 NSString *const JSON_CURRENCYPACK_PRODUCT_ID  = @"productId";
 NSString *const JSON_CURRENCYPACK_PRICE       = @"price";

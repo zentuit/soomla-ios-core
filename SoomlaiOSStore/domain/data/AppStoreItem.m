@@ -15,6 +15,7 @@
  */
 
 #import "AppStoreItem.h"
+#import "JSONConsts.h"
 
 @implementation AppStoreItem
 
@@ -28,6 +29,23 @@
     }
     
     return self;
+}
+
+- (id)initWithDictionary:(NSDictionary*)dict{
+    self = [super init];
+    if (self) {
+        self.consumable = [[dict valueForKey:JSON_NONCONSUMABLE_CONSUMABLE] intValue];
+        self.productId = [dict objectForKey:JSON_NONCONSUMABLE_PRODUCT_ID];
+    }
+    
+    return self;
+}
+
+- (NSDictionary*)toDictionary{
+    return [[NSDictionary alloc] initWithObjectsAndKeys:
+            [NSNumber numberWithInt:self.consumable], JSON_NONCONSUMABLE_CONSUMABLE,
+            self.productId, JSON_NONCONSUMABLE_PRODUCT_ID,
+            nil];
 }
 
 @end

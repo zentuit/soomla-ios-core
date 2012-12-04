@@ -23,6 +23,7 @@
 #import "VirtualCurrency.h"
 #import "VirtualCurrencyPack.h"
 #import "VirtualCurrencyStorage.h"
+#import "NonConsumableStorage.h"
 #import "VirtualGoodStorage.h"
 #import "InsufficientFundsException.h"
 #import "NotEnoughGoodsException.h"
@@ -121,6 +122,10 @@
     }
 }
 
+- (void)buyNonConsumableItem:(NSString*)productId{
+    
+}
+
 - (void)storeOpening{
     if(![[StoreInfo getInstance] initializeFromDB]){
         [EventHandling postUnexpectedError];
@@ -184,24 +189,32 @@
 {
 
     NSLog(@"Transaction completed for product: %@", transaction.payment.productIdentifier);
+    AppStoreItem* appStoreItem = NULL;
     
     @try{
         VirtualCurrencyPack* pack = [[StoreInfo getInstance] currencyPackWithProductId:transaction.payment.productIdentifier];
+        appStoreItem = pack.appstoreItem;
     
         // updating the currency balance
         // note that a refunded purchase is treated as a purchase.
         // a friendly refund policy is nice for the user.
         [[[StorageManager getInstance] virtualCurrencyStorage] addAmount:pack.currencyAmount toCurrency:pack.currency];
-        
-        [EventHandling postVirtualCurrencyPackPurchased:pack];
     }
     @catch (VirtualItemNotFoundException* e) {
-        NSLog(@"Hey man... This is serious !!! Some of the items' productIds you provided "
-              @"ios-store doesn't correlate to the productId on itunes connect. "
-              @"Your user was charged but she won't get the actual product in your game. "
-              @"You will have to issue a refund now. Check the CurrencyPacks' productIds now! "
-              @"Couldn't find a VirtualCurrencyPack with productId: %@", transaction.payment.productIdentifier);
-        [EventHandling postUnexpectedError];
+        @try{
+            AppStoreItem* appStoreItem = [[StoreInfo getInstance] appStoreNonConsumableItemWithProductId:transaction.payment.productIdentifier];
+            
+            [[[StorageManager getInstance] nonConsumableStorage] add:appStoreItem];
+        }
+        @catch (VirtualItemNotFoundException* e) {
+            NSLog(@"ERROR : Couldn't find the VirtualCurrencyPack OR AppStoreItem with productId: %@"
+                  @". It's unexpected so an unexpected error is being emitted.", transaction.payment.productIdentifier);
+            [EventHandling postUnexpectedError];
+        }
+    }
+    
+    if (appStoreItem != NULL) {
+        [EventHandling postAppStorePurchase:appStoreItem];
     }
     
     // Remove the transaction from the payment queue.

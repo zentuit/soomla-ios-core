@@ -52,7 +52,7 @@
              nil];
     
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(packPurchased:) name:EVENT_VIRTUAL_CURRENCY_PACK_PURCHASED object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(packPurchased:) name:EVENT_APPSTORE_PURCHASED object:nil];
     
     int balance = [StoreInventory getCurrencyBalance:MUFFINS_CURRENCY_ITEM_ID];
     currencyBalance.text = [NSString stringWithFormat:@"%d", balance];

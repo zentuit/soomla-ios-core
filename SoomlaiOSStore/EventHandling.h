@@ -17,7 +17,7 @@
 
 #import <UIKit/UIKit.h>
 
-extern NSString * EVENT_VIRTUAL_CURRENCY_PACK_PURCHASED;
+extern NSString * EVENT_APPSTORE_PURCHASED;
 extern NSString * EVENT_VIRTUAL_GOOD_PURCHASED;
 extern NSString * EVENT_VIRTUAL_GOOD_EQUIPPED;
 extern NSString * EVENT_VIRTUAL_GOOD_UNEQUIPPED;
@@ -30,7 +30,7 @@ extern NSString * EVENT_OPENING_STORE;
 extern NSString * EVENT_UNEXPECTED_ERROR_IN_STORE;
 extern NSString * EVENT_TRANSACTION_RESTORED;
 
-@class VirtualCurrencyPack;
+@class AppStoreItem;
 @class VirtualGood;
 
 /**
@@ -43,7 +43,7 @@ extern NSString * EVENT_TRANSACTION_RESTORED;
 
 + (void)observeAllEventsWithObserver:(id)observer withSelector:(SEL)selector;
 
-+ (void)postVirtualCurrencyPackPurchased:(VirtualCurrencyPack*)pack;
++ (void)postAppStorePurchase:(AppStoreItem*)appStoreItem;
 + (void)postVirtualGoodPurchased:(VirtualGood*)good;
 + (void)postVirtualGoodEquipped:(VirtualGood*)good;
 + (void)postVirtualGoodUnEquipped:(VirtualGood*)good;

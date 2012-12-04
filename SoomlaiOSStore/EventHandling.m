@@ -16,10 +16,10 @@
 
 
 #import "EventHandling.h"
-#import "VirtualCurrencyPack.h"
+#import "AppStoreItem.h"
 #import "VirtualGood.h"
 
-NSString * EVENT_VIRTUAL_CURRENCY_PACK_PURCHASED = @"VirtualCurrencyPackPurchased";
+NSString * EVENT_APPSTORE_PURCHASED              = @"AppStorePurchased";
 NSString * EVENT_VIRTUAL_GOOD_PURCHASED          = @"VirtualGoodPurchased";
 NSString * EVENT_VIRTUAL_GOOD_EQUIPPED           = @"VirtualGoodEquipped";
 NSString * EVENT_VIRTUAL_GOOD_UNEQUIPPED         = @"VirtualGoodUNEQUIPPED";
@@ -36,7 +36,7 @@ NSString * EVENT_TRANSACTION_RESTORED            = @"TransactionRestored";
 @implementation EventHandling
 
 + (void)observeAllEventsWithObserver:(id)observer withSelector:(SEL)selector{
-    [[NSNotificationCenter defaultCenter] addObserver:observer selector:selector name:EVENT_VIRTUAL_CURRENCY_PACK_PURCHASED object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:observer selector:selector name:EVENT_APPSTORE_PURCHASED object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:observer selector:selector name:EVENT_VIRTUAL_GOOD_PURCHASED object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:observer selector:selector name:EVENT_VIRTUAL_GOOD_EQUIPPED object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:observer selector:selector name:EVENT_VIRTUAL_GOOD_UNEQUIPPED object:nil];
@@ -49,9 +49,9 @@ NSString * EVENT_TRANSACTION_RESTORED            = @"TransactionRestored";
     [[NSNotificationCenter defaultCenter] addObserver:observer selector:selector name:EVENT_UNEXPECTED_ERROR_IN_STORE object:nil];
 }
 
-+ (void)postVirtualCurrencyPackPurchased:(VirtualCurrencyPack*)pack{
-    NSDictionary *userInfo = [NSDictionary dictionaryWithObject:pack forKey:@"VirtualCurrencyPack"];
-    [[NSNotificationCenter defaultCenter] postNotificationName:EVENT_VIRTUAL_CURRENCY_PACK_PURCHASED object:self userInfo:userInfo];
++ (void)postAppStorePurchase:(AppStoreItem*)appStoreItem{
+    NSDictionary *userInfo = [NSDictionary dictionaryWithObject:appStoreItem forKey:@"AppStoreItem"];
+    [[NSNotificationCenter defaultCenter] postNotificationName:EVENT_APPSTORE_PURCHASED object:self userInfo:userInfo];
 }
 
 + (void)postVirtualGoodPurchased:(VirtualGood*)good{

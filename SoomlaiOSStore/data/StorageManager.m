@@ -18,10 +18,11 @@
 #import "StoreDatabase.h"
 #import "VirtualCurrencyStorage.h"
 #import "VirtualGoodStorage.h"
+#import "NonConsumableStorage.h"
 
 @implementation StorageManager
 
-@synthesize database, virtualCurrencyStorage, virtualGoodStorage;
+@synthesize database, virtualCurrencyStorage, virtualGoodStorage, nonConsumableStorage;
 
 + (StorageManager*)getInstance{
     static StorageManager* _instance = nil;
@@ -41,6 +42,7 @@
         database = [[StoreDatabase alloc] init];
         virtualCurrencyStorage = [[VirtualCurrencyStorage alloc] init];
         virtualGoodStorage = [[VirtualGoodStorage alloc] init];
+        nonConsumableStorage = [[NonConsumableStorage alloc] init];
     }
     
     return self;

@@ -44,4 +44,15 @@
  */
 - (NSArray*)virtualCategories;
 
+/**
+ * You can define NON-CONSUMABLE items that you'd like to use for your needs.
+ * CONSUMABLE items are usually just currency packs. If you use SOOMLA's storefront, it'll take care of
+ * the UNMANAGED for you in the UI.
+ * NON-CONSUMABLE items are usually used to let users purchase a "no-ads" token.
+ * Make sure you set the type of the items you add here as Consumable.kNonConsumable.
+ *
+ * An array of all managed served in your game.
+ */
+- (NSArray*)appStoreNonConsumableItems;
+
 @end

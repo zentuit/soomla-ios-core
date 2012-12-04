@@ -79,6 +79,7 @@
 		C08CF2FF164321F7007603E8 /* iOS Simulator Screen shot Nov 1, 2012 11.31.54 PM.png in Resources */ = {isa = PBXBuildFile; fileRef = C08CF2FC164321F7007603E8 /* iOS Simulator Screen shot Nov 1, 2012 11.31.54 PM.png */; };
 		C08CF30516432235007603E8 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = C08CF30416432235007603E8 /* Icon.png */; };
 		C08CF30716432239007603E8 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C08CF30616432239007603E8 /* Icon@2x.png */; };
+		C09F6CB71662840C002D385B /* NonConsumableStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = C09F6CB61662840C002D385B /* NonConsumableStorage.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -195,6 +196,8 @@
 		C08CF2FC164321F7007603E8 /* iOS Simulator Screen shot Nov 1, 2012 11.31.54 PM.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iOS Simulator Screen shot Nov 1, 2012 11.31.54 PM.png"; sourceTree = "<group>"; };
 		C08CF30416432235007603E8 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Icon.png; path = ../../Icon.png; sourceTree = "<group>"; };
 		C08CF30616432239007603E8 /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon@2x.png"; path = "../../Icon@2x.png"; sourceTree = "<group>"; };
+		C09F6CB51662840C002D385B /* NonConsumableStorage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NonConsumableStorage.h; sourceTree = "<group>"; };
+		C09F6CB61662840C002D385B /* NonConsumableStorage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NonConsumableStorage.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -365,6 +368,8 @@
 				C08CF2751641CF9F007603E8 /* VirtualCurrencyStorage.m */,
 				C08CF2761641CF9F007603E8 /* VirtualGoodStorage.h */,
 				C08CF2771641CF9F007603E8 /* VirtualGoodStorage.m */,
+				C09F6CB51662840C002D385B /* NonConsumableStorage.h */,
+				C09F6CB61662840C002D385B /* NonConsumableStorage.m */,
 			);
 			path = data;
 			sourceTree = "<group>";
@@ -573,6 +578,7 @@
 				C08CF2E41642BFB7007603E8 /* VirtualGoodCell.m in Sources */,
 				C08CF2EE16431847007603E8 /* VirtualCurrencyPackCell.m in Sources */,
 				C08CF2F1164318AF007603E8 /* VirtualCurrencyPacksViewController.m in Sources */,
+				C09F6CB71662840C002D385B /* NonConsumableStorage.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -689,6 +695,7 @@
 				C08CF22D1641C68D007603E8 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

@@ -29,7 +29,7 @@
 
 @implementation StoreInfo
 
-@synthesize virtualCategories, virtualCurrencies, virtualCurrencyPacks, virtualGoods;
+@synthesize virtualCategories, virtualCurrencies, virtualCurrencyPacks, virtualGoods, appStoreNonConsumableItems;
 
 + (StoreInfo*)getInstance{
     static StoreInfo* _instance = nil;
@@ -55,6 +55,7 @@
         self.virtualCurrencies = [storeAssets virtualCurrencies];
         self.virtualCurrencyPacks = [storeAssets virtualCurrencyPacks];
         self.virtualGoods = [storeAssets virtualGoods];
+        self.appStoreNonConsumableItems = [storeAssets appStoreNonConsumableItems];
         
         // put StoreInfo in the database as JSON
         NSString* storeInfoJSON = [[self toDictionary] JSONString];
@@ -104,6 +105,13 @@
     }
     self.virtualGoods = goods;
     
+    NSMutableArray* nonConsumableItems = [[NSMutableArray alloc] init];
+    NSArray* nonConsumableItemsDict = [storeInfo objectForKey:JSON_STORE_NONCONSUMABLE];
+    for(NSDictionary* nonConsumableItemDict in nonConsumableItemsDict){
+        [nonConsumableItems addObject:[[AppStoreItem alloc] initWithDictionary:nonConsumableItemDict]];
+    }
+    self.appStoreNonConsumableItems = nonConsumableItems;
+    
     return YES;
 }
 
@@ -129,12 +137,18 @@
         [packs addObject:[c toDictionary]];
     }
     
+    NSMutableArray* nonConsumables = [[NSMutableArray alloc] init];
+    for(AppStoreItem* appStoreItem in self.appStoreNonConsumableItems) {
+        [nonConsumables addObject:[appStoreItem toDictionary]];
+    }
+    
     NSMutableDictionary* dict = [[NSMutableDictionary alloc] init];
     
     [dict setObject:categories forKey:JSON_STORE_VIRTUALCATEGORIES];
     [dict setObject:currencies forKey:JSON_STORE_VIRTUALCURRENCIES];
     [dict setObject:packs forKey:JSON_STORE_CURRENCYPACKS];
     [dict setObject:goods forKey:JSON_STORE_VIRTUALGOODS];
+    [dict setObject:nonConsumables forKey:JSON_STORE_NONCONSUMABLE];
     
     return dict;
 }
@@ -187,6 +201,16 @@
     }
     
     @throw [[VirtualItemNotFoundException alloc] initWithLookupField:@"itemId" andLookupValue:itemId];
+}
+
+- (AppStoreItem*)appStoreNonConsumableItemWithProductId:(NSString*)productId{
+    for (AppStoreItem* appStoreItem in self.appStoreNonConsumableItems){
+        if ([appStoreItem.productId isEqualToString:productId]){
+            return appStoreItem;
+        }
+    }
+    
+    @throw [[VirtualItemNotFoundException alloc] initWithLookupField:@"productId" andLookupValue:productId];
 }
 
 @end

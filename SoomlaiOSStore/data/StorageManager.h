@@ -19,6 +19,7 @@
 @class StoreDatabase;
 @class VirtualGoodStorage;
 @class VirtualCurrencyStorage;
+@class NonConsumableStorage;
 
 
 /**
@@ -32,11 +33,13 @@
     StoreDatabase* database;
     VirtualGoodStorage* virtualGoodStorage;
     VirtualCurrencyStorage* virtualCurrenctStorage;
+    NonConsumableStorage* nonConsumableStorage;
 }
 
 @property (nonatomic, retain)StoreDatabase* database;
 @property (nonatomic, retain)VirtualGoodStorage* virtualGoodStorage;
 @property (nonatomic, retain)VirtualCurrencyStorage* virtualCurrencyStorage;
+@property (nonatomic, retain)NonConsumableStorage* nonConsumableStorage;
 
 + (StorageManager*)getInstance;
 
