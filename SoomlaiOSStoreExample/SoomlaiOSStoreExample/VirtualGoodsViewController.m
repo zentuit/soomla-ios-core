@@ -31,7 +31,6 @@
 
 - (void)viewDidLoad
 {
-    [StoreInventory addAmount:1000 toCurrency:MUFFINS_CURRENCY_ITEM_ID];
     [[StoreController getInstance] storeOpening];
     
     goods = [NSArray arrayWithObjects:
