@@ -9,6 +9,8 @@
 #import "AppDelegate.h"
 #import "StoreController.h"
 #import "MuffinRushAssets.h"
+#import "StoreInventory.h"
+#import "VirtualCurrency.h"
 
 @implementation AppDelegate
 
@@ -19,7 +21,15 @@
     /**
      * We initialize StoreController when the application laods !
      */
-    [[StoreController getInstance] initializeWithStoreAssets:[[MuffinRushAssets alloc] init]];
+    id<IStoreAsssets> storeAssets = [[MuffinRushAssets alloc] init];
+    [[StoreController getInstance] initializeWithStoreAssets:storeAssets];
+    
+    if (![[NSUserDefaults standardUserDefaults] boolForKey:@"NotFirstLaunch"])
+    {
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"NotFirstLaunch"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+        [StoreInventory addAmount:10000 toCurrency:((VirtualCurrency*)[storeAssets.virtualCurrencies objectAtIndex:0]).itemId];
+    }
     
     // Override point for customization after application launch.
     return YES;

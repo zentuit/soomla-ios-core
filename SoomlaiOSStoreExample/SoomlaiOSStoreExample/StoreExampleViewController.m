@@ -35,13 +35,6 @@
 {
     [super viewDidLoad];
     
-    if (![[NSUserDefaults standardUserDefaults] boolForKey:@"NotFirstLaunch"])
-    {
-        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"NotFirstLaunch"];
-        [[NSUserDefaults standardUserDefaults] synchronize];
-        [StoreInventory addAmount:10000 toCurrency:MUFFINS_CURRENCY_ITEM_ID];
-    }
-    
     [titleLabel setFont:[UIFont fontWithName:@"GoodDog" size:50]];
     [infoLabel setFont:[UIFont fontWithName:@"GoodDog" size:20]];
     
