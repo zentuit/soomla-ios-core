@@ -24,6 +24,8 @@
     id<IStoreAsssets> storeAssets = [[MuffinRushAssets alloc] init];
     [[StoreController getInstance] initializeWithStoreAssets:storeAssets];
     
+    // Checking if it's a first run and adding 10000 currencies if it is.
+    // OFCOURSE... THIS IS JUST FOR TESTING.
     if (![[NSUserDefaults standardUserDefaults] boolForKey:@"NotFirstLaunch"])
     {
         [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"NotFirstLaunch"];

@@ -49,7 +49,7 @@
         
         NSDictionary* sfDict = [self.storefrontJson objectFromJSONString];
         //TODO: check that this value is parsed
-        self.orientationLandscape = [(NSNumber*)[[sfDict objectForKey:@"theme"] objectForKey:@"isOrientationLandscape"] boolValue];
+        self.orientationLandscape = [((NSString*)[[sfDict objectForKey:@"template"] objectForKey:@"orientation"]) isEqualToString:@"landscape"];
     }
 }
 
@@ -67,7 +67,7 @@
     NSDictionary* sfDict = [sfJSON objectFromJSONString];
     
     //TODO: check that this value is parsed
-    self.orientationLandscape = [(NSNumber*)[[sfDict objectForKey:@"theme"] objectForKey:@"isOrientationLandscape"] boolValue];
+    self.orientationLandscape = [((NSString*)[[sfDict objectForKey:@"template"] objectForKey:@"orientation"]) isEqualToString:@"landscape"];
     
     return YES;
 }
