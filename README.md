@@ -37,9 +37,10 @@ Getting Started (using source code)
       ```objective-c
        [[StoreController getInstance] initializeWithStoreAssets:[[YourStoreAssetsImplementation alloc] init] andCustomSecret:@"[YOUR CUSTOM SECRET HERE]"];
       ```
-> The custom secret is your encryption secret data saved in the DB. This secret is NOT the secret from step 4 (select a different value). **This change is introduced on Dec. 26th and if you already have android-store in your game you should pay attention to the "Game Secret" before you release an upgrade. Make sure the secret is exactly the same as what you had in the released version!! (If you never changed it in previous versions than it's probably "ChangeMe!!!")**
 
-> Initialize StoreController ONLY ONCE when your application loads.
+    > The custom secret is your encryption secret data saved in the DB. This secret is NOT the secret from step 4 (select a different value). **This change is introduced on Dec. 26th and if you already have android-store in your game you should pay attention to the "Game Secret" before you release an upgrade. Make sure the secret is exactly the same as what you had in the released version!! (If you never changed it in previous versions than it's probably "ChangeMe!!!")**
+
+    > Initialize StoreController ONLY ONCE when your application loads.
 
 6. Now, that you have StoreController loaded, just decide when you want to show/hide your store's UI to the user and let StoreController know about it:
 
