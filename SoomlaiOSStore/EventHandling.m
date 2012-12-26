@@ -81,8 +81,9 @@ NSString * EVENT_TRANSACTION_RESTORED            = @"TransactionRestored";
     [[NSNotificationCenter defaultCenter] postNotificationName:EVENT_GOODS_PURCHASE_STARTED object:self];
 }
 
-+ (void)postMarketPurchaseStarted{
-    [[NSNotificationCenter defaultCenter] postNotificationName:EVENT_MARKET_PURCHASE_STARTED object:self];
++ (void)postMarketPurchaseStarted:(AppStoreItem*)appStoreItem{
+    NSDictionary *userInfo = [NSDictionary dictionaryWithObject:appStoreItem forKey:@"AppStoreItem"];
+    [[NSNotificationCenter defaultCenter] postNotificationName:EVENT_MARKET_PURCHASE_STARTED object:self userInfo:userInfo];
 }
 
 + (void)postClosingStore{

@@ -49,13 +49,10 @@
 		C08CF2BD1641CF9F007603E8 /* NotEnoughGoodsException.m in Sources */ = {isa = PBXBuildFile; fileRef = C08CF2921641CF9F007603E8 /* NotEnoughGoodsException.m */; };
 		C08CF2BE1641CF9F007603E8 /* VirtualItemNotFoundException.m in Sources */ = {isa = PBXBuildFile; fileRef = C08CF2941641CF9F007603E8 /* VirtualItemNotFoundException.m */; };
 		C08CF2BF1641CF9F007603E8 /* FBEncryptorAES.m in Sources */ = {isa = PBXBuildFile; fileRef = C08CF2971641CF9F007603E8 /* FBEncryptorAES.m */; };
-		C08CF2C01641CF9F007603E8 /* NSData+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = C08CF2991641CF9F007603E8 /* NSData+Base64.m */; };
 		C08CF2C11641CF9F007603E8 /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = C08CF29D1641CF9F007603E8 /* JSONKit.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		C08CF2C21641CF9F007603E8 /* StoreConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = C08CF2A01641CF9F007603E8 /* StoreConfig.m */; };
 		C08CF2C31641CF9F007603E8 /* StoreController.m in Sources */ = {isa = PBXBuildFile; fileRef = C08CF2A21641CF9F007603E8 /* StoreController.m */; };
 		C08CF2C41641CF9F007603E8 /* StoreInventory.m in Sources */ = {isa = PBXBuildFile; fileRef = C08CF2A41641CF9F007603E8 /* StoreInventory.m */; };
-		C08CF2C51641CF9F007603E8 /* NSString+MD5Addition.m in Sources */ = {isa = PBXBuildFile; fileRef = C08CF2A71641CF9F007603E8 /* NSString+MD5Addition.m */; };
-		C08CF2C61641CF9F007603E8 /* UIDevice+IdentifierAddition.m in Sources */ = {isa = PBXBuildFile; fileRef = C08CF2A91641CF9F007603E8 /* UIDevice+IdentifierAddition.m */; };
 		C08CF2CC1641CFF3007603E8 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C08CF2CB1641CFF3007603E8 /* StoreKit.framework */; };
 		C08CF2CE1641CFFE007603E8 /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = C08CF2CD1641CFFE007603E8 /* libsqlite3.0.dylib */; };
 		C08CF2D01641D004007603E8 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C08CF2CF1641D004007603E8 /* Security.framework */; };
@@ -80,6 +77,10 @@
 		C08CF30516432235007603E8 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = C08CF30416432235007603E8 /* Icon.png */; };
 		C08CF30716432239007603E8 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C08CF30616432239007603E8 /* Icon@2x.png */; };
 		C09F6CB71662840C002D385B /* NonConsumableStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = C09F6CB61662840C002D385B /* NonConsumableStorage.m */; };
+		C0EFC949168B44A200948037 /* ObscuredNSUserDefaults.m in Sources */ = {isa = PBXBuildFile; fileRef = C0EFC948168B44A200948037 /* ObscuredNSUserDefaults.m */; };
+		C0EFC94D168B55C200948037 /* NSData-Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = C0EFC94C168B55C200948037 /* NSData-Base64.m */; };
+		C0EFC952168B55D700948037 /* NSString-MD5Addition.m in Sources */ = {isa = PBXBuildFile; fileRef = C0EFC94F168B55D700948037 /* NSString-MD5Addition.m */; };
+		C0EFC953168B55D700948037 /* UIDevice-IdentifierAddition.m in Sources */ = {isa = PBXBuildFile; fileRef = C0EFC951168B55D700948037 /* UIDevice-IdentifierAddition.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -153,8 +154,6 @@
 		C08CF2941641CF9F007603E8 /* VirtualItemNotFoundException.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VirtualItemNotFoundException.m; sourceTree = "<group>"; };
 		C08CF2961641CF9F007603E8 /* FBEncryptorAES.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBEncryptorAES.h; sourceTree = "<group>"; };
 		C08CF2971641CF9F007603E8 /* FBEncryptorAES.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBEncryptorAES.m; sourceTree = "<group>"; };
-		C08CF2981641CF9F007603E8 /* NSData+Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+Base64.h"; sourceTree = "<group>"; };
-		C08CF2991641CF9F007603E8 /* NSData+Base64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+Base64.m"; sourceTree = "<group>"; };
 		C08CF29A1641CF9F007603E8 /* IStoreAsssets.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IStoreAsssets.h; sourceTree = "<group>"; };
 		C08CF29C1641CF9F007603E8 /* JSONKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONKit.h; sourceTree = "<group>"; };
 		C08CF29D1641CF9F007603E8 /* JSONKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSONKit.m; sourceTree = "<group>"; };
@@ -165,10 +164,6 @@
 		C08CF2A21641CF9F007603E8 /* StoreController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StoreController.m; sourceTree = "<group>"; };
 		C08CF2A31641CF9F007603E8 /* StoreInventory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StoreInventory.h; sourceTree = "<group>"; };
 		C08CF2A41641CF9F007603E8 /* StoreInventory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StoreInventory.m; sourceTree = "<group>"; };
-		C08CF2A61641CF9F007603E8 /* NSString+MD5Addition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+MD5Addition.h"; sourceTree = "<group>"; };
-		C08CF2A71641CF9F007603E8 /* NSString+MD5Addition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+MD5Addition.m"; sourceTree = "<group>"; };
-		C08CF2A81641CF9F007603E8 /* UIDevice+IdentifierAddition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIDevice+IdentifierAddition.h"; sourceTree = "<group>"; };
-		C08CF2A91641CF9F007603E8 /* UIDevice+IdentifierAddition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIDevice+IdentifierAddition.m"; sourceTree = "<group>"; };
 		C08CF2CB1641CFF3007603E8 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		C08CF2CD1641CFFE007603E8 /* libsqlite3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.0.dylib; path = usr/lib/libsqlite3.0.dylib; sourceTree = SDKROOT; };
 		C08CF2CF1641D004007603E8 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
@@ -198,6 +193,14 @@
 		C08CF30616432239007603E8 /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon@2x.png"; path = "../../Icon@2x.png"; sourceTree = "<group>"; };
 		C09F6CB51662840C002D385B /* NonConsumableStorage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NonConsumableStorage.h; sourceTree = "<group>"; };
 		C09F6CB61662840C002D385B /* NonConsumableStorage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NonConsumableStorage.m; sourceTree = "<group>"; };
+		C0EFC947168B44A200948037 /* ObscuredNSUserDefaults.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ObscuredNSUserDefaults.h; sourceTree = "<group>"; };
+		C0EFC948168B44A200948037 /* ObscuredNSUserDefaults.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ObscuredNSUserDefaults.m; sourceTree = "<group>"; };
+		C0EFC94B168B55C200948037 /* NSData-Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData-Base64.h"; sourceTree = "<group>"; };
+		C0EFC94C168B55C200948037 /* NSData-Base64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData-Base64.m"; sourceTree = "<group>"; };
+		C0EFC94E168B55D700948037 /* NSString-MD5Addition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString-MD5Addition.h"; sourceTree = "<group>"; };
+		C0EFC94F168B55D700948037 /* NSString-MD5Addition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString-MD5Addition.m"; sourceTree = "<group>"; };
+		C0EFC950168B55D700948037 /* UIDevice-IdentifierAddition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIDevice-IdentifierAddition.h"; sourceTree = "<group>"; };
+		C0EFC951168B55D700948037 /* UIDevice-IdentifierAddition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIDevice-IdentifierAddition.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -370,6 +373,8 @@
 				C08CF2771641CF9F007603E8 /* VirtualGoodStorage.m */,
 				C09F6CB51662840C002D385B /* NonConsumableStorage.h */,
 				C09F6CB61662840C002D385B /* NonConsumableStorage.m */,
+				C0EFC947168B44A200948037 /* ObscuredNSUserDefaults.h */,
+				C0EFC948168B44A200948037 /* ObscuredNSUserDefaults.m */,
 			);
 			path = data;
 			sourceTree = "<group>";
@@ -423,10 +428,10 @@
 		C08CF2951641CF9F007603E8 /* FBEncryptor */ = {
 			isa = PBXGroup;
 			children = (
+				C0EFC94B168B55C200948037 /* NSData-Base64.h */,
+				C0EFC94C168B55C200948037 /* NSData-Base64.m */,
 				C08CF2961641CF9F007603E8 /* FBEncryptorAES.h */,
 				C08CF2971641CF9F007603E8 /* FBEncryptorAES.m */,
-				C08CF2981641CF9F007603E8 /* NSData+Base64.h */,
-				C08CF2991641CF9F007603E8 /* NSData+Base64.m */,
 			);
 			path = FBEncryptor;
 			sourceTree = "<group>";
@@ -443,10 +448,10 @@
 		C08CF2A51641CF9F007603E8 /* UIDevice-UUID */ = {
 			isa = PBXGroup;
 			children = (
-				C08CF2A61641CF9F007603E8 /* NSString+MD5Addition.h */,
-				C08CF2A71641CF9F007603E8 /* NSString+MD5Addition.m */,
-				C08CF2A81641CF9F007603E8 /* UIDevice+IdentifierAddition.h */,
-				C08CF2A91641CF9F007603E8 /* UIDevice+IdentifierAddition.m */,
+				C0EFC94E168B55D700948037 /* NSString-MD5Addition.h */,
+				C0EFC94F168B55D700948037 /* NSString-MD5Addition.m */,
+				C0EFC950168B55D700948037 /* UIDevice-IdentifierAddition.h */,
+				C0EFC951168B55D700948037 /* UIDevice-IdentifierAddition.m */,
 			);
 			path = "UIDevice-UUID";
 			sourceTree = "<group>";
@@ -567,18 +572,19 @@
 				C08CF2BD1641CF9F007603E8 /* NotEnoughGoodsException.m in Sources */,
 				C08CF2BE1641CF9F007603E8 /* VirtualItemNotFoundException.m in Sources */,
 				C08CF2BF1641CF9F007603E8 /* FBEncryptorAES.m in Sources */,
-				C08CF2C01641CF9F007603E8 /* NSData+Base64.m in Sources */,
 				C08CF2C11641CF9F007603E8 /* JSONKit.m in Sources */,
 				C08CF2C21641CF9F007603E8 /* StoreConfig.m in Sources */,
 				C08CF2C31641CF9F007603E8 /* StoreController.m in Sources */,
 				C08CF2C41641CF9F007603E8 /* StoreInventory.m in Sources */,
-				C08CF2C51641CF9F007603E8 /* NSString+MD5Addition.m in Sources */,
-				C08CF2C61641CF9F007603E8 /* UIDevice+IdentifierAddition.m in Sources */,
 				C08CF2D91641D57C007603E8 /* VirtualGoodsViewController.m in Sources */,
 				C08CF2E41642BFB7007603E8 /* VirtualGoodCell.m in Sources */,
 				C08CF2EE16431847007603E8 /* VirtualCurrencyPackCell.m in Sources */,
 				C08CF2F1164318AF007603E8 /* VirtualCurrencyPacksViewController.m in Sources */,
 				C09F6CB71662840C002D385B /* NonConsumableStorage.m in Sources */,
+				C0EFC949168B44A200948037 /* ObscuredNSUserDefaults.m in Sources */,
+				C0EFC94D168B55C200948037 /* NSData-Base64.m in Sources */,
+				C0EFC952168B55D700948037 /* NSString-MD5Addition.m in Sources */,
+				C0EFC953168B55D700948037 /* UIDevice-IdentifierAddition.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

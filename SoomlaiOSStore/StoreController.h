@@ -37,7 +37,7 @@
 
 + (StoreController*)getInstance;
 
-- (void)initializeWithStoreAssets:(id<IStoreAsssets>)storeAssets;
+- (void)initializeWithStoreAssets:(id<IStoreAsssets>)storeAssets andCustomSecret:(NSString*)secret;
 /**
  * Start a currency pack purchase process (with the App Store)
  * productId is the product id of the required currency pack.

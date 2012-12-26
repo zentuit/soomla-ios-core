@@ -6,7 +6,7 @@
 //  Copyright 2011 Aurora Apps. All rights reserved.
 //
 
-#import "NSString+MD5Addition.h"
+#import "NSString-MD5Addition.h"
 #import <CommonCrypto/CommonDigest.h>
 
 @implementation NSString(MD5Addition)

@@ -6,8 +6,8 @@
 //  Copyright 2011 Aurora Apps. All rights reserved.
 //
 
-#import "UIDevice+IdentifierAddition.h"
-#import "NSString+MD5Addition.h"
+#import "UIDevice-IdentifierAddition.h"
+#import "NSString-MD5Addition.h"
 
 #include <sys/socket.h> // Per msqr
 #include <sys/sysctl.h>

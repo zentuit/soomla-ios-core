@@ -15,10 +15,11 @@
  */
 
 #import "StoreEncryptor.h"
-#import "UIDevice+IdentifierAddition.h"
+#import "UIDevice-IdentifierAddition.h"
 #import "StoreConfig.h"
 #import <CommonCrypto/CommonCryptor.h>
 #import "FBEncryptorAES.h"
+#import "ObscuredNSUserDefaults.h"
 
 @implementation StoreEncryptor
 
@@ -28,7 +29,7 @@
  */
 + (NSString*)key
 {
-    return [STORE_CUSTOM_SECRET stringByAppendingString:[[UIDevice currentDevice] uniqueGlobalDeviceIdentifier]];
+    return [[ObscuredNSUserDefaults stringForKey:@"ISU#LL#SE#REI"] stringByAppendingString:[[UIDevice currentDevice] uniqueGlobalDeviceIdentifier]];
 }
 
 + (NSString *)encryptString:(NSString *)data{

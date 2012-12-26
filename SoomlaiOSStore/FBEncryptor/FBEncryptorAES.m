@@ -21,7 +21,7 @@
 //
 
 #import "FBEncryptorAES.h"
-#import "NSData+Base64.h"
+#import "NSData-Base64.h"
 
 @implementation FBEncryptorAES
 

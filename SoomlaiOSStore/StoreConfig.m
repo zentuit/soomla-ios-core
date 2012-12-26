@@ -20,9 +20,4 @@ BOOL DB_VOLATILE_METADATA       = YES;
 
 BOOL STORE_DEBUG                = NO;
 
-/*
- * your personal secret that'll be used to encrypt data.
- *
- * CHANGE THE VALUE OF THIS SECRET NOW !
- */
-NSString * STORE_CUSTOM_SECRET  = @"ChangeMe!!!";
+NSString* SOOM_SEC              = @"SINC_SSIEEKK";

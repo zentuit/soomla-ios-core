@@ -50,7 +50,7 @@ extern NSString * EVENT_TRANSACTION_RESTORED;
 + (void)postBillingSupported;
 + (void)postBillingNotSupported;
 + (void)postGoodsPurchaseStarted;
-+ (void)postMarketPurchaseStarted;
++ (void)postMarketPurchaseStarted:(AppStoreItem*)appStoreItem;
 + (void)postClosingStore;
 + (void)postOpeningStore;
 + (void)postUnexpectedError;

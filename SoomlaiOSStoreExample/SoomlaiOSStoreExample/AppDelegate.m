@@ -11,6 +11,7 @@
 #import "MuffinRushAssets.h"
 #import "StoreInventory.h"
 #import "VirtualCurrency.h"
+#import "ObscuredNSUserDefaults.h"
 
 @implementation AppDelegate
 
@@ -22,14 +23,13 @@
      * We initialize StoreController when the application laods !
      */
     id<IStoreAsssets> storeAssets = [[MuffinRushAssets alloc] init];
-    [[StoreController getInstance] initializeWithStoreAssets:storeAssets];
+    [[StoreController getInstance] initializeWithStoreAssets:storeAssets andCustomSecret:@"ChangeMe!!!"];
     
     // Checking if it's a first run and adding 10000 currencies if it is.
     // OFCOURSE... THIS IS JUST FOR TESTING.
-    if (![[NSUserDefaults standardUserDefaults] boolForKey:@"NotFirstLaunch"])
+    if (![ObscuredNSUserDefaults boolForKey:@"NotFirstLaunch"])
     {
-        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"NotFirstLaunch"];
-        [[NSUserDefaults standardUserDefaults] synchronize];
+        [ObscuredNSUserDefaults setBool:YES forKey:@"NotFirstLaunch"];
         [StoreInventory addAmount:10000 toCurrency:((VirtualCurrency*)[storeAssets.virtualCurrencies objectAtIndex:0]).itemId];
     }
     

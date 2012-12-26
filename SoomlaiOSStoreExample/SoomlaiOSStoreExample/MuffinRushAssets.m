@@ -5,6 +5,7 @@
 #import "VirtualCurrencyPack.h"
 #import "StaticPriceModel.h"
 #import "AppStoreItem.h"
+#import "BalanceDrivenPriceModel.h"
 
 
 NSString* const MUFFINS_CURRENCY_ITEM_ID = @"currency_muffin";
@@ -58,7 +59,9 @@ AppStoreItem* NO_ADDS_NON_CONS;
     NSDictionary* FRUIT_CAKE_PRICE = [[NSDictionary alloc] initWithObjectsAndKeys:
                                     [NSNumber numberWithInt:225], MUFFINS_CURRENCY_ITEM_ID,
                                       nil];
-    FRUIT_CAKE_GOOD = [[VirtualGood alloc] initWithName:@"Fruit Cake" andDescription:@"Customers buy a double portion on each purchase of this cake" andItemId:FRUIT_CAKE_GOOD_ITEM_ID andPriceModel:[[StaticPriceModel alloc] initWithCurrencyValue:FRUIT_CAKE_PRICE] andCategory:GENERAL_CATEGORY andEquipStatus:NO];
+    NSArray* prices = [NSArray arrayWithObjects:FRUIT_CAKE_PRICE, nil];
+    FRUIT_CAKE_GOOD = [[VirtualGood alloc] initWithName:@"Fruit Cake" andDescription:@"Customers buy a double portion on each purchase of this cake" andItemId:FRUIT_CAKE_GOOD_ITEM_ID andPriceModel:[[BalanceDrivenPriceModel alloc]
+          initWithCurrencyValuePerBalance:prices] andCategory:GENERAL_CATEGORY andEquipStatus:NO];
     
     NSDictionary* PAVLOVA_PRICE = [[NSDictionary alloc] initWithObjectsAndKeys:
                                     [NSNumber numberWithInt:175], MUFFINS_CURRENCY_ITEM_ID,

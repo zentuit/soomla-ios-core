@@ -31,9 +31,4 @@ extern BOOL DB_VOLATILE_METADATA;
  */
 extern BOOL STORE_DEBUG;
 
-/*
- * your personal secret that'll be used to encrypt data.
- *
- * CHANGE THE VALUE OF THIS SECRET NOW !
- */
-extern NSString * STORE_CUSTOM_SECRET;
+extern NSString* SOOM_SEC;

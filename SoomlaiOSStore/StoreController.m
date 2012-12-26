@@ -28,6 +28,7 @@
 #import "InsufficientFundsException.h"
 #import "NotEnoughGoodsException.h"
 #import "VirtualItemNotFoundException.h"
+#import "ObscuredNSUserDefaults.h"
 
 #define kInAppPurchaseManagerProductsFetchedNotification @"kInAppPurchaseManagerProductsFetchedNotification"
 
@@ -45,15 +46,23 @@
     return _instance;
 }
 
-- (void)initializeWithStoreAssets:(id<IStoreAsssets>)storeAssets{
-    STORE_DEBUG = YES;
+- (void)initializeWithStoreAssets:(id<IStoreAsssets>)storeAssets andCustomSecret:(NSString*)secret {
+    
+    if (secret && ![secret isEqualToString:@""]) {
+        [ObscuredNSUserDefaults setString:secret forKey:@"ISU#LL#SE#REI"];
+    } else if ([[ObscuredNSUserDefaults stringForKey:@"ISU#LL#SE#REI"] isEqualToString:@""]){
+        NSLog(@"secret is null or empty. can't initialize store !!");
+        return;
+    }
     
     [StorageManager getInstance];
     [[StoreInfo getInstance] initializeWithIStoreAsssets:storeAssets];
     
     if ([SKPaymentQueue canMakePayments]) {
         [[SKPaymentQueue defaultQueue] addTransactionObserver:self];
-        
+        if (![ObscuredNSUserDefaults boolForKey:@"RESTORED"]) {
+            [[SKPaymentQueue defaultQueue] restoreCompletedTransactions];
+        }
 //        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Can Make Payments !"
 //                                                        message:@"Woohoo !"
 //                                                       delegate:nil
@@ -72,13 +81,27 @@
 }
 
 - (void)buyCurrencyPackWithProcuctId:(NSString*)productId{
-    [EventHandling postMarketPurchaseStarted];
     
-    SKMutablePayment *payment = [[SKMutablePayment alloc] init] ;
-    payment.productIdentifier = productId;
-    payment.quantity = 1;
-    [[SKPaymentQueue defaultQueue] addPayment:payment];
+    // Just trying to fetch currency pack to see if we get an exception.
+    @try {
+        VirtualCurrencyPack* pack = [[StoreInfo getInstance] currencyPackWithProductId:productId];
+        
+        if ([SKPaymentQueue canMakePayments]) {
+            SKMutablePayment *payment = [[SKMutablePayment alloc] init] ;
+            payment.productIdentifier = productId;
+            payment.quantity = 1;
+            [[SKPaymentQueue defaultQueue] addPayment:payment];
+            
+            [EventHandling postMarketPurchaseStarted:pack.appstoreItem];
+        } else {
+            NSLog(@"Can't make purchases. Parental control is probably enabled.");
+        }
+    }
     
+    @catch (VirtualItemNotFoundException *e) {
+        NSLog(@"Couldn't find a VirtualCurrencyPack with productId: %@. Purchase is cancelled.", productId);
+        return;
+    }
 }
 
 - (void)buyVirtualGood:(NSString*)itemId{
@@ -123,7 +146,26 @@
 }
 
 - (void)buyNonConsumableItem:(NSString*)productId{
+    // Just trying to fetch app store item to see if we get an exception.
+    @try {
+        AppStoreItem* asi = [[StoreInfo getInstance] appStoreNonConsumableItemWithProductId:productId];
+        
+        if ([SKPaymentQueue canMakePayments]) {
+            SKMutablePayment *payment = [[SKMutablePayment alloc] init] ;
+            payment.productIdentifier = productId;
+            payment.quantity = 1;
+            [[SKPaymentQueue defaultQueue] addPayment:payment];
+            
+            [EventHandling postMarketPurchaseStarted:asi];
+        } else {
+            NSLog(@"Can't make purchases. Parental control is probably enabled.");
+        }
+    }
     
+    @catch (VirtualItemNotFoundException *e) {
+        NSLog(@"Couldn't find a AppStoreItem with productId: %@. Purchase is cancelled.", productId);
+        return;
+    }
 }
 
 - (void)storeOpening{
@@ -223,9 +265,10 @@
 
 - (void) restoreTransaction: (SKPaymentTransaction *)transaction
 {
+    [ObscuredNSUserDefaults setBool:YES forKey:@"RESTORED"];
     NSLog(@"Restore transaction for product: %@", transaction.payment.productIdentifier);
-    [EventHandling postTransactionRestored:transaction.payment.productIdentifier];
     [[SKPaymentQueue defaultQueue] finishTransaction: transaction];
+    [EventHandling postTransactionRestored:transaction.payment.productIdentifier];
 }
 
 - (void) failedTransaction: (SKPaymentTransaction *)transaction
