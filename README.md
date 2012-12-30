@@ -1,6 +1,6 @@
 *This project is a part of [The SOOMLA Project](http://project.soom.la) which is a series of open source initiatives with a joint goal to help mobile game developers get better stores and more in-app purchases.*
 
-Didn't you ever wanted an in-app purchase one liner that looks like this ?!
+Haven't you ever wanted an in-app purchase one liner that looks like this ?!
 
 ```objective-c
     [[StoreController getInstance] buyCurrencyPackWithProcuctId:@"[Your product id here]"]
@@ -8,9 +8,9 @@ Didn't you ever wanted an in-app purchase one liner that looks like this ?!
 
 ios-store
 ---
-The ios-store is our ios-falvored code initiative part of The SOOMLA Project. It is an iOS SDK that simplifies the App Store's in-app purchasing API and complements it with storage, security and event handling. The project also includes a sample app for reference. As an optional (and currently EXPERIMENTAL) part of our open-source projects you can also get the storefront's theme which you can customize with your own game's assets. To use our storefront, refer to [Get your own Storefront](https://github.com/soomla/ios-store/wiki/Get-your-own-Storefront-%5BEXPERIMENTAL%5D).
+The ios-store is our iOS-flavored code initiative part of The SOOMLA Project. It is an iOS SDK that simplifies the App Store's in-app purchasing API and complements it with storage, security and event handling. The project also includes a sample app for reference. As an optional (and currently EXPERIMENTAL) part of our open-source projects you can also get the storefront's theme which you can customize with your own game's assets. To use our storefront, refer to [Get your own Storefront](https://github.com/soomla/ios-store/wiki/Get-your-own-Storefront-%5BEXPERIMENTAL%5D).
 
->If you also want to create a storefront you can do that using our [Store Designer](designer.soom.la).
+>If you also want to create a storefront you can do that using our [Store Designer](http://designer.soom.la).
 
 Check out our [Wiki] (https://github.com/soomla/ios-store/wiki) for more information about the project and how to use it better.
 
@@ -38,11 +38,11 @@ Getting Started (using source code)
        [[StoreController getInstance] initializeWithStoreAssets:[[YourStoreAssetsImplementation alloc] init] andCustomSecret:@"[YOUR CUSTOM SECRET HERE]"];
       ```
 
-    > The custom secret is your encryption secret data saved in the DB. This secret is NOT the secret from step 4 (select a different value). **This change is introduced on Dec. 26th and if you already have android-store in your game you should pay attention to the "Game Secret" before you release an upgrade. Make sure the secret is exactly the same as what you had in the released version!! (If you never changed it in previous versions than it's probably "ChangeMe!!!")**
+    > The custom secret is your encryption secret for data saved in the DB. This secret is NOT the secret from step 4 (select a different value). **This change was introduced on Dec. 26th, 2012 and if you already have android-store in your game you should pay attention to the "Game Secret" before you release an upgrade. Make sure the secret is exactly the same as what you had in the released version!! (If you never changed it in previous versions then it's probably "ChangeMe!!!")**
 
-    > Initialize StoreController ONLY ONCE when your application loads.
+    > Initialize `StoreController` ONLY ONCE when your application loads.
 
-6. Now, that you have StoreController loaded, just decide when you want to show/hide your store's UI to the user and let StoreController know about it:
+6. Now, that you have `StoreController` loaded, just decide when you want to show/hide your store's UI to the user and let `StoreController` know about it:
 
 When you show the store call:
 
@@ -68,20 +68,20 @@ Getting Started (using static library)
 
 1. Download SoomlaiOSStore.zip and unpack it.
 
-2. Add libSoomlaiOSStore.a and add it to your project's library dependencies. Add SooomlaiOSStore headers forder to your project as a source folder.
+2. Add libSoomlaiOSStore.a and add it to your project's library dependencies. Add SooomlaiOSStore headers folder to your project as a source folder.
 
-3. Got to your project's "Build Phases" and set the value "-ObjC" for the key "Other Linker Flags".
+3. Go to your project's "Build Phases" and set the value "-ObjC" for the key "Other Linker Flags".
 
 4. Go through steps 3-5 from [Getting Started (using source code)](https://github.com/soomla/ios-store#getting-started-using-source-code).
 
 What's next? In App Purchasing.
 ---
 
-ios-store provides you with VirtualCurrencyPacks. VirtualCurrencyPack is a representation of a "bag" of currencies that you want to let your users purchase in the App Store. You define VirtualCurrencyPacks in your game specific assets file which is your implemetation of IStoreAssets ([example](https://github.com/soomla/ios-store/blob/master/SoomlaiOSStoreExamples/MuffinRush/MuffinRush/MuffinRushAssets.m)). After you do that you can call StoreController to make actual purchases and ios-store will take care of the rest.
+ios-store provides you with VirtualCurrencyPacks. VirtualCurrencyPack is a representation of a "bag" of currency units that you want to let your users purchase in the App Store. You define VirtualCurrencyPacks in your game specific assets file which is your implementation of `IStoreAssets` ([example](https://github.com/soomla/ios-store/blob/master/SoomlaiOSStoreExamples/MuffinRush/MuffinRush/MuffinRushAssets.m)). After you do that you can call `StoreController` to make actual purchases and ios-store will take care of the rest.
 
 Example:
 
-Lets say you have a VirtualCurrencyPack you call TEN_COINS_PACK, a VirtualCurrency you call COIN_CURRENCY and a VirtualCategory you call CURRENCYPACKS_CATEGORY:
+Lets say you have a VirtualCurrencyPack you call `TEN_COINS_PACK`, a VirtualCurrency you call `COIN_CURRENCY` and a VirtualCategory you call `CURRENCYPACKS_CATEGORY`:
 
 ```objective-c
 VirtualCurrencyPack* TEN_COINS_PACK = [[VirtualCurrencyPack alloc] initWithName:@"10 Coins"
@@ -93,20 +93,20 @@ VirtualCurrencyPack* TEN_COINS_PACK = [[VirtualCurrencyPack alloc] initWithName:
                                                  andCurrency:COIN_CURRENCY];
 ```
 
-Now you can use StoreController to call the App Store's in-app purchasing mechanism:
+Now you can use `StoreController` to call the App Store's in-app purchasing mechanism:
 
 ```objective-c
     [[StoreController getInstance] buyCurrencyPackWithProcuctId:TEN_COINS_PACK.productId];
 ```
 
-And that's it! ios-store knows how to contact the App Store for you and redirect the user to the purchasing mechanis. Don't forget to subscribe to events of successful or failed purchase (see [Event Handling](https://github.com/soomla/ios-store#event-handling)).
+And that's it! ios-store knows how to contact the App Store for you and redirect the user to the purchasing mechanism. Don't forget to subscribe to events of successful or failed purchases (see [Event Handling](https://github.com/soomla/ios-store#event-handling)).
 
 Storage & Meta-Data
 ---
 
-When you initialize _StoreController_, it automatically initializes two other classes: StorageManager and StoreInfo. _StorageManager_ is the father of all stoaage related instances in your game. Use it to access tha balances of virtual currencies and virtual goods (ususally, using their itemIds). _StoreInfo_ is the mother of all meta data information about your specific game. It is initialized with your implementation of IStoreAssets and you can use it to retrieve information about your specific game.
+When you initialize _StoreController_, it automatically initializes two other classes: _StorageManager_ and _StoreInfo_. _StorageManager_ is the father of all storage related instances in your game. Use it to access tha balances of virtual currencies and virtual goods (usually, using their itemIds). _StoreInfo_ is the mother of all meta data information about your specific game. It is initialized with your implementation of `IStoreAssets` and you can use it to retrieve information about your specific game.
 
-The on-device storage is encrypted and kept in a SQLite database. SOOMLA is preparing a cloud-based storage service that'll allow this SQLite to be synced to a cloud-based repository that you'll define. Stay tuned... this is just one of the goodies we prepare for you.
+The on-device storage is encrypted and kept in a SQLite database. SOOMLA is preparing a cloud-based storage service that will allow this SQLite to be synced to a cloud-based repository that you'll define. Stay tuned... this is just one of the goodies we prepare for you.
 
 **Example Usages**
 
@@ -146,7 +146,7 @@ SOOMLA lets you get notifications on various events and implement your own appli
 
 > Your behaviour is an addition to the default behaviour implemented by SOOMLA. You don't replace SOOMLA's behaviour.
 
-In order to observe store events you need to import EventHandling.h and than you can add a notification to *NSNotificationCenter*:
+In order to observe store events you need to import EventHandling.h and then you can add a notification to *NSNotificationCenter*:
 
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(yourCustomSelector:) name:EVENT_VIRTUAL_CURRENCY_PACK_PURCHASED object:nil];
     
