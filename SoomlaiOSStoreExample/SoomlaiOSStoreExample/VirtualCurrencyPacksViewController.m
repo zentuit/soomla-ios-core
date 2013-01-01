@@ -80,7 +80,7 @@
     NSDictionary *item = [packs objectAtIndex:indexPath.row];
     VirtualCurrencyPack* pack = [item objectForKey:KEY_PACK];
 
-    [[StoreController getInstance] buyCurrencyPackWithProcuctId:pack.appstoreItem.productId];    
+    [[StoreController getInstance] buyAppStoreItemWithProcuctId:pack.appstoreItem.productId];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {

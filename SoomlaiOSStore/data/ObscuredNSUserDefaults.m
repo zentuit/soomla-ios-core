@@ -14,6 +14,7 @@
 
 + (NSString*)key
 {
+//    NSLog(@"%@", SOOM_SEC);
     return [SOOM_SEC stringByAppendingString:[[UIDevice currentDevice] uniqueGlobalDeviceIdentifier]];
 }
 

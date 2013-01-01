@@ -80,34 +80,41 @@
     }
 }
 
-- (void)buyCurrencyPackWithProcuctId:(NSString*)productId{
+- (void)buyAppStoreItemWithProcuctId:(NSString*)productId{
     
-    // Just trying to fetch currency pack to see if we get an exception.
+    AppStoreItem* asi = NULL;
+    
     @try {
         VirtualCurrencyPack* pack = [[StoreInfo getInstance] currencyPackWithProductId:productId];
-        
-        if ([SKPaymentQueue canMakePayments]) {
-            SKMutablePayment *payment = [[SKMutablePayment alloc] init] ;
-            payment.productIdentifier = productId;
-            payment.quantity = 1;
-            [[SKPaymentQueue defaultQueue] addPayment:payment];
-            
-            [EventHandling postMarketPurchaseStarted:pack.appstoreItem];
-        } else {
-            NSLog(@"Can't make purchases. Parental control is probably enabled.");
-        }
+        asi = pack.appstoreItem;
     }
     
     @catch (VirtualItemNotFoundException *e) {
-        NSLog(@"Couldn't find a VirtualCurrencyPack with productId: %@. Purchase is cancelled.", productId);
-        return;
+        @try {
+            asi = [[StoreInfo getInstance] appStoreNonConsumableItemWithProductId:productId];
+        }
+        @catch (NSException *exception) {
+            NSLog(@"Couldn't find a VirtualCurrencyPack or NonConsumableItem with productId: %@. Purchase is cancelled.", productId);
+            @throw exception;
+        }
+    }
+    
+    if ([SKPaymentQueue canMakePayments]) {
+        SKMutablePayment *payment = [[SKMutablePayment alloc] init] ;
+        payment.productIdentifier = productId;
+        payment.quantity = 1;
+        [[SKPaymentQueue defaultQueue] addPayment:payment];
+        
+        [EventHandling postMarketPurchaseStarted:asi];
+    } else {
+        NSLog(@"Can't make purchases. Parental control is probably enabled.");
     }
 }
 
 - (void)buyVirtualGood:(NSString*)itemId{
-    [EventHandling postGoodsPurchaseStarted];
-    
     VirtualGood* good = [[StoreInfo getInstance] goodWithItemId:itemId];
+    
+    [EventHandling postGoodsPurchaseStarted];
     
     // fetching currencies and amounts that the user needs in order to purchase the current VirtualGood.
     NSDictionary* currencyValues = [good currencyValues];
@@ -142,29 +149,6 @@
     }
     else {
         @throw [[InsufficientFundsException alloc] initWithItemId:needMore.itemId];
-    }
-}
-
-- (void)buyNonConsumableItem:(NSString*)productId{
-    // Just trying to fetch app store item to see if we get an exception.
-    @try {
-        AppStoreItem* asi = [[StoreInfo getInstance] appStoreNonConsumableItemWithProductId:productId];
-        
-        if ([SKPaymentQueue canMakePayments]) {
-            SKMutablePayment *payment = [[SKMutablePayment alloc] init] ;
-            payment.productIdentifier = productId;
-            payment.quantity = 1;
-            [[SKPaymentQueue defaultQueue] addPayment:payment];
-            
-            [EventHandling postMarketPurchaseStarted:asi];
-        } else {
-            NSLog(@"Can't make purchases. Parental control is probably enabled.");
-        }
-    }
-    
-    @catch (VirtualItemNotFoundException *e) {
-        NSLog(@"Couldn't find a AppStoreItem with productId: %@. Purchase is cancelled.", productId);
-        return;
     }
 }
 
