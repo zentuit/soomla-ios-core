@@ -3,7 +3,7 @@
 Haven't you ever wanted an in-app purchase one liner that looks like this ?!
 
 ```objective-c
-    [[StoreController getInstance] buyCurrencyPackWithProcuctId:@"[Your product id here]"]
+    [[StoreController getInstance] buyAppStoreItemWithProcuctId:@"[Your product id here]"]
 ```
 
 ios-store
@@ -96,7 +96,7 @@ VirtualCurrencyPack* TEN_COINS_PACK = [[VirtualCurrencyPack alloc] initWithName:
 Now you can use `StoreController` to call the App Store's in-app purchasing mechanism:
 
 ```objective-c
-    [[StoreController getInstance] buyCurrencyPackWithProcuctId:TEN_COINS_PACK.productId];
+    [[StoreController getInstance] buyAppStoreItemWithProcuctId:TEN_COINS_PACK.productId];
 ```
 
 And that's it! ios-store knows how to contact the App Store for you and redirect the user to the purchasing mechanism. Don't forget to subscribe to events of successful or failed purchases (see [Event Handling](https://github.com/soomla/ios-store#event-handling)).
