@@ -52,7 +52,7 @@
              nil];
     
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(packPurchased:) name:EVENT_APPSTORE_PURCHASED object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(curBalanceChanged:) name:EVENT_CHANGED_CURRENCY_BALANCE object:nil];
     
     int balance = [StoreInventory getCurrencyBalance:MUFFINS_CURRENCY_ITEM_ID];
     currencyBalance.text = [NSString stringWithFormat:@"%d", balance];
@@ -70,9 +70,9 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
-- (void)packPurchased:(NSNotification*)notification{
-    int cbalance = [StoreInventory getCurrencyBalance:MUFFINS_CURRENCY_ITEM_ID];
-    currencyBalance.text = [NSString stringWithFormat:@"%d", cbalance];
+- (void)curBalanceChanged:(NSNotification*)notification{
+    NSDictionary* userInfo = [notification userInfo];
+    currencyBalance.text = [NSString stringWithFormat:@"%d", [(NSNumber*)[userInfo objectForKey:@"balance"] intValue]];
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {

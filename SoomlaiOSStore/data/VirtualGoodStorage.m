@@ -19,6 +19,7 @@
 #import "StorageManager.h"
 #import "StoreDatabase.h"
 #import "StoreEncryptor.h"
+#import "EventHandling.h"
 
 @implementation VirtualGoodStorage
 
@@ -41,6 +42,8 @@
     int balance = [self getBalanceForGood:virtualGood] + amount;
     [[[StorageManager getInstance] database] updateGoodBalance:[StoreEncryptor encryptNumber:[NSNumber numberWithInt:balance]] forItemId:itemId];
     
+    [EventHandling postChangedBalance:balance forGood:virtualGood];
+    
     return balance;
 }
 
@@ -49,6 +52,8 @@
     int balance = [self getBalanceForGood:virtualGood] - amount;
     balance = balance > 0 ? balance : 0;
     [[[StorageManager getInstance] database] updateGoodBalance:[StoreEncryptor encryptNumber:[NSNumber numberWithInt:balance]] forItemId:itemId];
+
+    [EventHandling postChangedBalance:balance forGood:virtualGood];
     
     return balance;
 }

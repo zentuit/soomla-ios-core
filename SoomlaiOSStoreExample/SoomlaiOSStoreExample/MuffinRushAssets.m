@@ -23,7 +23,7 @@ NSString* const _1000_MUFFINS_PACK_ITEM_ID = @"muffins_1000";
 NSString* const _10_MUFFINS_PACK_PRODUCT_ID = @"muffins_10";
 NSString* const _50_MUFFINS_PACK_PRODUCT_ID = @"muffins_50";
 NSString* const _400_MUFFINS_PACK_PRODUCT_ID = @"muffins_400";
-NSString* const _1000_MUFFINS_PACK_PRODUCT_ID = @"muffins_1000";
+NSString* const _1000_MUFFINS_PACK_PRODUCT_ID = @"com.soomla.SoomlaiOSExample.second_test";
 
 NSString* const NO_ADDS_MANAGED_PRODUCT_ID = @"no_ads";
 

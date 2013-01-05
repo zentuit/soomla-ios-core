@@ -31,6 +31,8 @@ NSString * EVENT_CLOSING_STORE                   = @"ClosingStore";
 NSString * EVENT_OPENING_STORE                   = @"OpeningStore";
 NSString * EVENT_UNEXPECTED_ERROR_IN_STORE       = @"UnexpectedErrorInStore";
 NSString * EVENT_TRANSACTION_RESTORED            = @"TransactionRestored";
+NSString * EVENT_CHANGED_CURRENCY_BALANCE        = @"ChangedCurrencyBalance";
+NSString * EVENT_CHANGED_GOOD_BALANCE            = @"ChangedGoodBalance";
 
 
 @implementation EventHandling
@@ -47,6 +49,8 @@ NSString * EVENT_TRANSACTION_RESTORED            = @"TransactionRestored";
     [[NSNotificationCenter defaultCenter] addObserver:observer selector:selector name:EVENT_CLOSING_STORE object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:observer selector:selector name:EVENT_OPENING_STORE object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:observer selector:selector name:EVENT_UNEXPECTED_ERROR_IN_STORE object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:observer selector:selector name:EVENT_CHANGED_CURRENCY_BALANCE object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:observer selector:selector name:EVENT_CHANGED_GOOD_BALANCE object:nil];
 }
 
 + (void)postAppStorePurchase:(AppStoreItem*)appStoreItem{
@@ -101,6 +105,22 @@ NSString * EVENT_TRANSACTION_RESTORED            = @"TransactionRestored";
 + (void)postTransactionRestored:(NSString*)productId{
     NSDictionary *userInfo = [NSDictionary dictionaryWithObject:productId forKey:@"RestoredProductId"];
     [[NSNotificationCenter defaultCenter] postNotificationName:EVENT_TRANSACTION_RESTORED object:self userInfo:userInfo];
+}
+
++ (void)postChangedBalance:(int)balance forCurrency:(VirtualCurrency*)currency {
+    NSDictionary *userInfo = [NSDictionary dictionaryWithObjectsAndKeys:
+                              [NSNumber numberWithInt:balance], @"balance",
+                              currency, @"VirtualCurrency",
+                              nil];
+    [[NSNotificationCenter defaultCenter] postNotificationName:EVENT_CHANGED_CURRENCY_BALANCE object:self userInfo:userInfo];
+}
+
++ (void)postChangedBalance:(int)balance forGood:(VirtualGood*)good {
+    NSDictionary *userInfo = [NSDictionary dictionaryWithObjectsAndKeys:
+                              [NSNumber numberWithInt:balance], @"balance",
+                              good, @"VirtualGood",
+                              nil];
+    [[NSNotificationCenter defaultCenter] postNotificationName:EVENT_CHANGED_GOOD_BALANCE object:self userInfo:userInfo];
 }
 
 @end

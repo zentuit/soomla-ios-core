@@ -19,6 +19,7 @@
 #import "StorageManager.h"
 #import "StoreDatabase.h"
 #import "StoreEncryptor.h"
+#import "EventHandling.h"
 
 @implementation VirtualCurrencyStorage
 
@@ -42,6 +43,8 @@
     int balance = [self getBalanceForCurrency:virtualCurrency] + amount;
     [[[StorageManager getInstance] database] updateCurrencyBalance:[StoreEncryptor encryptNumber:[NSNumber numberWithInt:balance]] forItemId:itemId];
     
+    [EventHandling postChangedBalance:balance forCurrency:virtualCurrency];
+    
     return balance;
 }
 
@@ -50,6 +53,8 @@
     int balance = [self getBalanceForCurrency:virtualCurrency] - amount;
     balance = balance > 0 ? balance : 0;
     [[[StorageManager getInstance] database] updateCurrencyBalance:[StoreEncryptor encryptNumber:[NSNumber numberWithInt:balance]] forItemId:itemId];
+    
+    [EventHandling postChangedBalance:balance forCurrency:virtualCurrency];
     
     return balance;
 }
