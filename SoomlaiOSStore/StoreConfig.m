@@ -16,8 +16,8 @@
 
 #import "StoreConfig.h"
 
-BOOL DB_VOLATILE_METADATA       = YES;
+const int METADATA_VERSION      = 1;
 
 BOOL STORE_DEBUG                = NO;
 
-NSString* SOOM_SEC              = @"SINC_SSIEEKK";
+const NSString* SOOM_SEC              = @"SINC_SSIEEKK";

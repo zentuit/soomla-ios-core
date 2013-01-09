@@ -4,8 +4,8 @@
 #import "VirtualGood.h"
 #import "VirtualCurrencyPack.h"
 #import "StaticPriceModel.h"
-#import "AppStoreItem.h"
 #import "BalanceDrivenPriceModel.h"
+#import "NonConsumableItem.h"
 
 
 NSString* const MUFFINS_CURRENCY_ITEM_ID = @"currency_muffin";
@@ -25,7 +25,7 @@ NSString* const _50_MUFFINS_PACK_PRODUCT_ID = @"muffins_50";
 NSString* const _400_MUFFINS_PACK_PRODUCT_ID = @"muffins_400";
 NSString* const _1000_MUFFINS_PACK_PRODUCT_ID = @"com.soomla.SoomlaiOSExample.second_test";
 
-NSString* const NO_ADDS_MANAGED_PRODUCT_ID = @"no_ads";
+NSString* const NO_ADDS_NONCONS_PRODUCT_ID = @"no_ads";
 
 @implementation MuffinRushAssets
 
@@ -43,7 +43,7 @@ VirtualCurrencyPack* _50_MUFFINS_PACK;
 VirtualCurrencyPack* _400_MUFFINS_PACK;
 VirtualCurrencyPack* _1000_MUFFINS_PACK;
 
-AppStoreItem* NO_ADDS_NON_CONS;
+NonConsumableItem* NO_ADDS_NON_CONS;
 
 + (void)initialize{
 
@@ -85,8 +85,12 @@ AppStoreItem* NO_ADDS_NON_CONS;
     _400_MUFFINS_PACK = [[VirtualCurrencyPack alloc] initWithName:@"400 Muffins" andDescription:@"" andItemId:_400_MUFFINS_PACK_ITEM_ID andPrice:4.99 andProductId:_400_MUFFINS_PACK_PRODUCT_ID andCurrencyAmount:400 andCurrency:MUFFINS_CURRENCY];
     _1000_MUFFINS_PACK = [[VirtualCurrencyPack alloc] initWithName:@"1000 Muffins" andDescription:@"" andItemId:_1000_MUFFINS_PACK_ITEM_ID andPrice:8.99 andProductId:_1000_MUFFINS_PACK_PRODUCT_ID andCurrencyAmount:1000 andCurrency:MUFFINS_CURRENCY];
     
-    NO_ADDS_NON_CONS = [[AppStoreItem alloc] initWithProductId:NO_ADDS_MANAGED_PRODUCT_ID andConsumable:kNonConsumable];
+    NO_ADDS_NON_CONS = [[NonConsumableItem alloc] initWithName:@"No Ads" andDescription:@"" andItemId:@"no_ads" andPrice:1.99 andProductId:NO_ADDS_NONCONS_PRODUCT_ID];
     
+}
+
+- (int)getVersion {
+    return 0;
 }
 
 - (NSArray*)virtualCurrencies{
@@ -105,7 +109,7 @@ AppStoreItem* NO_ADDS_NON_CONS;
     return @[GENERAL_CATEGORY];
 }
 
-- (NSArray*)appStoreNonConsumableItems{
+- (NSArray*)nonConsumableItems{
     return @[NO_ADDS_NON_CONS];
 }
 

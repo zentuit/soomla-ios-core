@@ -16,6 +16,7 @@
 
 #import "StoreDatabase.h"
 #import "StoreConfig.h"
+#import "ObscuredNSUserDefaults.h"
 
 #define DATABASE_NAME @"store.db"
 
@@ -183,23 +184,31 @@
 
             [self createDBWithPath:[databasebPath UTF8String]];
             
-        } else if (DB_VOLATILE_METADATA == YES) {
-            if (sqlite3_open([databasebPath UTF8String], &database) == SQLITE_OK)
-            {
-                char *errMsg;
-            
-                NSString* createStmt = [NSString stringWithFormat:@"DROP TABLE IF EXISTS %@", METADATA_TABLE_NAME];
-                if (sqlite3_exec(database, [createStmt UTF8String], NULL, NULL, &errMsg) != SQLITE_OK)
+        } else {
+            int mt_ver = [ObscuredNSUserDefaults intForKey:@"MT_VER"];
+            int sa_ver_old = [ObscuredNSUserDefaults intForKey:@"SA_VER_OLD"];
+            int sa_ver_new = [ObscuredNSUserDefaults intForKey:@"SA_VER_NEW"];
+            if (mt_ver < METADATA_VERSION || sa_ver_old < sa_ver_new) {
+                if (sqlite3_open([databasebPath UTF8String], &database) == SQLITE_OK)
                 {
-                    NSLog(@"Failed to create metadata table");
+                    [ObscuredNSUserDefaults setInt:METADATA_VERSION forKey:@"MT_VER"];
+                    [ObscuredNSUserDefaults setInt:sa_ver_new forKey:@"SA_VER_OLD"];
+                    
+                    char *errMsg;
+                
+                    NSString* createStmt = [NSString stringWithFormat:@"DROP TABLE IF EXISTS %@", METADATA_TABLE_NAME];
+                    if (sqlite3_exec(database, [createStmt UTF8String], NULL, NULL, &errMsg) != SQLITE_OK)
+                    {
+                        NSLog(@"Failed to create metadata table");
+                    }
+                    
+                    sqlite3_close(database);
+                    
+                    [self createDBWithPath:[databasebPath UTF8String]];
+                    
+                } else {
+                    NSLog(@"Failed to open/create database (DB_VOLATILE_METADATA)");
                 }
-                
-                sqlite3_close(database);
-                
-                [self createDBWithPath:[databasebPath UTF8String]];
-                
-            } else {
-                NSLog(@"Failed to open/create database (DB_VOLATILE_METADATA)");
             }
         }
     }

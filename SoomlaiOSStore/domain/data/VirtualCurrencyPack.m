@@ -23,17 +23,16 @@
 
 @implementation VirtualCurrencyPack
 
-@synthesize price, currencyAmount, currency, appstoreItem;
+@synthesize currencyAmount, currency, appstoreItem;
 
 - (id)initWithName:(NSString*)oName andDescription:(NSString*)oDescription
     andItemId:(NSString*)oItemId andPrice:(double)oPrice andProductId:(NSString*)productId andCurrencyAmount:(int)oCurrencyAmount andCurrency:(VirtualCurrency*)oCurrency{
     
     self = [super initWithName:oName andDescription:oDescription andItemId:oItemId];
     if (self) {
-        self.price = oPrice;
         self.currencyAmount = oCurrencyAmount;
         self.currency = oCurrency;
-        self.appstoreItem = [[AppStoreItem alloc] initWithProductId:productId andConsumable:kConsumable];
+        self.appstoreItem = [[AppStoreItem alloc] initWithProductId:productId andConsumable:kConsumable andPrice:oPrice];
     }
     
     return self;
@@ -43,12 +42,9 @@
     
     self = [super initWithDictionary:dict];
     if (self) {
-        NSNumber* priceNum = [dict objectForKey:JSON_CURRENCYPACK_PRICE];
-        self.price = [priceNum doubleValue];
         NSNumber* amountNum = [dict objectForKey:JSON_CURRENCYPACK_AMOUNT];
         self.currencyAmount = [amountNum intValue];
-        NSString* productId = [dict objectForKey:JSON_CURRENCYPACK_PRODUCT_ID];
-        self.appstoreItem = [[AppStoreItem alloc] initWithProductId:productId andConsumable:kConsumable];
+        self.appstoreItem = [[AppStoreItem alloc] initWithDictionary:dict];
         
         NSString* currencyItemId = [dict objectForKey:JSON_CURRENCYPACK_CURRENCYITEMID];
         @try {
@@ -64,11 +60,13 @@
 
 - (NSDictionary*)toDictionary{
     NSDictionary* parentDict = [super toDictionary];
+    NSDictionary* aiDict = [appstoreItem toDictionary];
     NSMutableDictionary* toReturn = [[NSMutableDictionary alloc] initWithDictionary:parentDict];
-    [toReturn setValue:[NSNumber numberWithDouble:self.price] forKey:JSON_CURRENCYPACK_PRICE];
+    [aiDict enumerateKeysAndObjectsUsingBlock: ^(id key, id obj, BOOL *stop) {
+        [toReturn setObject: obj forKey: key];
+    }];
     [toReturn setValue:[NSNumber numberWithInt:self.currencyAmount] forKey:JSON_CURRENCYPACK_AMOUNT];
     [toReturn setValue:self.currency.itemId forKey:JSON_CURRENCYPACK_CURRENCYITEMID];
-    [toReturn setValue:appstoreItem.productId forKey:JSON_CURRENCYPACK_PRODUCT_ID];
     
     return toReturn;
 }

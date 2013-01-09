@@ -19,22 +19,23 @@
 #import "StorageManager.h"
 #import "StoreDatabase.h"
 #import "StoreEncryptor.h"
+#import "NonConsumableItem.h"
 
 @implementation NonConsumableStorage
 
 
-- (BOOL)nonConsumableExists:(AppStoreItem*)appStoreItem{
-    NSString* productId = [StoreEncryptor encryptString:appStoreItem.productId];
+- (BOOL)nonConsumableExists:(NonConsumableItem*)appStoreItem{
+    NSString* productId = [StoreEncryptor encryptString:appStoreItem.appStoreItem.productId];
     return [[[StorageManager getInstance] database] getAppStoreNonConsumableExists:productId];
 }
 
-- (void)add:(AppStoreItem*)appStoreItem{
-    NSString* productId = [StoreEncryptor encryptString:appStoreItem.productId];
+- (void)add:(NonConsumableItem*)appStoreItem{
+    NSString* productId = [StoreEncryptor encryptString:appStoreItem.appStoreItem.productId];
     [[[StorageManager getInstance] database] setAppStoreNonConsumable:productId purchased:true];
 }
 
-- (void)remove:(AppStoreItem*)appStoreItem{
-    NSString* productId = [StoreEncryptor encryptString:appStoreItem.productId];
+- (void)remove:(NonConsumableItem*)appStoreItem{
+    NSString* productId = [StoreEncryptor encryptString:appStoreItem.appStoreItem.productId];
     [[[StorageManager getInstance] database] setAppStoreNonConsumable:productId purchased:false];
 }
 

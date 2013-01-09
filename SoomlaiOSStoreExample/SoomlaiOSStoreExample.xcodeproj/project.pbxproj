@@ -77,6 +77,7 @@
 		C08CF30516432235007603E8 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = C08CF30416432235007603E8 /* Icon.png */; };
 		C08CF30716432239007603E8 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C08CF30616432239007603E8 /* Icon@2x.png */; };
 		C09F6CB71662840C002D385B /* NonConsumableStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = C09F6CB61662840C002D385B /* NonConsumableStorage.m */; };
+		C0A7ADC4169C66AD00F4F029 /* NonConsumableItem.m in Sources */ = {isa = PBXBuildFile; fileRef = C0A7ADC3169C66AD00F4F029 /* NonConsumableItem.m */; };
 		C0EFC949168B44A200948037 /* ObscuredNSUserDefaults.m in Sources */ = {isa = PBXBuildFile; fileRef = C0EFC948168B44A200948037 /* ObscuredNSUserDefaults.m */; };
 		C0EFC94D168B55C200948037 /* NSData-Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = C0EFC94C168B55C200948037 /* NSData-Base64.m */; };
 		C0EFC952168B55D700948037 /* NSString-MD5Addition.m in Sources */ = {isa = PBXBuildFile; fileRef = C0EFC94F168B55D700948037 /* NSString-MD5Addition.m */; };
@@ -193,6 +194,8 @@
 		C08CF30616432239007603E8 /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon@2x.png"; path = "../../Icon@2x.png"; sourceTree = "<group>"; };
 		C09F6CB51662840C002D385B /* NonConsumableStorage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NonConsumableStorage.h; sourceTree = "<group>"; };
 		C09F6CB61662840C002D385B /* NonConsumableStorage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NonConsumableStorage.m; sourceTree = "<group>"; };
+		C0A7ADC2169C66AD00F4F029 /* NonConsumableItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NonConsumableItem.h; sourceTree = "<group>"; };
+		C0A7ADC3169C66AD00F4F029 /* NonConsumableItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NonConsumableItem.m; sourceTree = "<group>"; };
 		C0EFC947168B44A200948037 /* ObscuredNSUserDefaults.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ObscuredNSUserDefaults.h; sourceTree = "<group>"; };
 		C0EFC948168B44A200948037 /* ObscuredNSUserDefaults.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ObscuredNSUserDefaults.m; sourceTree = "<group>"; };
 		C0EFC94B168B55C200948037 /* NSData-Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData-Base64.h"; sourceTree = "<group>"; };
@@ -408,6 +411,8 @@
 				C08CF2891641CF9F007603E8 /* VirtualGood.m */,
 				C08CF28A1641CF9F007603E8 /* VirtualItem.h */,
 				C08CF28B1641CF9F007603E8 /* VirtualItem.m */,
+				C0A7ADC2169C66AD00F4F029 /* NonConsumableItem.h */,
+				C0A7ADC3169C66AD00F4F029 /* NonConsumableItem.m */,
 			);
 			path = data;
 			sourceTree = "<group>";
@@ -585,6 +590,7 @@
 				C0EFC94D168B55C200948037 /* NSData-Base64.m in Sources */,
 				C0EFC952168B55D700948037 /* NSString-MD5Addition.m in Sources */,
 				C0EFC953168B55D700948037 /* UIDevice-IdentifierAddition.m in Sources */,
+				C0A7ADC4169C66AD00F4F029 /* NonConsumableItem.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

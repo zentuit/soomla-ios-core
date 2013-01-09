@@ -19,13 +19,14 @@
 
 @implementation AppStoreItem
 
-@synthesize consumable, productId;
+@synthesize price, productId, consumable;
 
-- (id)initWithProductId:(NSString*)oProductId andConsumable:(Consumable)oConsumable{
+- (id)initWithProductId:(NSString*)oProductId andConsumable:(Consumable)oConsumable andPrice:(double)oPrice{
     self = [super init];
     if (self){
         self.productId = oProductId;
         self.consumable = oConsumable;
+        self.price = oPrice;
     }
     
     return self;
@@ -34,8 +35,9 @@
 - (id)initWithDictionary:(NSDictionary*)dict{
     self = [super init];
     if (self) {
-        self.consumable = [[dict valueForKey:JSON_NONCONSUMABLE_CONSUMABLE] intValue];
-        self.productId = [dict objectForKey:JSON_NONCONSUMABLE_PRODUCT_ID];
+        self.consumable = [[dict valueForKey:JSON_APPSTOREITEM_CONSUMABLE] intValue];
+        self.productId = [dict objectForKey:JSON_APPSTOREITEM_PRODUCT_ID];
+        self.price = [[dict valueForKey:JSON_APPSTOREITEM_PRICE] doubleValue];
     }
     
     return self;
@@ -43,8 +45,9 @@
 
 - (NSDictionary*)toDictionary{
     return [[NSDictionary alloc] initWithObjectsAndKeys:
-            [NSNumber numberWithInt:self.consumable], JSON_NONCONSUMABLE_CONSUMABLE,
-            self.productId, JSON_NONCONSUMABLE_PRODUCT_ID,
+            [NSNumber numberWithInt:self.consumable], JSON_APPSTOREITEM_CONSUMABLE,
+            self.productId, JSON_APPSTOREITEM_PRODUCT_ID,
+            [NSNumber numberWithDouble:self.price], JSON_APPSTOREITEM_PRICE,
             nil];
 }
 

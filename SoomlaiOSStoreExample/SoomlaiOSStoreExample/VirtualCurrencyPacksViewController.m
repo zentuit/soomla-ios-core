@@ -97,7 +97,7 @@
     VirtualCurrencyPack* pack = [item objectForKey:KEY_PACK];
     cell.title.text = pack.name;
     cell.description.text = pack.description;
-    cell.price.text = [NSString stringWithFormat:@"%.02f", pack.price];
+    cell.price.text = [NSString stringWithFormat:@"%.02f", pack.appstoreItem.price];
     cell.icon.image = [UIImage imageNamed:[item objectForKey:KEY_THUMB]];
     
     return cell;

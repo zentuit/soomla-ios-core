@@ -29,6 +29,8 @@
 #import "NotEnoughGoodsException.h"
 #import "VirtualItemNotFoundException.h"
 #import "ObscuredNSUserDefaults.h"
+#import "AppStoreItem.h"
+#import "NonConsumableItem.h"
 
 #define kInAppPurchaseManagerProductsFetchedNotification @"kInAppPurchaseManagerProductsFetchedNotification"
 
@@ -54,6 +56,8 @@
         NSLog(@"secret is null or empty. can't initialize store !!");
         return;
     }
+    
+    [ObscuredNSUserDefaults setInt:[storeAssets getVersion] forKey:@"SA_VER_NEW"];
     
     [StorageManager getInstance];
     [[StoreInfo getInstance] initializeWithIStoreAsssets:storeAssets];
@@ -91,7 +95,8 @@
     
     @catch (VirtualItemNotFoundException *e) {
         @try {
-            asi = [[StoreInfo getInstance] appStoreNonConsumableItemWithProductId:productId];
+            NonConsumableItem* nonCons = [[StoreInfo getInstance] nonConsumableItemWithProductId:productId];
+            asi = nonCons.appStoreItem;
         }
         @catch (NSException *exception) {
             NSLog(@"Couldn't find a VirtualCurrencyPack or NonConsumableItem with productId: %@. Purchase is cancelled.", productId);
@@ -228,9 +233,10 @@
     }
     @catch (VirtualItemNotFoundException* e) {
         @try{
-            AppStoreItem* appStoreItem = [[StoreInfo getInstance] appStoreNonConsumableItemWithProductId:transaction.payment.productIdentifier];
+            NonConsumableItem* nonCons = [[StoreInfo getInstance] nonConsumableItemWithProductId:transaction.payment.productIdentifier];
+            appStoreItem = nonCons.appStoreItem;
             
-            [[[StorageManager getInstance] nonConsumableStorage] add:appStoreItem];
+            [[[StorageManager getInstance] nonConsumableStorage] add:nonCons];
         }
         @catch (VirtualItemNotFoundException* e) {
             NSLog(@"ERROR : Couldn't find the VirtualCurrencyPack OR AppStoreItem with productId: %@"

@@ -37,6 +37,25 @@
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
++ (void)setInt:(int)value forKey:(NSString *)defaultName {
+    NSString* val = [NSString stringWithFormat:@"%d",value];
+    val = [FBEncryptorAES encryptBase64String:val
+                                    keyString:[ObscuredNSUserDefaults key]
+                                separateLines:NO];
+    [[NSUserDefaults standardUserDefaults] setValue:val forKey:defaultName];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
++ (int)intForKey:(NSString *)defaultName {
+    NSString* val = [[NSUserDefaults standardUserDefaults] objectForKey:defaultName];
+    if (!val) {
+        return -1;
+    }
+    val = [FBEncryptorAES decryptBase64String:val
+                                    keyString:[ObscuredNSUserDefaults key]];
+    return [val intValue];
+}
+
 + (NSString*)stringForKey:(NSString *)defaultName {
     NSString* val = [[NSUserDefaults standardUserDefaults] objectForKey:defaultName];
     if (!val) {
