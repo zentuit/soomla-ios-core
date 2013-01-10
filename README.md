@@ -58,22 +58,6 @@ When you hide the store call:
 
 And that's it ! You have Storage and in-app purchasing capabilities... ALL-IN-ONE.
 
-Getting Started (using static library)
----
-
-#### **WE USE ARC !**
-
-
-* Before doing anything, SOOMLA recommends that you go through [Selling with In-App Purchase](https://developer.apple.com/appstore/in-app-purchase/index.html).
-
-1. Download SoomlaiOSStore.zip and unpack it.
-
-2. Add libSoomlaiOSStore.a and add it to your project's library dependencies. Add SooomlaiOSStore headers folder to your project as a source folder.
-
-3. Go to your project's "Build Phases" and set the value "-ObjC" for the key "Other Linker Flags".
-
-4. Go through steps 3-5 from [Getting Started (using source code)](https://github.com/soomla/ios-store#getting-started-using-source-code).
-
 What's next? In App Purchasing.
 ---
 
