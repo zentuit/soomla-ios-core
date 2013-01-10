@@ -38,7 +38,7 @@ Getting Started (using source code)
        [[StoreController getInstance] initializeWithStoreAssets:[[YourStoreAssetsImplementation alloc] init] andCustomSecret:@"[YOUR CUSTOM SECRET HERE]"];
       ```
 
-    > The custom secret is your encryption secret for data saved in the DB. This secret is NOT the secret from step 4 (select a different value). **This change was introduced on Dec. 26th, 2012 and if you already have android-store in your game you should pay attention to the "Game Secret" before you release an upgrade. Make sure the secret is exactly the same as what you had in the released version!! (If you never changed it in previous versions then it's probably "ChangeMe!!!")**
+    > The custom secret is your encryption secret for data saved in the DB. This secret is NOT the secret from step 4 (select a different value).
 
     > Initialize `StoreController` ONLY ONCE when your application loads.
 
