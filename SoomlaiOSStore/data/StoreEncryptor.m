@@ -60,7 +60,7 @@
 
 + (BOOL)decryptToBoolean:(NSString *)data{
     data = [self decryptToString:data];
-    NSNumber *res = [NSKeyedUnarchiver unarchiveObjectWithData:[data dataUsingEncoding:NSUTF8StringEncoding]];
+    NSNumber *res = [NSNumber numberWithInt:[data intValue]];
     return [res boolValue];
 }
 
