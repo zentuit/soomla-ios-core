@@ -48,7 +48,7 @@ NonConsumableItem* NO_ADDS_NON_CONS;
 + (void)initialize{
 
     /** Virtual Categories **/
-    GENERAL_CATEGORY = [[VirtualCategory alloc] initWithName:@"General" andId:1];
+    GENERAL_CATEGORY = [[VirtualCategory alloc] initWithName:@"General" andId:1 andEquippingModel:kNone];
     
 
     /** Virtual Currencies **/

@@ -39,6 +39,7 @@ extern NSString *const JSON_GOOD_EQUIPPED;
 
 extern NSString *const JSON_CATEGORY_NAME;
 extern NSString *const JSON_CATEGORY_ID;
+extern NSString *const JSON_CATEGORY_EQUIPPING;
 
 extern NSString *const JSON_ITEM_NAME;
 extern NSString *const JSON_ITEM_DESCRIPTION;

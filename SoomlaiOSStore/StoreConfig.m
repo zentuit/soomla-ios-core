@@ -16,7 +16,7 @@
 
 #import "StoreConfig.h"
 
-const int METADATA_VERSION      = 1;
+const int METADATA_VERSION      = 2;
 
 BOOL STORE_DEBUG                = NO;
 

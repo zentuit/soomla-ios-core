@@ -20,6 +20,7 @@
 #import "StoreInfo.h"
 #import "EventHandling.h"
 #import "VirtualGood.h"
+#import "VirtualCategory.h"
 #import "VirtualCurrency.h"
 #import "VirtualCurrencyPack.h"
 #import "VirtualCurrencyStorage.h"
@@ -179,7 +180,14 @@
     if ([[[StorageManager getInstance] virtualGoodStorage] getBalanceForGood:good] > 0){
         [[[StorageManager getInstance] virtualGoodStorage] equipGood:good withEquipValue:true];
         
-        [EventHandling postVirtualGoodEquipped:good];
+        if (good.category.equippingModel == kSingle) {
+            for (VirtualGood* g in [[StoreInfo getInstance] virtualGoods]) {
+                if (g.category.Id == good.category.Id &&
+                    ![g.itemId isEqualToString:good.itemId]) {
+                    [[[StorageManager getInstance] virtualGoodStorage] equipGood:g withEquipValue:false];
+                }
+            }
+        }
     }
 
     @throw [[NotEnoughGoodsException alloc] initWithItemId:itemId];
@@ -189,8 +197,6 @@
     VirtualGood* good = [[StoreInfo getInstance] goodWithItemId:itemId];
     
     [[[StorageManager getInstance] virtualGoodStorage] equipGood:good withEquipValue:false];
-    
-    [EventHandling postVirtualGoodUnEquipped:good];
 }
 
 #pragma mark -

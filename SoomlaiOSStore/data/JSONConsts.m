@@ -37,6 +37,7 @@ NSString *const JSON_GOOD_EQUIPPED            = @"equipped";
 
 NSString *const JSON_CATEGORY_NAME            = @"name";
 NSString *const JSON_CATEGORY_ID              = @"id";
+NSString *const JSON_CATEGORY_EQUIPPING       = @"equipping";
 
 NSString *const JSON_ITEM_NAME                = @"name";
 NSString *const JSON_ITEM_DESCRIPTION         = @"description";

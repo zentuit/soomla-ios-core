@@ -76,6 +76,12 @@
 - (void)equipGood:(VirtualGood*)virtualGood withEquipValue:(BOOL)equip{
     NSString* itemId = [StoreEncryptor encryptString:virtualGood.itemId];
     [[[StorageManager getInstance] database] updateGoodEquipped:[StoreEncryptor encryptBoolean:equip] forItemId:itemId];
+    
+    if (equip) {
+        [EventHandling postVirtualGoodEquipped:virtualGood];
+    } else {
+        [EventHandling postVirtualGoodUnEquipped:virtualGood];
+    }
 }
 
 @end
