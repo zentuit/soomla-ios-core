@@ -48,4 +48,7 @@ typedef enum {
 - (id)initWithDictionary:(NSDictionary*)dict;
 - (NSDictionary*)toDictionary;
 
++(NSString*) equippingModelEnumToString:(EquippingModel)emVal;
++(EquippingModel) equippingModelStringToEnum:(NSString*)emStr;
+
 @end

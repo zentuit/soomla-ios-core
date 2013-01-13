@@ -61,22 +61,22 @@ NonConsumableItem* NO_ADDS_NON_CONS;
                                       nil];
     NSArray* prices = [NSArray arrayWithObjects:FRUIT_CAKE_PRICE, nil];
     FRUIT_CAKE_GOOD = [[VirtualGood alloc] initWithName:@"Fruit Cake" andDescription:@"Customers buy a double portion on each purchase of this cake" andItemId:FRUIT_CAKE_GOOD_ITEM_ID andPriceModel:[[BalanceDrivenPriceModel alloc]
-          initWithCurrencyValuePerBalance:prices] andCategory:GENERAL_CATEGORY andEquipStatus:NO];
+          initWithCurrencyValuePerBalance:prices] andCategory:GENERAL_CATEGORY];
     
     NSDictionary* PAVLOVA_PRICE = [[NSDictionary alloc] initWithObjectsAndKeys:
                                     [NSNumber numberWithInt:175], MUFFINS_CURRENCY_ITEM_ID,
                                       nil];
-    PAVLOVA_GOOD = [[VirtualGood alloc] initWithName:@"Pavlova" andDescription:@"Gives customers a sugar rush and they call their friends" andItemId:PAVLOVA_GOOD_ITEM_ID andPriceModel:[[StaticPriceModel alloc] initWithCurrencyValue:PAVLOVA_PRICE] andCategory:GENERAL_CATEGORY andEquipStatus:NO];
+    PAVLOVA_GOOD = [[VirtualGood alloc] initWithName:@"Pavlova" andDescription:@"Gives customers a sugar rush and they call their friends" andItemId:PAVLOVA_GOOD_ITEM_ID andPriceModel:[[StaticPriceModel alloc] initWithCurrencyValue:PAVLOVA_PRICE] andCategory:GENERAL_CATEGORY];
     
     NSDictionary* CHOCO_CAKE_PRICE = [[NSDictionary alloc] initWithObjectsAndKeys:
                                     [NSNumber numberWithInt:250], MUFFINS_CURRENCY_ITEM_ID,
                                       nil];
-    CHOCO_CAKE_GOOD = [[VirtualGood alloc] initWithName:@"Choco-Cake" andDescription:@"A classic cake to maximize customer satisfaction" andItemId:CHOCO_CAKE_GOOD_ITEM_ID andPriceModel:[[StaticPriceModel alloc] initWithCurrencyValue:CHOCO_CAKE_PRICE] andCategory:GENERAL_CATEGORY andEquipStatus:NO];
+    CHOCO_CAKE_GOOD = [[VirtualGood alloc] initWithName:@"Choco-Cake" andDescription:@"A classic cake to maximize customer satisfaction" andItemId:CHOCO_CAKE_GOOD_ITEM_ID andPriceModel:[[StaticPriceModel alloc] initWithCurrencyValue:CHOCO_CAKE_PRICE] andCategory:GENERAL_CATEGORY];
     
     NSDictionary* CREAM_CUP_PRICE = [[NSDictionary alloc] initWithObjectsAndKeys:
                                     [NSNumber numberWithInt:50], MUFFINS_CURRENCY_ITEM_ID,
                                       nil];
-    CREAM_CUP_GOOD = [[VirtualGood alloc] initWithName:@"Cream Cup" andDescription:@"Increase bakery reputation with this original pastry" andItemId:CREAM_CUP_GOOD_ITEM_ID andPriceModel:[[StaticPriceModel alloc] initWithCurrencyValue:CREAM_CUP_PRICE] andCategory:GENERAL_CATEGORY andEquipStatus:NO];
+    CREAM_CUP_GOOD = [[VirtualGood alloc] initWithName:@"Cream Cup" andDescription:@"Increase bakery reputation with this original pastry" andItemId:CREAM_CUP_GOOD_ITEM_ID andPriceModel:[[StaticPriceModel alloc] initWithCurrencyValue:CREAM_CUP_PRICE] andCategory:GENERAL_CATEGORY];
     
 
     /** Virtual Currency Pack **/

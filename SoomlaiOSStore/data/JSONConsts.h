@@ -35,7 +35,6 @@ extern NSString *const JSON_GOOD_PRICE_MODEL;
 extern NSString *const JSON_GOOD_CATEGORY_ID;
 extern NSString *const JSON_GOOD_PRICE_MODEL_VALUES;
 extern NSString *const JSON_GOOD_PRICE_MODEL_TYPE;
-extern NSString *const JSON_GOOD_EQUIPPED;
 
 extern NSString *const JSON_CATEGORY_NAME;
 extern NSString *const JSON_CATEGORY_ID;

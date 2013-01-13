@@ -23,17 +23,16 @@
 
 @implementation VirtualGood
 
-@synthesize priceModel, category, equipped;
+@synthesize priceModel, category;
 
 - (id)initWithName:(NSString*)oName andDescription:(NSString*)oDescription
     andItemId:(NSString*)oItemId andPriceModel:(PriceModel*)oPriceModel
-       andCategory:(VirtualCategory*)oCategory andEquipStatus:(BOOL)oEquipped{
+       andCategory:(VirtualCategory*)oCategory{
     
     self = [super initWithName:oName andDescription:oDescription andItemId:oItemId];
     if (self){
         self.priceModel = oPriceModel;
         self.category = oCategory;
-        self.equipped = oEquipped;
     }
     
     return self;
@@ -43,7 +42,6 @@
     self = [super initWithDictionary:dict];
     if (self) {
         self.priceModel = [PriceModel priceModelWithNSDictionary:[dict objectForKey:JSON_GOOD_PRICE_MODEL]];
-        self.equipped = [[dict objectForKey:JSON_GOOD_EQUIPPED] boolValue];
         int categoryId = [[dict objectForKey:JSON_GOOD_CATEGORY_ID] intValue];
         @try {
             if (categoryId > -1){
@@ -63,7 +61,6 @@
     NSMutableDictionary* toReturn = [[NSMutableDictionary alloc] initWithDictionary:parentDict];
     [toReturn setValue:[self.priceModel toDictionary] forKey:JSON_GOOD_PRICE_MODEL];
     [toReturn setValue:[NSNumber numberWithInt:self.category.Id] forKey:JSON_GOOD_CATEGORY_ID];
-    [toReturn setValue:[NSNumber numberWithBool:self.equipped] forKey:JSON_GOOD_EQUIPPED];
     
     return toReturn;
 }

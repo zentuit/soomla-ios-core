@@ -17,11 +17,6 @@
 #import "VirtualCategory.h"
 #import "JSONConsts.h"
 
-@interface VirtualCategory (Private)
--(NSString*) equippingModelEnumToString:(EquippingModel)emVal;
--(EquippingModel) equippingModelStringToEnum:(NSString*)emStr;
-@end
-
 @implementation VirtualCategory
 
 @synthesize Id, name, equippingModel;
@@ -45,7 +40,7 @@
         self.name = [dict objectForKey:JSON_CATEGORY_NAME];
         NSNumber* numId = [dict objectForKey:JSON_CATEGORY_ID];
         self.Id = [numId intValue];
-        self.equippingModel = [self equippingModelStringToEnum:[dict objectForKey:JSON_CATEGORY_EQUIPPING]];
+        self.equippingModel = [VirtualCategory equippingModelStringToEnum:[dict objectForKey:JSON_CATEGORY_EQUIPPING]];
     }
     
     return self;
@@ -55,17 +50,17 @@
     return [[NSDictionary alloc] initWithObjectsAndKeys:
             self.name, JSON_CATEGORY_NAME,
             [NSNumber numberWithInt:self.Id], JSON_CATEGORY_ID,
-            [self equippingModelEnumToString:equippingModel], JSON_CATEGORY_EQUIPPING,
+            [VirtualCategory equippingModelEnumToString:equippingModel], JSON_CATEGORY_EQUIPPING,
             nil];
 }
 
--(NSString*) equippingModelEnumToString:(EquippingModel)emVal
++(NSString*) equippingModelEnumToString:(EquippingModel)emVal
 {
     NSArray *emArray = [[NSArray alloc] initWithObjects:EquippingModelArray];
     return [emArray objectAtIndex:emVal];
 }
 
--(EquippingModel) equippingModelStringToEnum:(NSString*)emStr
++(EquippingModel) equippingModelStringToEnum:(NSString*)emStr
 {
     NSArray *emArray = [[NSArray alloc] initWithObjects:EquippingModelArray];
     NSUInteger n = [emArray indexOfObject:emStr];

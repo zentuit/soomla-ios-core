@@ -33,7 +33,6 @@ NSString *const JSON_GOOD_PRICE_MODEL         = @"priceModel";
 NSString *const JSON_GOOD_CATEGORY_ID         = @"categoryId";
 NSString *const JSON_GOOD_PRICE_MODEL_VALUES  = @"values";
 NSString *const JSON_GOOD_PRICE_MODEL_TYPE    = @"type";
-NSString *const JSON_GOOD_EQUIPPED            = @"equipped";
 
 NSString *const JSON_CATEGORY_NAME            = @"name";
 NSString *const JSON_CATEGORY_ID              = @"id";
