@@ -61,7 +61,7 @@ And that's it ! You have Storage and in-app purchasing capabilities... ALL-IN-ON
 What's next? In App Purchasing.
 ---
 
-ios-store provides you with VirtualCurrencyPacks. VirtualCurrencyPack is a representation of a "bag" of currency units that you want to let your users purchase in the App Store. You define VirtualCurrencyPacks in your game specific assets file which is your implementation of `IStoreAssets` ([example](https://github.com/soomla/ios-store/blob/master/SoomlaiOSStoreExamples/MuffinRush/MuffinRush/MuffinRushAssets.m)). After you do that you can call `StoreController` to make actual purchases and ios-store will take care of the rest.
+ios-store provides you with VirtualCurrencyPacks. VirtualCurrencyPack is a representation of a "bag" of currency units that you want to let your users purchase in the App Store. You define VirtualCurrencyPacks in your game specific assets file which is your implementation of `IStoreAssets` ([example](https://github.com/soomla/ios-store/blob/master/SoomlaiOSStoreExample/SoomlaiOSStoreExample/MuffinRushAssets.m)). After you do that you can call `StoreController` to make actual purchases and ios-store will take care of the rest.
 
 Example:
 
