@@ -18,8 +18,8 @@
 
 #define DICT_KEY_BALANCE @"balance"
 #define DICT_KEY_EQUIP   @"equip"
-#define DICT_KEY_ITEM_ID @"itemId"
-#define DICT_KEY_PRODUCT_ID @"productId"
+#define DICT_KEY_ITEM_ID @"item_id"
+#define DICT_KEY_PRODUCT_ID @"product_id"
 
 /**
  * The StoreDatabase provides basic SQLite database io functions for specific needs around the SDK.
@@ -28,6 +28,9 @@
     @private
     sqlite3 *database;
 }
+
++ (BOOL)checkDatabaseExists;
++ (void)purgeDatabase;
 
 - (id)init;
 
@@ -42,6 +45,7 @@
  * purchased is the status of the App Store NON-CONSUMABLE item.
  */
 - (void)setAppStoreNonConsumable:(NSString*)productId purchased:(BOOL)purchased;
+- (NSArray*)getNonConsumables;
 /**
  * Updates the balance of the virtual currency with the given itemId.
  * itemId is the item id of the required virtual currency.
@@ -65,11 +69,13 @@
  * itemId is the required currency's item id.
  */
 - (NSDictionary*)getCurrencyWithItemId:(NSString*)itemId;
+- (NSArray*)getCurrencies;
 /**
  * Fetch a single virtual good information with the given itemId.
  * itemId is the required good's item id.
  */
 - (NSDictionary*)getGoodWithItemId:(NSString*)itemId;
+- (NSArray*)getGoods;
 /**
  * Overwrites the current storeinfo information with a new one.
  * storeinfo is the new store information.

@@ -17,26 +17,27 @@
 #import "NonConsumableStorage.h"
 #import "AppStoreItem.h"
 #import "StorageManager.h"
-#import "StoreDatabase.h"
 #import "StoreEncryptor.h"
 #import "NonConsumableItem.h"
+#import "KeyValDatabase.h"
 
 @implementation NonConsumableStorage
 
 
 - (BOOL)nonConsumableExists:(NonConsumableItem*)appStoreItem{
-    NSString* productId = [StoreEncryptor encryptString:appStoreItem.appStoreItem.productId];
-    return [[[StorageManager getInstance] database] getAppStoreNonConsumableExists:productId];
+    NSString* key = [StoreEncryptor encryptString:[KeyValDatabase keyNonConsExists:appStoreItem.appStoreItem.productId]];
+    NSString* val = [[[StorageManager getInstance] kvDatabase] getValForKey:key];
+    return val != nil;
 }
 
 - (void)add:(NonConsumableItem*)appStoreItem{
-    NSString* productId = [StoreEncryptor encryptString:appStoreItem.appStoreItem.productId];
-    [[[StorageManager getInstance] database] setAppStoreNonConsumable:productId purchased:true];
+    NSString* key = [StoreEncryptor encryptString:[KeyValDatabase keyNonConsExists:appStoreItem.appStoreItem.productId]];
+    [[[StorageManager getInstance] kvDatabase] setVal:@"" forKey:key];
 }
 
 - (void)remove:(NonConsumableItem*)appStoreItem{
-    NSString* productId = [StoreEncryptor encryptString:appStoreItem.appStoreItem.productId];
-    [[[StorageManager getInstance] database] setAppStoreNonConsumable:productId purchased:false];
+    NSString* key = [StoreEncryptor encryptString:[KeyValDatabase keyNonConsExists:appStoreItem.appStoreItem.productId]];
+    [[[StorageManager getInstance] kvDatabase] deleteKeyValWithKey:key];
 }
 
 

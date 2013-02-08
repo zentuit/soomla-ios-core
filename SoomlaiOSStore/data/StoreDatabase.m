@@ -43,6 +43,23 @@
 
 @implementation StoreDatabase
 
++ (BOOL)checkDatabaseExists {
+    NSString* databasebPath = [[StoreDatabase applicationDocumentsDirectory] stringByAppendingPathComponent:DATABASE_NAME];
+    
+    NSFileManager *filemgr = [NSFileManager defaultManager];
+    
+    
+    return [filemgr fileExistsAtPath: databasebPath] == NO;
+}
+
++ (void)purgeDatabase {
+    NSString* databasebPath = [[StoreDatabase applicationDocumentsDirectory] stringByAppendingPathComponent:DATABASE_NAME];
+    
+    if([[NSFileManager defaultManager] fileExistsAtPath:databasebPath]){
+        [[NSFileManager defaultManager] removeItemAtPath:databasebPath error:nil];
+    }
+}
+
 - (BOOL)getAppStoreNonConsumableExists:(NSString*)productId{
     NSArray* table = [self getEntity:NONCONSUMABLE_ITEMS_TABLE_NAME withField:NONCONSUMABLE_ITEMS_COLUMN_PRODUCTID andValue:productId];
     
@@ -51,6 +68,18 @@
 
 - (void)setAppStoreNonConsumable:(NSString*)productId purchased:(BOOL)purchased{
     [self saveData:productId forAttr:NONCONSUMABLE_ITEMS_COLUMN_PRODUCTID toEntiry:NONCONSUMABLE_ITEMS_TABLE_NAME withKeyFieldName:NONCONSUMABLE_ITEMS_COLUMN_PRODUCTID andKeyFieldVal:productId];
+}
+
+- (NSArray*)getNonConsumables {
+    return [self getEntitiesForName:NONCONSUMABLE_ITEMS_TABLE_NAME];
+}
+
+- (NSArray*)getCurrencies {
+    return [self getEntitiesForName:VIRTUAL_CURRENCY_TABLE_NAME];
+}
+
+- (NSArray*)getGoods {
+    return [self getEntitiesForName:VIRTUAL_GOODS_TABLE_NAME];
 }
 
 - (void)updateCurrencyBalance:(NSString*)balance forItemId:(NSString*)itemId{
@@ -175,7 +204,7 @@
 
 - (id)init{
     if (self = [super init]) {
-        NSString* databasebPath = [[self applicationDocumentsDirectory] stringByAppendingPathComponent:DATABASE_NAME];
+        NSString* databasebPath = [[StoreDatabase applicationDocumentsDirectory] stringByAppendingPathComponent:DATABASE_NAME];
         
         NSFileManager *filemgr = [NSFileManager defaultManager];
         
@@ -215,8 +244,58 @@
     return self;
 }
 
+- (NSArray*)getEntitiesForName:(NSString *)entityName{
+    NSString* databasebPath = [[StoreDatabase applicationDocumentsDirectory] stringByAppendingPathComponent:DATABASE_NAME];
+    if (sqlite3_open([databasebPath UTF8String], &database) == SQLITE_OK)
+    {
+        NSMutableArray *result = [NSMutableArray array];
+        sqlite3_stmt *statement = nil;
+        const char *sql = [[NSString stringWithFormat:@"SELECT * FROM %@", entityName] UTF8String];
+        if (sqlite3_prepare_v2(database, sql, -1, &statement, NULL) != SQLITE_OK) {
+            NSLog(@"Error while fetching entities for %@ : %s", entityName, sqlite3_errmsg(database));
+        } else {
+            while (sqlite3_step(statement) == SQLITE_ROW) {
+                NSMutableDictionary *row = [NSMutableDictionary dictionary];
+                for (int i=0; i<sqlite3_column_count(statement); i++) {
+                    int colType = sqlite3_column_type(statement, i);
+                    id value;
+                    if (colType == SQLITE_TEXT) {
+                        const unsigned char *col = sqlite3_column_text(statement, i);
+                        value = [NSString stringWithFormat:@"%s", col];
+                    } else if (colType == SQLITE_INTEGER) {
+                        int col = sqlite3_column_int(statement, i);
+                        value = [NSNumber numberWithInt:col];
+                    } else if (colType == SQLITE_FLOAT) {
+                        double col = sqlite3_column_double(statement, i);
+                        value = [NSNumber numberWithDouble:col];
+                    } else if (colType == SQLITE_NULL) {
+                        value = [NSNull null];
+                    } else {
+                        NSLog(@"ERROR: UNKNOWN COLUMN DATATYPE");
+                    }
+                    
+                    NSString* colName = [NSString stringWithUTF8String:sqlite3_column_name(statement, i)];
+                    [row setObject:value forKey:colName];
+                }
+                [result addObject:row];
+            }
+            
+            // Finalize
+            sqlite3_finalize(statement);
+        }
+        
+        // Close database
+        sqlite3_close(database);
+        return result;
+    }
+    else{
+        NSLog(@"Failed to open/create database");
+    }
+    return nil;
+}
+
 - (NSArray*)getEntity:(NSString *)entityName withField:(NSString*)field andValue:(NSString *)val{
-    NSString* databasebPath = [[self applicationDocumentsDirectory] stringByAppendingPathComponent:DATABASE_NAME];
+    NSString* databasebPath = [[StoreDatabase applicationDocumentsDirectory] stringByAppendingPathComponent:DATABASE_NAME];
     if (sqlite3_open([databasebPath UTF8String], &database) == SQLITE_OK)
     {
         NSMutableArray *result = [NSMutableArray array];
@@ -267,7 +346,7 @@
 
 
 - (void)saveData:(NSString *)data forAttr:(NSString *)attrName toEntiry:(NSString *)entityName withKeyFieldName:(NSString *)keyName andKeyFieldVal:(NSString*)keyVal{
-    NSString* databasebPath = [[self applicationDocumentsDirectory] stringByAppendingPathComponent:DATABASE_NAME];
+    NSString* databasebPath = [[StoreDatabase applicationDocumentsDirectory] stringByAppendingPathComponent:DATABASE_NAME];
     if (sqlite3_open([databasebPath UTF8String], &database) == SQLITE_OK)
     {
         
@@ -316,7 +395,7 @@
 #pragma mark - Application's Documents directory
 
 // Returns the URL to the application's Documents directory.
-- (NSString *) applicationDocumentsDirectory
++ (NSString *) applicationDocumentsDirectory
 {
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *basePath = ([paths count] > 0) ? [paths objectAtIndex:0] : nil;

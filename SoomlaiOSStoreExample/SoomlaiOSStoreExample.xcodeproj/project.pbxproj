@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C0242E8616C4081600803FE4 /* KeyValDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = C0242E8516C4081600803FE4 /* KeyValDatabase.m */; };
 		C08CF20C1641C68D007603E8 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C08CF20B1641C68D007603E8 /* UIKit.framework */; };
 		C08CF20E1641C68D007603E8 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C08CF20D1641C68D007603E8 /* Foundation.framework */; };
 		C08CF2101641C68D007603E8 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C08CF20F1641C68D007603E8 /* CoreGraphics.framework */; };
@@ -85,6 +86,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		C0242E8416C4081600803FE4 /* KeyValDatabase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeyValDatabase.h; sourceTree = "<group>"; };
+		C0242E8516C4081600803FE4 /* KeyValDatabase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeyValDatabase.m; sourceTree = "<group>"; };
 		C08CF2071641C68D007603E8 /* SoomlaiOSStoreExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SoomlaiOSStoreExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C08CF20B1641C68D007603E8 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		C08CF20D1641C68D007603E8 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -378,6 +381,8 @@
 				C09F6CB61662840C002D385B /* NonConsumableStorage.m */,
 				C0EFC947168B44A200948037 /* ObscuredNSUserDefaults.h */,
 				C0EFC948168B44A200948037 /* ObscuredNSUserDefaults.m */,
+				C0242E8416C4081600803FE4 /* KeyValDatabase.h */,
+				C0242E8516C4081600803FE4 /* KeyValDatabase.m */,
 			);
 			path = data;
 			sourceTree = "<group>";
@@ -591,6 +596,7 @@
 				C0EFC952168B55D700948037 /* NSString-MD5Addition.m in Sources */,
 				C0EFC953168B55D700948037 /* UIDevice-IdentifierAddition.m in Sources */,
 				C0A7ADC4169C66AD00F4F029 /* NonConsumableItem.m in Sources */,
+				C0242E8616C4081600803FE4 /* KeyValDatabase.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

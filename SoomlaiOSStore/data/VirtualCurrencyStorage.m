@@ -17,31 +17,29 @@
 #import "VirtualCurrencyStorage.h"
 #import "VirtualCurrency.h"
 #import "StorageManager.h"
-#import "StoreDatabase.h"
 #import "StoreEncryptor.h"
 #import "EventHandling.h"
+#import "KeyValDatabase.h"
 
 @implementation VirtualCurrencyStorage
 
 - (int)getBalanceForCurrency:(VirtualCurrency*)virtualCurrency{
-    NSString* itemId = [StoreEncryptor encryptString:virtualCurrency.itemId];
-    NSDictionary* currencyDict = [[[StorageManager getInstance] database] getCurrencyWithItemId:itemId];
+    NSString* key = [StoreEncryptor encryptString:[KeyValDatabase keyCurrencyBalance:virtualCurrency.itemId]];
+    NSString* val = [[[StorageManager getInstance] kvDatabase] getValForKey:key];
     
-    NSString* balanceStr = [currencyDict valueForKey:DICT_KEY_BALANCE];
-    
-    if (!currencyDict || !balanceStr || [balanceStr isEqual:[NSNull null]] || [balanceStr length]==0){
+    if (!val || [val length]==0){
         return 0;
     }
     
-    NSNumber* balance = [StoreEncryptor decryptToNumber:balanceStr];
+    NSNumber* balance = [StoreEncryptor decryptToNumber:val];
     
     return [balance intValue];
 }
 
 - (int)addAmount:(int)amount toCurrency:(VirtualCurrency*)virtualCurrency{
-    NSString* itemId = [StoreEncryptor encryptString:virtualCurrency.itemId];
+    NSString* key = [StoreEncryptor encryptString:[KeyValDatabase keyCurrencyBalance:virtualCurrency.itemId]];
     int balance = [self getBalanceForCurrency:virtualCurrency] + amount;
-    [[[StorageManager getInstance] database] updateCurrencyBalance:[StoreEncryptor encryptNumber:[NSNumber numberWithInt:balance]] forItemId:itemId];
+    [[[StorageManager getInstance] kvDatabase] setVal:[StoreEncryptor encryptNumber:[NSNumber numberWithInt:balance]] forKey:key ];
     
     [EventHandling postChangedBalance:balance forCurrency:virtualCurrency];
     
@@ -49,10 +47,10 @@
 }
 
 - (int)removeAmount:(int)amount fromCurrency:(VirtualCurrency*)virtualCurrency{
-    NSString* itemId = [StoreEncryptor encryptString:virtualCurrency.itemId];
+    NSString* key = [StoreEncryptor encryptString:[KeyValDatabase keyCurrencyBalance:virtualCurrency.itemId]];
     int balance = [self getBalanceForCurrency:virtualCurrency] - amount;
     balance = balance > 0 ? balance : 0;
-    [[[StorageManager getInstance] database] updateCurrencyBalance:[StoreEncryptor encryptNumber:[NSNumber numberWithInt:balance]] forItemId:itemId];
+    [[[StorageManager getInstance] kvDatabase] setVal:[StoreEncryptor encryptNumber:[NSNumber numberWithInt:balance]] forKey:key ];
     
     [EventHandling postChangedBalance:balance forCurrency:virtualCurrency];
     

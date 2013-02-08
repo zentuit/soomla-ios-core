@@ -16,7 +16,7 @@
 
 #import "StoreInfo.h"
 #import "StorageManager.h"
-#import "StoreDatabase.h"
+#import "KeyValDatabase.h"
 #import "JSONKit.h"
 #import "JSONConsts.h"
 #import "VirtualCategory.h"
@@ -65,14 +65,14 @@
 //        NSLog(@"%@", storeInfoJSON);
         NSString* ec = [[NSString alloc] initWithData:[storeInfoJSON dataUsingEncoding:NSUTF8StringEncoding] encoding:NSUTF8StringEncoding];
         NSString* enc = [StoreEncryptor encryptString:ec];
-        [[[StorageManager getInstance] database] setStoreInfo:enc];
+        [[[StorageManager getInstance] kvDatabase] setVal:enc forKey:[KeyValDatabase keyMetaStoreInfo]];
     }
 }
 
 - (BOOL)initializeFromDB{
     // first, trying to load StoreInfo from the local DB.
-    NSString* storeInfoJSON = [[[StorageManager getInstance] database] getStoreInfo];
-    if(!storeInfoJSON || [storeInfoJSON isEqual:[NSNull null]] || [storeInfoJSON length] == 0){
+    NSString* storeInfoJSON = [[[StorageManager getInstance] kvDatabase] getValForKey:[KeyValDatabase keyMetaStoreInfo]];
+    if(!storeInfoJSON || [storeInfoJSON length] == 0){
         return false;
     }
     

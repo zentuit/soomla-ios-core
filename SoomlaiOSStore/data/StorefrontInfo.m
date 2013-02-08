@@ -16,7 +16,7 @@
 
 #import "StorefrontInfo.h"
 #import "StorageManager.h"
-#import "StoreDatabase.h"
+#import "KeyValDatabase.h"
 #import "JSONKit.h"
 #import "StoreEncryptor.h"
 
@@ -45,7 +45,7 @@
     if (![self initializeFromDB]){
         self.storefrontJson = sfJSON;
         
-        [[[StorageManager getInstance] database] setStorefrontInfo:[StoreEncryptor encryptString:sfJSON]];
+        [[[StorageManager getInstance] kvDatabase] setVal:[StoreEncryptor encryptString:sfJSON] forKey:[KeyValDatabase keyMetaStorefrontInfo]];
         
         NSDictionary* sfDict = [self.storefrontJson objectFromJSONString];
         //TODO: check that this value is parsed
@@ -54,7 +54,7 @@
 }
 
 - (BOOL)initializeFromDB{
-    NSString* sfJSON = [[[StorageManager getInstance] database] getStorefrontInfo];
+    NSString* sfJSON = [[[StorageManager getInstance] kvDatabase] getValForKey:[KeyValDatabase keyMetaStorefrontInfo]];
     if (!sfJSON || [sfJSON isEqual:[NSNull null]] || sfJSON.length == 0){
         NSLog(@"storefront json is not in DB yet");
         return NO;
