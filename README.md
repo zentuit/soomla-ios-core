@@ -8,6 +8,8 @@ Haven't you ever wanted an in-app purchase one liner that looks like this ?!
 
 ios-store
 ---
+**Feb 8th, 2013 - We've just released v2.0 of ios-store. The major change is a key-value storage (above SQLite) instead of the previous tables. We've also added code that migrates old data and removes the old database (StorageManager.migrateOldData). When you upgrade your code make sure data is transferred from the old database.**
+
 The ios-store is our iOS-flavored code initiative part of The SOOMLA Project. It is an iOS SDK that simplifies the App Store's in-app purchasing API and complements it with storage, security and event handling. The project also includes a sample app for reference. As an optional (and currently EXPERIMENTAL) part of our open-source projects you can also get the storefront's theme which you can customize with your own game's assets. To use our storefront, refer to [Get your own Storefront](https://github.com/soomla/ios-store/wiki/Get-your-own-Storefront-%5BEXPERIMENTAL%5D).
 
 >If you also want to create a storefront you can do that using our [Store Designer](http://designer.soom.la).
