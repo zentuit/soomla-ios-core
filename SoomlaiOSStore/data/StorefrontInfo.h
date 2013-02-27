@@ -39,7 +39,7 @@
  * NOTE: If you want to override the current StorefrontInfo metadata JSON file, you'll have to bump the
  * database version (the old database will be destroyed but balances will be saved!!).
  */
-- (void)initializeWithJSON:(NSString*)sfJSON;
+- (void)initialize;
 
 - (BOOL)initializeFromDB;
 - (NSDictionary*)toDictionary;
