@@ -41,4 +41,6 @@
  */
 - (int)removeAmount:(int)amount fromCurrency:(VirtualCurrency*)virtualCurrency;
 
+- (int)setBalance:(int)balance toCurrency:(VirtualCurrency*)virtualCurrency;
+
 @end

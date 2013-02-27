@@ -59,7 +59,7 @@ extern NSString * EVENT_CHANGED_GOOD_BALANCE;
 + (void)postOpeningStore;
 + (void)postUnexpectedError;
 + (void)postTransactionRestored:(NSString*)productId;
-+ (void)postChangedBalance:(int)balance forCurrency:(VirtualCurrency*)currency;
-+ (void)postChangedBalance:(int)balance forGood:(VirtualGood*)good;
++ (void)postChangedBalance:(int)balance forCurrency:(VirtualCurrency*)currency withAmount:(int)amountAdded;
++ (void)postChangedBalance:(int)balance forGood:(VirtualGood*)good withAmount:(int)amountAdded;
 
 @end

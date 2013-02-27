@@ -36,13 +36,14 @@
     return _instance;
 }
 
-- (void)initializeWithJSON:(NSString*)sfJSON{
-    if (sfJSON.length == 0){
-        NSLog(@"The given storefront JSON can't be null or empty !");
-        return;
-    }
+- (void)initialize{
     
     if (![self initializeFromDB]){
+        NSString* sfJSON = [self fetchThemeJsonFromFile];
+        if (!sfJSON) {
+            NSLog(@"Couldn't find storefront in the DB AND the filesystem. Something is totally wrong !");
+            return;
+        }
         self.storefrontJson = sfJSON;
         
         [[[StorageManager getInstance] kvDatabase] setVal:[StoreEncryptor encryptString:sfJSON] forKey:[KeyValDatabase keyMetaStorefrontInfo]];
@@ -51,6 +52,16 @@
         //TODO: check that this value is parsed
         self.orientationLandscape = [((NSString*)[[sfDict objectForKey:@"template"] objectForKey:@"orientation"]) isEqualToString:@"landscape"];
     }
+}
+
+- (NSString*) fetchThemeJsonFromFile {
+    NSString* jsonPath = [[NSBundle mainBundle] pathForResource:@"theme" ofType:@"json"];
+    if (jsonPath)  {
+        return [NSString stringWithContentsOfFile:jsonPath encoding:NSUTF8StringEncoding error:nil];
+    }
+    
+    NSLog(@"Can't read JSON storefront file. Please add theme.json as a bundle resource.");
+    return NULL;
 }
 
 - (BOOL)initializeFromDB{

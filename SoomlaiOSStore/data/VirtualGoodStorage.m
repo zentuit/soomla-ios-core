@@ -40,7 +40,7 @@
     int balance = [self getBalanceForGood:virtualGood] + amount;
     [[[StorageManager getInstance] kvDatabase] setVal:[StoreEncryptor encryptNumber:[NSNumber numberWithInt:balance]] forKey:key];
     
-    [EventHandling postChangedBalance:balance forGood:virtualGood];
+    [EventHandling postChangedBalance:balance forGood:virtualGood withAmount:amount];
     
     return balance;
 }
@@ -51,7 +51,16 @@
     balance = balance > 0 ? balance : 0;
     [[[StorageManager getInstance] kvDatabase] setVal:[StoreEncryptor encryptNumber:[NSNumber numberWithInt:balance]] forKey:key];
 
-    [EventHandling postChangedBalance:balance forGood:virtualGood];
+    [EventHandling postChangedBalance:balance forGood:virtualGood withAmount:(-1*amount)];
+    
+    return balance;
+}
+
+- (int)setBalance:(int)balance toCurrency:(VirtualGood*)virtualGood {
+    NSString* key = [StoreEncryptor encryptString:[KeyValDatabase keyGoodBalance:virtualGood.itemId]];
+    [[[StorageManager getInstance] kvDatabase] setVal:[StoreEncryptor encryptNumber:[NSNumber numberWithInt:balance]] forKey:key];
+    
+    [EventHandling postChangedBalance:balance forGood:virtualGood withAmount:0];
     
     return balance;
 }
