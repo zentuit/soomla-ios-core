@@ -45,4 +45,6 @@
 
 - (id)init;
 
++ (NSString *) applicationDirectory;
+
 @end

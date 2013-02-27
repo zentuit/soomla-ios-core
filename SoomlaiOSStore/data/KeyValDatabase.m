@@ -17,6 +17,7 @@
 #import "KeyValDatabase.h"
 #import "StoreConfig.h"
 #import "ObscuredNSUserDefaults.h"
+#import "StorageManager.h"
 
 #define DATABASE_NAME @"store.kv.db"
 
@@ -72,9 +73,18 @@
 
 - (id)init{
     if (self = [super init]) {
-        NSString* databasebPath = [[self applicationDocumentsDirectory] stringByAppendingPathComponent:DATABASE_NAME];
-        
+        NSError *error;
+        NSString* oldDatabasebPath = [[self applicationDocumentsDirectory] stringByAppendingPathComponent:DATABASE_NAME];
+        NSString* databasebPath = [[StorageManager applicationDirectory] stringByAppendingPathComponent:DATABASE_NAME];
         NSFileManager *filemgr = [NSFileManager defaultManager];
+        if ([filemgr fileExistsAtPath: oldDatabasebPath] == YES) {
+            [[NSFileManager defaultManager] copyItemAtPath:oldDatabasebPath toPath:databasebPath error:&error];
+            if (error) {
+                NSLog(@"There was a problem while trying to copy old database.");
+            } else {
+                [filemgr removeItemAtPath:oldDatabasebPath error:nil];
+            }
+        }
         
         if ([filemgr fileExistsAtPath: databasebPath] == NO) {
             [self createDBWithPath:[databasebPath UTF8String]];
@@ -84,7 +94,7 @@
 }
 
 - (void)deleteKeyValWithKey:(NSString *)key{
-    NSString* databasebPath = [[self applicationDocumentsDirectory] stringByAppendingPathComponent:DATABASE_NAME];
+    NSString* databasebPath = [[StorageManager applicationDirectory] stringByAppendingPathComponent:DATABASE_NAME];
     if (sqlite3_open([databasebPath UTF8String], &database) == SQLITE_OK)
     {
         NSString* deleteStmt = [NSString stringWithFormat:@"DELETE FROM %@ WHERE %@=?",
@@ -113,7 +123,7 @@
 
 - (NSString*)getValForKey:(NSString *)key{
     NSString *result = nil;
-    NSString* databasebPath = [[self applicationDocumentsDirectory] stringByAppendingPathComponent:DATABASE_NAME];
+    NSString* databasebPath = [[StorageManager applicationDirectory] stringByAppendingPathComponent:DATABASE_NAME];
     if (sqlite3_open([databasebPath UTF8String], &database) == SQLITE_OK)
     {
         sqlite3_stmt *statement = nil;
@@ -152,7 +162,7 @@
 
 
 - (void)setVal:(NSString *)val forKey:(NSString *)key{
-    NSString* databasebPath = [[self applicationDocumentsDirectory] stringByAppendingPathComponent:DATABASE_NAME];
+    NSString* databasebPath = [[StorageManager applicationDirectory] stringByAppendingPathComponent:DATABASE_NAME];
     if (sqlite3_open([databasebPath UTF8String], &database) == SQLITE_OK)
     {
         
@@ -203,9 +213,9 @@
 // Returns the URL to the application's Documents directory.
 - (NSString *) applicationDocumentsDirectory
 {
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *basePath = ([paths count] > 0) ? [paths objectAtIndex:0] : nil;
-    return basePath;
+        NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+        NSString *basePath = ([paths count] > 0) ? [paths objectAtIndex:0] : nil;
+        return basePath;
 }
 
 @end

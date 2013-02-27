@@ -99,7 +99,7 @@
     key = [StoreEncryptor encryptString:[KeyValDatabase keyMetaStorefrontInfo]];
     [kvDatabase setVal:storefrontInfo forKey:key];
     
-//    [StoreDatabase purgeDatabase];
+    [StoreDatabase purgeDatabase];
     
     NSLog(@"Finished Migrating old database!");
 }
@@ -127,6 +127,34 @@
     }
     
     return self;
+}
+
+
++ (NSString *) applicationDirectory
+{
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSApplicationSupportDirectory, NSUserDomainMask, YES);
+    if ([paths count] == 0)
+    {
+        // *** creation and return of error object omitted for space
+        return nil;
+    }
+    
+    NSString *basePath = [paths objectAtIndex:0];
+    NSError *error;
+    
+    NSFileManager *fManager = [NSFileManager defaultManager];
+    if (![fManager fileExistsAtPath:basePath]) {
+        if (![fManager createDirectoryAtPath:basePath
+                                       withIntermediateDirectories:YES
+                                                        attributes:nil
+                                                             error:&error])
+        {
+            NSLog(@"Create directory error: %@", error);
+            return nil;
+        }
+    }
+    
+    return basePath;
 }
 
 @end
