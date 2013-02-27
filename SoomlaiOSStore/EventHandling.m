@@ -111,7 +111,7 @@ NSString * EVENT_CHANGED_GOOD_BALANCE            = @"ChangedGoodBalance";
     NSDictionary *userInfo = [NSDictionary dictionaryWithObjectsAndKeys:
                               [NSNumber numberWithInt:balance], @"balance",
                               currency, @"VirtualCurrency",
-                              amountAdded, @"amountAdded",
+                              [NSNumber numberWithInt:amountAdded], @"amountAdded",
                               nil];
     [[NSNotificationCenter defaultCenter] postNotificationName:EVENT_CHANGED_CURRENCY_BALANCE object:self userInfo:userInfo];
 }
@@ -120,7 +120,7 @@ NSString * EVENT_CHANGED_GOOD_BALANCE            = @"ChangedGoodBalance";
     NSDictionary *userInfo = [NSDictionary dictionaryWithObjectsAndKeys:
                               [NSNumber numberWithInt:balance], @"balance",
                               good, @"VirtualGood",
-                              amountAdded, @"amountAdded",
+                              [NSNumber numberWithInt:amountAdded], @"amountAdded",
                               nil];
     [[NSNotificationCenter defaultCenter] postNotificationName:EVENT_CHANGED_GOOD_BALANCE object:self userInfo:userInfo];
 }
