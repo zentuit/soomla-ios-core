@@ -32,68 +32,68 @@
 + (BOOL)checkDatabaseExists;
 + (void)purgeDatabase;
 
-- (id)init;
+- (id)init __attribute__((deprecated));
 
 /**
  * Fetch a single App Store NON-CONSUMABLE information with the given productId.
  * productId is the required item's product id.
  */
-- (BOOL)getAppStoreNonConsumableExists:(NSString*)productId;
+- (BOOL)getAppStoreNonConsumableExists:(NSString*)productId __attribute__((deprecated));
 /**
  * Sets the status of the App Store NON-CONSUMABLE item with the given purchased boolean.
  * productId is the App Store NON-CONSUMABLE item.
  * purchased is the status of the App Store NON-CONSUMABLE item.
  */
-- (void)setAppStoreNonConsumable:(NSString*)productId purchased:(BOOL)purchased;
-- (NSArray*)getNonConsumables;
+- (void)setAppStoreNonConsumable:(NSString*)productId purchased:(BOOL)purchased __attribute__((deprecated));
+- (NSArray*)getNonConsumables __attribute__((deprecated));
 /**
  * Updates the balance of the virtual currency with the given itemId.
  * itemId is the item id of the required virtual currency.
  * balance is the required virtual currency's new balance.
  */
-- (void)updateCurrencyBalance:(NSString*)balance forItemId:(NSString*)itemId;
+- (void)updateCurrencyBalance:(NSString*)balance forItemId:(NSString*)itemId __attribute__((deprecated));
 /**
  * Updates the balance of the virtual good with the given itemId.
  * itemId is the item id of the required virtual good.
  * balance is the required virtual good's new balance.
  */
-- (void)updateGoodBalance:(NSString*)balance forItemId:(NSString*)itemId;
+- (void)updateGoodBalance:(NSString*)balance forItemId:(NSString*)itemId __attribute__((deprecated));
 /**
  * Updates the equipe status of the virtual good with the given itemId.
  * itemId is the item id of the required virtual good.
  * equip is the required virtual good's new equip status.
  */
-- (void)updateGoodEquipped:(NSString*)equip forItemId:(NSString*)itemId;
+- (void)updateGoodEquipped:(NSString*)equip forItemId:(NSString*)itemId __attribute__((deprecated));
 /**
  * Fetch a single virtual currency information with the given itemId.
  * itemId is the required currency's item id.
  */
-- (NSDictionary*)getCurrencyWithItemId:(NSString*)itemId;
-- (NSArray*)getCurrencies;
+- (NSDictionary*)getCurrencyWithItemId:(NSString*)itemId __attribute__((deprecated));
+- (NSArray*)getCurrencies __attribute__((deprecated));
 /**
  * Fetch a single virtual good information with the given itemId.
  * itemId is the required good's item id.
  */
-- (NSDictionary*)getGoodWithItemId:(NSString*)itemId;
-- (NSArray*)getGoods;
+- (NSDictionary*)getGoodWithItemId:(NSString*)itemId __attribute__((deprecated));
+- (NSArray*)getGoods __attribute__((deprecated));
 /**
  * Overwrites the current storeinfo information with a new one.
  * storeinfo is the new store information.
  */
-- (void)setStoreInfo:(NSString*)storeInfoData;
+- (void)setStoreInfo:(NSString*)storeInfoData __attribute__((deprecated));
 /**
  * Overwrites the current storefrontinfo information with a new one.
  * storefrontinfo is the new storefront information.
  */
-- (void)setStorefrontInfo:(NSString*)storefrontInfoData;
+- (void)setStorefrontInfo:(NSString*)storefrontInfoData __attribute__((deprecated));
 /**
  * Fetch the current storeInfo information with a new one.
  */
-- (NSString*)getStoreInfo;
+- (NSString*)getStoreInfo __attribute__((deprecated));
 /**
  * Fetch the current storefrontInfo information with a new one.
  */
-- (NSString*)getStorefrontInfo;
+- (NSString*)getStorefrontInfo __attribute__((deprecated));
 
 
 @end

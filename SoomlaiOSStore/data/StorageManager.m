@@ -23,6 +23,7 @@
 #import "StoreConfig.h"
 #import "StoreDatabase.h"
 #import "StoreEncryptor.h"
+#import "KeyValueStorage.h"
 
 @interface StorageManager (Private)
 - (void)migrateOldData;
@@ -30,7 +31,7 @@
 
 @implementation StorageManager
 
-@synthesize kvDatabase, virtualCurrencyStorage, virtualGoodStorage, nonConsumableStorage;
+@synthesize kvDatabase, virtualCurrencyStorage, virtualGoodStorage, nonConsumableStorage, keyValueStorage;
 
 + (StorageManager*)getInstance{
     static StorageManager* _instance = nil;
@@ -111,6 +112,7 @@
         self.virtualCurrencyStorage = [[VirtualCurrencyStorage alloc] init];
         self.virtualGoodStorage = [[VirtualGoodStorage alloc] init];
         self.nonConsumableStorage = [[NonConsumableStorage alloc] init];
+        self.keyValueStorage = [[KeyValueStorage alloc] init];
         
         [self migrateOldData];
         
@@ -132,29 +134,33 @@
 
 + (NSString *) applicationDirectory
 {
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSApplicationSupportDirectory, NSUserDomainMask, YES);
-    if ([paths count] == 0)
-    {
-        // *** creation and return of error object omitted for space
-        return nil;
-    }
+    static NSString* appDir = nil;
     
-    NSString *basePath = [paths objectAtIndex:0];
-    NSError *error;
-    
-    NSFileManager *fManager = [NSFileManager defaultManager];
-    if (![fManager fileExistsAtPath:basePath]) {
-        if (![fManager createDirectoryAtPath:basePath
-                                       withIntermediateDirectories:YES
-                                                        attributes:nil
-                                                             error:&error])
+    if (appDir == nil) {
+        NSArray *paths = NSSearchPathForDirectoriesInDomains(NSApplicationSupportDirectory, NSUserDomainMask, YES);
+        if ([paths count] == 0)
         {
-            NSLog(@"Create directory error: %@", error);
+            // *** creation and return of error object omitted for space
             return nil;
         }
+        
+        NSString *basePath = [paths objectAtIndex:0];
+        NSError *error;
+        
+        NSFileManager *fManager = [NSFileManager defaultManager];
+        if (![fManager fileExistsAtPath:basePath]) {
+            if (![fManager createDirectoryAtPath:basePath
+                                           withIntermediateDirectories:YES
+                                                            attributes:nil
+                                                                 error:&error])
+            {
+                NSLog(@"Create directory error: %@", error);
+                return nil;
+            }
+        }
+        appDir = basePath;
     }
-    
-    return basePath;
+    return appDir;
 }
 
 @end

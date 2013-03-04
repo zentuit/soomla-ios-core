@@ -56,7 +56,7 @@
     return balance;
 }
 
-- (int)setBalance:(int)balance toCurrency:(VirtualGood*)virtualGood {
+- (int)setBalance:(int)balance toGood:(VirtualGood*)virtualGood {
     NSString* key = [StoreEncryptor encryptString:[KeyValDatabase keyGoodBalance:virtualGood.itemId]];
     [[[StorageManager getInstance] kvDatabase] setVal:[StoreEncryptor encryptNumber:[NSNumber numberWithInt:balance]] forKey:key];
     

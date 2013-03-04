@@ -51,5 +51,5 @@
  */
 - (void)equipGood:(VirtualGood*)virtualGood withEquipValue:(BOOL)equip;
 
-- (int)setBalance:(int)balance toCurrency:(VirtualGood*)virtualGood;
+- (int)setBalance:(int)balance toGood:(VirtualGood*)virtualGood;
 @end

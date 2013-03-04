@@ -33,35 +33,47 @@
 }
 
 + (NSString *)encryptString:(NSString *)data{
-    return [FBEncryptorAES encryptBase64String:data
-                                     keyString:[self key]
-                                 separateLines:NO];
+    @synchronized(self) {
+        return [FBEncryptorAES encryptBase64String:data
+                                         keyString:[self key]
+                                     separateLines:NO];
+    }
 }
 
 + (NSString *)decryptToString:(NSString *)data{
-    return [FBEncryptorAES decryptBase64String:data
+    @synchronized(self) {
+        return [FBEncryptorAES decryptBase64String:data
                                      keyString:[self key]];
+    }
 }
 
 + (NSString *)encryptNumber:(NSNumber *)data{
-    return [self encryptString:[data stringValue]];
+    @synchronized(self) {
+        return [self encryptString:[data stringValue]];
+    }
 }
 
 + (NSNumber *)decryptToNumber:(NSString *)data{
-    data = [self decryptToString:data];
-    NSNumberFormatter * f = [[NSNumberFormatter alloc] init];
-    [f setNumberStyle:NSNumberFormatterDecimalStyle];
-    return [f numberFromString:data];
+    @synchronized(self) {
+        data = [self decryptToString:data];
+        NSNumberFormatter * f = [[NSNumberFormatter alloc] init];
+        [f setNumberStyle:NSNumberFormatterDecimalStyle];
+        return [f numberFromString:data];
+    }
 }
 
 + (NSString *)encryptBoolean:(BOOL)data{
-    return [self encryptString:[[NSNumber numberWithBool:data] stringValue]];
+    @synchronized(self) {
+        return [self encryptString:[[NSNumber numberWithBool:data] stringValue]];
+    }
 }
 
 + (BOOL)decryptToBoolean:(NSString *)data{
-    data = [self decryptToString:data];
-    NSNumber *res = [NSNumber numberWithInt:[data intValue]];
-    return [res boolValue];
+    @synchronized(self) {
+        data = [self decryptToString:data];
+        NSNumber *res = [NSNumber numberWithInt:[data intValue]];
+        return [res boolValue];
+    }
 }
 
 @end

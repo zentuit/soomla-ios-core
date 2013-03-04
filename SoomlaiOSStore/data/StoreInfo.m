@@ -73,7 +73,7 @@
     // first, trying to load StoreInfo from the local DB.
     NSString* storeInfoJSON = [[[StorageManager getInstance] kvDatabase] getValForKey:[KeyValDatabase keyMetaStoreInfo]];
     if(!storeInfoJSON || [storeInfoJSON length] == 0){
-        return false;
+        return NO;
     }
     
     storeInfoJSON = [StoreEncryptor decryptToString:storeInfoJSON];

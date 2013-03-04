@@ -20,6 +20,7 @@
 @class VirtualGoodStorage;
 @class VirtualCurrencyStorage;
 @class NonConsumableStorage;
+@class KeyValueStorage;
 
 
 /**
@@ -34,12 +35,14 @@
     VirtualGoodStorage* virtualGoodStorage;
     VirtualCurrencyStorage* virtualCurrenctStorage;
     NonConsumableStorage* nonConsumableStorage;
+    KeyValueStorage* keyValueStorage;
 }
 
 @property (nonatomic, retain)KeyValDatabase* kvDatabase;
 @property (nonatomic, retain)VirtualGoodStorage* virtualGoodStorage;
 @property (nonatomic, retain)VirtualCurrencyStorage* virtualCurrencyStorage;
 @property (nonatomic, retain)NonConsumableStorage* nonConsumableStorage;
+@property (nonatomic, retain)KeyValueStorage* keyValueStorage;
 
 + (StorageManager*)getInstance;
 

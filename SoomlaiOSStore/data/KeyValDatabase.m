@@ -72,139 +72,147 @@
 }
 
 - (id)init{
-    if (self = [super init]) {
-        NSError *error;
-        NSString* oldDatabasebPath = [[self applicationDocumentsDirectory] stringByAppendingPathComponent:DATABASE_NAME];
-        NSString* databasebPath = [[StorageManager applicationDirectory] stringByAppendingPathComponent:DATABASE_NAME];
-        NSFileManager *filemgr = [NSFileManager defaultManager];
-        if ([filemgr fileExistsAtPath: oldDatabasebPath] == YES) {
-            [[NSFileManager defaultManager] copyItemAtPath:oldDatabasebPath toPath:databasebPath error:&error];
-            if (error) {
-                NSLog(@"There was a problem while trying to copy old database.");
-            } else {
-                [filemgr removeItemAtPath:oldDatabasebPath error:nil];
+    @synchronized(self) {
+        if (self = [super init]) {
+            NSError *error;
+            NSString* oldDatabasebPath = [[self applicationDocumentsDirectory] stringByAppendingPathComponent:DATABASE_NAME];
+            NSString* databasebPath = [[StorageManager applicationDirectory] stringByAppendingPathComponent:DATABASE_NAME];
+            NSFileManager *filemgr = [NSFileManager defaultManager];
+            if ([filemgr fileExistsAtPath: oldDatabasebPath] == YES) {
+                [[NSFileManager defaultManager] copyItemAtPath:oldDatabasebPath toPath:databasebPath error:&error];
+                if (error) {
+                    NSLog(@"There was a problem while trying to copy old database.");
+                } else {
+                    [filemgr removeItemAtPath:oldDatabasebPath error:nil];
+                }
+            }
+            
+            if ([filemgr fileExistsAtPath: databasebPath] == NO) {
+                [self createDBWithPath:[databasebPath UTF8String]];
             }
         }
-        
-        if ([filemgr fileExistsAtPath: databasebPath] == NO) {
-            [self createDBWithPath:[databasebPath UTF8String]];
-        }
+        return self;
     }
-    return self;
 }
 
 - (void)deleteKeyValWithKey:(NSString *)key{
-    NSString* databasebPath = [[StorageManager applicationDirectory] stringByAppendingPathComponent:DATABASE_NAME];
-    if (sqlite3_open([databasebPath UTF8String], &database) == SQLITE_OK)
-    {
-        NSString* deleteStmt = [NSString stringWithFormat:@"DELETE FROM %@ WHERE %@=?",
-                                KEYVAL_TABLE_NAME, KEYVAL_COLUMN_KEY];
-        sqlite3_stmt *statement;
-        if (sqlite3_prepare_v2(database, [deleteStmt UTF8String], -1, &statement, NULL) != SQLITE_OK){
-            NSLog(@"Deleting key:'%@' failed: %s.", key, sqlite3_errmsg(database));
+    @synchronized(self) {
+        NSString* databasebPath = [[StorageManager applicationDirectory] stringByAppendingPathComponent:DATABASE_NAME];
+        if (sqlite3_open([databasebPath UTF8String], &database) == SQLITE_OK)
+        {
+            NSString* deleteStmt = [NSString stringWithFormat:@"DELETE FROM %@ WHERE %@=?",
+                                    KEYVAL_TABLE_NAME, KEYVAL_COLUMN_KEY];
+            sqlite3_stmt *statement;
+            if (sqlite3_prepare_v2(database, [deleteStmt UTF8String], -1, &statement, NULL) != SQLITE_OK){
+                NSLog(@"Deleting key:'%@' failed: %s.", key, sqlite3_errmsg(database));
+            }
+            else{
+                sqlite3_bind_text(statement, 1, [key UTF8String], -1, SQLITE_TRANSIENT);
+                
+                if(SQLITE_DONE != sqlite3_step(statement)){
+                    NSAssert1(0, @"Error while deleting. '%s'", sqlite3_errmsg(database));
+                    sqlite3_reset(statement);
+                }
+            }
+            
+            // Finalize and close database.
+            sqlite3_finalize(statement);
+            sqlite3_close(database);
         }
         else{
-            sqlite3_bind_text(statement, 1, [key UTF8String], -1, SQLITE_TRANSIENT);
-            
-            if(SQLITE_DONE != sqlite3_step(statement)){
-                NSAssert1(0, @"Error while deleting. '%s'", sqlite3_errmsg(database));
-                sqlite3_reset(statement);
-            }
+            NSLog(@"Failed to open/create database");
         }
-        
-        // Finalize and close database.
-        sqlite3_finalize(statement);
-        sqlite3_close(database);
-    }
-    else{
-        NSLog(@"Failed to open/create database");
     }
 }
 
 - (NSString*)getValForKey:(NSString *)key{
-    NSString *result = nil;
-    NSString* databasebPath = [[StorageManager applicationDirectory] stringByAppendingPathComponent:DATABASE_NAME];
-    if (sqlite3_open([databasebPath UTF8String], &database) == SQLITE_OK)
-    {
-        sqlite3_stmt *statement = nil;
-        const char *sql = [[NSString stringWithFormat:@"SELECT * FROM %@ WHERE %@='%@'", KEYVAL_TABLE_NAME, KEYVAL_COLUMN_KEY, key] UTF8String];
-        if (sqlite3_prepare_v2(database, sql, -1, &statement, NULL) != SQLITE_OK) {
-            NSLog(@"Error while fetching %@=%@ : %s", KEYVAL_COLUMN_KEY, key, sqlite3_errmsg(database));
-        } else {
-            while (sqlite3_step(statement) == SQLITE_ROW) {
-                for (int i=0; i<sqlite3_column_count(statement); i++) {
-                    NSString* colName = [NSString stringWithUTF8String:sqlite3_column_name(statement, i)];
+    @synchronized(self) {
+        NSString *result = nil;
+        NSString* databasebPath = [[StorageManager applicationDirectory] stringByAppendingPathComponent:DATABASE_NAME];
+        if (sqlite3_open([databasebPath UTF8String], &database) == SQLITE_OK)
+        {
+            sqlite3_stmt *statement = nil;
+            const char *sql = [[NSString stringWithFormat:@"SELECT * FROM %@ WHERE %@='%@'", KEYVAL_TABLE_NAME, KEYVAL_COLUMN_KEY, key] UTF8String];
+            if (sqlite3_prepare_v2(database, sql, -1, &statement, NULL) != SQLITE_OK) {
+                NSLog(@"Error while fetching %@=%@ : %s", KEYVAL_COLUMN_KEY, key, sqlite3_errmsg(database));
+            } else {
+                while (sqlite3_step(statement) == SQLITE_ROW) {
+                    for (int i=0; i<sqlite3_column_count(statement); i++) {
+                        NSString* colName = [NSString stringWithUTF8String:sqlite3_column_name(statement, i)];
+                        
+                        if ([colName isEqualToString:KEYVAL_COLUMN_VAL]) {
+                            int colType = sqlite3_column_type(statement, i);
+                            if (colType == SQLITE_TEXT) {
+                                const unsigned char *col = sqlite3_column_text(statement, i);
+                                result = [NSString stringWithFormat:@"%s", col];
+                            } else {
+                                NSLog(@"ERROR: UNKNOWN COLUMN DATATYPE");
+                            }
+                        }
+                    }
+                }
+                
+                // Finalize
+                sqlite3_finalize(statement);
+            }
+            
+            // Close database
+            sqlite3_close(database);
+        }
+        else{
+            NSLog(@"Failed to open/create database");
+        }
+        return result;
+    }
+}
+
+
+- (void)setVal:(NSString *)val forKey:(NSString *)key{
+    @synchronized(self) {
+        NSString* databasebPath = [[StorageManager applicationDirectory] stringByAppendingPathComponent:DATABASE_NAME];
+        if (sqlite3_open([databasebPath UTF8String], &database) == SQLITE_OK)
+        {
+            
+            NSString* updateStmt = [NSString stringWithFormat:@"UPDATE %@ SET %@=? WHERE %@=?",
+                                    KEYVAL_TABLE_NAME, KEYVAL_COLUMN_VAL, KEYVAL_COLUMN_KEY];
+            sqlite3_stmt *statement;
+            if (sqlite3_prepare_v2(database, [updateStmt UTF8String], -1, &statement, NULL) != SQLITE_OK){
+                NSLog(@"Updating key:'%@' with val:'%@' failed: %s.", key, val, sqlite3_errmsg(database));
+            }
+            else{
+                sqlite3_bind_text(statement, 1, [val UTF8String], -1, SQLITE_TRANSIENT);
+                sqlite3_bind_text(statement, 2, [key UTF8String], -1, SQLITE_TRANSIENT);
+                
+                if(SQLITE_DONE != sqlite3_step(statement)){
+                    NSAssert1(0, @"Error while updating. '%s'", sqlite3_errmsg(database));
+                    sqlite3_reset(statement);
+                }
+                else {
+                    int rowsaffected = sqlite3_changes(database);
                     
-                    if ([colName isEqualToString:KEYVAL_COLUMN_VAL]) {
-                        int colType = sqlite3_column_type(statement, i);
-                        if (colType == SQLITE_TEXT) {
-                            const unsigned char *col = sqlite3_column_text(statement, i);
-                            result = [NSString stringWithFormat:@"%s", col];
-                        } else {
-                            NSLog(@"ERROR: UNKNOWN COLUMN DATATYPE");
+                    if (rowsaffected == 0){
+                        NSLog(@"Can't update item b/c it doesn't exist. Trying to add a new one.");
+                        NSString* addStmt = [NSString stringWithFormat:@"INSERT INTO %@ (%@, %@) VALUES('%@', '%@')",
+                                             KEYVAL_TABLE_NAME, KEYVAL_COLUMN_KEY, KEYVAL_COLUMN_VAL, key, val];
+                        if (sqlite3_prepare_v2(database, [addStmt UTF8String], -1, &statement, NULL) != SQLITE_OK){
+                            NSLog(@"Adding new item failed: %s. \"George is getting upset!\"", sqlite3_errmsg(database));
+                        }
+                        
+                        if(SQLITE_DONE != sqlite3_step(statement)){
+                            NSAssert1(0, @"Error while adding item. '%s'", sqlite3_errmsg(database));
+                            sqlite3_reset(statement);
                         }
                     }
                 }
             }
             
-            // Finalize
+            // Finalize and close database.
             sqlite3_finalize(statement);
-        }
-        
-        // Close database
-        sqlite3_close(database);
-    }
-    else{
-        NSLog(@"Failed to open/create database");
-    }
-    return result;
-}
-
-
-- (void)setVal:(NSString *)val forKey:(NSString *)key{
-    NSString* databasebPath = [[StorageManager applicationDirectory] stringByAppendingPathComponent:DATABASE_NAME];
-    if (sqlite3_open([databasebPath UTF8String], &database) == SQLITE_OK)
-    {
-        
-        NSString* updateStmt = [NSString stringWithFormat:@"UPDATE %@ SET %@=? WHERE %@=?",
-                                KEYVAL_TABLE_NAME, KEYVAL_COLUMN_VAL, KEYVAL_COLUMN_KEY];
-        sqlite3_stmt *statement;
-        if (sqlite3_prepare_v2(database, [updateStmt UTF8String], -1, &statement, NULL) != SQLITE_OK){
-            NSLog(@"Updating key:'%@' with val:'%@' failed: %s.", key, val, sqlite3_errmsg(database));
+            sqlite3_close(database);
         }
         else{
-            sqlite3_bind_text(statement, 1, [val UTF8String], -1, SQLITE_TRANSIENT);
-            sqlite3_bind_text(statement, 2, [key UTF8String], -1, SQLITE_TRANSIENT);
-            
-            if(SQLITE_DONE != sqlite3_step(statement)){
-                NSAssert1(0, @"Error while updating. '%s'", sqlite3_errmsg(database));
-                sqlite3_reset(statement);
-            }
-            else {
-                int rowsaffected = sqlite3_changes(database);
-                
-                if (rowsaffected == 0){
-                    NSLog(@"Can't update item b/c it doesn't exist. Trying to add a new one.");
-                    NSString* addStmt = [NSString stringWithFormat:@"INSERT INTO %@ (%@, %@) VALUES('%@', '%@')",
-                                         KEYVAL_TABLE_NAME, KEYVAL_COLUMN_KEY, KEYVAL_COLUMN_VAL, key, val];
-                    if (sqlite3_prepare_v2(database, [addStmt UTF8String], -1, &statement, NULL) != SQLITE_OK){
-                        NSLog(@"Adding new item failed: %s. \"George is getting upset!\"", sqlite3_errmsg(database));
-                    }
-                    
-                    if(SQLITE_DONE != sqlite3_step(statement)){
-                        NSAssert1(0, @"Error while adding item. '%s'", sqlite3_errmsg(database));
-                        sqlite3_reset(statement);
-                    }
-                }
-            }
+            NSLog(@"Failed to open/create database");
         }
-        
-        // Finalize and close database.
-        sqlite3_finalize(statement);
-        sqlite3_close(database);
-    }
-    else{
-        NSLog(@"Failed to open/create database");
     }
 }
 
