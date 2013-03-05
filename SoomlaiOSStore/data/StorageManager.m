@@ -158,7 +158,7 @@
                 return nil;
             }
         }
-        appDir = basePath;
+        appDir = [basePath copy];
     }
     return appDir;
 }
