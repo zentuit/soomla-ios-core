@@ -20,7 +20,7 @@
     [[UIApplication sharedApplication]setStatusBarHidden:YES withAnimation:UIStatusBarAnimationNone];
     
     /**
-     * We initialize StoreController when the application laods !
+     * We initialize StoreController when the application loads !
      */
     id<IStoreAsssets> storeAssets = [[MuffinRushAssets alloc] init];
     [[StoreController getInstance] initializeWithStoreAssets:storeAssets andCustomSecret:@"ChangeMe!!!"];
@@ -32,8 +32,7 @@
         [ObscuredNSUserDefaults setBool:YES forKey:@"NotFirstLaunch"];
         [StoreInventory addAmount:10000 toCurrency:((VirtualCurrency*)[storeAssets.virtualCurrencies objectAtIndex:0]).itemId];
     }
-    
-    // Override point for customization after application launch.
+
     return YES;
 }
 							
