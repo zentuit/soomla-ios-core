@@ -57,7 +57,7 @@ NonConsumableItem* NO_ADDS_NON_CONS;
 
     /** Virtual Goods **/
     NSDictionary* FRUIT_CAKE_PRICE = [[NSDictionary alloc] initWithObjectsAndKeys:
-                                    [NSNumber numberWithInt:225], MUFFINS_CURRENCY_ITEM_ID,
+				    [NSNumber numberWithInt:220], MUFFINS_CURRENCY_ITEM_ID,
                                       nil];
     NSArray* prices = [NSArray arrayWithObjects:FRUIT_CAKE_PRICE, nil];
     FRUIT_CAKE_GOOD = [[VirtualGood alloc] initWithName:@"Fruit Cake" andDescription:@"Customers buy a double portion on each purchase of this cake" andItemId:FRUIT_CAKE_GOOD_ITEM_ID andPriceModel:[[BalanceDrivenPriceModel alloc]

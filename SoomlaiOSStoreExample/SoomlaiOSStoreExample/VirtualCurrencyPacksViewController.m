@@ -17,11 +17,8 @@
 #import "VirtualItemNotFoundException.h"
 #import "VirtualCurrencyPackCell.h"
 
-#define KEY_PACK    @"PACK"
-#define KEY_THUMB   @"THUMB"
-
 @interface VirtualCurrencyPacksViewController () {
-    NSArray* packs;
+    NSDictionary* images;
 }
 
 @end
@@ -32,24 +29,12 @@
 
 - (void)viewDidLoad
 {
-    packs = [NSArray arrayWithObjects:
-             [NSDictionary dictionaryWithObjectsAndKeys:
-              [[StoreInfo getInstance] currencyPackWithProductId:_10_MUFFINS_PACK_PRODUCT_ID], KEY_PACK,
-              @"muffins01.png", KEY_THUMB,
-              nil],
-             [NSDictionary dictionaryWithObjectsAndKeys:
-              [[StoreInfo getInstance] currencyPackWithProductId:_50_MUFFINS_PACK_PRODUCT_ID], KEY_PACK,
-              @"muffins02.png", KEY_THUMB,
-              nil],
-             [NSDictionary dictionaryWithObjectsAndKeys:
-              [[StoreInfo getInstance] currencyPackWithProductId:_400_MUFFINS_PACK_PRODUCT_ID], KEY_PACK,
-              @"muffins03.png", KEY_THUMB,
-              nil],
-             [NSDictionary dictionaryWithObjectsAndKeys:
-              [[StoreInfo getInstance] currencyPackWithProductId:_1000_MUFFINS_PACK_PRODUCT_ID], KEY_PACK,
-              @"muffins04.png", KEY_THUMB,
-              nil],
-             nil];
+    images = [NSDictionary dictionaryWithObjectsAndKeys:
+	      @"muffins01.png", _10_MUFFINS_PACK_PRODUCT_ID,
+	      @"muffins02.png", _50_MUFFINS_PACK_PRODUCT_ID,
+	      @"muffins03.png", _400_MUFFINS_PACK_PRODUCT_ID,
+	      @"muffins04.png", _1000_MUFFINS_PACK_PRODUCT_ID,
+	      nil];
     
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(curBalanceChanged:) name:EVENT_CHANGED_CURRENCY_BALANCE object:nil];
@@ -77,14 +62,13 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:[tableView indexPathForSelectedRow] animated:NO];
-    NSDictionary *item = [packs objectAtIndex:indexPath.row];
-    VirtualCurrencyPack* pack = [item objectForKey:KEY_PACK];
+    VirtualCurrencyPack* pack = [[[StoreInfo getInstance] virtualCurrencyPacks] objectAtIndex:indexPath.row];
 
     [[StoreController getInstance] buyAppStoreItemWithProcuctId:pack.appstoreItem.productId];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [packs count];
+    return [[[StoreInfo getInstance] virtualCurrencyPacks] count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -93,12 +77,11 @@
     if (cell == nil) {
         cell = [[VirtualCurrencyPackCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:MyIdentifier];
     }
-    NSDictionary *item = [packs objectAtIndex:indexPath.row];
-    VirtualCurrencyPack* pack = [item objectForKey:KEY_PACK];
+    VirtualCurrencyPack* pack = [[[StoreInfo getInstance] virtualCurrencyPacks] objectAtIndex:indexPath.row];
     cell.title.text = pack.name;
     cell.description.text = pack.description;
     cell.price.text = [NSString stringWithFormat:@"%.02f", pack.appstoreItem.price];
-    cell.icon.image = [UIImage imageNamed:[item objectForKey:KEY_THUMB]];
+    cell.icon.image = [UIImage imageNamed:[images objectForKey:pack.appstoreItem.productId]];
     
     return cell;
 }

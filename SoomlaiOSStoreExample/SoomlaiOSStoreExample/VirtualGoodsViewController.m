@@ -16,11 +16,8 @@
 #import "StoreInventory.h"
 #import "InsufficientFundsException.h"
 
-#define KEY_GOOD    @"GOOD"
-#define KEY_THUMB   @"THUMB"
-
 @interface VirtualGoodsViewController () {
-    NSArray* goods;
+    NSDictionary* images;
 }
 
 @end
@@ -33,24 +30,12 @@
 {
     [[StoreController getInstance] storeOpening];
     
-    goods = [NSArray arrayWithObjects:
-             [NSDictionary dictionaryWithObjectsAndKeys:
-              [[StoreInfo getInstance] goodWithItemId:CHOCO_CAKE_GOOD_ITEM_ID], KEY_GOOD,
-              @"chocolate_cake.png", KEY_THUMB,
-              nil],
-             [NSDictionary dictionaryWithObjectsAndKeys:
-              [[StoreInfo getInstance] goodWithItemId:PAVLOVA_GOOD_ITEM_ID], KEY_GOOD,
-              @"pavlova.png", KEY_THUMB,
-              nil],
-             [NSDictionary dictionaryWithObjectsAndKeys:
-              [[StoreInfo getInstance] goodWithItemId:CREAM_CUP_GOOD_ITEM_ID], KEY_GOOD,
-              @"cream_cup.png", KEY_THUMB,
-              nil],
-             [NSDictionary dictionaryWithObjectsAndKeys:
-              [[StoreInfo getInstance] goodWithItemId:FRUIT_CAKE_GOOD_ITEM_ID], KEY_GOOD,
-              @"fruit_cake.png", KEY_THUMB,
-              nil],
-             nil];
+    images = [NSDictionary dictionaryWithObjectsAndKeys:
+	      @"chocolate_cake.png", CHOCO_CAKE_GOOD_ITEM_ID,
+	      @"pavlova.png", PAVLOVA_GOOD_ITEM_ID,
+	      @"cream_cup.png", CREAM_CUP_GOOD_ITEM_ID,
+	      @"fruit_cake.png", FRUIT_CAKE_GOOD_ITEM_ID,
+	      nil];
     
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(goodBalanceChanged:) name:EVENT_CHANGED_GOOD_BALANCE object:nil];
@@ -84,8 +69,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:[tableView indexPathForSelectedRow] animated:NO];
-    NSDictionary *item = [goods objectAtIndex:indexPath.row];
-    VirtualGood* good = [item objectForKey:KEY_GOOD];
+    VirtualGood* good = [[[StoreInfo getInstance] virtualGoods] objectAtIndex:indexPath.row];
     
     @try {
         [[StoreController getInstance] buyVirtualGood:good.itemId];
@@ -103,7 +87,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [goods count];
+    return [[[StoreInfo getInstance] virtualGoods] count];
 }
 
 
@@ -113,13 +97,12 @@
     if (cell == nil) {
         cell = [[VirtualGoodCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:MyIdentifier];
     }
-    NSDictionary *item = [goods objectAtIndex:indexPath.row];
-    VirtualGood* good = [item objectForKey:KEY_GOOD];
+    VirtualGood* good = [[[StoreInfo getInstance] virtualGoods] objectAtIndex:indexPath.row];
     cell.title.text = good.name;
     cell.description.text = good.description;
     NSDictionary* currencyValues = good.currencyValues;
     cell.price.text = [(NSNumber*)[currencyValues objectForKey:MUFFINS_CURRENCY_ITEM_ID] stringValue];
-    cell.icon.image = [UIImage imageNamed:[item objectForKey:KEY_THUMB]];
+    cell.icon.image = [UIImage imageNamed:[images objectForKey:good.itemId]];
     int balance = [StoreInventory getGoodBalance:good.itemId];
     cell.balance.text = [NSString stringWithFormat:@"%d", balance];
     

@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		C0242E8616C4081600803FE4 /* KeyValDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = C0242E8516C4081600803FE4 /* KeyValDatabase.m */; };
+		C061088016E8E4D5000E5739 /* KeyValueStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = C0586A2A16E20A7E00EB8FEA /* KeyValueStorage.m */; };
 		C08CF20C1641C68D007603E8 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C08CF20B1641C68D007603E8 /* UIKit.framework */; };
 		C08CF20E1641C68D007603E8 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C08CF20D1641C68D007603E8 /* Foundation.framework */; };
 		C08CF2101641C68D007603E8 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C08CF20F1641C68D007603E8 /* CoreGraphics.framework */; };
@@ -570,6 +571,7 @@
 				C08CF2AD1641CF9F007603E8 /* StoreEncryptor.m in Sources */,
 				C08CF2AE1641CF9F007603E8 /* StorefrontInfo.m in Sources */,
 				C08CF2AF1641CF9F007603E8 /* StoreInfo.m in Sources */,
+				C061088016E8E4D5000E5739 /* KeyValueStorage.m in Sources */,
 				C08CF2B01641CF9F007603E8 /* VirtualCurrencyStorage.m in Sources */,
 				C08CF2B11641CF9F007603E8 /* VirtualGoodStorage.m in Sources */,
 				C08CF2B21641CF9F007603E8 /* AppStoreItem.m in Sources */,
