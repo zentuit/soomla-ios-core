@@ -20,4 +20,9 @@
 + (int)addAmount:(int)amount toGood:(NSString*)goodItemId;
 + (int)removeAmount:(int)amount fromGood:(NSString*)goodItemId;
 
+/** NonConsumables **/
++ (BOOL) nonConsumableItemExists:(NSString*)productId;
++ (void) addNonConsumableItem:(NSString*)productId;
++ (void) removeNonConsumableItem:(NSString*)productId;
+
 @end

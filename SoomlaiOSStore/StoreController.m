@@ -199,22 +199,6 @@
     [[[StorageManager getInstance] virtualGoodStorage] equipGood:good withEquipValue:false];
 }
 
-- (BOOL) nonConsumableItemExists:(NSString*)productId {
-    NonConsumableItem* nonConsumable = [[StoreInfo getInstance] nonConsumableItemWithProductId:productId];
-    
-    return [[[StorageManager getInstance] nonConsumableStorage] nonConsumableExists:nonConsumable];
-}
-- (void) addNonConsumableItem:(NSString*)productId {
-    NonConsumableItem* nonConsumable = [[StoreInfo getInstance] nonConsumableItemWithProductId:productId];
-    
-    [[[StorageManager getInstance] nonConsumableStorage] add:nonConsumable];
-}
-- (void) removeNonConsumableItem:(NSString*)productId {
-    NonConsumableItem* nonConsumable = [[StoreInfo getInstance] nonConsumableItemWithProductId:productId];
-    
-    [[[StorageManager getInstance] nonConsumableStorage] remove:nonConsumable];
-}
-
 #pragma mark -
 #pragma mark SKPaymentTransactionObserver methods
 
@@ -291,7 +275,25 @@
         [EventHandling postUnexpectedError];
     }
     else{
-        NSLog(@"payment was canceled by the user. doing nothing for now.");
+        AppStoreItem* appStoreItem = NULL;
+        
+        @try{
+            VirtualCurrencyPack* pack = [[StoreInfo getInstance] currencyPackWithProductId:transaction.payment.productIdentifier];
+            appStoreItem = pack.appstoreItem;
+        }
+        @catch (VirtualItemNotFoundException* e) {
+            @try{
+                NonConsumableItem* nonCons = [[StoreInfo getInstance] nonConsumableItemWithProductId:transaction.payment.productIdentifier];
+                appStoreItem = nonCons.appStoreItem;
+            }
+            @catch (VirtualItemNotFoundException* e) {
+                NSLog(@"ERROR : Couldn't find the CANCELLED VirtualCurrencyPack OR AppStoreItem with productId: %@"
+                      @". It's unexpected so an unexpected error is being emitted.", transaction.payment.productIdentifier);
+                [EventHandling postUnexpectedError];
+            }
+        }
+        
+        [EventHandling postMarketPurchaseCancelled:appStoreItem];
     }
     [[SKPaymentQueue defaultQueue] finishTransaction: transaction];
 }

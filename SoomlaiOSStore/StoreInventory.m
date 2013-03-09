@@ -13,6 +13,7 @@
 #import "StoreInfo.h"
 #import "VirtualCurrencyStorage.h"
 #import "VirtualGoodStorage.h"
+#import "NonConsumableStorage.h"
 
 @implementation StoreInventory
 
@@ -50,6 +51,24 @@
     VirtualGood* good = [[StoreInfo getInstance] goodWithItemId:goodItemId];
     
     return [[[StorageManager getInstance] virtualGoodStorage] removeAmount:amount fromGood:good];
+}
+
++ (BOOL) nonConsumableItemExists:(NSString*)productId {
+    NonConsumableItem* nonConsumable = [[StoreInfo getInstance] nonConsumableItemWithProductId:productId];
+    
+    return [[[StorageManager getInstance] nonConsumableStorage] nonConsumableExists:nonConsumable];
+}
+
++ (void) addNonConsumableItem:(NSString*)productId {
+    NonConsumableItem* nonConsumable = [[StoreInfo getInstance] nonConsumableItemWithProductId:productId];
+    
+    [[[StorageManager getInstance] nonConsumableStorage] add:nonConsumable];
+}
+
++ (void) removeNonConsumableItem:(NSString*)productId {
+    NonConsumableItem* nonConsumable = [[StoreInfo getInstance] nonConsumableItemWithProductId:productId];
+    
+    [[[StorageManager getInstance] nonConsumableStorage] remove:nonConsumable];
 }
 
 @end
