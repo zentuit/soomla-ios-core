@@ -32,6 +32,7 @@ extern NSString * EVENT_TRANSACTION_RESTORED;
 extern NSString * EVENT_TRANSACTION_RESTORED;
 extern NSString * EVENT_CHANGED_CURRENCY_BALANCE;
 extern NSString * EVENT_CHANGED_GOOD_BALANCE;
+extern NSString * EVENT_MARKET_PURCHASE_CANCELLED;
 
 @class AppStoreItem;
 @class VirtualGood;
@@ -55,6 +56,7 @@ extern NSString * EVENT_CHANGED_GOOD_BALANCE;
 + (void)postBillingNotSupported;
 + (void)postGoodsPurchaseStarted;
 + (void)postMarketPurchaseStarted:(AppStoreItem*)appStoreItem;
++ (void)postMarketPurchaseCancelled:(AppStoreItem*)appStoreItem;
 + (void)postClosingStore;
 + (void)postOpeningStore;
 + (void)postUnexpectedError;

@@ -72,4 +72,8 @@
 */
 - (void) unequipVirtualGood:(NSString*) itemId;
 
+- (BOOL) nonConsumableItemExists:(NSString*)productId;
+- (void) addNonConsumableItem:(NSString*)productId;
+- (void) removeNonConsumableItem:(NSString*)productId;
+
 @end

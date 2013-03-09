@@ -27,6 +27,7 @@ NSString * EVENT_BILLING_SUPPORTED               = @"BillingSupported";
 NSString * EVENT_BILLING_NOT_SUPPORTED           = @"BillingNotSupported";
 NSString * EVENT_MARKET_PURCHASE_STARTED         = @"MarketPurchaseProcessStarted";
 NSString * EVENT_GOODS_PURCHASE_STARTED          = @"GoodsPurchaseProcessStarted";
+NSString * EVENT_GOODS_PURCHASE_CANCELLED        = @"GoodsPurchaseProcessCancelled";
 NSString * EVENT_CLOSING_STORE                   = @"ClosingStore";
 NSString * EVENT_OPENING_STORE                   = @"OpeningStore";
 NSString * EVENT_UNEXPECTED_ERROR_IN_STORE       = @"UnexpectedErrorInStore";
@@ -88,6 +89,11 @@ NSString * EVENT_CHANGED_GOOD_BALANCE            = @"ChangedGoodBalance";
 + (void)postMarketPurchaseStarted:(AppStoreItem*)appStoreItem{
     NSDictionary *userInfo = [NSDictionary dictionaryWithObject:appStoreItem forKey:@"AppStoreItem"];
     [[NSNotificationCenter defaultCenter] postNotificationName:EVENT_MARKET_PURCHASE_STARTED object:self userInfo:userInfo];
+}
+
++ (void)postMarketPurchaseCancelled:(AppStoreItem*)appStoreItem {
+    NSDictionary *userInfo = [NSDictionary dictionaryWithObject:appStoreItem forKey:@"AppStoreItem"];
+    [[NSNotificationCenter defaultCenter] postNotificationName:EVENT_MARKET_PURCHASE_CANCELLED object:self userInfo:userInfo];
 }
 
 + (void)postClosingStore{

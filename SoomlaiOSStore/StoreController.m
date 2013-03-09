@@ -199,6 +199,22 @@
     [[[StorageManager getInstance] virtualGoodStorage] equipGood:good withEquipValue:false];
 }
 
+- (BOOL) nonConsumableItemExists:(NSString*)productId {
+    NonConsumableItem* nonConsumable = [[StoreInfo getInstance] nonConsumableItemWithProductId:productId];
+    
+    return [[[StorageManager getInstance] nonConsumableStorage] nonConsumableExists:nonConsumable];
+}
+- (void) addNonConsumableItem:(NSString*)productId {
+    NonConsumableItem* nonConsumable = [[StoreInfo getInstance] nonConsumableItemWithProductId:productId];
+    
+    [[[StorageManager getInstance] nonConsumableStorage] add:nonConsumable];
+}
+- (void) removeNonConsumableItem:(NSString*)productId {
+    NonConsumableItem* nonConsumable = [[StoreInfo getInstance] nonConsumableItemWithProductId:productId];
+    
+    [[[StorageManager getInstance] nonConsumableStorage] remove:nonConsumable];
+}
+
 #pragma mark -
 #pragma mark SKPaymentTransactionObserver methods
 
