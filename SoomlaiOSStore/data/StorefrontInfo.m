@@ -55,7 +55,7 @@
 }
 
 - (NSString*) fetchThemeJsonFromFile {
-    NSString* jsonPath = [[NSBundle mainBundle] pathForResource:@"theme" ofType:@"json"];
+    NSString* jsonPath = [[NSBundle mainBundle] pathForResource:@"soomla/theme" ofType:@"json"];
     if (jsonPath)  {
         return [NSString stringWithContentsOfFile:jsonPath encoding:NSUTF8StringEncoding error:nil];
     }
