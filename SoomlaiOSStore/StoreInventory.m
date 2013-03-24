@@ -53,6 +53,24 @@
     return [[[StorageManager getInstance] virtualGoodStorage] removeAmount:amount fromGood:good];
 }
 
++ (void)equipVirtualGoodWithItemId:(NSString*)goodItemId {
+    VirtualGood* good = [[StoreInfo getInstance] goodWithItemId:goodItemId];
+    
+    return [[[StorageManager getInstance] virtualGoodStorage] equipGood:good withEquipValue:YES];
+}
+
++ (void)unEquipVirtualGoodWithItemId:(NSString*)goodItemId {
+    VirtualGood* good = [[StoreInfo getInstance] goodWithItemId:goodItemId];
+    
+    return [[[StorageManager getInstance] virtualGoodStorage] equipGood:good withEquipValue:NO];
+}
+
++ (BOOL)isVirtualGoodWithItemIdEquipped:(NSString*)goodItemId {
+    VirtualGood* good = [[StoreInfo getInstance] goodWithItemId:goodItemId];
+    
+    return [[[StorageManager getInstance] virtualGoodStorage] isGoodEquipped:good];
+}
+
 + (BOOL) nonConsumableItemExists:(NSString*)productId {
     NonConsumableItem* nonConsumable = [[StoreInfo getInstance] nonConsumableItemWithProductId:productId];
     
