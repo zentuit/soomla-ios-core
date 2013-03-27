@@ -17,9 +17,9 @@
 #import <Foundation/Foundation.h>
 
 typedef enum {
-    kNone = 1,
-    kSingle = 2,
-    kMultiple = 3
+    kNone = 0,
+    kSingle = 1,
+    kMultiple = 2
 } EquippingModel;
 #define EquippingModelArray @"none", @"single", @"multiple", nil
 
