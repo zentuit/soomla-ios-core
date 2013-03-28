@@ -188,9 +188,10 @@
                 }
             }
         }
+    } else {
+        @throw [[NotEnoughGoodsException alloc] initWithItemId:itemId];
     }
-
-    @throw [[NotEnoughGoodsException alloc] initWithItemId:itemId];
+    
 }
                          
 - (void) unequipVirtualGood:(NSString*) itemId{
