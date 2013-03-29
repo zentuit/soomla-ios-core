@@ -73,16 +73,15 @@
         return NO;
     }
     
-    BOOL equip = [StoreEncryptor decryptToBoolean:val];
-    
-    return equip;
+    // we're returning YES as long as there's a value for the required key.
+    return YES;
 }
 
 - (void)equipGood:(VirtualGood*)virtualGood withEquipValue:(BOOL)equip{
     NSString* key = [StoreEncryptor encryptString:[KeyValDatabase keyGoodEquipped:virtualGood.itemId]];
     
     if (equip) {
-        [[[StorageManager getInstance] kvDatabase] setVal:@"" forKey:key];
+        [[[StorageManager getInstance] kvDatabase] setVal:@"equipped" forKey:key];
         [EventHandling postVirtualGoodEquipped:virtualGood];
     } else {
         [[[StorageManager getInstance] kvDatabase] deleteKeyValWithKey:key];
