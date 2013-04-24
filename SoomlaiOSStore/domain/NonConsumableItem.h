@@ -14,30 +14,30 @@
  * limitations under the License.
  */
 
-#import "VirtualItem.h"
+#import "PurchasableVirtualItem.h"
 
-@class PurchaseType;
-
-/** ABSTRACT
- * A representation of an VirtualItem you can actually purchase.
+/**
+ * A representation of a non-consumable item in the App Store. 
+ * These kinds of items are bought by the user once and kept for him forever.
+ *
+ * Don't get confused... this is not a Lifetime VirtualGood. It's an item in the App Store.
+ * This item will be retrieved when you "restoreTransactions"
  */
-@interface PurchasableVirtualItem : VirtualItem {
-    PurchaseType* purchaseType;
+@interface NonConsumableItem : PurchasableVirtualItem {
 }
-
-@property (retain, nonatomic) PurchaseType* purchaseType;
 
 /** Constructor
  *
  * oName see parent
  * oDescription see parent
  * oItemId see parent
- * oPurchaseType is the way this item is purchased.
+ * oPurchaseType see parent
  */
-- (id)initWithName:(NSString *)oName andDescription:(NSString *)oDescription
-         andItemId:(NSString *)oItemId andPurchaseType:(PurchaseType*)oPurchaseType;
+- (id)initWithName:(NSString*)oName andDescription:(NSString*)oDescription
+                andItemId:(NSString*)oItemId andPurchaseType:(PurchaseType*)oPurchaseType;
 
-/**
+/** Constructor
+ *
  * see parent
  */
 - (id)initWithDictionary:(NSDictionary*)dict;
@@ -46,17 +46,5 @@
  * see parent
  */
 - (NSDictionary*)toDictionary;
-
-/**
- * Use this function to buy a Virtual Item. This action uses the associated PurchaseType to perform the purchase.
- *
- * throws InsufficientFundsException
- */
-- (void)buy;
-
-/**
- * Determines if you are in a states that allows you to buy a specific VirtualItem.
- */
-- (BOOL)canBuy;
 
 @end

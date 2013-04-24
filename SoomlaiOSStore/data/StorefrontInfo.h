@@ -18,6 +18,8 @@
 
 /**
  * This class is used to retrieve the storefront JSON when it's needed.
+ *
+ * This class is relevant only to users who created a storefront using the SOOMLA designer.
  */
 @interface StorefrontInfo : NSObject{
     @private
@@ -34,14 +36,19 @@
 /**
  * This function initializes StorefrontInfo. On first initialization, when the
  * database doesn't have any previous version of the store metadata (JSON), StorefrontInfo
- * saves the given JSON to the DB. After the first initialization,
+ * saves the JSON from 'theme.json' to the DB. After the first initialization,
  * StorefrontInfo will load the JSON metadata when needed.
  * NOTE: If you want to override the current StorefrontInfo metadata JSON file, you'll have to bump the
  * database version (the old database will be destroyed but balances will be saved!!).
  */
 - (void)initialize;
 
+/**
+ * Initializes StorefrontInfo from the database.
+ * returns true on success and false on failure (probably when the database doesn't contain the JSON).
+ */
 - (BOOL)initializeFromDB;
+
 - (NSDictionary*)toDictionary;
 
 @end

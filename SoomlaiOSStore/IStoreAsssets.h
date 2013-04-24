@@ -29,6 +29,9 @@
  * Bump the version every time you want to delete the old data in the DB.
  * If you don't bump this value, you won't be able to see changes you've made to the objects in this file.
  *
+ * NOTE: You can NOT bump this value and just delete the app from your device to see changes. You can't do this after
+ * you publish your application on the market.
+ *
  * For example: If you previously created a VirtualGood with name "Hat" and you published your application,
  * the name "Hat will be saved in any of your users' databases. If you want to change the name to "Green Hat"
  * than you'll also have to bump the version (from 0 to 1). Now the new "Green Hat" name will replace the old one.
@@ -41,14 +44,12 @@
 - (NSArray*)virtualCurrencies;
 
 /**
- * An array of all virtual goods served by your store.
- * NOTE: The order of the items in the array will be their order when shown to the user.
+ * An array of all virtual goods served by your store (all kinds in one array). If you have UpgradeVGs, they must appear in the order of levels.
  */
 - (NSArray*)virtualGoods;
 
 /**
  * An array of all virtual currency packs served by your store.
- * NOTE: The order of the items in the array will be their order when shown to the user.
  */
 - (NSArray*)virtualCurrencyPacks;
 
@@ -58,13 +59,9 @@
 - (NSArray*)virtualCategories;
 
 /**
- * You can define NON-CONSUMABLE items that you'd like to use for your needs.
- * CONSUMABLE items are usually just currency packs. If you use SOOMLA's storefront, it'll take care of
- * the UNMANAGED for you in the UI.
+ * You can define non consumable items that you'd like to use for your needs.
+ * CONSUMABLE items are usually just currency packs.
  * NON-CONSUMABLE items are usually used to let users purchase a "no-ads" token.
- * Make sure you set the type of the items you add here as Consumable.kNonConsumable.
- *
- * An array of all managed served in your game.
  */
 - (NSArray*)nonConsumableItems;
 

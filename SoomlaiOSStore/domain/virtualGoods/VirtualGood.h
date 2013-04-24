@@ -14,31 +14,24 @@
  * limitations under the License.
  */
 
-#import "PurchaseType.h"
-
-@class AppStoreItem;
+#import "PurchasableVirtualItem.h"
 
 /**
- * This type of Purchase is used to let users purchase PurchasableVirtualItems with the App Store (with real $$).
+ * This is an abstract representation of the application's virtual good.
+ * Your game's virtual economy revolves around virtual goods. This class defines the abstract
+ * and most common virtual good while the descendants of this class defines specific definitions of VirtualGood.
  */
-@interface PurchaseWithMarket : PurchaseType {
-    AppStoreItem* appStoreItem;
+@interface VirtualGood : PurchasableVirtualItem{
 }
 
-@property (retain, nonatomic) AppStoreItem* appStoreItem;
-
 /** Constructor
  *
- * oProductId is the productId to purchase in the App Store.
- * oPrice is the price in the App Store.
+ * oName see parent
+ * oDescription see parent
+ * oItemId see parent
+ * oPurchaseType see parent
  */
-- (id)initWithProductId:(NSString*)oProductId andPrice:(double)oPrice;
-
-/** Constructor
- *
- * oAppStoreItem is the representation of the item in the App Store.
- */
-- (id)initWithAppStoreItem:(AppStoreItem*)oAppStoreItem;
-
+- (id)initWithName:(NSString*)oName andDescription:(NSString*)oDescription
+         andItemId:(NSString*)oItemId andPurchaseType:(PurchaseType*)oPurchaseType;
 
 @end

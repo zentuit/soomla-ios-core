@@ -18,6 +18,7 @@
 #import "StoreConfig.h"
 #import "ObscuredNSUserDefaults.h"
 #import "StorageManager.h"
+#import "StoreUtils.h"
 
 #define DATABASE_NAME @"store.kv.db"
 
@@ -29,12 +30,18 @@
 
 @implementation KeyValDatabase
 
+static NSString* TAG = @"SOOMLA KeyValDatabase";
+
 + (NSString*) keyGoodBalance:(NSString*)itemId {
     return [NSString stringWithFormat:@"good.%@.balance", itemId];
 }
 
 + (NSString*) keyGoodEquipped:(NSString*)itemId {
     return [NSString stringWithFormat:@"good.%@.equipped", itemId];
+}
+
++ (NSString*) keyGoodUpgrade:(NSString*)itemId {
+    return [NSString stringWithFormat:@"good.%@.currentUpgrade", itemId];
 }
 
 + (NSString*) keyCurrencyBalance:(NSString*)itemId {
@@ -61,13 +68,13 @@
         NSString* createStmt = [NSString stringWithFormat:@"CREATE TABLE IF NOT EXISTS %@ (%@ TEXT PRIMARY KEY, %@ TEXT)", KEYVAL_TABLE_NAME, KEYVAL_COLUMN_KEY, KEYVAL_COLUMN_VAL];
         if (sqlite3_exec(database, [createStmt UTF8String], NULL, NULL, &errMsg) != SQLITE_OK)
         {
-            NSLog(@"Failed to create key-value table");
+            LogDebug(TAG, @"Failed to create key-value table");
         }
 
         sqlite3_close(database);
         
     } else {
-        NSLog(@"Failed to open/create database (createDBWithPath)");
+        LogError(TAG, @"Failed to open/create database (createDBWithPath)");
     }
 }
 
@@ -81,7 +88,7 @@
             if ([filemgr fileExistsAtPath: oldDatabasebPath] == YES) {
                 [[NSFileManager defaultManager] copyItemAtPath:oldDatabasebPath toPath:databasebPath error:&error];
                 if (error) {
-                    NSLog(@"There was a problem while trying to copy old database.");
+                    LogError(TAG, @"There was a problem while trying to copy old database.");
                 } else {
                     [filemgr removeItemAtPath:oldDatabasebPath error:nil];
                 }
@@ -104,7 +111,7 @@
                                     KEYVAL_TABLE_NAME, KEYVAL_COLUMN_KEY];
             sqlite3_stmt *statement;
             if (sqlite3_prepare_v2(database, [deleteStmt UTF8String], -1, &statement, NULL) != SQLITE_OK){
-                NSLog(@"Deleting key:'%@' failed: %s.", key, sqlite3_errmsg(database));
+                LogError(TAG, ([NSString stringWithFormat:@"Deleting key:'%@' failed: %s.", key, sqlite3_errmsg(database)]));
             }
             else{
                 sqlite3_bind_text(statement, 1, [key UTF8String], -1, SQLITE_TRANSIENT);
@@ -120,7 +127,7 @@
             sqlite3_close(database);
         }
         else{
-            NSLog(@"Failed to open/create database");
+            LogError(TAG, @"Failed to open/create database");
         }
     }
 }
@@ -134,7 +141,7 @@
             sqlite3_stmt *statement = nil;
             const char *sql = [[NSString stringWithFormat:@"SELECT * FROM %@ WHERE %@='%@'", KEYVAL_TABLE_NAME, KEYVAL_COLUMN_KEY, key] UTF8String];
             if (sqlite3_prepare_v2(database, sql, -1, &statement, NULL) != SQLITE_OK) {
-                NSLog(@"Error while fetching %@=%@ : %s", KEYVAL_COLUMN_KEY, key, sqlite3_errmsg(database));
+                LogError(TAG, ([NSString stringWithFormat:@"Error while fetching %@=%@ : %s", KEYVAL_COLUMN_KEY, key, sqlite3_errmsg(database)]));
             } else {
                 while (sqlite3_step(statement) == SQLITE_ROW) {
                     for (int i=0; i<sqlite3_column_count(statement); i++) {
@@ -146,7 +153,7 @@
                                 const unsigned char *col = sqlite3_column_text(statement, i);
                                 result = [NSString stringWithFormat:@"%s", col];
                             } else {
-                                NSLog(@"ERROR: UNKNOWN COLUMN DATATYPE");
+                                LogError(TAG, @"ERROR: UNKNOWN COLUMN DATATYPE");
                             }
                         }
                     }
@@ -160,7 +167,7 @@
             sqlite3_close(database);
         }
         else{
-            NSLog(@"Failed to open/create database");
+            LogError(TAG, @"Failed to open/create database");
         }
         return result;
     }
@@ -177,7 +184,7 @@
                                     KEYVAL_TABLE_NAME, KEYVAL_COLUMN_VAL, KEYVAL_COLUMN_KEY];
             sqlite3_stmt *statement;
             if (sqlite3_prepare_v2(database, [updateStmt UTF8String], -1, &statement, NULL) != SQLITE_OK){
-                NSLog(@"Updating key:'%@' with val:'%@' failed: %s.", key, val, sqlite3_errmsg(database));
+                LogError(TAG, ([NSString stringWithFormat:@"Updating key:'%@' with val:'%@' failed: %s.", key, val, sqlite3_errmsg(database)]));
             }
             else{
                 sqlite3_bind_text(statement, 1, [val UTF8String], -1, SQLITE_TRANSIENT);
@@ -191,11 +198,11 @@
                     int rowsaffected = sqlite3_changes(database);
                     
                     if (rowsaffected == 0){
-                        NSLog(@"Can't update item b/c it doesn't exist. Trying to add a new one.");
+                        LogDebug(TAG, @"Can't update item b/c it doesn't exist. Trying to add a new one.");
                         NSString* addStmt = [NSString stringWithFormat:@"INSERT INTO %@ (%@, %@) VALUES('%@', '%@')",
                                              KEYVAL_TABLE_NAME, KEYVAL_COLUMN_KEY, KEYVAL_COLUMN_VAL, key, val];
                         if (sqlite3_prepare_v2(database, [addStmt UTF8String], -1, &statement, NULL) != SQLITE_OK){
-                            NSLog(@"Adding new item failed: %s. \"George is getting upset!\"", sqlite3_errmsg(database));
+                            LogError(TAG, ([NSString stringWithFormat:@"Adding new item failed: %s. \"George is getting upset!\"", sqlite3_errmsg(database)]));
                         }
                         
                         if(SQLITE_DONE != sqlite3_step(statement)){
@@ -211,7 +218,7 @@
             sqlite3_close(database);
         }
         else{
-            NSLog(@"Failed to open/create database");
+            LogError(TAG, @"Failed to open/create database");
         }
     }
 }

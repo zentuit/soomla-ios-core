@@ -14,27 +14,28 @@
  * limitations under the License.
  */
 
-#import <Foundation/Foundation.h>
+#import "VirtualGood.h"
 
-@class PurchasableVirtualItem;
+@implementation VirtualGood
 
-/** ABSTRACT
-* A PurchaseType is a way to purchase a PurchasableVirtualItem. This abstract class describes basic features
-* of the actual implementations of PurchaseType.
-*/
-@interface PurchaseType : NSObject {
-    PurchasableVirtualItem* associatedItem;
+- (id)initWithName:(NSString*)oName andDescription:(NSString*)oDescription
+         andItemId:(NSString*)oItemId andPurchaseType:(PurchaseType*)oPurchaseType{
+
+    if (self = [super initWithName:oName andDescription:oDescription andItemId:oItemId andPurchaseType:oPurchaseType]){
+    }
+    
+    return self;
 }
 
-@property (retain, nonatomic) PurchasableVirtualItem* associatedItem;
+- (id)initWithDictionary:(NSDictionary*)dict{
+    if (self = [super initWithDictionary:dict]) {
+    }
+    
+    return self;
+}
 
-- (id)init;
-
-/**
- * Buy the associated item.
- *
- * throws InsufficientFundsException
- */
-- (void)buy;
+- (NSDictionary*)toDictionary{
+    return [super toDictionary];
+}
 
 @end

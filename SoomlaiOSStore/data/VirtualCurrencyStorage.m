@@ -23,47 +23,19 @@
 
 @implementation VirtualCurrencyStorage
 
-- (int)getBalanceForCurrency:(VirtualCurrency*)virtualCurrency{
-    NSString* key = [StoreEncryptor encryptString:[KeyValDatabase keyCurrencyBalance:virtualCurrency.itemId]];
-    NSString* val = [[[StorageManager getInstance] kvDatabase] getValForKey:key];
-    
-    if (!val || [val length]==0){
-        return 0;
+- (id)init {
+    if (self = [super init]) {
+        tag = @"SOOMLA VirtualCurrencyStorage";
     }
-    
-    NSNumber* balance = [StoreEncryptor decryptToNumber:val];
-    
-    return [balance intValue];
+    return self;
 }
 
-- (int)addAmount:(int)amount toCurrency:(VirtualCurrency*)virtualCurrency{
-    NSString* key = [StoreEncryptor encryptString:[KeyValDatabase keyCurrencyBalance:virtualCurrency.itemId]];
-    int balance = [self getBalanceForCurrency:virtualCurrency] + amount;
-    [[[StorageManager getInstance] kvDatabase] setVal:[StoreEncryptor encryptNumber:[NSNumber numberWithInt:balance]] forKey:key ];
-    
-    [EventHandling postChangedBalance:balance forCurrency:virtualCurrency withAmount:amount];
-    
-    return balance;
+- (NSString*)keyBalance:(NSString*)itemId {
+    return [KeyValDatabase keyCurrencyBalance:itemId];
 }
 
-- (int)removeAmount:(int)amount fromCurrency:(VirtualCurrency*)virtualCurrency{
-    NSString* key = [StoreEncryptor encryptString:[KeyValDatabase keyCurrencyBalance:virtualCurrency.itemId]];
-    int balance = [self getBalanceForCurrency:virtualCurrency] - amount;
-    balance = balance > 0 ? balance : 0;
-    [[[StorageManager getInstance] kvDatabase] setVal:[StoreEncryptor encryptNumber:[NSNumber numberWithInt:balance]] forKey:key ];
-    
-    [EventHandling postChangedBalance:balance forCurrency:virtualCurrency withAmount:(-1*amount)];
-    
-    return balance;
-}
-
-- (int)setBalance:(int)balance toCurrency:(VirtualCurrency*)virtualCurrency {
-    NSString* key = [StoreEncryptor encryptString:[KeyValDatabase keyCurrencyBalance:virtualCurrency.itemId]];
-    [[[StorageManager getInstance] kvDatabase] setVal:[StoreEncryptor encryptNumber:[NSNumber numberWithInt:balance]] forKey:key];
-    
-    [EventHandling postChangedBalance:balance forCurrency:virtualCurrency withAmount:0];
-    
-    return balance;
+- (void)postBalanceChangeToItem:(VirtualItem*)item withBalance:(int)balance andAmountAdded:(int)amountAdded {
+    [EventHandling postChangedBalance:balance forCurrency:(VirtualCurrency*)item withAmount:amountAdded];
 }
 
 @end

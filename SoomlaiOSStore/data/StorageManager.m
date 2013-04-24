@@ -24,6 +24,11 @@
 #import "StoreDatabase.h"
 #import "StoreEncryptor.h"
 #import "KeyValueStorage.h"
+#import "StoreUtils.h"
+#import "VirtualItemStorage.h"
+#import "VirtualItem.h"
+#import "VirtualGood.h"
+#import "VirtualCurrency.h"
 
 @interface StorageManager (Private)
 - (void)migrateOldData;
@@ -32,6 +37,8 @@
 @implementation StorageManager
 
 @synthesize kvDatabase, virtualCurrencyStorage, virtualGoodStorage, nonConsumableStorage, keyValueStorage;
+
+static NSString* TAG = @"SOOMLA StorageManager";
 
 + (StorageManager*)getInstance{
     static StorageManager* _instance = nil;
@@ -47,11 +54,11 @@
 
 - (void)migrateOldData {
     if ([StoreDatabase checkDatabaseExists]) {
-        NSLog(@"Old store database doesn't exist. Nothing to migrate.");
+        LogDebug(TAG, @"Old store database doesn't exist. Nothing to migrate.");
         return;
     }
     
-    NSLog(@"Old store database exists. Migrating now!");
+    LogDebug(TAG, @"Old store database exists. Migrating now!");
     
     StoreDatabase* storeDatabase = [[StoreDatabase alloc] init];
     
@@ -102,7 +109,7 @@
     
     [StoreDatabase purgeDatabase];
     
-    NSLog(@"Finished Migrating old database!");
+    LogDebug(TAG, @"Finished Migrating old database!");
 }
 
 - (id)init{
@@ -131,6 +138,18 @@
     return self;
 }
 
+- (VirtualItemStorage*)virtualItemStorage:(VirtualItem*)item {
+    VirtualItemStorage* storage = nil;
+    
+    if ([item isKindOfClass:[VirtualGood class]]) {
+        storage = self.virtualGoodStorage;
+    }else if ([item isKindOfClass:[VirtualCurrency class]]) {
+        storage = self.virtualCurrencyStorage;
+    }
+    
+    return storage;
+}
+
 
 + (NSString *) applicationDirectory
 {
@@ -154,7 +173,7 @@
                                                             attributes:nil
                                                                  error:&error])
             {
-                NSLog(@"Create directory error: %@", error);
+                LogError(TAG, ([NSString stringWithFormat:@"Create directory error: %@", error]));
                 return nil;
             }
         }

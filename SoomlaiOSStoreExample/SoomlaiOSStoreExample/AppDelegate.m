@@ -30,7 +30,7 @@
     if (![ObscuredNSUserDefaults boolForKey:@"NotFirstLaunch"])
     {
         [ObscuredNSUserDefaults setBool:YES forKey:@"NotFirstLaunch"];
-        [StoreInventory addAmount:10000 toCurrency:((VirtualCurrency*)[storeAssets.virtualCurrencies objectAtIndex:0]).itemId];
+        [(VirtualCurrency*)[storeAssets.virtualCurrencies objectAtIndex:0] giveAmount:10000];
     }
 
     return YES;

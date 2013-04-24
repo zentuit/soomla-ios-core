@@ -15,28 +15,35 @@
  */
 
 #import "NonConsumableStorage.h"
-#import "AppStoreItem.h"
 #import "StorageManager.h"
 #import "StoreEncryptor.h"
 #import "NonConsumableItem.h"
 #import "KeyValDatabase.h"
+#import "StoreUtils.h"
 
 @implementation NonConsumableStorage
 
+static NSString* TAG = @"SOOMLA NonConsumableStorage";
 
-- (BOOL)nonConsumableExists:(NonConsumableItem*)appStoreItem{
-    NSString* key = [StoreEncryptor encryptString:[KeyValDatabase keyNonConsExists:appStoreItem.appStoreItem.productId]];
+- (BOOL)nonConsumableExists:(NonConsumableItem*)nonConsumableItem{
+    LogDebug(TAG, @"trying to figure out if the given NonConsumable item exists.")
+    
+    NSString* key = [StoreEncryptor encryptString:[KeyValDatabase keyNonConsExists:nonConsumableItem.itemId]];
     NSString* val = [[[StorageManager getInstance] kvDatabase] getValForKey:key];
     return val != nil;
 }
 
-- (void)add:(NonConsumableItem*)appStoreItem{
-    NSString* key = [StoreEncryptor encryptString:[KeyValDatabase keyNonConsExists:appStoreItem.appStoreItem.productId]];
+- (void)add:(NonConsumableItem*)nonConsumableItem{
+    LogDebug(TAG, ([NSString stringWithFormat:@"Adding NonConsumabel %@", nonConsumableItem.itemId]));
+    
+    NSString* key = [StoreEncryptor encryptString:[KeyValDatabase keyNonConsExists:nonConsumableItem.itemId]];
     [[[StorageManager getInstance] kvDatabase] setVal:@"" forKey:key];
 }
 
-- (void)remove:(NonConsumableItem*)appStoreItem{
-    NSString* key = [StoreEncryptor encryptString:[KeyValDatabase keyNonConsExists:appStoreItem.appStoreItem.productId]];
+- (void)remove:(NonConsumableItem*)nonConsumableItem{
+    LogDebug(TAG, ([NSString stringWithFormat:@"Removing NonConsumabel %@", nonConsumableItem.itemId]));
+    
+    NSString* key = [StoreEncryptor encryptString:[KeyValDatabase keyNonConsExists:nonConsumableItem.itemId]];
     [[[StorageManager getInstance] kvDatabase] deleteKeyValWithKey:key];
 }
 

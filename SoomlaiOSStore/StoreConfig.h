@@ -28,4 +28,9 @@ extern const int METADATA_VERSION;
  */
 extern BOOL STORE_DEBUG;
 
+/* CHANGE THIS SECRET NOW ! */
 extern const NSString* SOOM_SEC;
+
+
+
+

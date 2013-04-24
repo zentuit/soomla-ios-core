@@ -22,15 +22,23 @@
 @class VirtualGood;
 @class VirtualCurrencyPack;
 @class NonConsumableItem;
+@class VirtualItem;
+@class PurchasableVirtualItem;
 
 /**
  * This class holds the store's meta data including:
- * - Virtual Currencies definitions
- * - Virtual Currency Packs definitions
- * - Virtual Goods definitions
- * - Virtual Categories definitions
+ * - Virtual Currencies
+ * - Virtual Currency Packs
+ * - All kinds of Virtual Goods
+ * - Virtual Categories
+ * - NonConsumables
  */
 @interface StoreInfo : NSObject{
+    @private
+    NSDictionary* virtualItems;
+    NSDictionary* purchasableItems;
+    NSDictionary* goodsCategories;
+    @public
     NSArray* virtualCurrencies;
     NSArray* virtualGoods;
     NSArray* virtualCurrencyPacks;
@@ -43,6 +51,9 @@
 @property (nonatomic, retain) NSArray* virtualCurrencyPacks;
 @property (nonatomic, retain) NSArray* nonConsumableItems;
 @property (nonatomic, retain) NSArray* virtualCategories;
+@property (nonatomic, retain) NSDictionary* virtualItems;
+@property (nonatomic, retain) NSDictionary* purchasableItems;
+@property (nonatomic, retain) NSDictionary* goodsCategories;
 
 + (StoreInfo*)getInstance;
 
@@ -51,49 +62,53 @@
  * database doesn't have any previous version of the store metadata, StoreInfo
  * is being loaded from the given IStoreAssets. After the first initialization,
  * StoreInfo will be initialized from the database.
- * NOTE: If you want to override the current StoreInfo, you'll have to bump the
- * database version (the old database will be destroyed) OR just bump the version of your implementation of IStoreAssets
- * in order to remove the metadata when the application loads.
+ *
+ * IMPORTANT: If you want to override the current StoreInfo, you'll have to bump the version of your
+ * implementation of IStoreAssets in order to remove the metadata when the application loads.
+ * (bumping the version is done by returning a higher number in IStoreAssets:getVersion.
  */
 - (void)initializeWithIStoreAsssets:(id <IStoreAsssets>)storeAssets;
+
+/**
+ * Initializes StoreInfo from the database. This action should be performed only once during the lifetime of
+ * a session of the game. StoreController automatically initializes StoreInfo. Don't do it if you don't know what
+ * you're doing.
+ * return success.
+ */
 - (BOOL)initializeFromDB;
 - (NSDictionary*)toDictionary;
 
+
 /**
- * Use this function if you need to know the definition of a specific virtual category.
- * id is the requested category's id.
- * throws VirtualItemNotFoundException
+ * A utility function to retrieve a single VirtualItem that resides in the meta data.
+ *
+ * itemId is the itemId of the required VirtualItem.
+ *
+ * throws VirtualItemNotFoundException when the given itemId was not found.
  */
-- (VirtualCategory*)categoryWithId:(int)Id;
+- (VirtualItem*)virtualItemWithId:(NSString*)itemId;
+
 /**
- * Use this function if you need to know the definition of a specific virtual good.
- * itemId is the requested good's item id.
- * throws VirtualItemNotFoundException
+ * A utility function to retrieve a single PurchasableVirtualItem that resides in the meta data.
+ *
+ * IMPORTANT: The retrieved PurchasableVirtualItems are only those which has a purchaseType of PurchaseWithMarket.
+ * (This is why we fetch here with productId)
+ *
+ * productId the productId of the required PurchasableVirtualItem.
+ *
+ * throws VirtualItemNotFoundException when the given productId was not found.
  */
-- (VirtualGood*)goodWithItemId:(NSString*)itemId;
+- (PurchasableVirtualItem*)purchasableItemWithProductId:(NSString*)productId;
+
 /**
- * Use this function if you need to know the definition of a specific virtual currency.
- * itemId is the requested currency's item id.
- * throws VirtualItemNotFoundException
+ * A utility function to retrieve a single VirtualCategory for a given VirtualGood itemId.
+ *
+ * goodItemId is the virtualGood in the category.
+ *
+ * returns a VirtualCategory for the given VirtualGood.
+ *
+ * throws VirtualItemNotFoundException when the given goodItemId was not found.
  */
-- (VirtualCurrency*)currencyWithItemId:(NSString*)itemId;
-/**
- * Use this function if you need to know the definition of a specific virtual currency pack.
- * productId is the requested pack's product id.
- * throws VirtualItemNotFoundException
- */
-- (VirtualCurrencyPack*)currencyPackWithProductId:(NSString*)productId;
-/**
- * Use this function if you need to know the definition of a specific virtual currency pack.
- * itemId is the requested currency pack's item id.
- * throws VirtualItemNotFoundException
- */
-- (VirtualCurrencyPack*)currencyPackWithItemId:(NSString*)itemId;
-/**
- * Use this function if you need to know the definition of a specific App Store NON-CONSUMABLE item.
- * productId is the requested NON-CONSUMABLE item's product id.
- * throws VirtualItemNotFoundException
- */
-- (NonConsumableItem*)nonConsumableItemWithProductId:(NSString*)productId;
+- (VirtualCategory*)categoryForGoodWithItemId:(NSString*)goodItemId;
 
 @end

@@ -16,10 +16,28 @@
 
 #import <Foundation/Foundation.h>
 
+/**
+ * This class provides basic storage operations for a simple key-value store.
+ */
 @interface KeyValueStorage : NSObject
 
+/**
+ * Fetch the value for the given key.
+ * key is the key in the key-val pair.
+ */
 - (NSString*)getValueForKey:(NSString*)key;
+
+/**
+ * Sets the given value to the given key.
+ * key is the key in the key-val pair.
+ * val is the val in the key-val pair.
+ */
 - (void)setValue:(NSString*)val forKey:(NSString*)key;
+
+/**
+ * Deletes a key-val pair with the given key.
+ * key is the key in the key-val pair.
+ */
 - (void)deleteValueForKey:(NSString*)key;
 
 @end

@@ -14,27 +14,32 @@
  * limitations under the License.
  */
 
-#import <Foundation/Foundation.h>
-
-@class PurchasableVirtualItem;
-
-/** ABSTRACT
-* A PurchaseType is a way to purchase a PurchasableVirtualItem. This abstract class describes basic features
-* of the actual implementations of PurchaseType.
-*/
-@interface PurchaseType : NSObject {
-    PurchasableVirtualItem* associatedItem;
-}
-
-@property (retain, nonatomic) PurchasableVirtualItem* associatedItem;
-
-- (id)init;
+#import "VirtualItem.h"
 
 /**
- * Buy the associated item.
- *
- * throws InsufficientFundsException
+ * This is a representation of the game's virtual currency.
+ * Each game can have multiple instances of a virtual currency, all kept in StoreInfo;
  */
-- (void)buy;
+@interface VirtualCurrency : VirtualItem{
+    
+}
+
+/** Constructor
+ *
+ * see parent
+ */
+- (id)initWithName:(NSString*)name andDescription:(NSString*)description
+    andItemId:(NSString*)itemId;
+
+/** Constructor
+ *
+ * see parent
+ */
+- (id)initWithDictionary:(NSDictionary*)dict;
+
+/**
+ * see parent
+ */
+- (NSDictionary*)toDictionary;
 
 @end

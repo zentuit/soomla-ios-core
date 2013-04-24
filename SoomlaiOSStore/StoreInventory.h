@@ -10,22 +10,28 @@
 
 @interface StoreInventory : NSObject
 
-/** Virtual Currencies **/
-+ (int)getCurrencyBalance:(NSString*)currencyItemId;
-+ (int)addAmount:(int)amount toCurrency:(NSString*)currencyItemId;
-+ (int)removeAmount:(int)amount fromCurrency:(NSString*)currencyItemId;
+/**
+ * throws InsufficientFundsException, VirtualItemNotFoundException
+ */
++ (void)buyItemWithItemId:(NSString*)itemId;
+
+/** Virtual Items **/
+// The itemId must be of a VirtualCurrency or SingleUseVG or LifetimeVG or EquippableVG
++ (int)getVirtualItemBalance:(NSString*)itemId;
+// The itemId must be of a VirtualCurrency or SingleUseVG or LifetimeVG or EquippableVG
++ (int)addAmount:(int)amount toVirtualItem:(NSString*)itemId;
+// The itemId must be of a VirtualCurrency or SingleUseVG or LifetimeVG or EquippableVG
++ (int)removeAmount:(int)amount fromVirtualItem:(NSString*)itemId;
 
 /** Virtual Goods **/
-+ (int)getGoodBalance:(NSString*)goodItemId;
-+ (int)addAmount:(int)amount toGood:(NSString*)goodItemId;
-+ (int)removeAmount:(int)amount fromGood:(NSString*)goodItemId;
 + (void)equipVirtualGoodWithItemId:(NSString*)goodItemId;
 + (void)unEquipVirtualGoodWithItemId:(NSString*)goodItemId;
 + (BOOL)isVirtualGoodWithItemIdEquipped:(NSString*)goodItemId;
++ (int)goodUpgradeLevel:(NSString*)goodItemId;
 
 /** NonConsumables **/
-+ (BOOL) nonConsumableItemExists:(NSString*)productId;
-+ (void) addNonConsumableItem:(NSString*)productId;
-+ (void) removeNonConsumableItem:(NSString*)productId;
++ (BOOL) nonConsumableItemExists:(NSString*)itemId;
++ (void) addNonConsumableItem:(NSString*)itemId;
++ (void) removeNonConsumableItem:(NSString*)itemId;
 
 @end

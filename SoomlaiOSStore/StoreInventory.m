@@ -14,77 +14,79 @@
 #import "VirtualCurrencyStorage.h"
 #import "VirtualGoodStorage.h"
 #import "NonConsumableStorage.h"
+#import "PurchasableVirtualItem.h"
+#import "UpgradeVG.h"
 
 @implementation StoreInventory
 
-+ (int)getCurrencyBalance:(NSString*)currencyItemId {
-    VirtualCurrency* currency = [[StoreInfo getInstance] currencyWithItemId:currencyItemId];
-    
-    return [[[StorageManager getInstance] virtualCurrencyStorage] getBalanceForCurrency:currency];
++ (void)buyItemWithItemId:(NSString*)itemId {
+    PurchasableVirtualItem* pvi = (PurchasableVirtualItem*) [[StoreInfo getInstance] virtualItemWithId:itemId];
+    [pvi buy];
 }
 
-+ (int)addAmount:(int)amount toCurrency:(NSString*)currencyItemId {
-    VirtualCurrency* currency = [[StoreInfo getInstance] currencyWithItemId:currencyItemId];
-    
-    return [[[StorageManager getInstance] virtualCurrencyStorage] addAmount:amount toCurrency:currency];
+
+
++ (int)getVirtualItemBalance:(NSString*)itemId {
+    VirtualItem* item = [[StoreInfo getInstance] virtualItemWithId:itemId];
+    return [[[StorageManager getInstance] virtualItemStorage:item] balanceForItem:item];
 }
 
-+ (int)removeAmount:(int)amount fromCurrency:(NSString*)currencyItemId {
-    VirtualCurrency* currency = [[StoreInfo getInstance] currencyWithItemId:currencyItemId];
-    
-    return [[[StorageManager getInstance] virtualCurrencyStorage] removeAmount:amount fromCurrency:currency];
++ (int)addAmount:(int)amount toVirtualItem:(NSString*)itemId {
+    VirtualItem* item = [[StoreInfo getInstance] virtualItemWithId:itemId];
+    return [[[StorageManager getInstance] virtualItemStorage:item] addAmount:amount toItem:item];
 }
 
-+ (int)getGoodBalance:(NSString*)goodItemId {
-    VirtualGood* good = [[StoreInfo getInstance] goodWithItemId:goodItemId];
-    
-    return [[[StorageManager getInstance] virtualGoodStorage] getBalanceForGood:good];
++ (int)removeAmount:(int)amount fromVirtualItem:(NSString*)itemId {
+    VirtualItem* item = [[StoreInfo getInstance] virtualItemWithId:itemId];
+    return [[[StorageManager getInstance] virtualItemStorage:item] removeAmount:amount fromItem:item];
 }
 
-+ (int)addAmount:(int)amount toGood:(NSString*)goodItemId {
-    VirtualGood* good = [[StoreInfo getInstance] goodWithItemId:goodItemId];
-    
-    return [[[StorageManager getInstance] virtualGoodStorage] addAmount:amount toGood:good];
-}
 
-+ (int)removeAmount:(int)amount fromGood:(NSString*)goodItemId {
-    VirtualGood* good = [[StoreInfo getInstance] goodWithItemId:goodItemId];
-    
-    return [[[StorageManager getInstance] virtualGoodStorage] removeAmount:amount fromGood:good];
-}
 
 + (void)equipVirtualGoodWithItemId:(NSString*)goodItemId {
-    VirtualGood* good = [[StoreInfo getInstance] goodWithItemId:goodItemId];
+    EquippableVG* good = (EquippableVG*)[[StoreInfo getInstance] virtualItemWithId:goodItemId];
     
-    return [[[StorageManager getInstance] virtualGoodStorage] equipGood:good withEquipValue:YES];
+    return [[[StorageManager getInstance] virtualGoodStorage] equipGood:good];
 }
 
 + (void)unEquipVirtualGoodWithItemId:(NSString*)goodItemId {
-    VirtualGood* good = [[StoreInfo getInstance] goodWithItemId:goodItemId];
+    EquippableVG* good = (EquippableVG*)[[StoreInfo getInstance] virtualItemWithId:goodItemId];
     
-    return [[[StorageManager getInstance] virtualGoodStorage] equipGood:good withEquipValue:NO];
+    return [[[StorageManager getInstance] virtualGoodStorage] unequipGood:good];
 }
 
 + (BOOL)isVirtualGoodWithItemIdEquipped:(NSString*)goodItemId {
-    VirtualGood* good = [[StoreInfo getInstance] goodWithItemId:goodItemId];
+    EquippableVG* good = (EquippableVG*)[[StoreInfo getInstance] virtualItemWithId:goodItemId];
     
     return [[[StorageManager getInstance] virtualGoodStorage] isGoodEquipped:good];
 }
 
-+ (BOOL) nonConsumableItemExists:(NSString*)productId {
-    NonConsumableItem* nonConsumable = [[StoreInfo getInstance] nonConsumableItemWithProductId:productId];
++ (int)goodUpgradeLevel:(NSString*)goodItemId {
+    VirtualGood* good = (VirtualGood*)[[StoreInfo getInstance] virtualItemWithId:goodItemId];
+    UpgradeVG* upgradeVG = [[[StorageManager getInstance] virtualGoodStorage] currentUpgradeOf:good];
+    if (!upgradeVG) {
+        return 0;
+    }
+    
+    return upgradeVG.level;
+}
+
+
+
++ (BOOL) nonConsumableItemExists:(NSString*)itemId {
+    NonConsumableItem* nonConsumable = (NonConsumableItem*)[[StoreInfo getInstance] virtualItemWithId:itemId];
     
     return [[[StorageManager getInstance] nonConsumableStorage] nonConsumableExists:nonConsumable];
 }
 
-+ (void) addNonConsumableItem:(NSString*)productId {
-    NonConsumableItem* nonConsumable = [[StoreInfo getInstance] nonConsumableItemWithProductId:productId];
++ (void) addNonConsumableItem:(NSString*)itemId {
+    NonConsumableItem* nonConsumable = (NonConsumableItem*)[[StoreInfo getInstance] virtualItemWithId:itemId];
     
     [[[StorageManager getInstance] nonConsumableStorage] add:nonConsumable];
 }
 
-+ (void) removeNonConsumableItem:(NSString*)productId {
-    NonConsumableItem* nonConsumable = [[StoreInfo getInstance] nonConsumableItemWithProductId:productId];
++ (void) removeNonConsumableItem:(NSString*)itemId {
+    NonConsumableItem* nonConsumable = (NonConsumableItem*)[[StoreInfo getInstance] virtualItemWithId:itemId];
     
     [[[StorageManager getInstance] nonConsumableStorage] remove:nonConsumable];
 }

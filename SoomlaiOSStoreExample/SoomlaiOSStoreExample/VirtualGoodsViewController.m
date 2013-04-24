@@ -15,6 +15,7 @@
 #import "EventHandling.h"
 #import "StoreInventory.h"
 #import "InsufficientFundsException.h"
+#import "PurchaseWithVirtualItem.h"
 
 @interface VirtualGoodsViewController () {
     NSDictionary* images;
@@ -38,10 +39,10 @@
 	      nil];
     
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(goodBalanceChanged:) name:EVENT_CHANGED_GOOD_BALANCE object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(curBalanceChanged:) name:EVENT_CHANGED_CURRENCY_BALANCE object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(goodBalanceChanged:) name:EVENT_GOOD_BALANCE_CHANGED object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(curBalanceChanged:) name:EVENT_CURRENCY_BALANCE_CHANGED object:nil];
     
-    int balance = [StoreInventory getCurrencyBalance:MUFFINS_CURRENCY_ITEM_ID];
+    int balance = [StoreInventory getVirtualItemBalance:MUFFINS_CURRENCY_ITEM_ID];
     currencyBalance.text = [NSString stringWithFormat:@"%d", balance];
     
     [super viewDidLoad];
@@ -72,7 +73,7 @@
     VirtualGood* good = [[[StoreInfo getInstance] virtualGoods] objectAtIndex:indexPath.row];
     
     @try {
-        [[StoreController getInstance] buyVirtualGood:good.itemId];
+        [good buy];
     }
     @catch (InsufficientFundsException *exception) {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Insufficient funds"
@@ -100,10 +101,10 @@
     VirtualGood* good = [[[StoreInfo getInstance] virtualGoods] objectAtIndex:indexPath.row];
     cell.title.text = good.name;
     cell.description.text = good.description;
-    NSDictionary* currencyValues = good.currencyValues;
-    cell.price.text = [(NSNumber*)[currencyValues objectForKey:MUFFINS_CURRENCY_ITEM_ID] stringValue];
+
+    cell.price.text = [NSString stringWithFormat:@"%d", ((PurchaseWithVirtualItem*)good.purchaseType).amount];
     cell.icon.image = [UIImage imageNamed:[images objectForKey:good.itemId]];
-    int balance = [StoreInventory getGoodBalance:good.itemId];
+    int balance = [StoreInventory getVirtualItemBalance:good.itemId];
     cell.balance.text = [NSString stringWithFormat:@"%d", balance];
     
     return cell;

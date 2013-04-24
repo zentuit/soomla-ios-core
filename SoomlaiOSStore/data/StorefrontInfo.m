@@ -19,10 +19,13 @@
 #import "KeyValDatabase.h"
 #import "JSONKit.h"
 #import "StoreEncryptor.h"
+#import "StoreUtils.h"
 
 @implementation StorefrontInfo
 
 @synthesize storefrontJson, orientationLandscape;
+
+static NSString* TAG = @"SOOMLA StorefrontInfo";
 
 + (StorefrontInfo*)getInstance{
     static StorefrontInfo* _instance = nil;
@@ -41,7 +44,7 @@
     if (![self initializeFromDB]){
         NSString* sfJSON = [self fetchThemeJsonFromFile];
         if (!sfJSON) {
-            NSLog(@"Couldn't find storefront in the DB AND the filesystem. Something is totally wrong !");
+            LogError(TAG, @"Couldn't find storefront in the DB AND the filesystem. Something is totally wrong !");
             return;
         }
         self.storefrontJson = sfJSON;
@@ -49,7 +52,6 @@
         [[[StorageManager getInstance] kvDatabase] setVal:[StoreEncryptor encryptString:sfJSON] forKey:[KeyValDatabase keyMetaStorefrontInfo]];
         
         NSDictionary* sfDict = [self.storefrontJson objectFromJSONString];
-        //TODO: check that this value is parsed
         self.orientationLandscape = [((NSString*)[[sfDict objectForKey:@"template"] objectForKey:@"orientation"]) isEqualToString:@"landscape"];
     }
 }
@@ -60,14 +62,14 @@
         return [NSString stringWithContentsOfFile:jsonPath encoding:NSUTF8StringEncoding error:nil];
     }
     
-    NSLog(@"Can't read JSON storefront file. Please add theme.json as a bundle resource.");
+    LogError(TAG, @"Can't read JSON storefront file. Please add theme.json as a bundle resource.");
     return NULL;
 }
 
 - (BOOL)initializeFromDB{
     NSString* sfJSON = [[[StorageManager getInstance] kvDatabase] getValForKey:[KeyValDatabase keyMetaStorefrontInfo]];
     if (!sfJSON || [sfJSON isEqual:[NSNull null]] || sfJSON.length == 0){
-        NSLog(@"storefront json is not in DB yet");
+        LogDebug(TAG, @"storefront json is not in DB yet");
         return NO;
     }
     
@@ -77,8 +79,9 @@
     
     NSDictionary* sfDict = [sfJSON objectFromJSONString];
     
-    //TODO: check that this value is parsed
     self.orientationLandscape = [((NSString*)[[sfDict objectForKey:@"template"] objectForKey:@"orientation"]) isEqualToString:@"landscape"];
+    
+    LogDebug(TAG, ([NSString stringWithFormat:@"the metadata-design json (from DB) is %@", storefrontJson]));
     
     return YES;
 }

@@ -25,19 +25,19 @@
 
 /**
  * Figure out if the given Non-Consumable AppStoreItem exists.
- * appStoreItem is the required Non-Consumable AppStoreItem.
+ * nonConsumableItem is the required Non-Consumable AppStoreItem.
  */
-- (BOOL)nonConsumableExists:(NonConsumableItem*)appStoreItem;
+- (BOOL)nonConsumableExists:(NonConsumableItem*)nonConsumableItem;
 /**
  * Adds the given App Store Non-Consumable item to the storage.
- * appStoreItem is the required App Store Non-Consumable item.
+ * nonConsumableItem is the required App Store Non-Consumable item.
  */
-- (void)add:(NonConsumableItem*)appStoreItem;
+- (void)add:(NonConsumableItem*)nonConsumableItem;
 /**
  * Removes the given App Store Non-Consumable item from the storage.
- * appStoreItem is the required App Store Non-Consumable item.
+ * nonConsumableItem is the required App Store Non-Consumable item.
  */
-- (void)remove:(NonConsumableItem*)appStoreItem;
+- (void)remove:(NonConsumableItem*)nonConsumableItem;
 
 
 @end
