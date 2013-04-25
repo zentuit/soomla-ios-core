@@ -26,19 +26,19 @@
 
 
 
-+ (int)getVirtualItemBalance:(NSString*)itemId {
++ (int)getItemBalance:(NSString*)itemId {
     VirtualItem* item = [[StoreInfo getInstance] virtualItemWithId:itemId];
     return [[[StorageManager getInstance] virtualItemStorage:item] balanceForItem:item];
 }
 
-+ (int)addAmount:(int)amount toVirtualItem:(NSString*)itemId {
++ (void)giveAmount:(int)amount ofItem:(NSString*)itemId {
     VirtualItem* item = [[StoreInfo getInstance] virtualItemWithId:itemId];
-    return [[[StorageManager getInstance] virtualItemStorage:item] addAmount:amount toItem:item];
+    [item giveAmount:amount];
 }
 
-+ (int)removeAmount:(int)amount fromVirtualItem:(NSString*)itemId {
++ (void)takeAmount:(int)amount ofItem:(NSString*)itemId {
     VirtualItem* item = [[StoreInfo getInstance] virtualItemWithId:itemId];
-    return [[[StorageManager getInstance] virtualItemStorage:item] removeAmount:amount fromItem:item];
+    [item takeAmount:amount];
 }
 
 

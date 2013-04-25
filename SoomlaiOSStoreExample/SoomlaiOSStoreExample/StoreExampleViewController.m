@@ -41,6 +41,7 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(closingStore:) name:EVENT_CLOSING_STORE object:nil];
     
     rightView.layer.cornerRadius = 7;
+    
 }
 
 - (void)didReceiveMemoryWarning
