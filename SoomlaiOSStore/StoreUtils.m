@@ -20,7 +20,7 @@
 @implementation StoreUtils
 
 + (void)LogDebug:(NSString*)tag withMessage:(NSString*)msg {
-    if (STORE_DEBUG) {
+    if (STORE_DEBUG_LOG) {
         NSLog(@"[Debug] %@: %@", tag, msg);
     }
 }

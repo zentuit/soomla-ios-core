@@ -26,7 +26,7 @@ extern const int METADATA_VERSION;
 /*
  * do you want to print out debug messages?
  */
-extern BOOL STORE_DEBUG;
+extern BOOL STORE_DEBUG_LOG;
 
 /* CHANGE THIS SECRET NOW ! */
 extern const NSString* SOOM_SEC;

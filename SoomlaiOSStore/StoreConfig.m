@@ -18,7 +18,7 @@
 
 const int METADATA_VERSION      = 2;
 
-BOOL STORE_DEBUG                = YES;
+BOOL STORE_DEBUG_LOG                = YES;
 
 
 const NSString* SOOM_SEC        = @"SINC_SSIEEKK";
