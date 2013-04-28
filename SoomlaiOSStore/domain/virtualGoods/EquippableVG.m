@@ -73,22 +73,30 @@ static NSString* TAG = @"SOOMLA equippingModel";
 - (void)equip {
     // only if the user has bought this EquippableVG, the EquippableVG is equipped.
     if ([[[StorageManager getInstance] virtualGoodStorage] balanceForItem:self] > 0) {
-        [[[StorageManager getInstance] virtualGoodStorage] equipGood:self];
         
         if (self.equippingModel == kCategory) {
             @try {
                 VirtualCategory* category = [[StoreInfo getInstance] categoryForGoodWithItemId:self.itemId];
                 
-                for(VirtualGood* good in category.goods) {
-                    if ((![good.itemId isEqualToString:self.itemId]) &&
-                        [good isKindOfClass:[EquippableVG class]]) {
-                        [((EquippableVG*)good) unequip];
+                for(NSString* goodItemId in category.goodsItemIds) {
+                    EquippableVG* equippableVG = nil;
+                    @try {
+                        equippableVG = (EquippableVG*)[[StoreInfo getInstance] virtualItemWithId:goodItemId];
+                    } @catch (VirtualItemNotFoundException* ex) {
+                        LogError(TAG, ([NSString stringWithFormat:@"On equip, couldn't find one of the itemIds in the category. Continuing to the next one. itemId: %@", goodItemId]));
+                        continue;
+                    } @catch (NSException* e) {
+                        LogDebug(TAG, ([NSString stringWithFormat:@"On equip, an error occured. It's a debug message b/c the VirtualGood may just not be an EquippableVG. itemId: %@", goodItemId]));
+                        continue;
+                    }
+                    if ((![goodItemId isEqualToString:self.itemId])) {
+                        [equippableVG unequip];
                     }
                 }
             } @catch (VirtualItemNotFoundException* ex) {
                 LogError(TAG, ([NSString stringWithFormat:@"Tried to unequip all other category VirtualGoods but there was no associated category. virtual good itemId: %@", self.itemId]));
             }
-        } else if (self.equippingModel == kCategory) {
+        } else if (self.equippingModel == kGlobal) {
             NSArray* goods = [[StoreInfo getInstance] virtualGoods];
             for(VirtualGood* good in goods) {
                 if ((![good.itemId isEqualToString:self.itemId]) &&
@@ -97,6 +105,10 @@ static NSString* TAG = @"SOOMLA equippingModel";
                 }
             }
         }
+        
+        // equipping the current good
+        [[[StorageManager getInstance] virtualGoodStorage] equipGood:self];
+        
     } else {
         @throw [[NotEnoughGoodsException alloc] initWithItemId:self.itemId];
     }

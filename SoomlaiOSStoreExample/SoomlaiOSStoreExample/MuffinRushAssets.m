@@ -72,13 +72,13 @@ NonConsumableItem* NO_ADDS_NON_CONS;
     
     /** Virtual Goods **/
     
-    FRUIT_CAKE_GOOD = [[SingleUseVG alloc] initWithName:@"Fruit Cake" andDescription:@"Customers buy a double portion on each purchase of this cake" andItemId:FRUIT_CAKE_GOOD_ITEM_ID andPurchaseType:[[PurchaseWithVirtualItem alloc] initWithVirtualItem:MUFFINS_CURRENCY andAmount:220]];
+    FRUIT_CAKE_GOOD = [[SingleUseVG alloc] initWithName:@"Fruit Cake" andDescription:@"Customers buy a double portion on each purchase of this cake" andItemId:FRUIT_CAKE_GOOD_ITEM_ID andPurchaseType:[[PurchaseWithVirtualItem alloc] initWithVirtualItem:MUFFINS_CURRENCY_ITEM_ID andAmount:220]];
     
-    PAVLOVA_GOOD = [[SingleUseVG alloc] initWithName:@"Pavlova" andDescription:@"Gives customers a sugar rush and they call their friends" andItemId:PAVLOVA_GOOD_ITEM_ID andPurchaseType:[[PurchaseWithVirtualItem alloc] initWithVirtualItem:MUFFINS_CURRENCY andAmount:175]];
+    PAVLOVA_GOOD = [[SingleUseVG alloc] initWithName:@"Pavlova" andDescription:@"Gives customers a sugar rush and they call their friends" andItemId:PAVLOVA_GOOD_ITEM_ID andPurchaseType:[[PurchaseWithVirtualItem alloc] initWithVirtualItem:MUFFINS_CURRENCY_ITEM_ID andAmount:175]];
     
-    CHOCO_CAKE_GOOD = [[SingleUseVG alloc] initWithName:@"Choco-Cake" andDescription:@"A classic cake to maximize customer satisfaction" andItemId:CHOCO_CAKE_GOOD_ITEM_ID andPurchaseType:[[PurchaseWithVirtualItem alloc] initWithVirtualItem:MUFFINS_CURRENCY andAmount:250]];
+    CHOCO_CAKE_GOOD = [[SingleUseVG alloc] initWithName:@"Choco-Cake" andDescription:@"A classic cake to maximize customer satisfaction" andItemId:CHOCO_CAKE_GOOD_ITEM_ID andPurchaseType:[[PurchaseWithVirtualItem alloc] initWithVirtualItem:MUFFINS_CURRENCY_ITEM_ID andAmount:250]];
     
-    CREAM_CUP_GOOD = [[SingleUseVG alloc] initWithName:@"Cream Cup" andDescription:@"Increase bakery reputation with this original pastry" andItemId:CREAM_CUP_GOOD_ITEM_ID andPurchaseType:[[PurchaseWithVirtualItem alloc] initWithVirtualItem:MUFFINS_CURRENCY andAmount:50]];
+    CREAM_CUP_GOOD = [[SingleUseVG alloc] initWithName:@"Cream Cup" andDescription:@"Increase bakery reputation with this original pastry" andItemId:CREAM_CUP_GOOD_ITEM_ID andPurchaseType:[[PurchaseWithVirtualItem alloc] initWithVirtualItem:MUFFINS_CURRENCY_ITEM_ID andAmount:50]];
     
 
     

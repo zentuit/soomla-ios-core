@@ -24,15 +24,15 @@
 
 @implementation UpgradeVG
 
-@synthesize level, prev, good;
+@synthesize level, prevGoodItemId, goodItemId;
 
 static NSString* TAG = @"SOOMLA UpgradeVG";
 
-- (id)initWithName:(NSString *)oName andDescription:(NSString *)oDescription andItemId:(NSString *)oItemId andPurchaseType:(PurchaseType *)oPurchaseType andLinkedGood:(VirtualGood*)oGood andLevel:(int)oLevel andPreviousUpgrade:(UpgradeVG*)oPrev {
+- (id)initWithName:(NSString *)oName andDescription:(NSString *)oDescription andItemId:(NSString *)oItemId andPurchaseType:(PurchaseType *)oPurchaseType andLinkedGood:(NSString*)oGoodItemId andLevel:(int)oLevel andPreviousUpgrade:(NSString*)oPrevItemId {
     if (self = [super initWithName:oName andDescription:oDescription andItemId:oItemId andPurchaseType:oPurchaseType]) {
         self.level = oLevel;
-        self.prev = oPrev;
-        self.good = oGood;
+        self.prevGoodItemId = oPrevItemId;
+        self.goodItemId = oGoodItemId;
     }
     
     return self;
@@ -40,17 +40,9 @@ static NSString* TAG = @"SOOMLA UpgradeVG";
 
 - (id)initWithDictionary:(NSDictionary *)dict {
     if (self = [super initWithDictionary:dict]) {
-        NSString* goodItemId = [dict objectForKey:JSON_VGU_GOOD_ITEMID];
-        NSString* prevItemId = [dict objectForKey:JSON_VGU_PREV_ITEMID];
+        self.goodItemId = [dict objectForKey:JSON_VGU_GOOD_ITEMID];
+        self.prevGoodItemId = [dict objectForKey:JSON_VGU_PREV_ITEMID];
         level = [[dict objectForKey:JSON_VGU_LEVEL] intValue];
-        
-        @try {
-            self.good = (VirtualGood*)[[StoreInfo getInstance] virtualItemWithId:goodItemId];
-            self.prev = (!prevItemId) ? nil : (UpgradeVG*)[[StoreInfo getInstance] virtualItemWithId:prevItemId];
-        }
-        @catch (VirtualItemNotFoundException *ex) {
-            LogError(TAG, @"The wanted virtual good was not found.");
-        }
     }
     
     return self;
@@ -61,8 +53,8 @@ static NSString* TAG = @"SOOMLA UpgradeVG";
     
     NSMutableDictionary* toReturn = [[NSMutableDictionary alloc] initWithDictionary:parentDict];
     [toReturn setValue:[NSNumber numberWithInt:self.level] forKey:JSON_VGU_LEVEL];
-    [toReturn setValue:self.good.itemId forKey:JSON_VGU_GOOD_ITEMID];
-    [toReturn setValue:(self.prev ? self.prev.itemId : @"") forKey:JSON_VGU_PREV_ITEMID];
+    [toReturn setValue:self.goodItemId forKey:JSON_VGU_GOOD_ITEMID];
+    [toReturn setValue:(self.prevGoodItemId ? self.prevGoodItemId : @"") forKey:JSON_VGU_PREV_ITEMID];
     
     return toReturn;
 }
@@ -75,13 +67,20 @@ static NSString* TAG = @"SOOMLA UpgradeVG";
  * amount is NOT USED HERE !
  */
 - (void)giveAmount:(int)amount {
-    LogDebug(TAG, ([NSString stringWithFormat:@"Assigning %@ to: %@", self.name, self.good.name]));
+    LogDebug(TAG, ([NSString stringWithFormat:@"Assigning %@ to: %@", self.name, self.goodItemId]));
     
-    [[[StorageManager getInstance] virtualGoodStorage] assignCurrentUpgrade:self toGood:self.good];
+    VirtualGood* good = NULL;
+    @try {
+        good = (VirtualGood*)[[StoreInfo getInstance] virtualItemWithId:self.goodItemId];
+    } @catch (VirtualItemNotFoundException* ex) {
+        LogError(TAG, ([NSString stringWithFormat:@"VirtualGood with itemId: %@ doesn't exist! Can't upgrade.", self.goodItemId]));
+        return;
+    }
+    [[[StorageManager getInstance] virtualGoodStorage] assignCurrentUpgrade:self toGood:good];
 }
 
 /**
- * This is actually a downgrade of the associated VirtualGood (mGood).
+ * This is actually a downgrade of the associated VirtualGood (with goodItemId).
  * We check if the current Upgrade is really associated with the VirtualGood and:
  *  if YES we downgrade to the previous upgrade (or removing upgrades in case of null).
  *  if NO we return (do nothing).
@@ -89,23 +88,45 @@ static NSString* TAG = @"SOOMLA UpgradeVG";
  * amount is NOT USED HERE !
  */
 - (void)takeAmount:(int)amount {
-    UpgradeVG* upgradeVG = [[[StorageManager getInstance] virtualGoodStorage] currentUpgradeOf:self.good];
+    VirtualGood* good = NULL;
+    @try {
+        good = (VirtualGood*)[[StoreInfo getInstance] virtualItemWithId:self.goodItemId];
+    } @catch (VirtualItemNotFoundException* ex) {
+        LogError(TAG, ([NSString stringWithFormat:@"VirtualGood with itemId: %@ doesn't exist! Can't downgrade.", self.goodItemId]));
+        return;
+    }
+    UpgradeVG* upgradeVG = [[[StorageManager getInstance] virtualGoodStorage] currentUpgradeOf:good];
     if (upgradeVG != self) {
-        LogError(TAG, ([NSString stringWithFormat:@"You can't take what's not yours. The UpgradeVG %@ is not assigned to the VirtualGood: %@", self.name, self.good.name]));
+        LogError(TAG, ([NSString stringWithFormat:@"You can't take what's not yours. The UpgradeVG %@ is not assigned to the VirtualGood: %@. (or maybe it's NULL?)", self.name, good.name]));
         return;
     }
     
-    if (self.prev) {
-        LogDebug(TAG, ([NSString stringWithFormat:@"Downgrading %@ to %@", self.good.name, self.prev.name]));
-        [[[StorageManager getInstance] virtualGoodStorage] assignCurrentUpgrade:self.prev toGood:self.good];
+    if (self.prevGoodItemId && self.prevGoodItemId.length>0) {
+        UpgradeVG* prevUpgradeVG = NULL;
+        @try {
+            prevUpgradeVG = (UpgradeVG*)[[StoreInfo getInstance]virtualItemWithId:self.prevGoodItemId];
+        } @catch (VirtualItemNotFoundException* ex) {
+            LogError(TAG, ([NSString stringWithFormat:@"Previous UpgradeVG with itemId: %@ doesn't exist! Can't downgrade.", self.prevGoodItemId]));
+            return;
+        }
+        
+        LogDebug(TAG, ([NSString stringWithFormat:@"Downgrading %@ to %@", good.name, prevUpgradeVG.name]));
+        [[[StorageManager getInstance] virtualGoodStorage] assignCurrentUpgrade:prevUpgradeVG toGood:good];
     } else {
-        LogDebug(TAG, ([NSString stringWithFormat:@"Downgrading %@ to NO-UPGRADE", self.good.name]));
-        [[[StorageManager getInstance] virtualGoodStorage] removeUpgradesFrom:self.good];
+        LogDebug(TAG, ([NSString stringWithFormat:@"Downgrading %@ to NO-UPGRADE", good.name]));
+        [[[StorageManager getInstance] virtualGoodStorage] removeUpgradesFrom:good];
     }
 }
 
 - (BOOL)canBuy {
-    UpgradeVG* upgradeVG = [[[StorageManager getInstance] virtualGoodStorage] currentUpgradeOf:self.good];
+    VirtualGood* good = NULL;
+    @try {
+        good = (VirtualGood*)[[StoreInfo getInstance] virtualItemWithId:self.goodItemId];
+    } @catch (VirtualItemNotFoundException* ex) {
+        LogError(TAG, ([NSString stringWithFormat:@"VirtualGood with itemId: %@ doesn't exist! Returning NO (can't buy).", self.goodItemId]));
+        return NO;
+    }
+    UpgradeVG* upgradeVG = [[[StorageManager getInstance] virtualGoodStorage] currentUpgradeOf:good];
     return ((!upgradeVG) && self.level==1) ||
             (upgradeVG && ((upgradeVG.level == (self.level-1)) || (upgradeVG.level == (self.level+1))));
 }

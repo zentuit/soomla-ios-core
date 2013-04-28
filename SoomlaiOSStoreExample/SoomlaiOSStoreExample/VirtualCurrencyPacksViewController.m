@@ -40,7 +40,7 @@
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(curBalanceChanged:) name:EVENT_CURRENCY_BALANCE_CHANGED object:nil];
     
-    int balance = [StoreInventory getVirtualItemBalance:MUFFINS_CURRENCY_ITEM_ID];
+    int balance = [StoreInventory getItemBalance:MUFFINS_CURRENCY_ITEM_ID];
     currencyBalance.text = [NSString stringWithFormat:@"%d", balance];
     
     [super viewDidLoad];

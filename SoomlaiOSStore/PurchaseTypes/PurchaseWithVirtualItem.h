@@ -19,14 +19,14 @@
 @class VirtualItem;
 
 @interface PurchaseWithVirtualItem : PurchaseType {
-    VirtualItem* item;
+    NSString* targetItemId;
     int amount;
 }
 
-@property (retain, nonatomic) VirtualItem* item;
+@property (retain, nonatomic) NSString* targetItemId;
 @property (nonatomic) int amount;
 
-- (id) initWithVirtualItem:(VirtualItem*)oItem andAmount:(int)oAmount;
+- (id) initWithVirtualItem:(NSString*)oTargetItemId andAmount:(int)oAmount;
 
 
 @end

@@ -42,7 +42,7 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(goodBalanceChanged:) name:EVENT_GOOD_BALANCE_CHANGED object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(curBalanceChanged:) name:EVENT_CURRENCY_BALANCE_CHANGED object:nil];
     
-    int balance = [StoreInventory getVirtualItemBalance:MUFFINS_CURRENCY_ITEM_ID];
+    int balance = [StoreInventory getItemBalance:MUFFINS_CURRENCY_ITEM_ID];
     currencyBalance.text = [NSString stringWithFormat:@"%d", balance];
     
     [super viewDidLoad];
@@ -104,7 +104,7 @@
 
     cell.price.text = [NSString stringWithFormat:@"%d", ((PurchaseWithVirtualItem*)good.purchaseType).amount];
     cell.icon.image = [UIImage imageNamed:[images objectForKey:good.itemId]];
-    int balance = [StoreInventory getVirtualItemBalance:good.itemId];
+    int balance = [StoreInventory getItemBalance:good.itemId];
     cell.balance.text = [NSString stringWithFormat:@"%d", balance];
     
     return cell;

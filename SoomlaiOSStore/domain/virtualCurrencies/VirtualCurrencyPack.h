@@ -29,11 +29,11 @@
  */
 @interface VirtualCurrencyPack : PurchasableVirtualItem{
     int     currencyAmount;
-    VirtualCurrency* currency;
+    NSString* currencyItemId;
 }
 
 @property int     currencyAmount;
-@property (retain, nonatomic) VirtualCurrency* currency;
+@property (retain, nonatomic) NSString* currencyItemId;
 
 /** Constructor
  *
@@ -41,11 +41,11 @@
  * oDescription see parent
  * oItemId see parent
  * oCurrencyAmount is the amount of currency in the pack.
- * oCurrency is the currency associated with this pack.
+ * oCurrencyItemId is the itemId of the currency associated with this pack.
  * oPurchaseType see parent
  */
 - (id)initWithName:(NSString*)oName andDescription:(NSString*)oDescription
-     andItemId:(NSString*)oItemId andCurrencyAmount:(int)oCurrencyAmount andCurrency:(VirtualCurrency*)oCurrency
+     andItemId:(NSString*)oItemId andCurrencyAmount:(int)oCurrencyAmount andCurrency:(NSString*)oCurrencyItemId
      andPurchaseType:(PurchaseType*)oPurchaseType;
 
 /** Constructor

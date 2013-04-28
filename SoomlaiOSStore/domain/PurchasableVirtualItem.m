@@ -22,7 +22,6 @@
 #import "AppStoreItem.h"
 #import "VirtualItem.h"
 #import "StoreUtils.h"
-#import "StoreInfo.h"
 #import "VirtualItemNotFoundException.h"
 
 @implementation PurchasableVirtualItem
@@ -63,12 +62,7 @@ static NSString* TAG = @"SOOMLA PurchasableVirtualItem";
             NSString* pItemId = [purchasableDict objectForKey:JSON_PURCHASE_VI_ITEMID];
             int amount = [[purchasableDict objectForKey:JSON_PURCHASE_VI_AMOUNT] intValue];
             
-            @try {
-                VirtualItem* item = [[StoreInfo getInstance] virtualItemWithId:pItemId];
-                self.purchaseType = [[PurchaseWithVirtualItem alloc] initWithVirtualItem:item andAmount:amount];
-            } @catch (VirtualItemNotFoundException* ex) {
-                LogError(TAG, @"Couldn't find virtual item when trying to initialize PurchaseWithVirtualItem in PurchasableVirtualItem");
-            }
+            self.purchaseType = [[PurchaseWithVirtualItem alloc] initWithVirtualItem:pItemId andAmount:amount];
         } else {
             LogError(TAG, @"Purchase type not recognized !");
         }
@@ -95,7 +89,7 @@ static NSString* TAG = @"SOOMLA PurchasableVirtualItem";
     } else if ([self.purchaseType class] == [PurchaseWithVirtualItem class]) {
         [purchasableDict setObject:JSON_PURCHASE_TYPE_VI forKey:JSON_PURCHASE_TYPE];
         
-        [purchasableDict setObject:((PurchaseWithVirtualItem*)self.purchaseType).item.itemId forKey:JSON_PURCHASE_VI_ITEMID];
+        [purchasableDict setObject:((PurchaseWithVirtualItem*)self.purchaseType).targetItemId forKey:JSON_PURCHASE_VI_ITEMID];
         [purchasableDict setObject:[NSNumber numberWithInt:((PurchaseWithVirtualItem*)self.purchaseType).amount] forKey:JSON_PURCHASE_VI_AMOUNT];
     }
     

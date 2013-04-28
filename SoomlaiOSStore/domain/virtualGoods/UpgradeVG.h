@@ -39,15 +39,25 @@
  * iTunes Connect. ( https://itunesconnect.apple.com )
  */
 @interface UpgradeVG : VirtualGood {
-    VirtualGood* good;
+    NSString* goodItemId;
     int level;
-    UpgradeVG* prev;
+    NSString* prevGoodItemId;
 }
 
-@property (nonatomic, retain) VirtualGood* good;
+@property (nonatomic, retain) NSString* goodItemId;
 @property int level;
-@property (nonatomic, retain) UpgradeVG* prev;
+@property (nonatomic, retain) NSString* prevGoodItemId;
 
-- (id)initWithName:(NSString *)oName andDescription:(NSString *)oDescription andItemId:(NSString *)oItemId andPurchaseType:(PurchaseType *)oPurchaseType andLinkedGood:(VirtualGood*)oGood andLevel:(int)level andPreviousUpgrade:(UpgradeVG*)prev;
+/** Constructor
+ *
+ * oName see parent
+ * oDescription see parent
+ * oItemId see parent
+ * oPurchaseType see parent
+ * oGoodItemId is the itemId of the VirtualGood associated with this Upgrade. It can be any VirtualGood type.
+ * oLevel is the level of this upgrde in the upgrade scale. (prev's level will be [level-1] and the next UpgradeVG's level will be [level+1])
+ * oPrevItemId is the itemId of the previous UpgradeVG. MUST BE AN UpgardeVG's itemId !
+ */
+- (id)initWithName:(NSString *)oName andDescription:(NSString *)oDescription andItemId:(NSString *)oItemId andPurchaseType:(PurchaseType *)oPurchaseType andLinkedGood:(NSString*)oGoodItemId andLevel:(int)oLevel andPreviousUpgrade:(NSString*)oPrevItemId;
 
 @end

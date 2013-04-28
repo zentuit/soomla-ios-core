@@ -72,6 +72,7 @@ static NSString* TAG = @"SOOMLA StoreInfo";
 }
 
 - (void)privInitializeWithIStoreAssets:(id)storeAssets {
+    LogDebug(TAG, @"Initializing StoreInfo with a given store assets.");
     self.virtualGoods = [storeAssets virtualGoods];
     self.virtualCurrencies = [storeAssets virtualCurrencies];
     self.virtualCurrencyPacks = [storeAssets virtualCurrencyPacks];
@@ -105,8 +106,8 @@ static NSString* TAG = @"SOOMLA StoreInfo";
     }
     
     for(VirtualCategory* category in self.virtualCategories) {
-        for(VirtualGood* good in category.goods) {
-            [tmpGoodsCategories setObject:category forKey:good.itemId];
+        for(NSString* goodItemId in category.goodsItemIds) {
+            [tmpGoodsCategories setObject:category forKey:goodItemId];
         }
     }
     
@@ -218,8 +219,8 @@ static NSString* TAG = @"SOOMLA StoreInfo";
             VirtualCategory* c = [[VirtualCategory alloc] initWithDictionary: categoryDict];
             [categories addObject:c];
             
-            for(VirtualGood* good in c.goods) {
-                [tmpGoodsCategories setObject:c forKey:good.itemId];
+            for(NSString* goodItemId in c.goodsItemIds) {
+                [tmpGoodsCategories setObject:c forKey:goodItemId];
             }
         }
         self.virtualCategories = categories;

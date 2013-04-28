@@ -16,20 +16,18 @@
 
 #import "VirtualCategory.h"
 #import "JSONConsts.h"
-#import "VirtualGood.h"
-#import "StoreInfo.h"
 
 @implementation VirtualCategory
 
-@synthesize name, goods;
+@synthesize name, goodsItemIds;
 
 
-- (id)initWithName:(NSString*)oName andGoods:(NSArray*)oGoods{
+- (id)initWithName:(NSString*)oName andGoodsItemIds:(NSArray*)oGoodsItemIds{
     
     self = [super init];
     if (self) {
         self.name = oName;
-        self.goods = oGoods;
+        self.goodsItemIds = oGoodsItemIds;
     }
     
     return self;
@@ -44,10 +42,9 @@
         NSMutableArray* tmpGoods = [NSMutableArray array];
         NSArray* goodsArr = [dict objectForKey:JSON_CATEGORY_GOODSITEMIDS];
         for(NSString* goodItemId in goodsArr) {
-            VirtualGood* good = (VirtualGood*)[[StoreInfo getInstance] virtualItemWithId:goodItemId];
-            [tmpGoods addObject:good];
+            [tmpGoods addObject:goodItemId];
         }
-        self.goods = tmpGoods;
+        self.goodsItemIds = tmpGoods;
     }
     
     return self;
@@ -55,8 +52,8 @@
 
 - (NSDictionary*)toDictionary{
     NSMutableArray* arr = [NSMutableArray array];
-    for(VirtualGood* good in self.goods) {
-        [arr addObject:good.itemId];
+    for(NSString* goodItemId in self.goodsItemIds) {
+        [arr addObject:goodItemId];
     }
     
     return [[NSDictionary alloc] initWithObjectsAndKeys:

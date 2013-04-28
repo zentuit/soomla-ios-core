@@ -35,24 +35,22 @@
  * iTunes Connect. ( https://itunesconnect.apple.com )
  */
 @interface SingleUsePackVG : VirtualGood {
-    SingleUseVG* good;
+    NSString* goodItemId;
     int amount;
 }
 
-@property (nonatomic, retain) SingleUseVG* good;
+@property (nonatomic, retain) NSString* goodItemId;
 @property int amount;
 
 /** Constructor
  *
- * oGood is the SingleUseVG associated with this pack.
- * oAmount is the number of SingleUseVG in the pack.
  * oName see parent
  * oDescription see parent
  * oItemId see parent
  * oPurchaseType see parent
+ * oGoodItemId is the SingleUseVG associated with this pack - MUST BE A SingleUseVG itemId !
+ * oAmount is the number of SingleUseVG in the pack.
  */
-- (id)initWithName:(NSString *)oName andDescription:(NSString *)oDescription andItemId:(NSString *)oItemId andPurchaseType:(PurchaseType *)oPurchaseType andGood:(SingleUseVG*)oGood andAmount:(int)oAmount;
-
-
+- (id)initWithName:(NSString *)oName andDescription:(NSString *)oDescription andItemId:(NSString *)oItemId andPurchaseType:(PurchaseType *)oPurchaseType andSingleUseGood:(NSString*)oGoodItemId andAmount:(int)oAmount;
 
 @end

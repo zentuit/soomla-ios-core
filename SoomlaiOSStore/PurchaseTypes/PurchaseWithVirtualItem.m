@@ -22,16 +22,18 @@
 #import "VirtualItemStorage.h"
 #import "StorageManager.h"
 #import "InsufficientFundsException.h"
+#import "StoreInfo.h"
+#import "VirtualItemNotFoundException.h"
 
 @implementation PurchaseWithVirtualItem
 
-@synthesize item, amount;
+@synthesize targetItemId, amount;
 
 static NSString* TAG = @"SOOMLA PurchaseWithVirtualItem";
 
-- (id) initWithVirtualItem:(VirtualItem*)oItem andAmount:(int)oAmount {
+- (id) initWithVirtualItem:(NSString*)oTargetItemId andAmount:(int)oAmount {
     if (self = [super init]) {
-        self.item = oItem;
+        self.targetItemId = oTargetItemId;
         self.amount = oAmount;
     }
     
@@ -41,20 +43,27 @@ static NSString* TAG = @"SOOMLA PurchaseWithVirtualItem";
 
 - (void)buy {
     LogDebug(TAG, ([NSString stringWithFormat:@"Trying to buy a %@ with %d pieces of %@.",
-                    self.associatedItem.name, self.amount, self.item.name]));
+                    self.associatedItem.name, self.amount, self.targetItemId]));
     
     [EventHandling postItemPurchaseStarted:self.associatedItem];
     
-    VirtualItemStorage* storage = [[StorageManager getInstance] virtualItemStorage:self.item];
+    VirtualItem* item = NULL;
+    @try {
+        item = [[StoreInfo getInstance] virtualItemWithId:targetItemId];
+    } @catch (VirtualItemNotFoundException* ex) {
+        LogError(TAG, @"Target virtual item doesn't exist !");
+        return;
+    }
+    VirtualItemStorage* storage = [[StorageManager getInstance] virtualItemStorage:item];
     
     assert(storage);
     
-    int balance = [storage balanceForItem:self.item];
+    int balance = [storage balanceForItem:item];
     if (balance < amount) {
-        @throw [[InsufficientFundsException alloc] initWithItemId:self.item.itemId];
+        @throw [[InsufficientFundsException alloc] initWithItemId:self.targetItemId];
     }
     
-    [storage removeAmount:amount fromItem:self.item];
+    [storage removeAmount:amount fromItem:item];
     
     [self.associatedItem giveAmount:1];
     [EventHandling postItemPurchased:self.associatedItem];

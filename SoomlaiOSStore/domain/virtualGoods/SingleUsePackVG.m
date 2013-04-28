@@ -24,13 +24,13 @@
 
 @implementation SingleUsePackVG
 
-@synthesize amount, good;
+@synthesize amount, goodItemId;
 
 static NSString* TAG = @"SOOMLA SingleUsePackVG";
 
-- (id)initWithName:(NSString *)oName andDescription:(NSString *)oDescription andItemId:(NSString *)oItemId andPurchaseType:(PurchaseType *)oPurchaseType andGood:(SingleUseVG *)oGood andAmount:(int)oAmount {
+- (id)initWithName:(NSString *)oName andDescription:(NSString *)oDescription andItemId:(NSString *)oItemId andPurchaseType:(PurchaseType *)oPurchaseType andSingleUseGood:(NSString*)oGoodItemId andAmount:(int)oAmount {
     if (self = [super initWithName:oName andDescription:oDescription andItemId:oItemId andPurchaseType:oPurchaseType]) {
-        self.good = oGood;
+        self.goodItemId = oGoodItemId;
         self.amount = oAmount;
     }
     
@@ -39,15 +39,8 @@ static NSString* TAG = @"SOOMLA SingleUsePackVG";
 
 - (id)initWithDictionary:(NSDictionary *)dict {
     if (self = [super initWithDictionary:dict]) {
-        NSString* goodItemId = [dict objectForKey:JSON_VGP_GOOD_ITEMID];
+        self.goodItemId = [dict objectForKey:JSON_VGP_GOOD_ITEMID];
         self.amount = [[dict objectForKey:JSON_VGP_GOOD_AMOUNT] intValue];
-        
-        @try {
-            self.good = (SingleUseVG*)[[StoreInfo getInstance] virtualItemWithId:goodItemId];
-        }
-        @catch (VirtualItemNotFoundException *exception) {
-            LogError(TAG, ([NSString stringWithFormat:@"Tried to fetch single use VG with itemId '%@' but it didn't exist.", goodItemId]));
-        }
     }
     
     return self;
@@ -58,17 +51,31 @@ static NSString* TAG = @"SOOMLA SingleUsePackVG";
     
     NSMutableDictionary* toReturn = [[NSMutableDictionary alloc] initWithDictionary:parentDict];
     [toReturn setValue:[NSNumber numberWithInt:self.amount] forKey:JSON_VGP_GOOD_AMOUNT];
-    [toReturn setValue:self.good.itemId forKey:JSON_VGP_GOOD_ITEMID];
+    [toReturn setValue:self.goodItemId forKey:JSON_VGP_GOOD_ITEMID];
     
     return toReturn;
 }
 
 - (void)giveAmount:(int)oAmount {
-    [[[StorageManager getInstance] virtualGoodStorage] addAmount:self.amount*oAmount toItem:self.good];
+    SingleUseVG* good = NULL;
+    @try {
+        good = (SingleUseVG*)[[StoreInfo getInstance] virtualItemWithId:self.goodItemId];
+    } @catch (VirtualItemNotFoundException* ex) {
+        LogError(TAG, ([NSString stringWithFormat:@"SingleUseVG with itemId: %@ doesn't exist! Can't give this pack.", self.goodItemId]));
+        return;
+    }
+    [[[StorageManager getInstance] virtualGoodStorage] addAmount:self.amount*oAmount toItem:good];
 }
 
 - (void)takeAmount:(int)oAmount {
-    [[[StorageManager getInstance] virtualGoodStorage] removeAmount:self.amount*oAmount fromItem:self.good];
+    SingleUseVG* good = NULL;
+    @try {
+        good = (SingleUseVG*)[[StoreInfo getInstance] virtualItemWithId:self.goodItemId];
+    } @catch (VirtualItemNotFoundException* ex) {
+        LogError(TAG, ([NSString stringWithFormat:@"SingleUseVG with itemId: %@ doesn't exist! Can't take this pack.", self.goodItemId]));
+        return;
+    }
+    [[[StorageManager getInstance] virtualGoodStorage] removeAmount:self.amount*oAmount fromItem:good];
 }
 
 - (BOOL)canBuy {

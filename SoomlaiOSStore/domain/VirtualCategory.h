@@ -24,18 +24,18 @@
  */
 @interface VirtualCategory : NSObject{
     NSString* name;
-    NSArray*  goods;
+    NSArray*  goodsItemIds;
 }
 
 @property (retain, nonatomic) NSString* name;
-@property (retain, nonatomic) NSArray*  goods;
+@property (retain, nonatomic) NSArray*  goodsItemIds;
 
 /** Constructor
  *
  * oName is the category's name.
- * oGoods is the list of VirtualGoods in this category.
+ * oGoodsItemIds is the list of itemIds of VirtualGoods in this category.
  */
-- (id)initWithName:(NSString*)oName andGoods:(NSArray*)oGoods;
+- (id)initWithName:(NSString*)oName andGoodsItemIds:(NSArray*)oGoodsItemIds;
 
 /** Constructor
  *
