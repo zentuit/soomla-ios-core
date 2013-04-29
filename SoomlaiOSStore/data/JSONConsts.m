@@ -43,9 +43,9 @@ NSString *const JSON_EQUIPPABLE_EQUIPPING     = @"equipping";
 NSString *const JSON_VGP_GOOD_ITEMID          = @"good_itemId";
 NSString *const JSON_VGP_GOOD_AMOUNT          = @"good_amount";
 
-NSString *const JSON_VGU_LEVEL                = @"level";
 NSString *const JSON_VGU_GOOD_ITEMID          = @"good_itemId";
 NSString *const JSON_VGU_PREV_ITEMID          = @"prev_itemId";
+NSString *const JSON_VGU_NEXT_ITEMID          = @"next_itemId";
 
 NSString *const JSON_CURRENCYPACK_CURRENCYAMOUNT = @"currency_amount";
 NSString *const JSON_CURRENCYPACK_CURRENCYITEMID = @"currency_itemId";

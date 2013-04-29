@@ -24,15 +24,15 @@
 
 @implementation UpgradeVG
 
-@synthesize level, prevGoodItemId, goodItemId;
+@synthesize prevGoodItemId, goodItemId, nextGoodItemId;
 
 static NSString* TAG = @"SOOMLA UpgradeVG";
 
-- (id)initWithName:(NSString *)oName andDescription:(NSString *)oDescription andItemId:(NSString *)oItemId andPurchaseType:(PurchaseType *)oPurchaseType andLinkedGood:(NSString*)oGoodItemId andLevel:(int)oLevel andPreviousUpgrade:(NSString*)oPrevItemId {
+- (id)initWithName:(NSString *)oName andDescription:(NSString *)oDescription andItemId:(NSString *)oItemId andPurchaseType:(PurchaseType *)oPurchaseType andLinkedGood:(NSString*)oGoodItemId andPreviousUpgrade:(NSString*)oPrevItemId andNextUpgrade:(NSString*)oNextItemId {
     if (self = [super initWithName:oName andDescription:oDescription andItemId:oItemId andPurchaseType:oPurchaseType]) {
-        self.level = oLevel;
         self.prevGoodItemId = oPrevItemId;
         self.goodItemId = oGoodItemId;
+        self.nextGoodItemId = oNextItemId;
     }
     
     return self;
@@ -42,7 +42,7 @@ static NSString* TAG = @"SOOMLA UpgradeVG";
     if (self = [super initWithDictionary:dict]) {
         self.goodItemId = [dict objectForKey:JSON_VGU_GOOD_ITEMID];
         self.prevGoodItemId = [dict objectForKey:JSON_VGU_PREV_ITEMID];
-        level = [[dict objectForKey:JSON_VGU_LEVEL] intValue];
+        self.nextGoodItemId = [dict objectForKey:JSON_VGU_NEXT_ITEMID];
     }
     
     return self;
@@ -52,9 +52,9 @@ static NSString* TAG = @"SOOMLA UpgradeVG";
     NSDictionary* parentDict = [super toDictionary];
     
     NSMutableDictionary* toReturn = [[NSMutableDictionary alloc] initWithDictionary:parentDict];
-    [toReturn setValue:[NSNumber numberWithInt:self.level] forKey:JSON_VGU_LEVEL];
     [toReturn setValue:self.goodItemId forKey:JSON_VGU_GOOD_ITEMID];
     [toReturn setValue:(self.prevGoodItemId ? self.prevGoodItemId : @"") forKey:JSON_VGU_PREV_ITEMID];
+    [toReturn setValue:(self.nextGoodItemId ? self.nextGoodItemId : @"") forKey:JSON_VGU_NEXT_ITEMID];
     
     return toReturn;
 }
@@ -118,6 +118,10 @@ static NSString* TAG = @"SOOMLA UpgradeVG";
     }
 }
 
+/**
+ * We want to enforce the logic of allowing/rejecting upgrades here so users won't buy when they are not supposed to.
+ * If you want to give your users upgrades for free, use the "give" function.
+ */
 - (BOOL)canBuy {
     VirtualGood* good = NULL;
     @try {
@@ -127,8 +131,8 @@ static NSString* TAG = @"SOOMLA UpgradeVG";
         return NO;
     }
     UpgradeVG* upgradeVG = [[[StorageManager getInstance] virtualGoodStorage] currentUpgradeOf:good];
-    return ((!upgradeVG) && self.level==1) ||
-            (upgradeVG && ((upgradeVG.level == (self.level-1)) || (upgradeVG.level == (self.level+1))));
+    return ((!upgradeVG) && (!self.prevGoodItemId || (self.prevGoodItemId.length == 0))) ||
+            (upgradeVG && (([upgradeVG.nextGoodItemId isEqualToString:self.itemId]) || ([upgradeVG.prevGoodItemId isEqualToString:self.itemId])));
 }
 
 

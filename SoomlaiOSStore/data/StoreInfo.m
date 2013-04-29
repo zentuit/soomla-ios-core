@@ -40,7 +40,7 @@
 
 @implementation StoreInfo
 
-@synthesize virtualCategories, virtualCurrencies, virtualCurrencyPacks, virtualGoods, nonConsumableItems, virtualItems, purchasableItems, goodsCategories;
+@synthesize virtualCategories, virtualCurrencies, virtualCurrencyPacks, virtualGoods, nonConsumableItems, virtualItems, purchasableItems, goodsCategories, goodsUpgrades;
 
 static NSString* TAG = @"SOOMLA StoreInfo";
 
@@ -82,6 +82,7 @@ static NSString* TAG = @"SOOMLA StoreInfo";
     NSMutableDictionary* tmpVirtualItems = [NSMutableDictionary dictionary];
     NSMutableDictionary* tmpPurchasableItems = [NSMutableDictionary dictionary];
     NSMutableDictionary* tmpGoodsCategories = [NSMutableDictionary dictionary];
+    NSMutableDictionary* tmpGoodsUpgrades = [NSMutableDictionary dictionary];
     
     for(VirtualCurrency* vi in self.virtualCurrencies) {
         [tmpVirtualItems setObject:vi forKey:vi.itemId];
@@ -95,6 +96,15 @@ static NSString* TAG = @"SOOMLA StoreInfo";
     
     for(VirtualGood* vi in self.virtualGoods) {
         [tmpVirtualItems setObject:vi forKey:vi.itemId];
+        
+        if ([vi isKindOfClass:[UpgradeVG class]]) {
+            NSMutableArray* upgrades = [tmpGoodsUpgrades objectForKey:((UpgradeVG*)vi).goodItemId];
+            if (!upgrades) {
+                upgrades = [NSMutableArray array];
+                [tmpGoodsUpgrades setObject:upgrades forKey:((UpgradeVG*)vi).goodItemId];
+            }
+            [upgrades addObject:vi];
+        }
         
         [self checkAndAddPurchasable:vi toTempPurchasables:tmpPurchasableItems];
     }
@@ -114,6 +124,7 @@ static NSString* TAG = @"SOOMLA StoreInfo";
     self.virtualItems = tmpVirtualItems;
     self.purchasableItems = tmpPurchasableItems;
     self.goodsCategories = tmpGoodsCategories;
+    self.goodsUpgrades = tmpGoodsUpgrades;
     
     // put StoreInfo in the database as JSON
     NSString* storeInfoJSON = [[self toDictionary] JSONString];
@@ -160,6 +171,7 @@ static NSString* TAG = @"SOOMLA StoreInfo";
         NSMutableDictionary* tmpVirtualItems = [NSMutableDictionary dictionary];
         NSMutableDictionary* tmpPurchasableItems = [NSMutableDictionary dictionary];
         NSMutableDictionary* tmpGoodsCategories = [NSMutableDictionary dictionary];
+        NSMutableDictionary* tmpGoodsUpgrades = [NSMutableDictionary dictionary];
         
         NSMutableArray* currencies = [[NSMutableArray alloc] init];
         NSArray* currenciesDicts = [storeInfo objectForKey:JSON_STORE_CURRENCIES];
@@ -205,6 +217,14 @@ static NSString* TAG = @"SOOMLA StoreInfo";
         }
         for(NSDictionary* gDict in upGoods){
             UpgradeVG* g = [[UpgradeVG alloc] initWithDictionary: gDict];
+            
+            NSMutableArray* upgrades = [tmpGoodsUpgrades objectForKey:g.goodItemId];
+            if (!upgrades) {
+                upgrades = [NSMutableArray array];
+                [tmpGoodsUpgrades setObject:upgrades forKey:g.goodItemId];
+            }
+            [upgrades addObject:g];
+            
             [self addVirtualGood:g withTempGoods:goods andTempItems:tmpVirtualItems andTempPurchasables:tmpPurchasableItems];
         }
         for(NSDictionary* gDict in paGoods){
@@ -240,6 +260,7 @@ static NSString* TAG = @"SOOMLA StoreInfo";
         self.virtualItems = tmpVirtualItems;
         self.purchasableItems = tmpPurchasableItems;
         self.goodsCategories = tmpGoodsCategories;
+        self.goodsUpgrades = tmpGoodsUpgrades;
         
         // everything went well... StoreInfo is initialized from the local DB.
         // it's ok to return now.
@@ -336,6 +357,38 @@ static NSString* TAG = @"SOOMLA StoreInfo";
     }
     
     return cat;
+}
+
+- (UpgradeVG*)firstUpgradeForGoodWithItemId:(NSString*)goodItemId {
+    NSArray* upgrades = [self.goodsUpgrades objectForKey:goodItemId];
+    if (upgrades) {
+        for(UpgradeVG* upgradeVG in upgrades) {
+            if ((!upgradeVG.prevGoodItemId) ||
+                (upgradeVG.prevGoodItemId.length == 0)) {
+                return upgradeVG;
+            }
+        }
+    }
+    
+    return NULL;
+}
+
+- (UpgradeVG*)lastUpgradeForGoodWithItemId:(NSString*)goodItemId {
+    NSArray* upgrades = [self.goodsUpgrades objectForKey:goodItemId];
+    if (upgrades) {
+        for(UpgradeVG* upgradeVG in upgrades) {
+            if ((!upgradeVG.nextGoodItemId) ||
+                (upgradeVG.nextGoodItemId.length == 0)) {
+                return upgradeVG;
+            }
+        }
+    }
+    
+    return NULL;
+}
+
+- (UpgradeVG*)upgradesForGoodWithItemId:(NSString*)goodItemId {
+    return [self.goodsUpgrades objectForKey:goodItemId];
 }
 
 @end

@@ -68,7 +68,48 @@
         return 0;
     }
     
-    return upgradeVG.level;
+    UpgradeVG* first = [[StoreInfo getInstance] firstUpgradeForGoodWithItemId:goodItemId];
+    int level = 1;
+    while (![first.itemId isEqualToString:upgradeVG.itemId]) {
+        first = (UpgradeVG*)[[StoreInfo getInstance] virtualItemWithId:first.nextGoodItemId];
+        level++;
+    }
+    
+    return level;
+}
+
++ (NSString*)goodCurrentUpgrade:(NSString*)goodItemId {
+    VirtualGood* good = (VirtualGood*)[[StoreInfo getInstance] virtualItemWithId:goodItemId];
+    UpgradeVG* upgradeVG = [[[StorageManager getInstance] virtualGoodStorage] currentUpgradeOf:good];
+    if (!upgradeVG) {
+        return @"";
+    }
+    
+    return upgradeVG.itemId;
+}
+
++ (void)upgradeVirtualGood:(NSString*)goodItemId {
+    VirtualGood* good = (VirtualGood*)[[StoreInfo getInstance] virtualItemWithId:goodItemId];
+    UpgradeVG* upgradeVG = [[[StorageManager getInstance] virtualGoodStorage] currentUpgradeOf:good];
+    if (upgradeVG) {
+        NSString* nextItemId = upgradeVG.nextGoodItemId;
+        if ((!nextItemId) ||
+            (nextItemId.length == 0)) {
+            return;
+        }
+        UpgradeVG* vgu = (UpgradeVG*)[[StoreInfo getInstance] virtualItemWithId:nextItemId];
+        [vgu buy];
+    } else {
+        UpgradeVG* first = [[StoreInfo getInstance] firstUpgradeForGoodWithItemId:goodItemId];
+        if (first) {
+            [first buy];
+        }
+    }
+}
+
++ (void)removeUpgrades:(NSString*)goodItemId {
+    VirtualGood* good = (VirtualGood*)[[StoreInfo getInstance] virtualItemWithId:goodItemId];
+    [[[StorageManager getInstance] virtualGoodStorage] removeUpgradesFrom:good];
 }
 
 

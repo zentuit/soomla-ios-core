@@ -45,9 +45,9 @@ extern NSString *const JSON_EQUIPPABLE_EQUIPPING;
 extern NSString *const JSON_VGP_GOOD_ITEMID;
 extern NSString *const JSON_VGP_GOOD_AMOUNT;
 
-extern NSString *const JSON_VGU_LEVEL;
 extern NSString *const JSON_VGU_GOOD_ITEMID;
 extern NSString *const JSON_VGU_PREV_ITEMID;
+extern NSString *const JSON_VGU_NEXT_ITEMID;
 
 extern NSString *const JSON_CURRENCYPACK_CURRENCYAMOUNT;
 extern NSString *const JSON_CURRENCYPACK_CURRENCYITEMID;

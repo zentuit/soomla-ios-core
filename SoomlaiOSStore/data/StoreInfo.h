@@ -24,6 +24,7 @@
 @class NonConsumableItem;
 @class VirtualItem;
 @class PurchasableVirtualItem;
+@class UpgradeVG;
 
 /**
  * This class holds the store's meta data including:
@@ -38,6 +39,7 @@
     NSDictionary* virtualItems;
     NSDictionary* purchasableItems;
     NSDictionary* goodsCategories;
+    NSDictionary* goodsUpgrades;
     @public
     NSArray* virtualCurrencies;
     NSArray* virtualGoods;
@@ -54,6 +56,7 @@
 @property (nonatomic, retain) NSDictionary* virtualItems;
 @property (nonatomic, retain) NSDictionary* purchasableItems;
 @property (nonatomic, retain) NSDictionary* goodsCategories;
+@property (nonatomic, retain) NSDictionary* goodsUpgrades;
 
 + (StoreInfo*)getInstance;
 
@@ -111,4 +114,21 @@
  */
 - (VirtualCategory*)categoryForGoodWithItemId:(NSString*)goodItemId;
 
+/**
+ * A utility function to retrieve a first UpgradeVG for a given VirtualGood itemId.
+ * goodItemId is the VirtualGood we're searching the upgrade for.
+ */
+- (UpgradeVG*)firstUpgradeForGoodWithItemId:(NSString*)goodItemId;
+
+/**
+ * A utility function to retrieve a last UpgradeVG for a given VirtualGood itemId.
+ * goodItemId is the VirtualGood we're searching the upgrade for.
+ */
+- (UpgradeVG*)lastUpgradeForGoodWithItemId:(NSString*)goodItemId;
+
+/**
+ * A utility function to retrieve all UpgradeVGs for a given VirtualGood itemId.
+ * goodItemId is the VirtualGood we're searching the upgrades for.
+ */
+- (UpgradeVG*)upgradesForGoodWithItemId:(NSString*)goodItemId;
 @end

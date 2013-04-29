@@ -54,11 +54,29 @@
  */
 + (BOOL)isVirtualGoodWithItemIdEquipped:(NSString*)goodItemId;
 /**
- * The goodItemId must be of any VirtualGood
+ * The goodItemId can be of any VirtualGood
  *
  * throws VirtualItemNotFoundException
  */
 + (int)goodUpgradeLevel:(NSString*)goodItemId;
+/**
+ * The goodItemId can be of any VirtualGood
+ *
+ * throws VirtualItemNotFoundException
+ */
++ (NSString*)goodCurrentUpgrade:(NSString*)goodItemId;
+/**
+ * The goodItemId can be of any VirtualGood
+ *
+ * throws VirtualItemNotFoundException
+ */
++ (void)upgradeVirtualGood:(NSString*)goodItemId;
+/**
+ * The goodItemId can be of any VirtualGood
+ *
+ * throws VirtualItemNotFoundException
+ */
++ (void)removeUpgrades:(NSString*)goodItemId;
 
 /** NonConsumables **/
 /**
