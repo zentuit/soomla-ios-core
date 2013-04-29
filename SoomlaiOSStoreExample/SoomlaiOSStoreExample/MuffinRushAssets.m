@@ -63,10 +63,10 @@ NonConsumableItem* NO_ADDS_NON_CONS;
     
     /** Virtual Currency Pack **/
     
-    _10_MUFFINS_PACK = [[VirtualCurrencyPack alloc] initWithName:@"10 Muffins" andDescription:@"" andItemId:_10_MUFFINS_PACK_ITEM_ID andCurrencyAmount:10 andCurrency:MUFFINS_CURRENCY andPurchaseType:[[PurchaseWithMarket alloc] initWithProductId:_10_MUFFINS_PACK_PRODUCT_ID andPrice:0.99]];
-    _50_MUFFINS_PACK = [[VirtualCurrencyPack alloc] initWithName:@"50 Muffins" andDescription:@"" andItemId:_50_MUFFINS_PACK_ITEM_ID andCurrencyAmount:50 andCurrency:MUFFINS_CURRENCY andPurchaseType:[[PurchaseWithMarket alloc] initWithProductId:_50_MUFFINS_PACK_PRODUCT_ID andPrice:1.99]];
-    _400_MUFFINS_PACK = [[VirtualCurrencyPack alloc] initWithName:@"400 Muffins" andDescription:@"" andItemId:_400_MUFFINS_PACK_ITEM_ID andCurrencyAmount:400 andCurrency:MUFFINS_CURRENCY andPurchaseType:[[PurchaseWithMarket alloc] initWithProductId:_400_MUFFINS_PACK_PRODUCT_ID andPrice:4.99]];
-    _1000_MUFFINS_PACK = [[VirtualCurrencyPack alloc] initWithName:@"1000 Muffins" andDescription:@"" andItemId:_1000_MUFFINS_PACK_ITEM_ID andCurrencyAmount:1000 andCurrency:MUFFINS_CURRENCY andPurchaseType:[[PurchaseWithMarket alloc] initWithProductId:_1000_MUFFINS_PACK_PRODUCT_ID andPrice:8.99]];
+    _10_MUFFINS_PACK = [[VirtualCurrencyPack alloc] initWithName:@"10 Muffins" andDescription:@"" andItemId:_10_MUFFINS_PACK_ITEM_ID andCurrencyAmount:10 andCurrency:MUFFINS_CURRENCY_ITEM_ID andPurchaseType:[[PurchaseWithMarket alloc] initWithProductId:_10_MUFFINS_PACK_PRODUCT_ID andPrice:0.99]];
+    _50_MUFFINS_PACK = [[VirtualCurrencyPack alloc] initWithName:@"50 Muffins" andDescription:@"" andItemId:_50_MUFFINS_PACK_ITEM_ID andCurrencyAmount:50 andCurrency:MUFFINS_CURRENCY_ITEM_ID andPurchaseType:[[PurchaseWithMarket alloc] initWithProductId:_50_MUFFINS_PACK_PRODUCT_ID andPrice:1.99]];
+    _400_MUFFINS_PACK = [[VirtualCurrencyPack alloc] initWithName:@"400 Muffins" andDescription:@"" andItemId:_400_MUFFINS_PACK_ITEM_ID andCurrencyAmount:400 andCurrency:MUFFINS_CURRENCY_ITEM_ID andPurchaseType:[[PurchaseWithMarket alloc] initWithProductId:_400_MUFFINS_PACK_PRODUCT_ID andPrice:4.99]];
+    _1000_MUFFINS_PACK = [[VirtualCurrencyPack alloc] initWithName:@"1000 Muffins" andDescription:@"" andItemId:_1000_MUFFINS_PACK_ITEM_ID andCurrencyAmount:1000 andCurrency:MUFFINS_CURRENCY_ITEM_ID andPurchaseType:[[PurchaseWithMarket alloc] initWithProductId:_1000_MUFFINS_PACK_PRODUCT_ID andPrice:8.99]];
 
     
     
@@ -84,7 +84,7 @@ NonConsumableItem* NO_ADDS_NON_CONS;
     
     /** Virtual Categories **/
     
-    GENERAL_CATEGORY = [[VirtualCategory alloc] initWithName:@"General" andGoods:@[FRUIT_CAKE_GOOD, PAVLOVA_GOOD, CHOCO_CAKE_GOOD, CREAM_CUP_GOOD]];
+    GENERAL_CATEGORY = [[VirtualCategory alloc] initWithName:@"General" andGoodsItemIds:@[FRUIT_CAKE_GOOD_ITEM_ID, PAVLOVA_GOOD_ITEM_ID, CHOCO_CAKE_GOOD_ITEM_ID, CREAM_CUP_GOOD_ITEM_ID]];
     
     
     

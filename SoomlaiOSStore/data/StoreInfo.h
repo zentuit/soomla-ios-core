@@ -130,5 +130,5 @@
  * A utility function to retrieve all UpgradeVGs for a given VirtualGood itemId.
  * goodItemId is the VirtualGood we're searching the upgrades for.
  */
-- (UpgradeVG*)upgradesForGoodWithItemId:(NSString*)goodItemId;
+- (NSArray*)upgradesForGoodWithItemId:(NSString*)goodItemId;
 @end

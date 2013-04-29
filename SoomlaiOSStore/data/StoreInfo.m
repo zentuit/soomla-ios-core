@@ -387,7 +387,7 @@ static NSString* TAG = @"SOOMLA StoreInfo";
     return NULL;
 }
 
-- (UpgradeVG*)upgradesForGoodWithItemId:(NSString*)goodItemId {
+- (NSArray*)upgradesForGoodWithItemId:(NSString*)goodItemId {
     return [self.goodsUpgrades objectForKey:goodItemId];
 }
 
