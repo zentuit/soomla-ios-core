@@ -14,33 +14,27 @@
  * limitations under the License.
  */
 
-#import "VirtualCurrency.h"
+#import <Foundation/Foundation.h>
 
-@implementation VirtualCurrency
-    
-- (id)initWithName:(NSString*)oName andDescription:(NSString*)oDescription
-    andItemId:(NSString*)oItemId{
-    
-    self = [super initWithName:oName andDescription:oDescription andItemId:oItemId];
-    if (self) {
-        // Nothing to initialize
-    }
-    
-    return self;
+@class PurchasableVirtualItem;
+
+/** ABSTRACT
+* A PurchaseType is a way to purchase a PurchasableVirtualItem. This abstract class describes basic features
+* of the actual implementations of PurchaseType.
+*/
+@interface PurchaseType : NSObject {
+    PurchasableVirtualItem* associatedItem;
 }
 
-- (id)initWithDictionary:(NSDictionary*)dict{
-    
-    self = [super initWithDictionary:dict];
-    if (self) {
-        // Nothing to initialize
-    }
-    
-    return self;
-}
+@property (retain, nonatomic) PurchasableVirtualItem* associatedItem;
 
-- (NSDictionary*)toDictionary{
-    return [super toDictionary];
-}
+- (id)init;
+
+/**
+ * Buy the associated item.
+ *
+ * throws InsufficientFundsException
+ */
+- (void)buy;
 
 @end

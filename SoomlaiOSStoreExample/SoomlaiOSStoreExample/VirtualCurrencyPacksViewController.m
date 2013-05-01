@@ -16,6 +16,7 @@
 #import "AppStoreItem.h"
 #import "VirtualItemNotFoundException.h"
 #import "VirtualCurrencyPackCell.h"
+#import "PurchaseWithMarket.h"
 
 @interface VirtualCurrencyPacksViewController () {
     NSDictionary* images;
@@ -37,9 +38,9 @@
 	      nil];
     
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(curBalanceChanged:) name:EVENT_CHANGED_CURRENCY_BALANCE object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(curBalanceChanged:) name:EVENT_CURRENCY_BALANCE_CHANGED object:nil];
     
-    int balance = [StoreInventory getCurrencyBalance:MUFFINS_CURRENCY_ITEM_ID];
+    int balance = [StoreInventory getItemBalance:MUFFINS_CURRENCY_ITEM_ID];
     currencyBalance.text = [NSString stringWithFormat:@"%d", balance];
     
     [super viewDidLoad];
@@ -63,8 +64,8 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:[tableView indexPathForSelectedRow] animated:NO];
     VirtualCurrencyPack* pack = [[[StoreInfo getInstance] virtualCurrencyPacks] objectAtIndex:indexPath.row];
-
-    [[StoreController getInstance] buyAppStoreItemWithProcuctId:pack.appstoreItem.productId];
+    
+    [pack buy];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -80,8 +81,8 @@
     VirtualCurrencyPack* pack = [[[StoreInfo getInstance] virtualCurrencyPacks] objectAtIndex:indexPath.row];
     cell.title.text = pack.name;
     cell.description.text = pack.description;
-    cell.price.text = [NSString stringWithFormat:@"%.02f", pack.appstoreItem.price];
-    cell.icon.image = [UIImage imageNamed:[images objectForKey:pack.appstoreItem.productId]];
+    cell.price.text = [NSString stringWithFormat:@"%.02f", ((PurchaseWithMarket*)pack.purchaseType).appStoreItem.price];
+    cell.icon.image = [UIImage imageNamed:[images objectForKey:((PurchaseWithMarket*)pack.purchaseType).appStoreItem.productId]];
     
     return cell;
 }

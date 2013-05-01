@@ -26,12 +26,28 @@
 
 - (id)init;
 
+/**
+ * Sets the given value to the given key
+ *
+ * key is the key of the key-val pair.
+ * val is the val of the key-val pair.
+ */
 - (void)setVal:(NSString *)val forKey:(NSString *)key;
+
+/**
+ * Gets the value for the given key.
+ *
+ * key the key of the key-val pair.
+ */
 - (NSString*)getValForKey:(NSString *)key;
 - (void)deleteKeyValWithKey:(NSString *)key;
 
+
+/** SOOMLA keys **/
+
 + (NSString*) keyGoodBalance:(NSString*)itemId;
 + (NSString*) keyGoodEquipped:(NSString*)itemId;
++ (NSString*) keyGoodUpgrade:(NSString*)itemId;
 + (NSString*) keyCurrencyBalance:(NSString*)itemId;
 + (NSString*) keyNonConsExists:(NSString*)productId;
 + (NSString*) keyMetaStoreInfo;

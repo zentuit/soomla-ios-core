@@ -24,9 +24,22 @@
     
 }
 
+/** Constructor
+ *
+ * see parent
+ */
 - (id)initWithName:(NSString*)name andDescription:(NSString*)description
     andItemId:(NSString*)itemId;
+
+/** Constructor
+ *
+ * see parent
+ */
 - (id)initWithDictionary:(NSDictionary*)dict;
+
+/**
+ * see parent
+ */
 - (NSDictionary*)toDictionary;
 
 @end

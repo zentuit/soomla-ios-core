@@ -14,51 +14,27 @@
  * limitations under the License.
  */
 
-#import "PriceModel.h"
-#import "JSONConsts.h"
-#import "StaticPriceModel.h"
-#import "BalanceDrivenPriceModel.h"
+#import "PurchaseType.h"
 
-@implementation PriceModel
+@implementation PurchaseType
 
-@synthesize type;
+@synthesize associatedItem;
 
 - (id)init{
     self = [super init];
-    if ([self class] == [PriceModel class]) {
+    if ([self class] == [PurchaseType class]) {
         @throw [NSException exceptionWithName:NSInternalInconsistencyException
-                                   reason:@"Error, attempting to instantiate AbstractClass directly." userInfo:nil];
+                                       reason:@"Error, attempting to instantiate AbstractClass directly." userInfo:nil];
     }
+    
     return self;
 }
 
-- (NSDictionary*)getCurrentPriceForVirtualGood:(VirtualGood*)virtualGood{
+- (void)buy {
     @throw [NSException exceptionWithName:NSInternalInconsistencyException
                                    reason:[NSString stringWithFormat:@"You must override %@ in a subclass",
                                            NSStringFromSelector(_cmd)]
                                  userInfo:nil];
-}
-
-- (NSDictionary*)toDictionary{
-    return [[NSDictionary alloc] initWithObjectsAndKeys:
-            self.type, JSON_GOOD_PRICE_MODEL_TYPE,
-            nil];
-}
-
-+ (PriceModel*)priceModelWithNSDictionary:(NSDictionary*)dict{
-    NSString* type = [dict valueForKey:JSON_GOOD_PRICE_MODEL_TYPE];
-    if ([type isEqualToString:@"static"]) {
-        return [StaticPriceModel modelWithNSDictionary:dict];
-    }
-    else if ([type isEqualToString:@"balance"]) {
-        return [BalanceDrivenPriceModel modelWithNSDictionary:dict];
-    }
-    
-    return nil;
-}
-
-+ (NSDictionary*)dictionaryWithPriceModel:(PriceModel*)priceModel{
-    return [priceModel toDictionary];
 }
 
 

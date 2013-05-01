@@ -13,25 +13,22 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+#import "SingleUseVG.h"
+#import "StorageManager.h"
+#import "VirtualGoodStorage.h"
 
-#import "PriceModel.h"
+@implementation SingleUseVG
 
-/**
- * This price model is a model that gives the associated virtual good a static price that's not affected by anything.
- */
-@interface StaticPriceModel : PriceModel{
-    NSDictionary* currencyValue;
+- (void)giveAmount:(int)amount {
+    [[[StorageManager getInstance] virtualGoodStorage] addAmount:amount toItem:self];
 }
 
-@property (retain, nonatomic) NSDictionary* currencyValue;
+- (void)takeAmount:(int)amount {
+    [[[StorageManager getInstance] virtualGoodStorage] removeAmount:amount fromItem:self];
+}
 
-- (id)initWithCurrencyValue:(NSDictionary*)oCurrencyValue;
-
-// docs in parent
-- (NSDictionary*)getCurrentPriceForVirtualGood:(VirtualGood*)virtualGood;
-// docs in parent
-- (NSDictionary*)toDictionary;
-
-+ (StaticPriceModel*)modelWithNSDictionary:(NSDictionary*)dict;
+- (BOOL)canBuy {
+    return YES;
+}
 
 @end

@@ -18,38 +18,42 @@
 #import <StoreKit/StoreKit.h>
 #import "IStoreAsssets.h"
 
+@class AppStoreItem;
+
 /**
- * This class is where all the important stuff happens. You can use it to purchase products from Google Play,
- * buy virtual goods, and get notifications on whatever happens.
+ * This class holds the most basic assets needed to operate the Store.
+ * You can use it to purchase products from the App Store.
  *
- * This is the only class you need to initialize in order to use the SOOMLA SDK. If you use the UI,
- * you'll need to also initialize StorefrontActivity.
+ * This is the only class you need to initialize in order to use the SOOMLA SDK.
  *
- * In addition to initializing this class, you'll also have to call storeOpening and
- * storeClosing when you open the store window or close it.
- * IMPORTANT: if you use the SOOMLA storefront (SOOMLA Storefront), than DON'T call these 2 functions. SOOMLA
- * storefront takes care of it for you.
+ * In addition to initializing this class, you'll also have to call
+ * StoreController::storeOpening and StoreController::storeClosing when you open the store window or close it. These two
+ * calls initializes important components that support billing and storage information (see implementation below).
+ * IMPORTANT: if you use the SOOMLA's storefront, then DON'T call these 2 functions.
+ *
  */
 @interface StoreController : NSObject <SKProductsRequestDelegate, SKPaymentTransactionObserver>{
-    SKProduct *proUpgradeProduct;
-    SKProductsRequest *productsRequest;
+    @private
+    BOOL initialized;
+    BOOL storeOpen;
 }
+
+@property BOOL initialized;
+@property BOOL storeOpen;
 
 + (StoreController*)getInstance;
 
+/**
+ * This initializer also initializes StoreInfo.
+ * storeAssets is the definition of your application specific assets.
+ * customSecret is your encryption secret (it's used to encrypt your data in the database)
+ */
 - (void)initializeWithStoreAssets:(id<IStoreAsssets>)storeAssets andCustomSecret:(NSString*)secret;
 /**
- * Start an app-store item (CurrencyPack or NonConsumableItem) purchase process
- * productId is the product id of the required currency pack.
+ * Start an in app purchase process in the App Store.
+ * appStoreItem is the item to purchase. This item has to be defined EXACTLY the same in iTunes Connect.
  */
-- (void)buyAppStoreItemWithProcuctId:(NSString*)productId;
-/**
- * Start a virtual goods purchase process.
- * itemId is the item id of the required virtual good.
- * throws InsufficientFundsException
- * throws VirtualItemNotFoundException
- */
-- (void)buyVirtualGood:(NSString*)itemId;
+- (BOOL)buyInAppStoreWithAppStoreItem:(AppStoreItem*)appStoreItem;
 /**
  * Call this function when you open the actual store window
  */
@@ -59,17 +63,8 @@
  */
 - (void)storeClosing;
 /**
-* Make a VirtualGood equipped by the user.
-* itemId is the item id of the required virtual good.
-* throws NotEnoughGoodsException
-* throws VirtualItemNotFoundException
-*/
-- (void) equipVirtualGood:(NSString*) itemId;
-/**
-* Make a VirtualGood unequipped by the user.
-* itemId is the item id of the required virtual good.
-* throws VirtualItemNotFoundException
-*/
-- (void) unequipVirtualGood:(NSString*) itemId;
+ * Initiate the restoreTransactions process
+ */
+- (void)restoreTransactions;
 
 @end

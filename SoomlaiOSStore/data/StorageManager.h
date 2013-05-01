@@ -21,12 +21,12 @@
 @class VirtualCurrencyStorage;
 @class NonConsumableStorage;
 @class KeyValueStorage;
-
+@class VirtualItemStorage;
+@class VirtualItem;
 
 /**
  * This is the place where all the relevant storage classes are created.
- * This is a singleton class and you can call it from your application in order
- * to get the instances of the Virtual goods/currency storages.
+ * This class contains static methods for you to retrieve the various storages.
  *
  * You will usually need the storage in order to get/set the amounts of virtual goods/currency.
  */
@@ -47,6 +47,8 @@
 + (StorageManager*)getInstance;
 
 - (id)init;
+- (VirtualItemStorage*)virtualItemStorage:(VirtualItem*)item;
+
 
 + (NSString *) applicationDirectory;
 

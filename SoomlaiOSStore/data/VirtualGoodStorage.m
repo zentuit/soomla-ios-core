@@ -20,53 +20,70 @@
 #import "KeyValDatabase.h"
 #import "StoreEncryptor.h"
 #import "EventHandling.h"
+#import "StoreUtils.h"
+#import "StoreInfo.h"
+#import "VirtualItemNotFoundException.h"
+#import "UpgradeVG.h"
+#import "EquippableVG.h"
 
 @implementation VirtualGoodStorage
 
-- (int)getBalanceForGood:(VirtualGood*)virtualGood{
-    NSString* key = [StoreEncryptor encryptString:[KeyValDatabase keyGoodBalance:virtualGood.itemId]];
-    NSString* val = [[[StorageManager getInstance] kvDatabase] getValForKey:key];
+- (id)init {
+    if (self = [super init]) {
+        tag = @"SOOMLA VirtualGoodStorage";
+    }
+    return self;
+}
+
+- (void)removeUpgradesFrom:(VirtualGood*)good {
+    LogDebug(tag, ([NSString stringWithFormat:@"Removing upgrade information from virtual good: %@", good.name]));
     
-    if (!val || [val length]==0){
-        return 0;
+    NSString* key = [StoreEncryptor encryptString:[KeyValDatabase keyGoodUpgrade:good.itemId]];
+    
+    [[[StorageManager getInstance] kvDatabase] deleteKeyValWithKey:key];
+    
+    [EventHandling postGoodUpgrade:good withGoodUpgrade:nil];
+}
+
+- (void)assignCurrentUpgrade:(UpgradeVG*)upgradeVG toGood:(VirtualGood*)good {
+    LogDebug(tag, ([NSString stringWithFormat:@"Assigning upgrade %@ to virtual good: %@", upgradeVG.name, good.name]));
+    
+    NSString* key = [StoreEncryptor encryptString:[KeyValDatabase keyGoodUpgrade:good.itemId]];
+    
+    NSString* upItemId = [StoreEncryptor encryptString:upgradeVG.itemId];
+    [[[StorageManager getInstance] kvDatabase] setVal:upItemId forKey:key];
+    
+    [EventHandling postGoodUpgrade:good withGoodUpgrade:upgradeVG];
+}
+
+- (UpgradeVG*)currentUpgradeOf:(VirtualGood*)good {
+    LogDebug(tag, ([NSString stringWithFormat:@"Fetching upgrade to virtual good: %@", good.name]));
+    
+    NSString* key = [StoreEncryptor encryptString:[KeyValDatabase keyGoodUpgrade:good.itemId]];
+    
+    NSString* upItemId = [[[StorageManager getInstance] kvDatabase] getValForKey:key];
+    
+    if(!upItemId) {
+        LogError(tag, ([NSString stringWithFormat:@"You tried to fetch the current upgrade of %@ but there's no upgrade in the DB for it.", good.name]));
+        return nil;
     }
     
-    NSNumber* balance = [StoreEncryptor decryptToNumber:val];
-    return [balance intValue];
+    @try {
+        upItemId = [StoreEncryptor decryptToString:upItemId];
+        return (UpgradeVG*)[[StoreInfo getInstance] virtualItemWithId:upItemId];
+    } @catch (VirtualItemNotFoundException* ex){
+        LogError(tag, @"The current upgrade's itemId from the DB is not found in StoreInfo.");
+    } @catch (NSException* e) {
+        LogError(tag, @"Something bad happend while trying to decrypt or fetch current upgrade.");
+    }
+    
+    return nil;
 }
 
-- (int)addAmount:(int)amount toGood:(VirtualGood*)virtualGood{
-    NSString* key = [StoreEncryptor encryptString:[KeyValDatabase keyGoodBalance:virtualGood.itemId]];
-    int balance = [self getBalanceForGood:virtualGood] + amount;
-    [[[StorageManager getInstance] kvDatabase] setVal:[StoreEncryptor encryptNumber:[NSNumber numberWithInt:balance]] forKey:key];
+- (BOOL)isGoodEquipped:(EquippableVG*)good {
+    LogDebug(tag, ([NSString stringWithFormat:@"checking if virtual good with itemId: %@ is equipped", good.itemId]));
     
-    [EventHandling postChangedBalance:balance forGood:virtualGood withAmount:amount];
-    
-    return balance;
-}
-
-- (int)removeAmount:(int)amount fromGood:(VirtualGood*)virtualGood{
-    NSString* key = [StoreEncryptor encryptString:[KeyValDatabase keyGoodBalance:virtualGood.itemId]];
-    int balance = [self getBalanceForGood:virtualGood] - amount;
-    balance = balance > 0 ? balance : 0;
-    [[[StorageManager getInstance] kvDatabase] setVal:[StoreEncryptor encryptNumber:[NSNumber numberWithInt:balance]] forKey:key];
-
-    [EventHandling postChangedBalance:balance forGood:virtualGood withAmount:(-1*amount)];
-    
-    return balance;
-}
-
-- (int)setBalance:(int)balance toGood:(VirtualGood*)virtualGood {
-    NSString* key = [StoreEncryptor encryptString:[KeyValDatabase keyGoodBalance:virtualGood.itemId]];
-    [[[StorageManager getInstance] kvDatabase] setVal:[StoreEncryptor encryptNumber:[NSNumber numberWithInt:balance]] forKey:key];
-    
-    [EventHandling postChangedBalance:balance forGood:virtualGood withAmount:0];
-    
-    return balance;
-}
-
-- (BOOL)isGoodEquipped:(VirtualGood*)virtualGood{
-    NSString* key = [StoreEncryptor encryptString:[KeyValDatabase keyGoodEquipped:virtualGood.itemId]];
+    NSString* key = [StoreEncryptor encryptString:[KeyValDatabase keyGoodEquipped:good.itemId]];
     NSString* val = [[[StorageManager getInstance] kvDatabase] getValForKey:key];
     
     if (!val || [val length]==0){
@@ -77,16 +94,34 @@
     return YES;
 }
 
-- (void)equipGood:(VirtualGood*)virtualGood withEquipValue:(BOOL)equip{
-    NSString* key = [StoreEncryptor encryptString:[KeyValDatabase keyGoodEquipped:virtualGood.itemId]];
+- (void)equipGood:(EquippableVG*)good {
+    [self privEquipGood:good withEquipValue:YES];
+}
+
+- (void)unequipGood:(EquippableVG*)good {
+    [self privEquipGood:good withEquipValue:NO];
+}
+
+- (void)privEquipGood:(EquippableVG*)good withEquipValue:(BOOL)equip{
+    LogDebug(tag, ([NSString stringWithFormat:@"%@ %@.", (equip ? @"equipping" : @"unequipping"), good.name]));
+    
+    NSString* key = [StoreEncryptor encryptString:[KeyValDatabase keyGoodEquipped:good.itemId]];
     
     if (equip) {
         [[[StorageManager getInstance] kvDatabase] setVal:@"equipped" forKey:key];
-        [EventHandling postVirtualGoodEquipped:virtualGood];
+        [EventHandling postGoodEquipped:good];
     } else {
         [[[StorageManager getInstance] kvDatabase] deleteKeyValWithKey:key];
-        [EventHandling postVirtualGoodUnEquipped:virtualGood];
+        [EventHandling postGoodUnEquipped:good];
     }
+}
+
+- (NSString*)keyBalance:(NSString*)itemId {
+    return [KeyValDatabase keyGoodBalance:itemId];
+}
+
+- (void)postBalanceChangeToItem:(VirtualItem*)item withBalance:(int)balance andAmountAdded:(int)amountAdded {
+    [EventHandling postChangedBalance:balance forGood:(VirtualGood*)item withAmount:amountAdded];
 }
 
 @end

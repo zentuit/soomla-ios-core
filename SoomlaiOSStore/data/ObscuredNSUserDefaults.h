@@ -9,7 +9,6 @@
 #import <Foundation/Foundation.h>
 
 @interface ObscuredNSUserDefaults : NSObject {
-
 }
 
 + (BOOL)boolForKey:(NSString *)defaultName;

@@ -17,51 +17,71 @@
 
 #import <UIKit/UIKit.h>
 
-extern NSString * EVENT_APPSTORE_PURCHASED;
-extern NSString * EVENT_VIRTUAL_GOOD_PURCHASED;
-extern NSString * EVENT_VIRTUAL_GOOD_EQUIPPED;
-extern NSString * EVENT_VIRTUAL_GOOD_UNEQUIPPED;
-extern NSString * EVENT_BILLING_SUPPORTED;
-extern NSString * EVENT_BILLING_NOT_SUPPORTED;
-extern NSString * EVENT_MARKET_PURCHASE_STARTED;
-extern NSString * EVENT_GOODS_PURCHASE_STARTED;
-extern NSString * EVENT_CLOSING_STORE;
-extern NSString * EVENT_OPENING_STORE;
-extern NSString * EVENT_UNEXPECTED_ERROR_IN_STORE;
-extern NSString * EVENT_TRANSACTION_RESTORED;
-extern NSString * EVENT_TRANSACTION_RESTORED;
-extern NSString * EVENT_CHANGED_CURRENCY_BALANCE;
-extern NSString * EVENT_CHANGED_GOOD_BALANCE;
-extern NSString * EVENT_MARKET_PURCHASE_CANCELLED;
-
 @class AppStoreItem;
 @class VirtualGood;
 @class VirtualCurrency;
+@class PurchasableVirtualItem;
+@class UpgradeVG;
+@class EquippableVG;
+
+// Events
+#define EVENT_BILLING_NOT_SUPPORTED         @"BillingNotSupported"
+#define EVENT_BILLING_SUPPORTED             @"BillingSupported"
+#define EVENT_CLOSING_STORE                 @"ClosingStore"
+#define EVENT_CURRENCY_BALANCE_CHANGED      @"ChangedCurrencyBalance"
+#define EVENT_GOOD_BALANCE_CHANGED          @"ChangedGoodBalance"
+#define EVENT_GOOD_EQUIPPED                 @"VirtualGoodEquipped"
+#define EVENT_GOOD_UNEQUIPPED               @"VirtualGoodUNEQUIPPED"
+#define EVENT_GOOD_UPGRADE                  @"VirtualGoodUpgrade"
+#define EVENT_ITEM_PURCHASED                @"ItemPurchased"
+#define EVENT_ITEM_PURCHASE_STARTED         @"ItemPurchaseProcessStarted"
+#define EVENT_OPENING_STORE                 @"OpeningStore"
+#define EVENT_APPSTORE_PURCHASE_CANCELLED   @"AppStorePurchaseCancelled"
+#define EVENT_APPSTORE_PURCHASED            @"AppStorePurchased"
+#define EVENT_APPSTORE_PURCHASE_STARTED     @"AppStorePurchaseProcessStarted"
+#define EVENT_TRANSACTION_RESTORED          @"TransactionRestored"
+#define EVENT_TRANSACTION_RESTORE_STARTED   @"TransactionRestoreStarted"
+#define EVENT_UNEXPECTED_ERROR_IN_STORE     @"UnexpectedErrorInStore"
+
+
+// UserInfo Elements
+#define DICT_ELEMENT_BALANCE           @"balance"
+#define DICT_ELEMENT_CURRENCY          @"VirtualCurrency"
+#define DICT_ELEMENT_AMOUNT_ADDED      @"amountAdded"
+#define DICT_ELEMENT_GOOD              @"VirtualGood"
+#define DICT_ELEMENT_EquippableVG      @"EquippableVG"
+#define DICT_ELEMENT_UpgradeVG         @"UpgradeVG"
+#define DICT_ELEMENT_PURCHASABLE       @"PurchasableVirtualItem"
+#define DICT_ELEMENT_SUCCESS           @"success"
+
 
 /**
  * This class is used register and post all the supported events.
  * Use this class to invoke events on handlers when they occur.
  *
- * We use iOS's NSNotificationCenter to handle events across the SDK.
+ * SOOMLA uses iOS's NSNotificationCenter to handle events across the SDK.
  */
 @interface EventHandling : NSObject
 
 + (void)observeAllEventsWithObserver:(id)observer withSelector:(SEL)selector;
 
-+ (void)postAppStorePurchase:(AppStoreItem*)appStoreItem;
-+ (void)postVirtualGoodPurchased:(VirtualGood*)good;
-+ (void)postVirtualGoodEquipped:(VirtualGood*)good;
-+ (void)postVirtualGoodUnEquipped:(VirtualGood*)good;
 + (void)postBillingSupported;
 + (void)postBillingNotSupported;
-+ (void)postGoodsPurchaseStarted;
-+ (void)postMarketPurchaseStarted:(AppStoreItem*)appStoreItem;
-+ (void)postMarketPurchaseCancelled:(AppStoreItem*)appStoreItem;
 + (void)postClosingStore;
-+ (void)postOpeningStore;
-+ (void)postUnexpectedError;
-+ (void)postTransactionRestored:(NSString*)productId;
 + (void)postChangedBalance:(int)balance forCurrency:(VirtualCurrency*)currency withAmount:(int)amountAdded;
 + (void)postChangedBalance:(int)balance forGood:(VirtualGood*)good withAmount:(int)amountAdded;
++ (void)postGoodEquipped:(EquippableVG*)good;
++ (void)postGoodUnEquipped:(EquippableVG*)good;
++ (void)postGoodUpgrade:(VirtualGood*)good withGoodUpgrade:(UpgradeVG*)goodUpgrade;
++ (void)postItemPurchaseStarted:(PurchasableVirtualItem*)item;
++ (void)postItemPurchased:(PurchasableVirtualItem*)item;
++ (void)postOpeningStore;
++ (void)postAppStorePurchaseCancelled:(PurchasableVirtualItem*)purchasableVirtualItem;
++ (void)postAppStorePurchase:(PurchasableVirtualItem*)purchasableVirtualItem;
++ (void)postAppStorePurchaseStarted:(PurchasableVirtualItem*)purchasableVirtualItem;
++ (void)postTransactionRestored:(BOOL)success;
++ (void)postTransactionRestoreStarted;
++ (void)postUnexpectedError;
 
 @end
+

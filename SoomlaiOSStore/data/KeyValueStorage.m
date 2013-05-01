@@ -26,6 +26,7 @@
     if (val && [val length]>0){
         return [StoreEncryptor decryptToString:val];
     }
+    
     return NULL;
 }
 

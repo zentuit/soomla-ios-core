@@ -25,13 +25,13 @@
     self = [super init];
     if ([self class] == [VirtualItem class]) {
         @throw [NSException exceptionWithName:NSInternalInconsistencyException
-               reason:@"Error, attempting to instantiate AbstractClass directly." userInfo:nil];
+                                       reason:@"Error, attempting to instantiate AbstractClass directly." userInfo:nil];
     }
     
     return self;
 }
-- (id)initWithName:(NSString*)oName andDescription:(NSString*)oDescription
-    andItemId:(NSString*)oItemId{
+
+- (id)initWithName:(NSString*)oName andDescription:(NSString*)oDescription andItemId:(NSString*)oItemId {
     self = [super init];
     if ([self class] == [VirtualItem class]) {
         @throw [NSException exceptionWithName:NSInternalInconsistencyException
@@ -46,6 +46,7 @@
     
     return self;
 }
+
 
 - (id)initWithDictionary:(NSDictionary*)dict{
     self = [super init];
@@ -65,11 +66,24 @@
 
 - (NSDictionary*)toDictionary{
     return [[NSDictionary alloc] initWithObjectsAndKeys:
-                          self.name, JSON_ITEM_NAME,
-                          self.description, JSON_ITEM_DESCRIPTION,
-                          self.itemId, JSON_ITEM_ITEMID,
-                          nil];
+            self.name, JSON_ITEM_NAME,
+            self.description, JSON_ITEM_DESCRIPTION,
+            self.itemId, JSON_ITEM_ITEMID,
+            nil];
 }
 
+- (void)giveAmount:(int)amount {
+    @throw [NSException exceptionWithName:NSInternalInconsistencyException
+                                   reason:[NSString stringWithFormat:@"You must override %@ in a subclass",
+                                           NSStringFromSelector(_cmd)]
+                                 userInfo:nil];
+}
+
+- (void)takeAmount:(int)amount {
+    @throw [NSException exceptionWithName:NSInternalInconsistencyException
+                                   reason:[NSString stringWithFormat:@"You must override %@ in a subclass",
+                                           NSStringFromSelector(_cmd)]
+                                 userInfo:nil];
+}
 
 @end

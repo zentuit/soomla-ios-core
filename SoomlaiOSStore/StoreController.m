@@ -32,10 +32,24 @@
 #import "ObscuredNSUserDefaults.h"
 #import "AppStoreItem.h"
 #import "NonConsumableItem.h"
+#import "StoreUtils.h"
 
 #define kInAppPurchaseManagerProductsFetchedNotification @"kInAppPurchaseManagerProductsFetchedNotification"
 
 @implementation StoreController
+
+@synthesize initialized, storeOpen;
+
+static NSString* TAG = @"SOOMLA StoreController";
+
+- (BOOL)checkInit {
+    if (!self.initialized) {
+        LogDebug(TAG, @"You can't perform any of StoreController's actions before it was initialized. Initialize it once when your game loads.");
+        return NO;
+    }
+    
+    return YES;
+}
 
 + (StoreController*)getInstance{
     static StoreController* _instance = nil;
@@ -51,10 +65,10 @@
 
 - (void)initializeWithStoreAssets:(id<IStoreAsssets>)storeAssets andCustomSecret:(NSString*)secret {
     
-    if (secret && ![secret isEqualToString:@""]) {
+    if (secret && secret.length > 0) {
         [ObscuredNSUserDefaults setString:secret forKey:@"ISU#LL#SE#REI"];
     } else if ([[ObscuredNSUserDefaults stringForKey:@"ISU#LL#SE#REI"] isEqualToString:@""]){
-        NSLog(@"secret is null or empty. can't initialize store !!");
+        LogError(TAG, @"secret is null or empty. can't initialize store !!");
         return;
     }
     
@@ -65,139 +79,78 @@
     
     if ([SKPaymentQueue canMakePayments]) {
         [[SKPaymentQueue defaultQueue] addTransactionObserver:self];
-        if (![ObscuredNSUserDefaults boolForKey:@"RESTORED"]) {
-            [[SKPaymentQueue defaultQueue] restoreCompletedTransactions];
-        }
-//        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Can Make Payments !"
-//                                                        message:@"Woohoo !"
-//                                                       delegate:nil
-//                                              cancelButtonTitle:@"OK"
-//                                              otherButtonTitles:nil];
-//        
-//        [alert show];
+        
+        [EventHandling postBillingSupported];
     } else {
-//        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Can't Make Payments !"
-//                                                        message:@"Crap !"
-//                                                       delegate:nil
-//                                              cancelButtonTitle:@"OK"
-//                                              otherButtonTitles:nil];
-//        [alert show];
+        [EventHandling postBillingNotSupported];
     }
+    
+    self.initialized = YES;
 }
 
-- (void)buyAppStoreItemWithProcuctId:(NSString*)productId{
-    
-    AppStoreItem* asi = NULL;
-    
-    @try {
-        VirtualCurrencyPack* pack = [[StoreInfo getInstance] currencyPackWithProductId:productId];
-        asi = pack.appstoreItem;
-    }
-    
-    @catch (VirtualItemNotFoundException *e) {
-        @try {
-            NonConsumableItem* nonCons = [[StoreInfo getInstance] nonConsumableItemWithProductId:productId];
-            asi = nonCons.appStoreItem;
-        }
-        @catch (NSException *exception) {
-            NSLog(@"Couldn't find a VirtualCurrencyPack or NonConsumableItem with productId: %@. Purchase is cancelled.", productId);
-            @throw exception;
-        }
-    }
+- (BOOL)buyInAppStoreWithAppStoreItem:(AppStoreItem*)appStoreItem{
+    if (![self checkInit]) return NO;
     
     if ([SKPaymentQueue canMakePayments]) {
         SKMutablePayment *payment = [[SKMutablePayment alloc] init] ;
-        payment.productIdentifier = productId;
+        payment.productIdentifier = appStoreItem.productId;
         payment.quantity = 1;
         [[SKPaymentQueue defaultQueue] addPayment:payment];
         
-        [EventHandling postMarketPurchaseStarted:asi];
+        @try {
+            PurchasableVirtualItem* pvi = [[StoreInfo getInstance] purchasableItemWithProductId:appStoreItem.productId];
+            [EventHandling postAppStorePurchaseStarted:pvi];
+        }
+        @catch (NSException *exception) {
+            LogError(TAG, ([NSString stringWithFormat:@"Couldn't find a purchasable item with productId: %@", appStoreItem.productId]));
+        }
     } else {
-        NSLog(@"Can't make purchases. Parental control is probably enabled.");
-    }
-}
-
-- (void)buyVirtualGood:(NSString*)itemId{
-    VirtualGood* good = [[StoreInfo getInstance] goodWithItemId:itemId];
-    
-    [EventHandling postGoodsPurchaseStarted];
-    
-    // fetching currencies and amounts that the user needs in order to purchase the current VirtualGood.
-    NSDictionary* currencyValues = [good currencyValues];
-    
-    // preparing list of VirtualCurrency objects.
-    NSMutableArray* virtualCurrencies = [[NSMutableArray alloc] init];
-    for (NSString* currencyItemId in [currencyValues allKeys]){
-        [virtualCurrencies addObject:[[StoreInfo getInstance] currencyWithItemId:currencyItemId]];
+        LogError(TAG, @"Can't make purchases. Parental control is probably enabled.");
+        return NO;
     }
     
-    // checking if the user has enough of each of the virtual currencies in order to purchase this virtual
-    // good.
-    VirtualCurrency* needMore = NULL;
-    for (VirtualCurrency* virtualCurrency in virtualCurrencies){
-        int currencyBalance = [[StorageManager getInstance].virtualCurrencyStorage getBalanceForCurrency:virtualCurrency];
-        int currencyBalanceNeeded = [(NSNumber*)[currencyValues objectForKey:virtualCurrency.itemId] intValue];
-        if (currencyBalance < currencyBalanceNeeded){
-            needMore = virtualCurrency;
-            break;
-        }
-    }
-    
-    // if the user has enough, the virtual good is purchased.
-    if (needMore == NULL){
-        [[StorageManager getInstance].virtualGoodStorage addAmount:1 toGood:good];
-        for (VirtualCurrency* virtualCurrency in virtualCurrencies){
-            int currencyBalanceNeeded = [(NSNumber*)[currencyValues objectForKey:virtualCurrency.itemId] intValue];
-            [[StorageManager getInstance].virtualCurrencyStorage removeAmount:currencyBalanceNeeded fromCurrency:virtualCurrency];
-        }
-        
-        [EventHandling postVirtualGoodPurchased:good];
-    }
-    else {
-        @throw [[InsufficientFundsException alloc] initWithItemId:needMore.itemId];
-    }
+    return YES;
 }
 
 - (void)storeOpening{
-    if(![[StoreInfo getInstance] initializeFromDB]){
-        [EventHandling postUnexpectedError];
-        NSLog(@"An unexpected error occured while trying to initialize storeInfo from DB.");
-        return;
-    }
+    if(![self checkInit]) return;
     
-    [EventHandling postOpeningStore];
+    @synchronized(self) {
+        if (self.storeOpen) {
+            LogError(TAG, @"You called storeOpening whern the store was already open !");
+            return;
+        }
+
+        if(![[StoreInfo getInstance] initializeFromDB]){
+            [EventHandling postUnexpectedError];
+            LogError(TAG, @"An unexpected error occured while trying to initialize storeInfo from DB.");
+            return;
+        }
+
+        [EventHandling postOpeningStore];
+        
+        self.storeOpen = YES;
+    }
 }
 
 - (void)storeClosing{
+    if (!self.storeOpen) return;
+    
+    self.storeOpen = NO;
+    
     [EventHandling postClosingStore];
 }
 
 
-- (void) equipVirtualGood:(NSString*) itemId{
-    VirtualGood* good = [[StoreInfo getInstance] goodWithItemId:itemId];
+- (void)restoreTransactions {
+    if(![self checkInit]) return;
     
-    // if the user has enough, the virtual good is purchased.
-    if ([[[StorageManager getInstance] virtualGoodStorage] getBalanceForGood:good] > 0){
-        [[[StorageManager getInstance] virtualGoodStorage] equipGood:good withEquipValue:true];
-        
-        if (good.category.equippingModel == kSingle) {
-            for (VirtualGood* g in [[StoreInfo getInstance] virtualGoods]) {
-                if (g.category.Id == good.category.Id &&
-                    ![g.itemId isEqualToString:good.itemId]) {
-                    [[[StorageManager getInstance] virtualGoodStorage] equipGood:g withEquipValue:false];
-                }
-            }
-        }
-    } else {
-        @throw [[NotEnoughGoodsException alloc] initWithItemId:itemId];
+    LogDebug(TAG, @"Sending restore transaction request");
+    if ([SKPaymentQueue canMakePayments]) {
+        [[SKPaymentQueue defaultQueue] restoreCompletedTransactions];
     }
     
-}
-                         
-- (void) unequipVirtualGood:(NSString*) itemId{
-    VirtualGood* good = [[StoreInfo getInstance] goodWithItemId:itemId];
-    
-    [[[StorageManager getInstance] virtualGoodStorage] equipGood:good withEquipValue:false];
+    [EventHandling postTransactionRestoreStarted];
 }
 
 #pragma mark -
@@ -226,34 +179,20 @@
 - (void) completeTransaction: (SKPaymentTransaction *)transaction
 {
 
-    NSLog(@"Transaction completed for product: %@", transaction.payment.productIdentifier);
-    AppStoreItem* appStoreItem = NULL;
-    
-    @try{
-        VirtualCurrencyPack* pack = [[StoreInfo getInstance] currencyPackWithProductId:transaction.payment.productIdentifier];
-        appStoreItem = pack.appstoreItem;
-    
-        // updating the currency balance
-        // note that a refunded purchase is treated as a purchase.
-        // a friendly refund policy is nice for the user.
-        [[[StorageManager getInstance] virtualCurrencyStorage] addAmount:pack.currencyAmount toCurrency:pack.currency];
-    }
-    @catch (VirtualItemNotFoundException* e) {
-        @try{
-            NonConsumableItem* nonCons = [[StoreInfo getInstance] nonConsumableItemWithProductId:transaction.payment.productIdentifier];
-            appStoreItem = nonCons.appStoreItem;
-            
-            [[[StorageManager getInstance] nonConsumableStorage] add:nonCons];
-        }
-        @catch (VirtualItemNotFoundException* e) {
-            NSLog(@"ERROR : Couldn't find the VirtualCurrencyPack OR AppStoreItem with productId: %@"
-                  @". It's unexpected so an unexpected error is being emitted.", transaction.payment.productIdentifier);
-            [EventHandling postUnexpectedError];
-        }
-    }
-    
-    if (appStoreItem != NULL) {
-        [EventHandling postAppStorePurchase:appStoreItem];
+    LogDebug(TAG, ([NSString stringWithFormat:@"Transaction completed for product: %@", transaction.payment.productIdentifier]));
+    @try {
+        PurchasableVirtualItem* pvi = [[StoreInfo getInstance] purchasableItemWithProductId:transaction.payment.productIdentifier];
+        
+        [EventHandling postAppStorePurchase:pvi];
+        
+        [pvi giveAmount:1];
+        
+        [EventHandling postItemPurchased:pvi];
+        
+    } @catch (VirtualItemNotFoundException* e) {
+        LogDebug(TAG, ([NSString stringWithFormat:@"ERROR : Couldn't find the PurchasableVirtualItem with productId: %@"
+              @". It's unexpected so an unexpected error is being emitted.", transaction.payment.productIdentifier]));
+        [EventHandling postUnexpectedError];
     }
     
     // Remove the transaction from the payment queue.
@@ -263,7 +202,7 @@
 - (void) restoreTransaction: (SKPaymentTransaction *)transaction
 {
     [ObscuredNSUserDefaults setBool:YES forKey:@"RESTORED"];
-    NSLog(@"Restore transaction for product: %@", transaction.payment.productIdentifier);
+    LogDebug(TAG, ([NSString stringWithFormat:@"Restore transaction for product: %@", transaction.payment.productIdentifier]));
     [[SKPaymentQueue defaultQueue] finishTransaction: transaction];
     [EventHandling postTransactionRestored:transaction.payment.productIdentifier];
 }
@@ -271,33 +210,28 @@
 - (void) failedTransaction: (SKPaymentTransaction *)transaction
 {
     if (transaction.error.code != SKErrorPaymentCancelled) {
-        NSLog(@"An error occured for product id \"%@\" with code \"%d\" and description \"%@\"", transaction.payment.productIdentifier, transaction.error.code, transaction.error.localizedDescription);
+        LogError(TAG, ([NSString stringWithFormat:@"An error occured for product id \"%@\" with code \"%d\" and description \"%@\"", transaction.payment.productIdentifier, transaction.error.code, transaction.error.localizedDescription]));
         
         [EventHandling postUnexpectedError];
     }
     else{
-        AppStoreItem* appStoreItem = NULL;
         
-        @try{
-            VirtualCurrencyPack* pack = [[StoreInfo getInstance] currencyPackWithProductId:transaction.payment.productIdentifier];
-            appStoreItem = pack.appstoreItem;
+        @try {
+            PurchasableVirtualItem* pvi = [[StoreInfo getInstance] purchasableItemWithProductId:transaction.payment.productIdentifier];
+        
+            [EventHandling postAppStorePurchaseCancelled:pvi];
         }
         @catch (VirtualItemNotFoundException* e) {
-            @try{
-                NonConsumableItem* nonCons = [[StoreInfo getInstance] nonConsumableItemWithProductId:transaction.payment.productIdentifier];
-                appStoreItem = nonCons.appStoreItem;
-            }
-            @catch (VirtualItemNotFoundException* e) {
-                NSLog(@"ERROR : Couldn't find the CANCELLED VirtualCurrencyPack OR AppStoreItem with productId: %@"
-                      @". It's unexpected so an unexpected error is being emitted.", transaction.payment.productIdentifier);
-                [EventHandling postUnexpectedError];
-            }
+            LogError(TAG, ([NSString stringWithFormat:@"Couldn't find the CANCELLED VirtualCurrencyPack OR AppStoreItem with productId: %@"
+                  @". It's unexpected so an unexpected error is being emitted.", transaction.payment.productIdentifier]));
+            [EventHandling postUnexpectedError];
         }
-        
-        [EventHandling postMarketPurchaseCancelled:appStoreItem];
+
     }
     [[SKPaymentQueue defaultQueue] finishTransaction: transaction];
 }
+
+
 
 #pragma mark -
 #pragma mark SKProductsRequestDelegate methods
@@ -306,22 +240,22 @@
 // for you and will automatically load it into your game.
 - (void)productsRequest:(SKProductsRequest *)request didReceiveResponse:(SKProductsResponse *)response
 {
-//    NSArray *products = response.products;
-//    proUpgradeProduct = [products count] == 1 ? [products objectAtIndex:0] : nil;
-//    if (proUpgradeProduct)
-//    {
-//        NSLog(@"Product title: %@" , proUpgradeProduct.localizedTitle);
-//        NSLog(@"Product description: %@" , proUpgradeProduct.localizedDescription);
-//        NSLog(@"Product price: %@" , proUpgradeProduct.price);
-//        NSLog(@"Product id: %@" , proUpgradeProduct.productIdentifier);
-//    }
-//
-//    for (NSString *invalidProductId in response.invalidProductIdentifiers)
-//    {
-//        NSLog(@"Invalid product id: %@" , invalidProductId);
-//    }
-//
-//    [[NSNotificationCenter defaultCenter] postNotificationName:kInAppPurchaseManagerProductsFetchedNotification object:self userInfo:nil];
+    //    NSArray *products = response.products;
+    //    proUpgradeProduct = [products count] == 1 ? [products objectAtIndex:0] : nil;
+    //    if (proUpgradeProduct)
+    //    {
+    //        NSLog(@"Product title: %@" , proUpgradeProduct.localizedTitle);
+    //        NSLog(@"Product description: %@" , proUpgradeProduct.localizedDescription);
+    //        NSLog(@"Product price: %@" , proUpgradeProduct.price);
+    //        NSLog(@"Product id: %@" , proUpgradeProduct.productIdentifier);
+    //    }
+    //
+    //    for (NSString *invalidProductId in response.invalidProductIdentifiers)
+    //    {
+    //        NSLog(@"Invalid product id: %@" , invalidProductId);
+    //    }
+    //
+    //    [[NSNotificationCenter defaultCenter] postNotificationName:kInAppPurchaseManagerProductsFetchedNotification object:self userInfo:nil];
 }
 
 

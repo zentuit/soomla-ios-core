@@ -16,13 +16,6 @@
 
 #import <Foundation/Foundation.h>
 
-typedef enum {
-    kNone = 0,
-    kSingle = 1,
-    kMultiple = 2
-} EquippingModel;
-#define EquippingModelArray @"none", @"single", @"multiple", nil
-
 /**
  * This class is a definition of a category. A single category can be associated with many virtual goods.
  * The purposes of virtual category are:
@@ -31,24 +24,29 @@ typedef enum {
  */
 @interface VirtualCategory : NSObject{
     NSString* name;
-    int       Id;
-    EquippingModel equippingModel;
+    NSArray*  goodsItemIds;
 }
 
 @property (retain, nonatomic) NSString* name;
-@property int Id;
-@property EquippingModel equippingModel;
+@property (retain, nonatomic) NSArray*  goodsItemIds;
+
+/** Constructor
+ *
+ * oName is the category's name.
+ * oGoodsItemIds is the list of itemIds of VirtualGoods in this category.
+ */
+- (id)initWithName:(NSString*)oName andGoodsItemIds:(NSArray*)oGoodsItemIds;
+
+/** Constructor
+ *
+ * Generates an instance of VirtualCategory from a NSDictionary.
+ * dict is a NSDictionary representation of the wanted VirtualCategory.
+ */
+- (id)initWithDictionary:(NSDictionary*)dict;
 
 /**
-* oName is the category's name.
-* oId is the category's unique id.
-* oEquippingModel is the equipping model for this category
-*/
-- (id)initWithName:(NSString*)oName andId:(int)oId andEquippingModel:(EquippingModel) oEquippingModel;
-- (id)initWithDictionary:(NSDictionary*)dict;
+ * Converts the current VirtualCategory to a NSDictionary.
+ */
 - (NSDictionary*)toDictionary;
-
-+(NSString*) equippingModelEnumToString:(EquippingModel)emVal;
-+(EquippingModel) equippingModelStringToEnum:(NSString*)emStr;
 
 @end

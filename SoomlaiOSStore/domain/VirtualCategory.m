@@ -19,15 +19,15 @@
 
 @implementation VirtualCategory
 
-@synthesize Id, name, equippingModel;
+@synthesize name, goodsItemIds;
 
-- (id)initWithName:(NSString*)oName andId:(int)oId andEquippingModel:(EquippingModel) oEquippingModel{
+
+- (id)initWithName:(NSString*)oName andGoodsItemIds:(NSArray*)oGoodsItemIds{
     
     self = [super init];
     if (self) {
         self.name = oName;
-        self.Id = oId;
-        self.equippingModel = oEquippingModel;
+        self.goodsItemIds = oGoodsItemIds;
     }
     
     return self;
@@ -38,34 +38,28 @@
     self = [super init];
     if (self) {
         self.name = [dict objectForKey:JSON_CATEGORY_NAME];
-        NSNumber* numId = [dict objectForKey:JSON_CATEGORY_ID];
-        self.Id = [numId intValue];
-        self.equippingModel = [VirtualCategory equippingModelStringToEnum:[dict objectForKey:JSON_CATEGORY_EQUIPPING]];
+        
+        NSMutableArray* tmpGoods = [NSMutableArray array];
+        NSArray* goodsArr = [dict objectForKey:JSON_CATEGORY_GOODSITEMIDS];
+        for(NSString* goodItemId in goodsArr) {
+            [tmpGoods addObject:goodItemId];
+        }
+        self.goodsItemIds = tmpGoods;
     }
     
     return self;
 }
 
 - (NSDictionary*)toDictionary{
+    NSMutableArray* arr = [NSMutableArray array];
+    for(NSString* goodItemId in self.goodsItemIds) {
+        [arr addObject:goodItemId];
+    }
+    
     return [[NSDictionary alloc] initWithObjectsAndKeys:
             self.name, JSON_CATEGORY_NAME,
-            [NSNumber numberWithInt:self.Id], JSON_CATEGORY_ID,
-            [VirtualCategory equippingModelEnumToString:equippingModel], JSON_CATEGORY_EQUIPPING,
+            arr, JSON_CATEGORY_GOODSITEMIDS,
             nil];
-}
-
-+(NSString*) equippingModelEnumToString:(EquippingModel)emVal
-{
-    NSArray *emArray = [[NSArray alloc] initWithObjects:EquippingModelArray];
-    return [emArray objectAtIndex:emVal];
-}
-
-+(EquippingModel) equippingModelStringToEnum:(NSString*)emStr
-{
-    NSArray *emArray = [[NSArray alloc] initWithObjects:EquippingModelArray];
-    NSUInteger n = [emArray indexOfObject:emStr];
-    if(n < 1) n = kNone;
-    return (EquippingModel) n;
 }
 
 @end

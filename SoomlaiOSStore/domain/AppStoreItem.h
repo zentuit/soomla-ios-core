@@ -24,7 +24,7 @@ typedef enum {
 
 /**
  * This class represents an item in the App Store.
- * Every VirtualCurrencyPack has an instance of this class which is a
+ * Every PurchasableVirtualItem with PurchaseType of PurchaseWithMarket has an instance of this class which is a
  * representation of the same currency pack as an item on the App Store.
  */
 @interface AppStoreItem : NSObject{
@@ -37,6 +37,12 @@ typedef enum {
 @property Consumable consumable;
 @property double  price;
 
+/** Constructor
+ *
+ * oProductId is the Id of the current item in the App Store.
+ * oConsumable is the type of the current item in the App Store.
+ * oPrice is the actual $$ cost of the current item in the App Store.
+ */
 - (id)initWithProductId:(NSString*)oProductId andConsumable:(Consumable)oConsumable andPrice:(double)oPrice;
 - (id)initWithDictionary:(NSDictionary*)dict;
 - (NSDictionary*)toDictionary;

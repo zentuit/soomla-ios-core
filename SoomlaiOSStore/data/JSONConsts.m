@@ -16,28 +16,47 @@
 
 #import "JSONConsts.h"
 
-NSString *const JSON_STORE_VIRTUALCURRENCIES  = @"virtualCurrencies";
+NSString *const JSON_STORE_CURRENCIES         = @"currencies";
 NSString *const JSON_STORE_CURRENCYPACKS      = @"currencyPacks";
-NSString *const JSON_STORE_NONCONSUMABLE      = @"nonConsumables";
-NSString *const JSON_STORE_VIRTUALGOODS       = @"virtualGoods";
-NSString *const JSON_STORE_VIRTUALCATEGORIES  = @"categories";
-
-NSString *const JSON_APPSTOREITEM_PRODUCT_ID  = @"productId";
-NSString *const JSON_APPSTOREITEM_CONSUMABLE  = @"consumable";
-NSString *const JSON_APPSTOREITEM_PRICE       = @"price";
-
-NSString *const JSON_CURRENCYPACK_AMOUNT      = @"amount";
-NSString *const JSON_CURRENCYPACK_CURRENCYITEMID = @"currency_itemId";
-
-NSString *const JSON_GOOD_PRICE_MODEL         = @"priceModel";
-NSString *const JSON_GOOD_CATEGORY_ID         = @"categoryId";
-NSString *const JSON_GOOD_PRICE_MODEL_VALUES  = @"values";
-NSString *const JSON_GOOD_PRICE_MODEL_TYPE    = @"type";
-
-NSString *const JSON_CATEGORY_NAME            = @"name";
-NSString *const JSON_CATEGORY_ID              = @"id";
-NSString *const JSON_CATEGORY_EQUIPPING       = @"equipping";
+NSString *const JSON_STORE_GOODS              = @"goods";
+NSString *const JSON_STORE_CATEGORIES         = @"categories";
+NSString *const JSON_STORE_NONCONSUMABLES     = @"nonConsumables";
+NSString *const JSON_STORE_GOODS_SU           = @"singleUse";
+NSString *const JSON_STORE_GOODS_PA           = @"goodPacks";
+NSString *const JSON_STORE_GOODS_UP           = @"goodUpgrades";
+NSString *const JSON_STORE_GOODS_LT           = @"lifetime";
+NSString *const JSON_STORE_GOODS_EQ           = @"equippable";
 
 NSString *const JSON_ITEM_NAME                = @"name";
 NSString *const JSON_ITEM_DESCRIPTION         = @"description";
 NSString *const JSON_ITEM_ITEMID              = @"itemId";
+
+NSString *const JSON_CATEGORY_NAME            = @"name";
+NSString *const JSON_CATEGORY_GOODSITEMIDS    = @"goods_itemIds";
+
+NSString *const JSON_MARKETITEM_PRODUCT_ID    = @"productId";
+NSString *const JSON_MARKETITEM_CONSUMABLE    = @"consumable";
+NSString *const JSON_MARKETITEM_PRICE         = @"price";
+
+NSString *const JSON_EQUIPPABLE_EQUIPPING     = @"equipping";
+
+NSString *const JSON_VGP_GOOD_ITEMID          = @"good_itemId";
+NSString *const JSON_VGP_GOOD_AMOUNT          = @"good_amount";
+
+NSString *const JSON_VGU_GOOD_ITEMID          = @"good_itemId";
+NSString *const JSON_VGU_PREV_ITEMID          = @"prev_itemId";
+NSString *const JSON_VGU_NEXT_ITEMID          = @"next_itemId";
+
+NSString *const JSON_CURRENCYPACK_CURRENCYAMOUNT = @"currency_amount";
+NSString *const JSON_CURRENCYPACK_CURRENCYITEMID = @"currency_itemId";
+
+NSString *const JSON_PURCHASABLE_ITEM         = @"purchasableItem";
+
+NSString *const JSON_PURCHASE_TYPE            = @"purchaseType";
+NSString *const JSON_PURCHASE_TYPE_MARKET     = @"market";
+NSString *const JSON_PURCHASE_TYPE_VI         = @"virtualItem";
+
+NSString *const JSON_PURCHASE_MARKET_ITEM     = @"marketItem";
+
+NSString *const JSON_PURCHASE_VI_ITEMID       = @"pvi_itemId";
+NSString *const JSON_PURCHASE_VI_AMOUNT       = @"pvi_amount";

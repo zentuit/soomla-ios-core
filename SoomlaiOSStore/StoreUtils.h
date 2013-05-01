@@ -16,23 +16,13 @@
 
 #import <Foundation/Foundation.h>
 
-/** ABSTRACT
- * This class is the parent of all virtual items in the application.
- */
-@interface VirtualItem : NSObject {
-    NSString* name;
-    NSString* description;
-    NSString* itemId;
-}
+#define LogDebug(x,y) [StoreUtils LogDebug:x withMessage:y];
+#define LogError(x,y) [StoreUtils LogError:x withMessage:y];
 
-@property (retain, nonatomic) NSString* name;
-@property (retain, nonatomic) NSString* description;
-@property (retain, nonatomic) NSString* itemId;
+@interface StoreUtils : NSObject
 
-- (id)init;
-- (id)initWithName:(NSString*)name andDescription:(NSString*)description
-    andItemId:(NSString*)itemId;
-- (id)initWithDictionary:(NSDictionary*)dict;
-- (NSDictionary*)toDictionary;
++ (void)LogDebug:(NSString*)tag withMessage:(NSString*)msg;
++ (void)LogError:(NSString*)tag withMessage:(NSString*)msg;
 
 @end
+

@@ -15,32 +15,15 @@
  */
 
 #import <Foundation/Foundation.h>
+#import "VirtualItemStorage.h"
 
 @class VirtualCurrency;
 
 /**
  * This class provide basic storage operations on VirtualCurrencies.
  */
-@interface VirtualCurrencyStorage : NSObject
+@interface VirtualCurrencyStorage : VirtualItemStorage
 
-/**
- * Fetch the balance of the given virtual currency.
- * virtualCurrency is the required virtual currency.
- */
-- (int)getBalanceForCurrency:(VirtualCurrency*)virtualCurrency;
-/**
- * Adds the given amount of currency to the storage.
- * virtualCurrency is the required virtual currency.
- * amount is the amount of currency to add.
- */
-- (int)addAmount:(int)amount toCurrency:(VirtualCurrency*)virtualCurrency;
-/**
- * Removes the given amount of currency from the storage.
- * virtualCurrency is the required virtual currency.
- * amount is the amount of currency to remove.
- */
-- (int)removeAmount:(int)amount fromCurrency:(VirtualCurrency*)virtualCurrency;
-
-- (int)setBalance:(int)balance toCurrency:(VirtualCurrency*)virtualCurrency;
+- (id)init;
 
 @end

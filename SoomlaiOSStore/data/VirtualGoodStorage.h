@@ -15,41 +15,54 @@
  */
 
 #import <Foundation/Foundation.h>
+#import "VirtualItemStorage.h"
 
 @class VirtualGood;
+@class UpgradeVG;
+@class EquippableVG;
 
 /**
  * This class provide basic storage operations on VirtualGoods.
  */
-@interface VirtualGoodStorage : NSObject
+@interface VirtualGoodStorage : VirtualItemStorage
+
+- (id)init;
 
 /**
- * Fetch the balance of the given virtual good.
- * virtualGood is the required virtual good.
+ * This function removes any upgrade associated with the given VirtualGood.
+ * good is the VirtualGood to remove upgrade from.
  */
-- (int)getBalanceForGood:(VirtualGood*)virtualGood;
-/**
- * Adds the given amount of goods to the storage.
- * virtualGood is the required virtual good.
- * amount is the amount of goods to add.
- */
-- (int)addAmount:(int)amount toGood:(VirtualGood*)virtualGood;
-/**
- * Removes the given amount from the given virtual good's balance.
- * virtualGood is the virtual good to remove the given amount from.
- * amount is the amount to remove.
- */
-- (int)removeAmount:(int)amount fromGood:(VirtualGood*)virtualGood;
-/**
- * Fetch the equip status of the given VirtualGood.
- */
-- (BOOL)isGoodEquipped:(VirtualGood*)virtualGood;
-/**
- * Sets the equip status of the given VirtualGood.
- * virtualGood is the required VirtualGood
- * equip is the boolean equip status of the VirtualGood
- */
-- (void)equipGood:(VirtualGood*)virtualGood withEquipValue:(BOOL)equip;
+- (void)removeUpgradesFrom:(VirtualGood*)good;
 
-- (int)setBalance:(int)balance toGood:(VirtualGood*)virtualGood;
+/**
+ * Assigns a specific upgrade to the given VirtualGood.
+ * good is the VirtualGood to upgrade.
+ * upgradeVG is the upgrade to assign.
+ */
+- (void)assignCurrentUpgrade:(UpgradeVG*)upgradeVG toGood:(VirtualGood*)good;
+
+/**
+ * Retrieves the current upgrade for the given VirtualGood.
+ * good is the VirtualGood to retrieve upgrade for.
+ */
+- (UpgradeVG*)currentUpgradeOf:(VirtualGood*)good;
+
+/**
+ * Check the equipping status of the given EquippableVG.
+ * good is the EquippableVG to check the status for.
+ */
+- (BOOL)isGoodEquipped:(EquippableVG*)good;
+
+/**
+ * Equip the given EquippableVG.
+ * good is the EquippableVG to equip.
+ */
+- (void)equipGood:(EquippableVG*)good;
+
+/**
+ * UnEquip the given EquippableVG.
+ * good is the EquippableVG to unequip.
+ */
+- (void)unequipGood:(EquippableVG*)good;
+
 @end
