@@ -3,16 +3,16 @@
 Haven't you ever wanted an in-app purchase one liner that looks like this ?!
 
 ```objective-c
-    [[StoreController getInstance] buyAppStoreItemWithProcuctId:@"[Your product id here]"]
+    [StoreInventory buyItemWithItemId:@"[itemId]"]
 ```
 
 ios-store
 ---
-**Feb 8th, 2013 - We've just released v2.0 of ios-store. The major change is a key-value storage (above SQLite) instead of the previous tables. We've also added code that migrates old data and removes the old database (StorageManager.migrateOldData). When you upgrade your code make sure data is transferred from the old database.**
+**The new Virtual Economy model V3 is merged into master. The new model has many new features and it works better than the old one. Old applications may break if they use in this new model so already published games with ios-store from before May 1st, 2013 needs to clone the project with tag 'v2.2' and not 'v3.0'.**
 
-The ios-store is our iOS-flavored code initiative part of The SOOMLA Project. It is an iOS SDK that simplifies the App Store's in-app purchasing API and complements it with storage, security and event handling. The project also includes a sample app for reference. As an optional (and currently EXPERIMENTAL) part of our open-source projects you can also get the storefront's theme which you can customize with your own game's assets. To use our storefront, refer to [Get your own Storefront](https://github.com/soomla/ios-store/wiki/Get-your-own-Storefront-%5BEXPERIMENTAL%5D).
+The ios-store is our iOS-flavored code initiative part of The SOOMLA Project. It is an iOS SDK that simplifies the App Store's in-app purchasing API and complements it with storage, security and event handling. The project also includes a sample app for reference. 
 
->If you also want to create a storefront you can do that using our [Store Designer](http://designer.soom.la).
+>If you also want to create a **storefront** you can do that using SOOMLA's [Store Designer](http://designer.soom.la).
 
 Check out our [Wiki] (https://github.com/soomla/ios-store/wiki) for more information about the project and how to use it better.
 
@@ -63,29 +63,33 @@ And that's it ! You have Storage and in-app purchasing capabilities... ALL-IN-ON
 What's next? In App Purchasing.
 ---
 
-ios-store provides you with VirtualCurrencyPacks. VirtualCurrencyPack is a representation of a "bag" of currency units that you want to let your users purchase in the App Store. You define VirtualCurrencyPacks in your game specific assets file which is your implementation of `IStoreAssets` ([example](https://github.com/soomla/ios-store/blob/master/SoomlaiOSStoreExample/SoomlaiOSStoreExample/MuffinRushAssets.m)). After you do that you can call `StoreController` to make actual purchases and ios-store will take care of the rest.
+When we implemented modelV3, we were thinking about ways people buy things inside apps. We figured many ways you can let your users purchase stuff in your game and we designed the new modelV3 to support 2 of them: PurchaseWithMarket and PurchaseWithVirtualItem.
 
-Example:
+**PurchaseWithMarket** is a PurchaseType that allows users to purchase a VirtualItem with the App Store.  
+**PurchaseWithVirtualItem** is a PurchaseType that lets your users purchase a VirtualItem with a different VirtualItem. For Example: Buying 1 Sword with 100 Gems.
 
-Lets say you have a VirtualCurrencyPack you call `TEN_COINS_PACK`, a VirtualCurrency you call `COIN_CURRENCY` and a VirtualCategory you call `CURRENCYPACKS_CATEGORY`:
+In order to define the way your various virtual items (Goods, Coins ...) are purchased, you'll need to create your implementation of IStoreAsset (the same one from step 4 in the "Getting Started" above).
 
-```objective-c
-VirtualCurrencyPack* TEN_COINS_PACK = [[VirtualCurrencyPack alloc] initWithName:@"10 Coins"
-                                              andDescription:@"A pack of 10 coins"
-                                                   andItemId:@"10_coins"
-                                                    andPrice:0.99
-                                                andProductId:TEN_COINS_PACK_PRODUCT_ID
-                                           andCurrencyAmount:10
-                                                 andCurrency:COIN_CURRENCY];
-```
+Here is an example:
 
-Now you can use `StoreController` to call the App Store's in-app purchasing mechanism:
+Lets say you have a _VirtualCurrencyPack_ you call `TEN_COINS_PACK` and a _VirtualCurrency_ you call `COIN_CURRENCY`:
 
 ```objective-c
-    [[StoreController getInstance] buyAppStoreItemWithProcuctId:TEN_COINS_PACK.productId];
+VirtualCurrencyPack* TEN_COINS_PACK = [[VirtualCurrencyPack alloc] initWithName:@"10 Coins" 
+											   andDescription:@"A pack of 10 coins" 
+											        andItemId:@"10_coins" 
+											andCurrencyAmount:10 
+											 	  andCurrency:COIN_CURRENCY_ITEM_ID 
+											  andPurchaseType:[[PurchaseWithMarket alloc] initWithProductId:TEN_COINS_PACK_PRODUCT_ID andPrice:1.99]];
 ```
 
-And that's it! ios-store knows how to contact the App Store for you and redirect the user to the purchasing mechanism. Don't forget to subscribe to events of successful or failed purchases (see [Event Handling](https://github.com/soomla/ios-store#event-handling)).
+Now you can use _StoreInventory_ to buy your new VirtualCurrencyPack:
+
+```objective-c
+    [StoreInventory buyItemWithItemId:TEN_COINS_PACK.itemId];
+```
+
+And that's it! ios-store knows how to contact the App Store for you and redirect the user to their purchasing system to complete the transaction. Don't forget to subscribe to events of successful or failed purchases (see [Event Handling](https://github.com/soomla/ios-store#event-handling)).
 
 Storage & Meta-Data
 ---
@@ -96,25 +100,23 @@ The on-device storage is encrypted and kept in a SQLite database. SOOMLA is prep
 
 **Example Usages**
 
-* Add 10 coins to the virtual currency with itemId "currency_coin":
+* Give the user 10 pieces of a virtual currency with itemId "currency_coin":
 
     ```objective-c
-    VirtualCurrency* coin = [[StoreInfo getInstance] currencyWithItemId:@"currency_coin"];
-    [[[StorageManager getInstance] virtualCurrencyStorage] addAmount:10 toCurrency:coin];
+    [StoreInventory giveAmount:10 ofItem:@"currency_coin"];
     ```
     
-* Remove 10 virtual goods with itemId "green_hat":
+* Take 10 virtual goods with itemId "green_hat":
 
     ```objective-c
-    VirtualGood* greenHat = [[StoreInfo getInstance] goodWithItemId:@"green_hat"];
-    [[[StorageManager getInstance] virtualGoodStorage] removeAmount:10 fromGood:greenHat];
+    [StoreInventory takeAmount:10 ofItem:@"currency_coin"];
     ```
     
-* Get the current balance of green hats (virtual goods with itemId "green_hat"):
+* Get the current balance of a virtual good with itemId "green_hat" (here we decided to show you the 'long' way. you can also use StoreInventory):
 
     ```objective-c
-    VirtualGood* greenHat = [[StoreInfo getInstance] goodWithItemId:@"green_hat"];
-    int greenHatsBalance = [[[StorageManager getInstance] virtualGoodStorage] getBalanceForGood:greenHat];
+    VirtualGood* greenHat = (VirtualGood*)[[StoreInfo getInstance] virtualItemWithId:@"green_hat"];
+    int greenHatsBalance = [[[StorageManager getInstance] virtualGoodStorage] balanceForItem:greenHat];
     ```
     
 Security
@@ -134,7 +136,7 @@ SOOMLA lets you get notifications on various events and implement your own appli
 
 In order to observe store events you need to import EventHandling.h and then you can add a notification to *NSNotificationCenter*:
 
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(yourCustomSelector:) name:EVENT_VIRTUAL_CURRENCY_PACK_PURCHASED object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(yourCustomSelector:) name:EVENT_ITEM_PURCHASED object:nil];
     
 OR, you can observe all events with the same selector by calling:
 
