@@ -10,6 +10,10 @@ ios-store
 ---
 **The new Virtual Economy model V3 is merged into master. The new model has many new features and it works better than the old one. Old applications may break if they use in this new model so already published games with ios-store from before May 1st, 2013 needs to clone the project with tag 'v2.2' and not 'v3.0'.**
 
+Want to learn more about modelV3? Try these:  
+* [Economy Model Objects](https://github.com/soomla/ios-store/wiki/Economy-Model-Objects)  
+* [Handling Store Operations](https://github.com/soomla/ios-store/wiki/Handling-Store-Operations)
+
 The ios-store is our iOS-flavored code initiative part of The SOOMLA Project. It is an iOS SDK that simplifies the App Store's in-app purchasing API and complements it with storage, security and event handling. The project also includes a sample app for reference. 
 
 >If you also want to create a **storefront** you can do that using SOOMLA's [Store Designer](http://designer.soom.la).
