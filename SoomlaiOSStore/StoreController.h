@@ -66,5 +66,9 @@
  * Initiate the restoreTransactions process
  */
 - (void)restoreTransactions;
+/**
+ * Answers the question: "Did you ever successfuly restored transactions before?"
+ */
+- (BOOL)transactionsAlreadyRestored;
 
 @end

@@ -153,6 +153,10 @@ static NSString* TAG = @"SOOMLA StoreController";
     [EventHandling postTransactionRestoreStarted];
 }
 
+- (BOOL)transactionsAlreadyRestored {
+    return [ObscuredNSUserDefaults boolForKey:@"RESTORED"];
+}
+
 #pragma mark -
 #pragma mark SKPaymentTransactionObserver methods
 
@@ -176,10 +180,8 @@ static NSString* TAG = @"SOOMLA StoreController";
     }
 }
 
-- (void) completeTransaction: (SKPaymentTransaction *)transaction
+- (void)givePurchasedItem:(SKPaymentTransaction *)transaction
 {
-
-    LogDebug(TAG, ([NSString stringWithFormat:@"Transaction completed for product: %@", transaction.payment.productIdentifier]));
     @try {
         PurchasableVirtualItem* pvi = [[StoreInfo getInstance] purchasableItemWithProductId:transaction.payment.productIdentifier];
         
@@ -189,22 +191,26 @@ static NSString* TAG = @"SOOMLA StoreController";
         
         [EventHandling postItemPurchased:pvi];
         
+	// Remove the transaction from the payment queue.
+	[[SKPaymentQueue defaultQueue] finishTransaction: transaction];
     } @catch (VirtualItemNotFoundException* e) {
         LogDebug(TAG, ([NSString stringWithFormat:@"ERROR : Couldn't find the PurchasableVirtualItem with productId: %@"
-              @". It's unexpected so an unexpected error is being emitted.", transaction.payment.productIdentifier]));
+			@". It's unexpected so an unexpected error is being emitted.", transaction.payment.productIdentifier]));
         [EventHandling postUnexpectedError];
     }
-    
-    // Remove the transaction from the payment queue.
-    [[SKPaymentQueue defaultQueue] finishTransaction: transaction];
+}
+
+- (void) completeTransaction: (SKPaymentTransaction *)transaction
+{
+
+    LogDebug(TAG, ([NSString stringWithFormat:@"Transaction completed for product: %@", transaction.payment.productIdentifier]));
+    [self givePurchasedItem:transaction];
 }
 
 - (void) restoreTransaction: (SKPaymentTransaction *)transaction
 {
-    [ObscuredNSUserDefaults setBool:YES forKey:@"RESTORED"];
     LogDebug(TAG, ([NSString stringWithFormat:@"Restore transaction for product: %@", transaction.payment.productIdentifier]));
-    [[SKPaymentQueue defaultQueue] finishTransaction: transaction];
-    [EventHandling postTransactionRestored:YES];
+    [self givePurchasedItem:transaction];
 }
 
 - (void) failedTransaction: (SKPaymentTransaction *)transaction
@@ -231,6 +237,10 @@ static NSString* TAG = @"SOOMLA StoreController";
     [[SKPaymentQueue defaultQueue] finishTransaction: transaction];
 }
 
+- (void)paymentQueueRestoreCompletedTransactionsFinished:(SKPaymentQueue *)queue {
+    [ObscuredNSUserDefaults setBool:YES forKey:@"RESTORED"];
+    [EventHandling postTransactionRestored:YES];
+}
 
 
 #pragma mark -
