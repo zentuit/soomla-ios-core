@@ -204,7 +204,7 @@ static NSString* TAG = @"SOOMLA StoreController";
     [ObscuredNSUserDefaults setBool:YES forKey:@"RESTORED"];
     LogDebug(TAG, ([NSString stringWithFormat:@"Restore transaction for product: %@", transaction.payment.productIdentifier]));
     [[SKPaymentQueue defaultQueue] finishTransaction: transaction];
-    [EventHandling postTransactionRestored:transaction.payment.productIdentifier];
+    [EventHandling postTransactionRestored:YES];
 }
 
 - (void) failedTransaction: (SKPaymentTransaction *)transaction
