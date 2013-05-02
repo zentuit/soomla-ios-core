@@ -67,8 +67,7 @@
  */
 - (void)restoreTransactions;
 /**
- * Answers the question: "Did you ever successfuly restored transactions before?"
+ * Answers the question: "Were transactions already restored for this game?"
  */
 - (BOOL)transactionsAlreadyRestored;
-
 @end
