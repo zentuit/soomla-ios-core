@@ -130,8 +130,8 @@ static NSString* TAG = @"SOOMLA StorageManager";
             [ObscuredNSUserDefaults setInt:METADATA_VERSION forKey:@"MT_VER"];
             [ObscuredNSUserDefaults setInt:sa_ver_new forKey:@"SA_VER_OLD"];
             
-            [kvDatabase deleteKeyValWithKey:[KeyValDatabase keyMetaStoreInfo]];
-            [kvDatabase deleteKeyValWithKey:[KeyValDatabase keyMetaStorefrontInfo]];
+            [kvDatabase deleteKeyValWithKey:[StoreEncryptor encryptString:[KeyValDatabase keyMetaStoreInfo]]];
+            [kvDatabase deleteKeyValWithKey:[StoreEncryptor encryptString:[KeyValDatabase keyMetaStorefrontInfo]]];
         }
     }
     

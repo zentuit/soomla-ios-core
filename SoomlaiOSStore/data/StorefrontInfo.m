@@ -49,7 +49,7 @@ static NSString* TAG = @"SOOMLA StorefrontInfo";
         }
         self.storefrontJson = sfJSON;
         
-        [[[StorageManager getInstance] kvDatabase] setVal:[StoreEncryptor encryptString:sfJSON] forKey:[KeyValDatabase keyMetaStorefrontInfo]];
+        [[[StorageManager getInstance] kvDatabase] setVal:[StoreEncryptor encryptString:sfJSON] forKey:[StoreEncryptor encryptString:[KeyValDatabase keyMetaStorefrontInfo]]];
         
         NSDictionary* sfDict = [self.storefrontJson objectFromJSONString];
         self.orientationLandscape = [((NSString*)[[sfDict objectForKey:@"template"] objectForKey:@"orientation"]) isEqualToString:@"landscape"];
@@ -67,7 +67,7 @@ static NSString* TAG = @"SOOMLA StorefrontInfo";
 }
 
 - (BOOL)initializeFromDB{
-    NSString* sfJSON = [[[StorageManager getInstance] kvDatabase] getValForKey:[KeyValDatabase keyMetaStorefrontInfo]];
+    NSString* sfJSON = [[[StorageManager getInstance] kvDatabase] getValForKey:[StoreEncryptor encryptString:[KeyValDatabase keyMetaStorefrontInfo]]];
     if (!sfJSON || [sfJSON isEqual:[NSNull null]] || sfJSON.length == 0){
         LogDebug(TAG, @"storefront json is not in DB yet");
         return NO;
