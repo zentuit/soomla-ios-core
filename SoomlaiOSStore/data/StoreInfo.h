@@ -131,4 +131,6 @@
  * goodItemId is the VirtualGood we're searching the upgrades for.
  */
 - (NSArray*)upgradesForGoodWithItemId:(NSString*)goodItemId;
+
+- (BOOL)goodHasUpgrades:(NSString*)goodItemId;
 @end

@@ -391,4 +391,8 @@ static NSString* TAG = @"SOOMLA StoreInfo";
     return [self.goodsUpgrades objectForKey:goodItemId];
 }
 
+- (BOOL)goodHasUpgrades:(NSString*)goodItemId {
+    return [goodsUpgrades objectForKey:goodItemId] != NULL;
+}
+
 @end
