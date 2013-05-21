@@ -16,7 +16,7 @@ Want to learn more about modelV3? Try these:
 
 The ios-store is our iOS-flavored code initiative part of The SOOMLA Project. It is an iOS SDK that simplifies the App Store's in-app purchasing API and complements it with storage, security and event handling. The project also includes a sample app for reference. 
 
->If you also want to create a **storefront** you can do that using SOOMLA's [Store Designer](http://designer.soom.la).
+>If you also want to create a **storefront** you can do that using SOOMLA's [In-App Purchase Store Designer](http://soom.la).
 
 Check out our [Wiki] (https://github.com/soomla/ios-store/wiki) for more information about the project and how to use it better.
 
