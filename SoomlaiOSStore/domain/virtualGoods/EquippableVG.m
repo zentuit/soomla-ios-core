@@ -33,7 +33,7 @@ static NSString* TAG = @"SOOMLA equippingModel";
 - (id)initWithName:(NSString *)oName andDescription:(NSString *)oDescription
          andItemId:(NSString *)oItemId andPurchaseType:(PurchaseType *)oPurchaseType andEquippingModel:(EquippingModel)oEquippingModel {
     if (self = [super initWithName:oName andDescription:oDescription andItemId:oItemId andPurchaseType:oPurchaseType]) {
-        self.equippingModel = equippingModel;
+        self.equippingModel = oEquippingModel;
     }
     
     return self;
