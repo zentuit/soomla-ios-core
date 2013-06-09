@@ -132,6 +132,48 @@ static NSString* TAG = @"SOOMLA KeyValDatabase";
     }
 }
 
+- (NSArray*)getValsForQuery:(NSString*)query {
+    @synchronized(self) {
+        NSMutableArray *results = [NSMutableArray array];
+        NSString* databasebPath = [[StorageManager applicationDirectory] stringByAppendingPathComponent:DATABASE_NAME];
+        if (sqlite3_open([databasebPath UTF8String], &database) == SQLITE_OK)
+        {
+            sqlite3_stmt *statement = nil;
+            query = [query stringByReplacingOccurrencesOfString:@"*" withString:@"%"];
+            const char *sql = [[NSString stringWithFormat:@"SELECT %@ FROM %@ WHERE %@ LIKE '%@'", KEYVAL_COLUMN_VAL, KEYVAL_TABLE_NAME, KEYVAL_COLUMN_KEY, query] UTF8String];
+            if (sqlite3_prepare_v2(database, sql, -1, &statement, NULL) != SQLITE_OK) {
+                LogError(TAG, ([NSString stringWithFormat:@"Error while fetching %@ LIKE '%@' : %s", KEYVAL_COLUMN_KEY, query, sqlite3_errmsg(database)]));
+            } else {
+                while (sqlite3_step(statement) == SQLITE_ROW) {
+//                    for (int i=0; i<sqlite3_column_count(statement); i++) {
+//                        NSString* colName = [NSString stringWithUTF8String:sqlite3_column_name(statement, i)];
+                    
+//                        if ([colName isEqualToString:KEYVAL_COLUMN_VAL]) {
+                            int colType = sqlite3_column_type(statement, 0);
+                            if (colType == SQLITE_TEXT) {
+                                const unsigned char *col = sqlite3_column_text(statement, 0);
+                                [results addObject:[NSString stringWithFormat:@"%s", col]];
+                            } else {
+                                LogError(TAG, @"ERROR: UNKNOWN COLUMN DATATYPE");
+                            }
+//                        }
+//                    }
+                }
+                
+                // Finalize
+                sqlite3_finalize(statement);
+            }
+            
+            // Close database
+            sqlite3_close(database);
+        }
+        else{
+            LogError(TAG, @"Failed to open/create database");
+        }
+        return results;
+    }
+}
+
 - (NSString*)getValForKey:(NSString *)key{
     @synchronized(self) {
         NSString *result = nil;
@@ -139,24 +181,24 @@ static NSString* TAG = @"SOOMLA KeyValDatabase";
         if (sqlite3_open([databasebPath UTF8String], &database) == SQLITE_OK)
         {
             sqlite3_stmt *statement = nil;
-            const char *sql = [[NSString stringWithFormat:@"SELECT * FROM %@ WHERE %@='%@'", KEYVAL_TABLE_NAME, KEYVAL_COLUMN_KEY, key] UTF8String];
+            const char *sql = [[NSString stringWithFormat:@"SELECT %@ FROM %@ WHERE %@='%@'", KEYVAL_COLUMN_VAL, KEYVAL_TABLE_NAME, KEYVAL_COLUMN_KEY, key] UTF8String];
             if (sqlite3_prepare_v2(database, sql, -1, &statement, NULL) != SQLITE_OK) {
                 LogError(TAG, ([NSString stringWithFormat:@"Error while fetching %@=%@ : %s", KEYVAL_COLUMN_KEY, key, sqlite3_errmsg(database)]));
             } else {
                 while (sqlite3_step(statement) == SQLITE_ROW) {
-                    for (int i=0; i<sqlite3_column_count(statement); i++) {
-                        NSString* colName = [NSString stringWithUTF8String:sqlite3_column_name(statement, i)];
-                        
-                        if ([colName isEqualToString:KEYVAL_COLUMN_VAL]) {
-                            int colType = sqlite3_column_type(statement, i);
+//                    for (int i=0; i<sqlite3_column_count(statement); i++) {
+//                        NSString* colName = [NSString stringWithUTF8String:sqlite3_column_name(statement, i)];
+                    
+//                        if ([colName isEqualToString:KEYVAL_COLUMN_VAL]) {
+                            int colType = sqlite3_column_type(statement, 0);
                             if (colType == SQLITE_TEXT) {
-                                const unsigned char *col = sqlite3_column_text(statement, i);
+                                const unsigned char *col = sqlite3_column_text(statement, 0);
                                 result = [NSString stringWithFormat:@"%s", col];
                             } else {
                                 LogError(TAG, @"ERROR: UNKNOWN COLUMN DATATYPE");
                             }
-                        }
-                    }
+//                        }
+//                    }
                 }
                 
                 // Finalize
