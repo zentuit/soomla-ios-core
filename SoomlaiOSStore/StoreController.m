@@ -67,7 +67,7 @@ static NSString* TAG = @"SOOMLA StoreController";
     
     if (secret && secret.length > 0) {
         [ObscuredNSUserDefaults setString:secret forKey:@"ISU#LL#SE#REI"];
-    } else if ([[ObscuredNSUserDefaults stringForKey:@"ISU#LL#SE#REI"] isEqualToString:@""]){
+    } else if ([[ObscuredNSUserDefaults stringForKey:@"ISU#LL#SE#REI" withDefaultValue:@""] isEqualToString:@""]){
         LogError(TAG, @"secret is null or empty. can't initialize store !!");
         return;
     }
@@ -86,6 +86,7 @@ static NSString* TAG = @"SOOMLA StoreController";
     }
     
     self.initialized = YES;
+    [EventHandling postStoreControllerInitialized];
 }
 
 - (BOOL)buyInAppStoreWithAppStoreItem:(AppStoreItem*)appStoreItem{
@@ -120,13 +121,13 @@ static NSString* TAG = @"SOOMLA StoreController";
             LogError(TAG, @"You called storeOpening whern the store was already open !");
             return;
         }
-
+        
         if(![[StoreInfo getInstance] initializeFromDB]){
             [EventHandling postUnexpectedError];
             LogError(TAG, @"An unexpected error occured while trying to initialize storeInfo from DB.");
             return;
         }
-
+        
         [EventHandling postOpeningStore];
         
         self.storeOpen = YES;
@@ -154,7 +155,7 @@ static NSString* TAG = @"SOOMLA StoreController";
 }
 
 - (BOOL)transactionsAlreadyRestored {
-    return [ObscuredNSUserDefaults boolForKey:@"RESTORED"];
+    return [ObscuredNSUserDefaults boolForKey:@"RESTORED" withDefaultValue:NO];
 }
 
 #pragma mark -
@@ -191,18 +192,18 @@ static NSString* TAG = @"SOOMLA StoreController";
         
         [EventHandling postItemPurchased:pvi];
         
-	// Remove the transaction from the payment queue.
-	[[SKPaymentQueue defaultQueue] finishTransaction: transaction];
+        // Remove the transaction from the payment queue.
+        [[SKPaymentQueue defaultQueue] finishTransaction: transaction];
     } @catch (VirtualItemNotFoundException* e) {
         LogDebug(TAG, ([NSString stringWithFormat:@"ERROR : Couldn't find the PurchasableVirtualItem with productId: %@"
-			@". It's unexpected so an unexpected error is being emitted.", transaction.payment.productIdentifier]));
+                        @". It's unexpected so an unexpected error is being emitted.", transaction.payment.productIdentifier]));
         [EventHandling postUnexpectedError];
     }
 }
 
 - (void) completeTransaction: (SKPaymentTransaction *)transaction
 {
-
+    
     LogDebug(TAG, ([NSString stringWithFormat:@"Transaction completed for product: %@", transaction.payment.productIdentifier]));
     [self givePurchasedItem:transaction];
 }
@@ -224,15 +225,15 @@ static NSString* TAG = @"SOOMLA StoreController";
         
         @try {
             PurchasableVirtualItem* pvi = [[StoreInfo getInstance] purchasableItemWithProductId:transaction.payment.productIdentifier];
-        
+            
             [EventHandling postAppStorePurchaseCancelled:pvi];
         }
         @catch (VirtualItemNotFoundException* e) {
             LogError(TAG, ([NSString stringWithFormat:@"Couldn't find the CANCELLED VirtualCurrencyPack OR AppStoreItem with productId: %@"
-                  @". It's unexpected so an unexpected error is being emitted.", transaction.payment.productIdentifier]));
+                            @". It's unexpected so an unexpected error is being emitted.", transaction.payment.productIdentifier]));
             [EventHandling postUnexpectedError];
         }
-
+        
     }
     [[SKPaymentQueue defaultQueue] finishTransaction: transaction];
 }

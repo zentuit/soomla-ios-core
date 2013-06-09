@@ -41,6 +41,7 @@
 #define EVENT_APPSTORE_PURCHASE_STARTED     @"AppStorePurchaseProcessStarted"
 #define EVENT_TRANSACTION_RESTORED          @"TransactionRestored"
 #define EVENT_TRANSACTION_RESTORE_STARTED   @"TransactionRestoreStarted"
+#define EVENT_STORECONTROLLER_INIT          @"StoreControllerInitialized"
 #define EVENT_UNEXPECTED_ERROR_IN_STORE     @"UnexpectedErrorInStore"
 
 
@@ -82,6 +83,7 @@
 + (void)postTransactionRestored:(BOOL)success;
 + (void)postTransactionRestoreStarted;
 + (void)postUnexpectedError;
++ (void)postStoreControllerInitialized;
 
 @end
 

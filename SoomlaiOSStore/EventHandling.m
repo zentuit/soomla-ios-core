@@ -39,6 +39,7 @@
     [[NSNotificationCenter defaultCenter] addObserver:observer selector:selector name:EVENT_TRANSACTION_RESTORED object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:observer selector:selector name:EVENT_TRANSACTION_RESTORE_STARTED object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:observer selector:selector name:EVENT_UNEXPECTED_ERROR_IN_STORE object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:observer selector:selector name:EVENT_STORECONTROLLER_INIT object:nil];
 
 }
 
@@ -130,6 +131,10 @@
 
 + (void)postUnexpectedError{
     [[NSNotificationCenter defaultCenter] postNotificationName:EVENT_UNEXPECTED_ERROR_IN_STORE object:self];
+}
+
++ (void) postStoreControllerInitialized {
+    [[NSNotificationCenter defaultCenter] postNotificationName:EVENT_STORECONTROLLER_INIT object:self];
 }
 
 
