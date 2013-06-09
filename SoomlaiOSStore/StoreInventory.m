@@ -25,6 +25,8 @@
 #import "PurchasableVirtualItem.h"
 #import "UpgradeVG.h"
 #import "EquippableVG.h"
+#import "VirtualItemNotFoundException.h"
+#import "StoreUtils.h"
 
 @implementation StoreInventory
 
@@ -112,6 +114,19 @@
         UpgradeVG* first = [[StoreInfo getInstance] firstUpgradeForGoodWithItemId:goodItemId];
         if (first) {
             [first buy];
+        }
+    }
+}
+
++ (void)forceUpgrade:(NSString*)upgradeItemId {
+    @try {
+        UpgradeVG* upgradeVG = (UpgradeVG*) [[StoreInfo getInstance] virtualItemWithId:upgradeItemId];
+        [upgradeVG giveAmount:1];
+    } @catch (NSException* ex) {
+        if ([ex isKindOfClass:[VirtualItemNotFoundException class]]) {
+            @throw ex;
+        } else {
+            LogError(@"SOOMLA StoreInventory", @"The given itemId was of a non UpgradeVG VirtualItem. Can't force it.");
         }
     }
 }

@@ -79,6 +79,14 @@
  * throws VirtualItemNotFoundException
  */
 + (void)upgradeVirtualGood:(NSString*)goodItemId;
+
+/**
+ * The upgradeItemId can be of an UpgradeVG
+ *
+ * throws VirtualItemNotFoundException
+ */
++ (void)forceUpgrade:(NSString*)upgradeItemId;
+
 /**
  * The goodItemId can be of any VirtualGood
  *
