@@ -52,6 +52,14 @@ static NSString* TAG = @"SOOMLA NonConsumableItem";
     [[[StorageManager getInstance] nonConsumableStorage] remove:self];
 }
 
+- (void)resetBalance:(int)balance {
+    if (balance > 0) {
+        [[[StorageManager getInstance] nonConsumableStorage] add:self];
+    } else {
+        [[[StorageManager getInstance] nonConsumableStorage] remove:self];
+    }
+}
+
 - (BOOL)canBuy {
     if ([[[StorageManager getInstance] nonConsumableStorage] nonConsumableExists:self]) {
         LogDebug(TAG, @"You can't buy a NonConsumableItem that was already given to the user.");

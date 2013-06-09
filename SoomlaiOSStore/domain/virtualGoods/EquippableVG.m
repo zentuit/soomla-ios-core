@@ -70,7 +70,7 @@ static NSString* TAG = @"SOOMLA equippingModel";
     return toReturn;
 }
 
-- (void)equip {
+- (void)equip {    
     // only if the user has bought this EquippableVG, the EquippableVG is equipped.
     if ([[[StorageManager getInstance] virtualGoodStorage] balanceForItem:self] > 0) {
         

@@ -67,4 +67,9 @@
  */
 - (void)takeAmount:(int)amount;
 
+/**
+ * This function resets the balance to the given balance.
+ * balance is the balance of the current virtual item.
+ */
+- (void)resetBalance:(int)balance;
 @end

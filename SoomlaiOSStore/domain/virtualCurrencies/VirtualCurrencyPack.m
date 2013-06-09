@@ -83,6 +83,11 @@ static NSString* TAG = @"SOOMLA VirtualCurrencyPack";
     [[[StorageManager getInstance] virtualCurrencyStorage] removeAmount:amount*self.currencyAmount fromItem:currency];
 }
 
+- (void)resetBalance:(int)balance {
+    // Not supported for VirtualCurrencyPacks !
+    LogError(TAG, @"Someone tried to reset balance of CurrencyPack. That's not right.");
+}
+
 - (BOOL)canBuy {
     return YES;
 }

@@ -57,8 +57,8 @@
     
     if (self) {
         self.name = [dict objectForKey:JSON_ITEM_NAME];
-        self.description = [dict objectForKey:JSON_ITEM_DESCRIPTION];
         self.itemId = [dict objectForKey:JSON_ITEM_ITEMID];
+        self.description = [dict objectForKey:JSON_ITEM_DESCRIPTION] ?: @"";
     }
     
     return self;
@@ -80,6 +80,13 @@
 }
 
 - (void)takeAmount:(int)amount {
+    @throw [NSException exceptionWithName:NSInternalInconsistencyException
+                                   reason:[NSString stringWithFormat:@"You must override %@ in a subclass",
+                                           NSStringFromSelector(_cmd)]
+                                 userInfo:nil];
+}
+
+- (void)resetBalance:(int)balance {
     @throw [NSException exceptionWithName:NSInternalInconsistencyException
                                    reason:[NSString stringWithFormat:@"You must override %@ in a subclass",
                                            NSStringFromSelector(_cmd)]

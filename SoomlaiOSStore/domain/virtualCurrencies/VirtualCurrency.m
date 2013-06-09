@@ -53,4 +53,8 @@
     [[StorageManager getInstance].virtualCurrencyStorage removeAmount:amount fromItem:self];
 }
 
+- (void)resetBalance:(int)balance {
+    [[StorageManager getInstance].virtualCurrencyStorage setBalance:balance toItem:self];
+}
+
 @end

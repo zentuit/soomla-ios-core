@@ -15,6 +15,8 @@
  */
 
 #import "VirtualGood.h"
+#import "StorageManager.h"
+#import "VirtualGoodStorage.h"
 
 @implementation VirtualGood
 
@@ -36,6 +38,10 @@
 
 - (NSDictionary*)toDictionary{
     return [super toDictionary];
+}
+
+- (void)resetBalance:(int)balance {
+    [[StorageManager getInstance].virtualGoodStorage setBalance:balance toItem:self];
 }
 
 @end
