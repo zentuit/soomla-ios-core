@@ -17,7 +17,6 @@
 #import "StorefrontInfo.h"
 #import "StorageManager.h"
 #import "KeyValDatabase.h"
-#import "JSONKit.h"
 #import "StoreEncryptor.h"
 #import "StoreUtils.h"
 
@@ -51,7 +50,11 @@ static NSString* TAG = @"SOOMLA StorefrontInfo";
         
         [[[StorageManager getInstance] kvDatabase] setVal:[StoreEncryptor encryptString:sfJSON] forKey:[StoreEncryptor encryptString:[KeyValDatabase keyMetaStorefrontInfo]]];
         
-        NSDictionary* sfDict = [self.storefrontJson objectFromJSONString];
+        NSDictionary *sfDict = [StoreUtils jsonStringToDict:self.storefrontJson];
+        if (!sfDict) {
+            LogError(TAG, @"There was a problem parsing the given storefront JSON.");
+            return;
+        }
         self.orientationLandscape = [((NSString*)[[sfDict objectForKey:@"template"] objectForKey:@"orientation"]) isEqualToString:@"landscape"];
     }
 }
@@ -77,7 +80,11 @@ static NSString* TAG = @"SOOMLA StorefrontInfo";
     
     self.storefrontJson = sfJSON;
     
-    NSDictionary* sfDict = [sfJSON objectFromJSONString];
+    NSDictionary *sfDict = [StoreUtils jsonStringToDict:sfJSON];
+    if (!sfDict) {
+        LogError(TAG, @"There was a problem parsing the given sfJSON.");
+        return NO;
+    }
     
     self.orientationLandscape = [((NSString*)[[sfDict objectForKey:@"template"] objectForKey:@"orientation"]) isEqualToString:@"landscape"];
     
@@ -87,7 +94,7 @@ static NSString* TAG = @"SOOMLA StorefrontInfo";
 }
 
 - (NSDictionary*)toDictionary{
-    return [self.storefrontJson objectFromJSONString];
+    return [StoreUtils jsonStringToDict:self.storefrontJson];
 }
 
 

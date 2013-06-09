@@ -23,6 +23,9 @@
 
 + (void)LogDebug:(NSString*)tag withMessage:(NSString*)msg;
 + (void)LogError:(NSString*)tag withMessage:(NSString*)msg;
++ (NSString*)deviceId;
++ (NSDictionary*)jsonStringToDict:(NSString*)str;
++ (NSString*)dictToJsonString:(NSDictionary*)str;
 
 @end
 

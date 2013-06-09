@@ -21,7 +21,6 @@
 #import "NonConsumableStorage.h"
 #import "ObscuredNSUserDefaults.h"
 #import "StoreConfig.h"
-#import "StoreDatabase.h"
 #import "StoreEncryptor.h"
 #import "KeyValueStorage.h"
 #import "StoreUtils.h"
@@ -30,9 +29,9 @@
 #import "VirtualGood.h"
 #import "VirtualCurrency.h"
 
-@interface StorageManager (Private)
-- (void)migrateOldData;
-@end
+//@interface StorageManager (Private)
+//- (void)migrateOldData;
+//@end
 
 @implementation StorageManager
 
@@ -52,66 +51,6 @@ static NSString* TAG = @"SOOMLA StorageManager";
     return _instance;
 }
 
-- (void)migrateOldData {
-    if ([StoreDatabase checkDatabaseExists]) {
-        LogDebug(TAG, @"Old store database doesn't exist. Nothing to migrate.");
-        return;
-    }
-    
-    LogDebug(TAG, @"Old store database exists. Migrating now!");
-    
-    StoreDatabase* storeDatabase = [[StoreDatabase alloc] init];
-    
-    NSArray* currencies = [storeDatabase getCurrencies];
-    for (NSDictionary* dict in currencies) {
-        NSString* itemId = [dict valueForKey:DICT_KEY_ITEM_ID];
-        itemId = [StoreEncryptor decryptToString:itemId];
-        NSString* balanceStr = [dict valueForKey:DICT_KEY_BALANCE];
-        
-        NSString* key = [StoreEncryptor encryptString:[KeyValDatabase keyCurrencyBalance:itemId]];
-        
-        [kvDatabase setVal:balanceStr forKey:key];
-    }
-    
-    NSArray* goods = [storeDatabase getGoods];
-    for (NSDictionary* dict in goods) {
-        NSString* itemId = [dict valueForKey:DICT_KEY_ITEM_ID];
-        itemId = [StoreEncryptor decryptToString:itemId];
-        NSString* balanceStr = [dict valueForKey:DICT_KEY_BALANCE];
-        NSString* equippedStr = [dict valueForKey:DICT_KEY_EQUIP];
-        
-        NSString* key = [StoreEncryptor encryptString:[KeyValDatabase keyGoodBalance:itemId]];
-        [kvDatabase setVal:balanceStr forKey:key];
-        
-        if (equippedStr) {
-            key = [StoreEncryptor encryptString:[KeyValDatabase keyGoodEquipped:itemId]];
-            [kvDatabase setVal:equippedStr forKey:key];
-        }
-    }
-    
-    NSArray* noncons = [storeDatabase getNonConsumables];
-    for (NSDictionary* dict in noncons) {
-        NSString* productId = [dict valueForKey:DICT_KEY_PRODUCT_ID];
-        productId = [StoreEncryptor decryptToString:productId];
-        
-        NSString* key = [StoreEncryptor encryptString:[KeyValDatabase keyNonConsExists:productId]];
-        
-        [kvDatabase setVal:@"" forKey:key];
-    }
-    
-    NSString* storeInfo = [storeDatabase getStoreInfo];
-    NSString* key = [StoreEncryptor encryptString:[KeyValDatabase keyMetaStoreInfo]];
-    [kvDatabase setVal:storeInfo forKey:key];
-    
-    NSString* storefrontInfo = [storeDatabase getStoreInfo];
-    key = [StoreEncryptor encryptString:[KeyValDatabase keyMetaStorefrontInfo]];
-    [kvDatabase setVal:storefrontInfo forKey:key];
-    
-    [StoreDatabase purgeDatabase];
-    
-    LogDebug(TAG, @"Finished Migrating old database!");
-}
-
 - (id)init{
     self = [super init];
     if (self){
@@ -121,11 +60,9 @@ static NSString* TAG = @"SOOMLA StorageManager";
         self.nonConsumableStorage = [[NonConsumableStorage alloc] init];
         self.keyValueStorage = [[KeyValueStorage alloc] init];
         
-        [self migrateOldData];
-        
-        int mt_ver = [ObscuredNSUserDefaults intForKey:@"MT_VER"];
-        int sa_ver_old = [ObscuredNSUserDefaults intForKey:@"SA_VER_OLD"];
-        int sa_ver_new = [ObscuredNSUserDefaults intForKey:@"SA_VER_NEW"];
+        int mt_ver = [ObscuredNSUserDefaults intForKey:@"MT_VER" withDefaultValue:0];
+        int sa_ver_old = [ObscuredNSUserDefaults intForKey:@"SA_VER_OLD" withDefaultValue:-1];
+        int sa_ver_new = [ObscuredNSUserDefaults intForKey:@"SA_VER_NEW" withDefaultValue:1];
         if (mt_ver < METADATA_VERSION || sa_ver_old < sa_ver_new) {
             [ObscuredNSUserDefaults setInt:METADATA_VERSION forKey:@"MT_VER"];
             [ObscuredNSUserDefaults setInt:sa_ver_new forKey:@"SA_VER_OLD"];
@@ -169,9 +106,9 @@ static NSString* TAG = @"SOOMLA StorageManager";
         NSFileManager *fManager = [NSFileManager defaultManager];
         if (![fManager fileExistsAtPath:basePath]) {
             if (![fManager createDirectoryAtPath:basePath
-                                           withIntermediateDirectories:YES
-                                                            attributes:nil
-                                                                 error:&error])
+                     withIntermediateDirectories:YES
+                                      attributes:nil
+                                           error:&error])
             {
                 LogError(TAG, ([NSString stringWithFormat:@"Create directory error: %@", error]));
                 return nil;

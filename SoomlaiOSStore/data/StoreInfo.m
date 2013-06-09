@@ -17,7 +17,6 @@
 #import "StoreInfo.h"
 #import "StorageManager.h"
 #import "KeyValDatabase.h"
-#import "JSONKit.h"
 #import "JSONConsts.h"
 #import "VirtualCategory.h"
 #import "VirtualGood.h"
@@ -111,7 +110,7 @@ static NSString* TAG = @"SOOMLA StoreInfo";
     
     for(NonConsumableItem* vi in self.nonConsumableItems) {
         [tmpVirtualItems setObject:vi forKey:vi.itemId];
-
+        
         [self checkAndAddPurchasable:vi toTempPurchasables:tmpPurchasableItems];
     }
     
@@ -127,7 +126,7 @@ static NSString* TAG = @"SOOMLA StoreInfo";
     self.goodsUpgrades = tmpGoodsUpgrades;
     
     // put StoreInfo in the database as JSON
-    NSString* storeInfoJSON = [[self toDictionary] JSONString];
+    NSString* storeInfoJSON = [StoreUtils dictToJsonString:[self toDictionary]];
     NSString* ec = [[NSString alloc] initWithData:[storeInfoJSON dataUsingEncoding:NSUTF8StringEncoding] encoding:NSUTF8StringEncoding];
     NSString* enc = [StoreEncryptor encryptString:ec];
     NSString* key = [StoreEncryptor encryptString:[KeyValDatabase keyMetaStoreInfo]];
@@ -163,10 +162,10 @@ static NSString* TAG = @"SOOMLA StoreInfo";
     }
     
     LogDebug(TAG, ([NSString stringWithFormat:@"the metadata-economy json (from DB) is %@", storeInfoJSON]));
-   
+    
     @try {
-
-        NSDictionary* storeInfo = [storeInfoJSON objectFromJSONString];
+        
+        NSDictionary* storeInfo = [StoreUtils jsonStringToDict:storeInfoJSON];
         
         NSMutableDictionary* tmpVirtualItems = [NSMutableDictionary dictionary];
         NSMutableDictionary* tmpPurchasableItems = [NSMutableDictionary dictionary];
@@ -309,7 +308,7 @@ static NSString* TAG = @"SOOMLA StoreInfo";
                            eqGoods, JSON_STORE_GOODS_EQ,
                            upGoods, JSON_STORE_GOODS_UP,
                            paGoods, JSON_STORE_GOODS_PA, nil];
-
+    
     NSMutableArray* categories = [NSMutableArray array];
     for(VirtualCategory* c in self.virtualCategories){
         [categories addObject:[c toDictionary]];
@@ -351,7 +350,7 @@ static NSString* TAG = @"SOOMLA StoreInfo";
 
 - (VirtualCategory*)categoryForGoodWithItemId:(NSString*)goodItemId {
     VirtualCategory* cat = [self.goodsCategories objectForKey:goodItemId];
-
+    
     if (!cat) {
         @throw [[VirtualItemNotFoundException alloc] initWithLookupField:@"goodItemId" andLookupValue:goodItemId];
     }
