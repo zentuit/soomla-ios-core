@@ -68,6 +68,11 @@
 - (int)setBalance:(int)balance toItem:(VirtualItem*)item {
     LogDebug(tag, ([NSString stringWithFormat:@"setting balance %d to %@", balance, item.name]));
     
+    int oldBalance = [self balanceForItem:item];
+    if (oldBalance == balance) {
+        return balance;
+    }
+    
     NSString* key = [StoreEncryptor encryptString:[self keyBalance:item.itemId]];
     [[[StorageManager getInstance] kvDatabase] setVal:[StoreEncryptor encryptNumber:[NSNumber numberWithInt:balance]] forKey:key];
     

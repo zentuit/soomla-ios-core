@@ -46,6 +46,10 @@
 }
 
 - (void)assignCurrentUpgrade:(UpgradeVG*)upgradeVG toGood:(VirtualGood*)good {
+    if ([[self currentUpgradeOf:good].itemId isEqualToString:upgradeVG.itemId]) {
+        return;
+    }
+    
     LogDebug(tag, ([NSString stringWithFormat:@"Assigning upgrade %@ to virtual good: %@", upgradeVG.name, good.name]));
     
     NSString* key = [StoreEncryptor encryptString:[KeyValDatabase keyGoodUpgrade:good.itemId]];
@@ -95,10 +99,18 @@
 }
 
 - (void)equipGood:(EquippableVG*)good {
+    if ([self isGoodEquipped:good]) {
+        return;
+    }
+    
     [self privEquipGood:good withEquipValue:YES];
 }
 
 - (void)unequipGood:(EquippableVG*)good {
+    if (![self isGoodEquipped:good]) {
+        return;
+    }
+    
     [self privEquipGood:good withEquipValue:NO];
 }
 
