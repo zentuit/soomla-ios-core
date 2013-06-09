@@ -22,7 +22,8 @@
 @implementation KeyValueStorage
 
 - (NSString*)getValueForKey:(NSString*)key {
-    NSString* val = [[[StorageManager getInstance] kvDatabase] getValForKey:[StoreEncryptor encryptString:key]];
+    key = [StoreEncryptor encryptString:key];
+    NSString* val = [[[StorageManager getInstance] kvDatabase] getValForKey:key];
     if (val && [val length]>0){
         return [StoreEncryptor decryptToString:val];
     }
@@ -31,11 +32,43 @@
 }
 
 - (void)setValue:(NSString*)val forKey:(NSString*)key {
-    [[[StorageManager getInstance] kvDatabase] setVal:[StoreEncryptor encryptString:val] forKey:[StoreEncryptor encryptString:key]];
+    key = [StoreEncryptor encryptString:key];
+    [[[StorageManager getInstance] kvDatabase] setVal:[StoreEncryptor encryptString:val] forKey:key];
 }
 
 - (void)deleteValueForKey:(NSString*)key {
-    [[[StorageManager getInstance] kvDatabase] deleteKeyValWithKey:[StoreEncryptor encryptString:key]];
+    key = [StoreEncryptor encryptString:key];
+    [[[StorageManager getInstance] kvDatabase] deleteKeyValWithKey:key];
+}
+
+- (NSArray*)getValuesForNonEncryptedQuery:(NSString*)query {
+    NSArray* vals = [[[StorageManager getInstance] kvDatabase] getValsForQuery:query];
+    NSMutableArray* results = [NSMutableArray array];
+    for (NSString* val in vals) {
+        if (val && [val length]>0){
+            [results addObject:[StoreEncryptor decryptToString:val]];
+        }
+    }
+    
+    return results;
+}
+
+
+- (NSString*)getValueForNonEncryptedKey:(NSString*)key {
+    NSString* val = [[[StorageManager getInstance] kvDatabase] getValForKey:key];
+    if (val && [val length]>0){
+        return [StoreEncryptor decryptToString:val];
+    }
+    
+    return NULL;
+}
+
+- (void)setValue:(NSString*)val forNonEncryptedKey:(NSString*)key {
+    [[[StorageManager getInstance] kvDatabase] setVal:[StoreEncryptor encryptString:val] forKey:key];
+}
+
+- (void)deleteValueForNonEncryptedKey:(NSString*)key {
+    [[[StorageManager getInstance] kvDatabase] deleteKeyValWithKey:key];
 }
 
 @end
