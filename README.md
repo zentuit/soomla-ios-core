@@ -10,6 +10,8 @@ ios-store
 ---
 **The new Virtual Economy model V3 is merged into master. The new model has many new features and it works better than the old one. Old applications may break if they use in this new model so already published games with ios-store from before May 1st, 2013 needs to clone the project with tag 'v2.2' and not 'v3.0'.**
 
+**On Jun 10, 2013 we've pushed v3.1 of ios-store. The changes in this version include removing of JSONKit (and using iOS's JSON parsing functions) and using Apple's allowed function of retreiving a UUID for the game. Everything is encrypted with this UUID so games that uses earlier versions of ios-store (with the previous method of UUID) will lose all their data. Be careful when you take v3.1**
+
 Want to learn more about modelV3? Try these:  
 * [Economy Model Objects](https://github.com/soomla/ios-store/wiki/Economy-Model-Objects)  
 * [Handling Store Operations](https://github.com/soomla/ios-store/wiki/Handling-Store-Operations)
@@ -32,13 +34,11 @@ Getting Started (using source code)
 
  `git clone git@github.com:soomla/ios-store.git`
 
-2. We use JSONKit but it doesn't use ARC. Go to your project's "Build Phases" and expand "Compile Sources". Add the flag "-fno-objc-arc" to the file JSONKit.m.
+2. Make sure you have the following frameworks in your application's project: **Security, libsqlite3.0.dylib, StoreKit**.
 
-3. Make sure you have the following frameworks in your application's project: **Security, libsqlite3.0.dylib, StoreKit**.
+3. Change the value of SOOM_SEC in StoreConfig.m to a secret of you choice. Do this now! **You can't change this value after you publish your game!**
 
-4. Change the value of SOOM_SEC in StoreConfig.m to a secret of you choice. Do this now! **You can't change this value after you publish your game!**
-
-5. Create your own implementation of _IStoreAssets_ in order to describe your specific game's assets. Initialize _StoreController_ with the class you just created:
+4. Create your own implementation of _IStoreAssets_ in order to describe your specific game's assets. Initialize _StoreController_ with the class you just created:
 
       ```objective-c
        [[StoreController getInstance] initializeWithStoreAssets:[[YourStoreAssetsImplementation alloc] init] andCustomSecret:@"[YOUR CUSTOM SECRET HERE]"];
@@ -48,7 +48,7 @@ Getting Started (using source code)
 
     > Initialize `StoreController` ONLY ONCE when your application loads.
 
-6. Now, that you have `StoreController` loaded, just decide when you want to show/hide your store's UI to the user and let `StoreController` know about it:
+5. Now, that you have `StoreController` loaded, just decide when you want to show/hide your store's UI to the user and let `StoreController` know about it:
 
 When you show the store call:
 
@@ -152,8 +152,6 @@ Our way of saying "Thanks !"
 Other open-source projects that we use:
 
 * [FBEncryptor](https://github.com/dev5tec/FBEncryptor)
-* [JSONKit](https://github.com/johnezang/JSONKit)
-* [UIDevice-with-UniqueIdentifier-for-iOS-5](https://github.com/gekitz/UIDevice-with-UniqueIdentifier-for-iOS-5)
 
 Contribution
 ---
