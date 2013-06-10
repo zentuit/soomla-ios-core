@@ -10,7 +10,7 @@ ios-store
 ---
 **The new Virtual Economy model V3 is merged into master. The new model has many new features and it works better than the old one. Old applications may break if they use in this new model so already published games with ios-store from before May 1st, 2013 needs to clone the project with tag 'v2.2' and not 'v3.0'.**
 
-**On Jun 10, 2013 we've pushed v3.1 of ios-store. The changes in this version include removing of JSONKit (and using iOS's JSON parsing functions) and using Apple's allowed function of retreiving a UUID for the game. Everything is encrypted with this UUID so games that uses earlier versions of ios-store (with the previous method of UUID) will lose all their data. Be careful when you take v3.1**
+**On Jun 10, 2013 we've pushed v3.1 of ios-store. The changes in this version include removing of JSONKit (and using iOS's JSON parsing functions) and using Apple's allowed function of retreiving a UUID for the game. Everything is encrypted with this UUID so games that uses earlier versions of ios-store (with the previous method of UUID) will lose all their data. Be careful when you take v3.1.**
 
 Want to learn more about modelV3? Try these:  
 * [Economy Model Objects](https://github.com/soomla/ios-store/wiki/Economy-Model-Objects)  
