@@ -37,18 +37,21 @@
  * amount is the amount of items to add.
  */
 - (int)addAmount:(int)amount toItem:(VirtualItem*)item;
+- (int)addAmount:(int)amount toItem:(VirtualItem*)item withEvent:(BOOL)notify;
 /**
  * Removes the given amount from the given virtual item's balance.
  * item is the virtual item to remove the given amount from.
  * amount is the amount to remove.
  */
 - (int)removeAmount:(int)amount fromItem:(VirtualItem*)item;
+- (int)removeAmount:(int)amount fromItem:(VirtualItem*)item withEvent:(BOOL)notify;
 
 /**
  * Set the balance of the given virtual item.
  * item is the required virtual item.
  */
 - (int)setBalance:(int)balance toItem:(VirtualItem*)item;
+- (int)setBalance:(int)balance toItem:(VirtualItem*)item withEvent:(BOOL)notify;
 
 - (NSString*)keyBalance:(NSString*)itemId;
 - (void)postBalanceChangeToItem:(VirtualItem*)item withBalance:(int)balance andAmountAdded:(int)amountAdded;

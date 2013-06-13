@@ -41,31 +41,45 @@
 }
 
 - (int)addAmount:(int)amount toItem:(VirtualItem*)item{
+    return [self addAmount:amount toItem:item withEvent:YES];
+}
+- (int)addAmount:(int)amount toItem:(VirtualItem*)item withEvent:(BOOL)notify {
     LogDebug(tag, ([NSString stringWithFormat:@"adding %d %@", amount, item.name]));
     
     NSString* key = [StoreEncryptor encryptString:[self keyBalance:item.itemId]];
     int balance = [self balanceForItem:item] + amount;
     [[[StorageManager getInstance] kvDatabase] setVal:[StoreEncryptor encryptNumber:[NSNumber numberWithInt:balance]] forKey:key];
 
-    [self postBalanceChangeToItem:item withBalance:balance andAmountAdded:amount];
+    if (notify) {
+        [self postBalanceChangeToItem:item withBalance:balance andAmountAdded:amount];
+    }
     
     return balance;
 }
 
 - (int)removeAmount:(int)amount fromItem:(VirtualItem*)item{
+    return [self removeAmount:amount fromItem:item withEvent:YES];
+}
+
+- (int)removeAmount:(int)amount fromItem:(VirtualItem*)item withEvent:(BOOL)notify {
     LogDebug(tag, ([NSString stringWithFormat:@"removing %d %@", amount, item.name]));
     
     NSString* key = [StoreEncryptor encryptString:[self keyBalance:item.itemId]];
     int balance = [self balanceForItem:item] - amount;
     balance = balance > 0 ? balance : 0;
     [[[StorageManager getInstance] kvDatabase] setVal:[StoreEncryptor encryptNumber:[NSNumber numberWithInt:balance]] forKey:key];
-
-    [self postBalanceChangeToItem:item withBalance:balance andAmountAdded:(-1*amount)];
+    
+    if (notify) {
+        [self postBalanceChangeToItem:item withBalance:balance andAmountAdded:(-1*amount)];
+    }
     
     return balance;
 }
 
 - (int)setBalance:(int)balance toItem:(VirtualItem*)item {
+    return [self setBalance:balance toItem:item withEvent:YES];
+}
+- (int)setBalance:(int)balance toItem:(VirtualItem*)item withEvent:(BOOL)notify {
     LogDebug(tag, ([NSString stringWithFormat:@"setting balance %d to %@", balance, item.name]));
     
     int oldBalance = [self balanceForItem:item];
@@ -76,7 +90,9 @@
     NSString* key = [StoreEncryptor encryptString:[self keyBalance:item.itemId]];
     [[[StorageManager getInstance] kvDatabase] setVal:[StoreEncryptor encryptNumber:[NSNumber numberWithInt:balance]] forKey:key];
     
-    [self postBalanceChangeToItem:item withBalance:balance andAmountAdded:0];
+    if (notify) {
+        [self postBalanceChangeToItem:item withBalance:balance andAmountAdded:0];
+    }
     
     return balance;
 }

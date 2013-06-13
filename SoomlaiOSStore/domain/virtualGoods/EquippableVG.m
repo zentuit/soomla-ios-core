@@ -70,7 +70,11 @@ static NSString* TAG = @"SOOMLA equippingModel";
     return toReturn;
 }
 
-- (void)equip {    
+- (void)equip {
+    [self equipWithEvent:YES];
+}
+
+- (void)equipWithEvent:(BOOL)notify {
     // only if the user has bought this EquippableVG, the EquippableVG is equipped.
     if ([[[StorageManager getInstance] virtualGoodStorage] balanceForItem:self] > 0) {
         
@@ -101,13 +105,13 @@ static NSString* TAG = @"SOOMLA equippingModel";
             for(VirtualGood* good in goods) {
                 if ((![good.itemId isEqualToString:self.itemId]) &&
                     [good isKindOfClass:[EquippableVG class]]) {
-                    [((EquippableVG*)good) unequip];
+                    [((EquippableVG*)good) unequipWithEvent:notify];
                 }
             }
         }
         
         // equipping the current good
-        [[[StorageManager getInstance] virtualGoodStorage] equipGood:self];
+        [[[StorageManager getInstance] virtualGoodStorage] equipGood:self withEvent:notify];
         
     } else {
         @throw [[NotEnoughGoodsException alloc] initWithItemId:self.itemId];
@@ -115,7 +119,11 @@ static NSString* TAG = @"SOOMLA equippingModel";
 }
 
 - (void)unequip {
-    [[[StorageManager getInstance] virtualGoodStorage] unequipGood:self];
+    [self unequipWithEvent:YES];
+}
+
+- (void)unequipWithEvent:(BOOL)notify {
+    [[[StorageManager getInstance] virtualGoodStorage] unequipGood:self withEvent:notify];
 }
 
 +(NSString*) equippingModelEnumToString:(EquippingModel)emVal

@@ -36,6 +36,9 @@
 }
 
 - (void)removeUpgradesFrom:(VirtualGood*)good {
+    [self removeUpgradesFrom:good withEvent:YES];
+}
+- (void)removeUpgradesFrom:(VirtualGood*)good withEvent:(BOOL)notify {
     LogDebug(tag, ([NSString stringWithFormat:@"Removing upgrade information from virtual good: %@", good.name]));
     
     NSString* key = [StoreEncryptor encryptString:[KeyValDatabase keyGoodUpgrade:good.itemId]];
@@ -46,6 +49,9 @@
 }
 
 - (void)assignCurrentUpgrade:(UpgradeVG*)upgradeVG toGood:(VirtualGood*)good {
+    [self assignCurrentUpgrade:upgradeVG toGood:good withEvent:YES];
+}
+- (void)assignCurrentUpgrade:(UpgradeVG*)upgradeVG toGood:(VirtualGood*)good withEvent:(BOOL)notify {
     if ([[self currentUpgradeOf:good].itemId isEqualToString:upgradeVG.itemId]) {
         return;
     }
@@ -99,32 +105,42 @@
 }
 
 - (void)equipGood:(EquippableVG*)good {
+    [self equipGood:good withEvent:YES];
+}
+- (void)equipGood:(EquippableVG*)good withEvent:(BOOL)notify {
     if ([self isGoodEquipped:good]) {
         return;
     }
     
-    [self privEquipGood:good withEquipValue:YES];
+    [self privEquipGood:good withEquipValue:YES withEvent:notify];
 }
 
 - (void)unequipGood:(EquippableVG*)good {
+    [self unequipGood:good withEvent:YES];
+}
+- (void)unequipGood:(EquippableVG*)good withEvent:(BOOL)notify {
     if (![self isGoodEquipped:good]) {
         return;
     }
     
-    [self privEquipGood:good withEquipValue:NO];
+    [self privEquipGood:good withEquipValue:NO withEvent:notify];
 }
 
-- (void)privEquipGood:(EquippableVG*)good withEquipValue:(BOOL)equip{
+- (void)privEquipGood:(EquippableVG*)good withEquipValue:(BOOL)equip withEvent:(BOOL)notify{
     LogDebug(tag, ([NSString stringWithFormat:@"%@ %@.", (equip ? @"equipping" : @"unequipping"), good.name]));
     
     NSString* key = [StoreEncryptor encryptString:[KeyValDatabase keyGoodEquipped:good.itemId]];
     
     if (equip) {
         [[[StorageManager getInstance] kvDatabase] setVal:@"equipped" forKey:key];
-        [EventHandling postGoodEquipped:good];
+        if (notify) {
+            [EventHandling postGoodEquipped:good];
+        }
     } else {
         [[[StorageManager getInstance] kvDatabase] deleteKeyValWithKey:key];
-        [EventHandling postGoodUnEquipped:good];
+        if (notify) {
+            [EventHandling postGoodUnEquipped:good];
+        }
     }
 }
 

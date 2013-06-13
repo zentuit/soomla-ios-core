@@ -33,6 +33,7 @@
  * good is the VirtualGood to remove upgrade from.
  */
 - (void)removeUpgradesFrom:(VirtualGood*)good;
+- (void)removeUpgradesFrom:(VirtualGood*)good withEvent:(BOOL)notify;
 
 /**
  * Assigns a specific upgrade to the given VirtualGood.
@@ -40,6 +41,7 @@
  * upgradeVG is the upgrade to assign.
  */
 - (void)assignCurrentUpgrade:(UpgradeVG*)upgradeVG toGood:(VirtualGood*)good;
+- (void)assignCurrentUpgrade:(UpgradeVG*)upgradeVG toGood:(VirtualGood*)good withEvent:(BOOL)notify;
 
 /**
  * Retrieves the current upgrade for the given VirtualGood.
@@ -58,11 +60,13 @@
  * good is the EquippableVG to equip.
  */
 - (void)equipGood:(EquippableVG*)good;
+- (void)equipGood:(EquippableVG*)good withEvent:(BOOL)notify;
 
 /**
  * UnEquip the given EquippableVG.
  * good is the EquippableVG to unequip.
  */
 - (void)unequipGood:(EquippableVG*)good;
+- (void)unequipGood:(EquippableVG*)good withEvent:(BOOL)notify;
 
 @end

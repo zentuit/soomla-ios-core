@@ -23,7 +23,7 @@
 
 static NSString* TAG = @"SOOMLA LifetimeVG";
 
-- (void)giveAmount:(int)amount {
+- (void)giveAmount:(int)amount withEvent:(BOOL)notify {
     if (amount > 1) {
         LogDebug(TAG, @"You tried to give more than one LifetimeVG. Will try to give one anyway.");
         amount = 1;
@@ -31,18 +31,18 @@ static NSString* TAG = @"SOOMLA LifetimeVG";
     
     int balance = [[[StorageManager getInstance] virtualGoodStorage] balanceForItem:self];
     if (balance < 1) {
-        [[[StorageManager getInstance] virtualGoodStorage] addAmount:amount toItem:self];
+        [[[StorageManager getInstance] virtualGoodStorage] addAmount:amount toItem:self withEvent:notify];
     }
 }
 
-- (void)takeAmount:(int)amount {
+- (void)takeAmount:(int)amount withEvent:(BOOL)notify {
     if (amount > 1) {
         amount = 1;
     }
     
     int balance = [[[StorageManager getInstance] virtualGoodStorage] balanceForItem:self];
     if (balance > 0) {
-        [[[StorageManager getInstance] virtualGoodStorage] removeAmount:amount fromItem:self];
+        [[[StorageManager getInstance] virtualGoodStorage] removeAmount:amount fromItem:self withEvent:notify];
     }
 }
 

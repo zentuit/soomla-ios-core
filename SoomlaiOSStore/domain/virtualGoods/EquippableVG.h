@@ -73,11 +73,13 @@ typedef enum {
  * throws NotEnoughGoodsException
  */
 - (void)equip;
+- (void)equipWithEvent:(BOOL)notify;
 
 /**
  * This function unequips the current EquippableVG
  */
 - (void)unequip;
+- (void)unequipWithEvent:(BOOL)notify;
 
 +(NSString*) equippingModelEnumToString:(EquippingModel)emVal;
 +(EquippingModel) equippingModelStringToEnum:(NSString*)emStr;

@@ -40,8 +40,8 @@
     return [super toDictionary];
 }
 
-- (void)resetBalance:(int)balance {
-    [[StorageManager getInstance].virtualGoodStorage setBalance:balance toItem:self];
+- (void)resetBalance:(int)balance withEvent:(BOOL)notify {
+    [[StorageManager getInstance].virtualGoodStorage setBalance:balance toItem:self withEvent:notify];
 }
 
 @end

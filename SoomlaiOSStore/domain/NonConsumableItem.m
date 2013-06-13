@@ -44,15 +44,15 @@ static NSString* TAG = @"SOOMLA NonConsumableItem";
     return [super toDictionary];
 }
 
-- (void)giveAmount:(int)amount {
+- (void)giveAmount:(int)amount withEvent:(BOOL)notify {
     [[[StorageManager getInstance] nonConsumableStorage] add:self];
 }
 
-- (void)takeAmount:(int)amount {
+- (void)takeAmount:(int)amount withEvent:(BOOL)notify {
     [[[StorageManager getInstance] nonConsumableStorage] remove:self];
 }
 
-- (void)resetBalance:(int)balance {
+- (void)resetBalance:(int)balance withEvent:(BOOL)notify {
     if (balance > 0) {
         [[[StorageManager getInstance] nonConsumableStorage] add:self];
     } else {

@@ -56,7 +56,7 @@ static NSString* TAG = @"SOOMLA SingleUsePackVG";
     return toReturn;
 }
 
-- (void)giveAmount:(int)oAmount {
+- (void)giveAmount:(int)oAmount withEvent:(BOOL)notify {
     SingleUseVG* good = NULL;
     @try {
         good = (SingleUseVG*)[[StoreInfo getInstance] virtualItemWithId:self.goodItemId];
@@ -64,10 +64,10 @@ static NSString* TAG = @"SOOMLA SingleUsePackVG";
         LogError(TAG, ([NSString stringWithFormat:@"SingleUseVG with itemId: %@ doesn't exist! Can't give this pack.", self.goodItemId]));
         return;
     }
-    [[[StorageManager getInstance] virtualGoodStorage] addAmount:self.amount*oAmount toItem:good];
+    [[[StorageManager getInstance] virtualGoodStorage] addAmount:self.amount*oAmount toItem:good withEvent:notify];
 }
 
-- (void)takeAmount:(int)oAmount {
+- (void)takeAmount:(int)oAmount withEvent:(BOOL)notify {
     SingleUseVG* good = NULL;
     @try {
         good = (SingleUseVG*)[[StoreInfo getInstance] virtualItemWithId:self.goodItemId];
@@ -75,7 +75,7 @@ static NSString* TAG = @"SOOMLA SingleUsePackVG";
         LogError(TAG, ([NSString stringWithFormat:@"SingleUseVG with itemId: %@ doesn't exist! Can't take this pack.", self.goodItemId]));
         return;
     }
-    [[[StorageManager getInstance] virtualGoodStorage] removeAmount:self.amount*oAmount fromItem:good];
+    [[[StorageManager getInstance] virtualGoodStorage] removeAmount:self.amount*oAmount fromItem:good withEvent:notify];
 }
 
 - (BOOL)canBuy {

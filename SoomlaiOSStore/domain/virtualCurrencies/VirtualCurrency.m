@@ -45,16 +45,16 @@
     return [super toDictionary];
 }
 
-- (void)giveAmount:(int)amount {
-    [[StorageManager getInstance].virtualCurrencyStorage addAmount:amount toItem:self];
+- (void)giveAmount:(int)amount withEvent:(BOOL)notify {
+    [[StorageManager getInstance].virtualCurrencyStorage addAmount:amount toItem:self withEvent:notify];
 }
 
-- (void)takeAmount:(int)amount {
-    [[StorageManager getInstance].virtualCurrencyStorage removeAmount:amount fromItem:self];
+- (void)takeAmount:(int)amount withEvent:(BOOL)notify {
+    [[StorageManager getInstance].virtualCurrencyStorage removeAmount:amount fromItem:self withEvent:notify];
 }
 
-- (void)resetBalance:(int)balance {
-    [[StorageManager getInstance].virtualCurrencyStorage setBalance:balance toItem:self];
+- (void)resetBalance:(int)balance withEvent:(BOOL)notify {
+    [[StorageManager getInstance].virtualCurrencyStorage setBalance:balance toItem:self withEvent:notify];
 }
 
 @end

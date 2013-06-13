@@ -19,12 +19,12 @@
 
 @implementation SingleUseVG
 
-- (void)giveAmount:(int)amount {
-    [[[StorageManager getInstance] virtualGoodStorage] addAmount:amount toItem:self];
+- (void)giveAmount:(int)amount withEvent:(BOOL)notify {
+    [[[StorageManager getInstance] virtualGoodStorage] addAmount:amount toItem:self withEvent:notify];
 }
 
-- (void)takeAmount:(int)amount {
-    [[[StorageManager getInstance] virtualGoodStorage] removeAmount:amount fromItem:self];
+- (void)takeAmount:(int)amount withEvent:(BOOL)notify {
+    [[[StorageManager getInstance] virtualGoodStorage] removeAmount:amount fromItem:self withEvent:notify];
 }
 
 - (BOOL)canBuy {
