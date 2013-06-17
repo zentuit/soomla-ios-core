@@ -29,7 +29,7 @@ extern const int METADATA_VERSION;
 extern BOOL STORE_DEBUG_LOG;
 
 /* CHANGE THIS SECRET NOW ! */
-#define SOOM_SEC @"SINC_SSIEEKK"
+extern NSString* SOOM_SEC;
 
 
 

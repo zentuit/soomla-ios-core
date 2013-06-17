@@ -24,3 +24,4 @@ BOOL STORE_DEBUG_LOG                = YES;
 BOOL STORE_DEBUG_LOG                = NO;
 #endif
 
+NSString* SOOM_SEC  = @"SINC_SSIEEKK";
