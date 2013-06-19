@@ -74,7 +74,7 @@
     NSString* upItemId = [[[StorageManager getInstance] kvDatabase] getValForKey:key];
     
     if(!upItemId) {
-        LogError(tag, ([NSString stringWithFormat:@"You tried to fetch the current upgrade of %@ but there's no upgrade in the DB for it.", good.name]));
+        LogDebug(tag, ([NSString stringWithFormat:@"You tried to fetch the current upgrade of %@ but there's no upgrade in the DB for it.", good.name]));
         return nil;
     }
     

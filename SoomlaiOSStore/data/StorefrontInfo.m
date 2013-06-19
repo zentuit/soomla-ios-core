@@ -17,8 +17,8 @@
 #import "StorefrontInfo.h"
 #import "StorageManager.h"
 #import "KeyValDatabase.h"
-#import "StoreEncryptor.h"
 #import "StoreUtils.h"
+#import "KeyValueStorage.h"
 
 @implementation StorefrontInfo
 
@@ -48,7 +48,7 @@ static NSString* TAG = @"SOOMLA StorefrontInfo";
         }
         self.storefrontJson = sfJSON;
         
-        [[[StorageManager getInstance] kvDatabase] setVal:[StoreEncryptor encryptString:sfJSON] forKey:[StoreEncryptor encryptString:[KeyValDatabase keyMetaStorefrontInfo]]];
+        [[[StorageManager getInstance] keyValueStorage] setValue:sfJSON forKey:[KeyValDatabase keyMetaStorefrontInfo]];
         
         NSDictionary *sfDict = [StoreUtils jsonStringToDict:self.storefrontJson];
         if (!sfDict) {
@@ -70,13 +70,11 @@ static NSString* TAG = @"SOOMLA StorefrontInfo";
 }
 
 - (BOOL)initializeFromDB{
-    NSString* sfJSON = [[[StorageManager getInstance] kvDatabase] getValForKey:[StoreEncryptor encryptString:[KeyValDatabase keyMetaStorefrontInfo]]];
+    NSString* sfJSON = [[[StorageManager getInstance] keyValueStorage] getValueForKey:[KeyValDatabase keyMetaStorefrontInfo]];
     if (!sfJSON || [sfJSON isEqual:[NSNull null]] || sfJSON.length == 0){
         LogDebug(TAG, @"storefront json is not in DB yet");
         return NO;
     }
-    
-    sfJSON = [StoreEncryptor decryptToString:sfJSON];
     
     self.storefrontJson = sfJSON;
     

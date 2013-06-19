@@ -24,7 +24,6 @@
 #import "VirtualCurrencyPack.h"
 #import "NonConsumableItem.h"
 #import "VirtualItemNotFoundException.h"
-#import "StoreEncryptor.h"
 #import "AppStoreItem.h"
 #import "ObscuredNSUserDefaults.h"
 #import "StoreUtils.h"
@@ -36,6 +35,7 @@
 #import "EquippableVG.h"
 #import "SingleUsePackVG.h"
 #import "UpgradeVG.h"
+#import "KeyValueStorage.h"
 
 @implementation StoreInfo
 
@@ -128,9 +128,7 @@ static NSString* TAG = @"SOOMLA StoreInfo";
     // put StoreInfo in the database as JSON
     NSString* storeInfoJSON = [StoreUtils dictToJsonString:[self toDictionary]];
     NSString* ec = [[NSString alloc] initWithData:[storeInfoJSON dataUsingEncoding:NSUTF8StringEncoding] encoding:NSUTF8StringEncoding];
-    NSString* enc = [StoreEncryptor encryptString:ec];
-    NSString* key = [StoreEncryptor encryptString:[KeyValDatabase keyMetaStoreInfo]];
-    [[[StorageManager getInstance] kvDatabase] setVal:enc forKey:key];
+    [[[StorageManager getInstance] keyValueStorage] setValue:ec forKey:[KeyValDatabase keyMetaStoreInfo]];
 }
 
 - (void)initializeWithIStoreAsssets:(id <IStoreAsssets>)storeAssets{
@@ -146,18 +144,10 @@ static NSString* TAG = @"SOOMLA StoreInfo";
 }
 
 - (BOOL)initializeFromDB{
-    NSString* key = [StoreEncryptor encryptString:[KeyValDatabase keyMetaStoreInfo]];
-    NSString* storeInfoJSON = [[[StorageManager getInstance] kvDatabase] getValForKey:key];
+    NSString* storeInfoJSON = [[[StorageManager getInstance] keyValueStorage] getValueForKey:[KeyValDatabase keyMetaStoreInfo]];
     
     if(!storeInfoJSON || [storeInfoJSON length] == 0){
         LogDebug(TAG, @"store json is not in DB yet.")
-        return NO;
-    }
-    
-    @try {
-        storeInfoJSON = [StoreEncryptor decryptToString:storeInfoJSON];
-    } @catch (NSException* ex){
-        LogError(TAG, @"An error occured while trying to decrypt store info JSON.");
         return NO;
     }
     
