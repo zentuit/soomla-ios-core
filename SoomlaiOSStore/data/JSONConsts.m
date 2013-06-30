@@ -35,6 +35,7 @@ NSString *const JSON_CATEGORY_NAME            = @"name";
 NSString *const JSON_CATEGORY_GOODSITEMIDS    = @"goods_itemIds";
 
 NSString *const JSON_MARKETITEM_PRODUCT_ID    = @"productId";
+NSString *const JSON_MARKETITEM_IOS_ID        = @"iosId";
 NSString *const JSON_MARKETITEM_CONSUMABLE    = @"consumable";
 NSString *const JSON_MARKETITEM_PRICE         = @"price";
 

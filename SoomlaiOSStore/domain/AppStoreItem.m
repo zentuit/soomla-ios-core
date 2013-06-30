@@ -36,7 +36,11 @@
     self = [super init];
     if (self) {
         self.consumable = [[dict valueForKey:JSON_MARKETITEM_CONSUMABLE] intValue];
-        self.productId = [dict objectForKey:JSON_MARKETITEM_PRODUCT_ID];
+        if ([[dict allKeys] containsObject:JSON_MARKETITEM_IOS_ID]) {
+            self.productId = [dict objectForKey:JSON_MARKETITEM_IOS_ID];
+        } else {
+            self.productId = [dict objectForKey:JSON_MARKETITEM_PRODUCT_ID];
+        }
         self.price = [[dict valueForKey:JSON_MARKETITEM_PRICE] doubleValue];
     }
     
@@ -46,7 +50,7 @@
 - (NSDictionary*)toDictionary{
     return [[NSDictionary alloc] initWithObjectsAndKeys:
             [NSNumber numberWithInt:self.consumable], JSON_MARKETITEM_CONSUMABLE,
-            self.productId, JSON_MARKETITEM_PRODUCT_ID,
+            self.productId, JSON_MARKETITEM_IOS_ID,
             [NSNumber numberWithDouble:self.price], JSON_MARKETITEM_PRICE,
             nil];
 }

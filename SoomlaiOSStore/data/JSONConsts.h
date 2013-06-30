@@ -37,6 +37,7 @@ extern NSString *const JSON_CATEGORY_NAME;
 extern NSString *const JSON_CATEGORY_GOODSITEMIDS;
 
 extern NSString *const JSON_MARKETITEM_PRODUCT_ID;
+extern NSString *const JSON_MARKETITEM_IOS_ID;
 extern NSString *const JSON_MARKETITEM_CONSUMABLE;
 extern NSString *const JSON_MARKETITEM_PRICE;
 
