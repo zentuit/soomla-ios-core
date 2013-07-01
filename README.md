@@ -10,7 +10,7 @@ ios-store
 ---
 **The new Virtual Economy model V3 is merged into master. The new model has many new features and it works better than the old one. Old applications may break if they use in this new model so already published games with ios-store from before May 1st, 2013 needs to clone the project with tag 'v2.2' and not 'v3.0'.**
 
-**On Jun 10, 2013 we've pushed v3.1 of ios-store. The changes in this version include removing of JSONKit (and using iOS's JSON parsing functions) and using Apple's allowed function of retreiving a UUID for the game. Everything is encrypted with this UUID so games that uses earlier versions of ios-store (with the previous method of UUID) will lose all their data. Be careful when you take v3.1.**
+**On Jun 10, 2013 we've pushed v3.1 of ios-store. The changes in this version include removing of JSONKit (and using iOS's JSON parsing functions) and using Apple's allowed function of retreiving a UUID for the game (with a fallback to OpenUDID when iOS5 is the target). Everything is encrypted with this UUID so games that uses earlier versions of ios-store (with the previous method of UUID) will lose all their data. Be careful when you take v3.1.**
 
 Want to learn more about modelV3? Try these:  
 * [Economy Model Objects](https://github.com/soomla/ios-store/wiki/Economy-Model-Objects)  
@@ -38,7 +38,9 @@ Getting Started (using source code)
 
 3. Change the value of SOOM_SEC in StoreConfig.m to a secret of you choice. Do this now! **You can't change this value after you publish your game!**
 
-4. Create your own implementation of _IStoreAssets_ in order to describe your specific game's assets. Initialize _StoreController_ with the class you just created:
+4. We use [OpenUDID](https://github.com/ylechelle/OpenUDID) when we can't use Apple's approved way of fetching the UDID (using 'identifierForVendor'). We use ARC but OpenUDID doesn't use ARC. Open your *Project Properties* -> *Build Phases* -> *Compile Sources* and and add the flag '-fno-objc-arc' to OpenUDID.m.
+
+5. Create your own implementation of _IStoreAssets_ in order to describe your specific game's assets. Initialize _StoreController_ with the class you just created:
 
       ```objective-c
        [[StoreController getInstance] initializeWithStoreAssets:[[YourStoreAssetsImplementation alloc] init] andCustomSecret:@"[YOUR CUSTOM SECRET HERE]"];
@@ -48,7 +50,7 @@ Getting Started (using source code)
 
     > Initialize `StoreController` ONLY ONCE when your application loads.
 
-5. Now, that you have `StoreController` loaded, just decide when you want to show/hide your store's UI to the user and let `StoreController` know about it:
+6. Now, that you have `StoreController` loaded, just decide when you want to show/hide your store's UI to the user and let `StoreController` know about it:
 
 When you show the store call:
 
