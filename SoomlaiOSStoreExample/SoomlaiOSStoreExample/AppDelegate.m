@@ -35,7 +35,7 @@
     
     // Checking if it's a first run and adding 10000 currencies if it is.
     // OFCOURSE... THIS IS JUST FOR TESTING.
-    if (![ObscuredNSUserDefaults boolForKey:@"NotFirstLaunch"])
+    if (![ObscuredNSUserDefaults boolForKey:@"NotFirstLaunch" withDefaultValue:nil])
     {
         [ObscuredNSUserDefaults setBool:YES forKey:@"NotFirstLaunch"];
         [(VirtualCurrency*)[storeAssets.virtualCurrencies objectAtIndex:0] giveAmount:10000];
