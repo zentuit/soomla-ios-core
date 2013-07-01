@@ -134,6 +134,9 @@
 		C02CECF6160DCB4A000AA0D2 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C02CECF5160DCB4A000AA0D2 /* UIKit.framework */; };
 		C07DA3C316218309005792DD /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = C07DA3C216218309005792DD /* libsqlite3.0.dylib */; };
 		C08CF2611641CF39007603E8 /* libSoomlaiOSStore.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C02CEC42160DC870000AA0D2 /* libSoomlaiOSStore.a */; };
+		C0CE33CE178168090089A0DE /* OpenUDID.h in Headers */ = {isa = PBXBuildFile; fileRef = C0CE33CC178168090089A0DE /* OpenUDID.h */; };
+		C0CE33CF178168090089A0DE /* OpenUDID.m in Sources */ = {isa = PBXBuildFile; fileRef = C0CE33CD178168090089A0DE /* OpenUDID.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		C0CE33D0178168090089A0DE /* OpenUDID.m in Sources */ = {isa = PBXBuildFile; fileRef = C0CE33CD178168090089A0DE /* OpenUDID.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -238,6 +241,8 @@
 		C02CEC7A160DCA3A000AA0D2 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		C02CECF5160DCB4A000AA0D2 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		C07DA3C216218309005792DD /* libsqlite3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.0.dylib; path = usr/lib/libsqlite3.0.dylib; sourceTree = SDKROOT; };
+		C0CE33CC178168090089A0DE /* OpenUDID.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpenUDID.h; sourceTree = "<group>"; };
+		C0CE33CD178168090089A0DE /* OpenUDID.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OpenUDID.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -275,6 +280,7 @@
 				C024135F176F2512007BB351 /* EventHandling.h */,
 				C0241360176F2512007BB351 /* EventHandling.m */,
 				C0241361176F2512007BB351 /* exceptions */,
+				C0CE33CB178168090089A0DE /* OpenUDID */,
 				C0241368176F2512007BB351 /* FBEncryptor */,
 				C024136D176F2512007BB351 /* IStoreAsssets.h */,
 				C024136E176F2512007BB351 /* PurchaseTypes */,
@@ -460,6 +466,15 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		C0CE33CB178168090089A0DE /* OpenUDID */ = {
+			isa = PBXGroup;
+			children = (
+				C0CE33CC178168090089A0DE /* OpenUDID.h */,
+				C0CE33CD178168090089A0DE /* OpenUDID.m */,
+			);
+			path = OpenUDID;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -507,6 +522,7 @@
 				C02413E9176F2512007BB351 /* StoreController.h in Headers */,
 				C02413EC176F2512007BB351 /* StoreInventory.h in Headers */,
 				C02413EF176F2512007BB351 /* StoreUtils.h in Headers */,
+				C0CE33CE178168090089A0DE /* OpenUDID.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -646,6 +662,7 @@
 				C02413EA176F2512007BB351 /* StoreController.m in Sources */,
 				C02413ED176F2512007BB351 /* StoreInventory.m in Sources */,
 				C02413F0176F2512007BB351 /* StoreUtils.m in Sources */,
+				C0CE33CF178168090089A0DE /* OpenUDID.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -692,6 +709,7 @@
 				C02413EB176F2512007BB351 /* StoreController.m in Sources */,
 				C02413EE176F2512007BB351 /* StoreInventory.m in Sources */,
 				C02413F1176F2512007BB351 /* StoreUtils.m in Sources */,
+				C0CE33D0178168090089A0DE /* OpenUDID.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -16,6 +16,7 @@
 
 #import "StoreUtils.h"
 #import "StoreConfig.h"
+#import "OpenUDID.h"
 
 @implementation StoreUtils
 
@@ -32,7 +33,11 @@ static NSString* TAG = @"SOOMLA StoreUtils";
 }
 
 + (NSString*)deviceId {
-    return [[[UIDevice currentDevice] identifierForVendor] UUIDString];
+    if ([[UIDevice currentDevice] respondsToSelector:@selector(identifierForVendor)]) {
+        return [[[UIDevice currentDevice] identifierForVendor] UUIDString];
+    } else {
+        return [SOOM_OpenUDID value];
+    }
 }
 
 + (NSDictionary*)jsonStringToDict:(NSString*)str {
