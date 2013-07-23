@@ -282,14 +282,14 @@ static NSString* TAG = @"SOOMLA StoreInfo";
     for(VirtualGood* g in self.virtualGoods){
         if ([g isKindOfClass:[SingleUseVG class]]) {
             [suGoods addObject:[g toDictionary]];
-        } else if ([g isKindOfClass:[EquippableVG class]]) {
-            [eqGoods addObject:[g toDictionary]];
-        } else if ([g isKindOfClass:[LifetimeVG class]]) {
-            [ltGoods addObject:[g toDictionary]];
-        } else if ([g isKindOfClass:[SingleUsePackVG class]]) {
-            [paGoods addObject:[g toDictionary]];
         } else if ([g isKindOfClass:[UpgradeVG class]]) {
             [upGoods addObject:[g toDictionary]];
+        } else if ([g isKindOfClass:[EquippableVG class]]) {
+            [eqGoods addObject:[g toDictionary]];
+        } else if ([g isKindOfClass:[SingleUsePackVG class]]) {
+            [paGoods addObject:[g toDictionary]];
+        } else if ([g isKindOfClass:[LifetimeVG class]]) {
+            [ltGoods addObject:[g toDictionary]];
         }
     }
     NSDictionary* goods = [NSDictionary dictionaryWithObjectsAndKeys:
