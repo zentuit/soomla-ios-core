@@ -86,15 +86,15 @@ static NSString* TAG = @"SOOMLA equippingModel";
                     EquippableVG* equippableVG = nil;
                     @try {
                         equippableVG = (EquippableVG*)[[StoreInfo getInstance] virtualItemWithId:goodItemId];
+						if (![goodItemId isEqualToString:self.itemId]) {
+                            [equippableVG unequip];
+                        }
                     } @catch (VirtualItemNotFoundException* ex) {
                         LogError(TAG, ([NSString stringWithFormat:@"On equip, couldn't find one of the itemIds in the category. Continuing to the next one. itemId: %@", goodItemId]));
                         continue;
                     } @catch (NSException* e) {
                         LogDebug(TAG, ([NSString stringWithFormat:@"On equip, an error occured. It's a debug message b/c the VirtualGood may just not be an EquippableVG. itemId: %@", goodItemId]));
                         continue;
-                    }
-                    if ((![goodItemId isEqualToString:self.itemId])) {
-                        [equippableVG unequip];
                     }
                 }
             } @catch (VirtualItemNotFoundException* ex) {
