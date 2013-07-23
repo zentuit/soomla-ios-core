@@ -77,6 +77,8 @@ static NSString* TAG = @"SOOMLA UpgradeVG";
         return;
     }
     [[[StorageManager getInstance] virtualGoodStorage] assignCurrentUpgrade:self toGood:good withEvent:notify];
+    
+    [super giveAmount:amount withEvent:notify];
 }
 
 /**
@@ -116,6 +118,8 @@ static NSString* TAG = @"SOOMLA UpgradeVG";
         LogDebug(TAG, ([NSString stringWithFormat:@"Downgrading %@ to NO-UPGRADE", good.name]));
         [[[StorageManager getInstance] virtualGoodStorage] removeUpgradesFrom:good withEvent:notify];
     }
+    
+    [super takeAmount:amount withEvent:notify];
 }
 
 /**
@@ -131,8 +135,9 @@ static NSString* TAG = @"SOOMLA UpgradeVG";
         return NO;
     }
     UpgradeVG* upgradeVG = [[[StorageManager getInstance] virtualGoodStorage] currentUpgradeOf:good];
-    return ((!upgradeVG) && (!self.prevGoodItemId || (self.prevGoodItemId.length == 0))) ||
-            (upgradeVG && (([upgradeVG.nextGoodItemId isEqualToString:self.itemId]) || ([upgradeVG.prevGoodItemId isEqualToString:self.itemId])));
+    return (((!upgradeVG && (!self.prevGoodItemId || (self.prevGoodItemId.length == 0))) ||
+            (upgradeVG && (([upgradeVG.nextGoodItemId isEqualToString:self.itemId]) || ([upgradeVG.prevGoodItemId isEqualToString:self.itemId]))))
+            && [super canBuy]);
 }
 
 

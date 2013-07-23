@@ -14,9 +14,7 @@
  * limitations under the License.
  */
 
-#import "VirtualGood.h"
-
-@class VirtualGood;
+#import "LifetimeVG.h"
 
 /**
  * An upgrade virtual good is one VG in a series of VGs that define an upgrade scale of an associated VirtualGood.
@@ -38,7 +36,7 @@
  * In case you purchase this item in the App Store (PurchaseWithMarket), You need to define the app store item in
  * iTunes Connect. ( https://itunesconnect.apple.com )
  */
-@interface UpgradeVG : VirtualGood {
+@interface UpgradeVG : LifetimeVG {
     NSString* goodItemId;
     NSString* prevGoodItemId;
     NSString* nextGoodItemId;
