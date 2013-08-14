@@ -122,11 +122,11 @@ static NSString* TAG = @"SOOMLA StoreController";
             return;
         }
         
-        if(![[StoreInfo getInstance] initializeFromDB]){
-            [EventHandling postUnexpectedError];
-            LogError(TAG, @"An unexpected error occured while trying to initialize storeInfo from DB.");
-            return;
-        }
+//        if(![[StoreInfo getInstance] initializeFromDB]){
+//            [EventHandling postUnexpectedError];
+//            LogError(TAG, @"An unexpected error occured while trying to initialize storeInfo from DB.");
+//            return;
+//        }
         
         [EventHandling postOpeningStore];
         
