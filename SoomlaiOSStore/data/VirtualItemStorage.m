@@ -66,7 +66,10 @@
     
     NSString* key = [StoreEncryptor encryptString:[self keyBalance:item.itemId]];
     int balance = [self balanceForItem:item] - amount;
-    balance = balance > 0 ? balance : 0;
+	if (balance < 0) {
+	    balance = 0;
+	    amount = 0;
+	}
     [[[StorageManager getInstance] kvDatabase] setVal:[StoreEncryptor encryptNumber:[NSNumber numberWithInt:balance]] forKey:key];
     
     if (notify) {
