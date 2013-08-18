@@ -72,20 +72,20 @@
             nil];
 }
 
-- (void)giveAmount:(int)amount {
-    [self giveAmount:amount withEvent:YES];
+- (int)giveAmount:(int)amount {
+    return [self giveAmount:amount withEvent:YES];
 }
-- (void)giveAmount:(int)amount withEvent:(BOOL)notify {
+- (int)giveAmount:(int)amount withEvent:(BOOL)notify {
     @throw [NSException exceptionWithName:NSInternalInconsistencyException
                                    reason:[NSString stringWithFormat:@"You must override %@ in a subclass",
                                            NSStringFromSelector(_cmd)]
                                  userInfo:nil];
 }
 
-- (void)takeAmount:(int)amount {
-    [self takeAmount:amount withEvent:YES];
+- (int)takeAmount:(int)amount {
+    return [self takeAmount:amount withEvent:YES];
 }
-- (void)takeAmount:(int)amount withEvent:(BOOL)notify {
+- (int)takeAmount:(int)amount withEvent:(BOOL)notify {
     @throw [NSException exceptionWithName:NSInternalInconsistencyException
                                    reason:[NSString stringWithFormat:@"You must override %@ in a subclass",
                                            NSStringFromSelector(_cmd)]
@@ -93,10 +93,10 @@
 }
 
 
-- (void)resetBalance:(int)balance {
-    [self resetBalance:balance withEvent:YES];
+- (int)resetBalance:(int)balance {
+    return [self resetBalance:balance withEvent:YES];
 }
-- (void)resetBalance:(int)balance withEvent:(BOOL)notify {
+- (int)resetBalance:(int)balance withEvent:(BOOL)notify {
     @throw [NSException exceptionWithName:NSInternalInconsistencyException
                                    reason:[NSString stringWithFormat:@"You must override %@ in a subclass",
                                            NSStringFromSelector(_cmd)]

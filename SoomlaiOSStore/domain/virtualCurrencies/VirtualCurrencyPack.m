@@ -61,29 +61,29 @@ static NSString* TAG = @"SOOMLA VirtualCurrencyPack";
 }
 
 
-- (void)giveAmount:(int)amount withEvent:(BOOL)notify {
+- (int)giveAmount:(int)amount withEvent:(BOOL)notify {
     VirtualCurrency* currency = NULL;
     @try {
         currency = (VirtualCurrency*)[[StoreInfo getInstance] virtualItemWithId:self.currencyItemId];
     } @catch (VirtualItemNotFoundException* ex) {
         LogError(TAG, ([NSString stringWithFormat:@"VirtualCurrency with itemId: %@ doesn't exist! Can't give this pack.", self.currencyItemId]));
-        return;
+        return 0;
     }
-    [[[StorageManager getInstance] virtualCurrencyStorage] addAmount:amount*self.currencyAmount toItem:currency withEvent:notify];
+    return [[[StorageManager getInstance] virtualCurrencyStorage] addAmount:amount*self.currencyAmount toItem:currency withEvent:notify];
 }
 
-- (void)takeAmount:(int)amount withEvent:(BOOL)notify {
+- (int)takeAmount:(int)amount withEvent:(BOOL)notify {
     VirtualCurrency* currency = NULL;
     @try {
         currency = (VirtualCurrency*)[[StoreInfo getInstance] virtualItemWithId:self.currencyItemId];
     } @catch (VirtualItemNotFoundException* ex) {
         LogError(TAG, ([NSString stringWithFormat:@"VirtualCurrency with itemId: %@ doesn't exist! Can't take this pack.", self.currencyItemId]));
-        return;
+        return 0;
     }
-    [[[StorageManager getInstance] virtualCurrencyStorage] removeAmount:amount*self.currencyAmount fromItem:currency withEvent:notify];
+    return [[[StorageManager getInstance] virtualCurrencyStorage] removeAmount:amount*self.currencyAmount fromItem:currency withEvent:notify];
 }
 
-- (void)resetBalance:(int)balance withEvent:(BOOL)notify {
+- (int)resetBalance:(int)balance withEvent:(BOOL)notify {
     // Not supported for VirtualCurrencyPacks !
     LogError(TAG, @"Someone tried to reset balance of CurrencyPack. That's not right.");
 }

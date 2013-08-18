@@ -59,20 +59,20 @@
  * nothing in return.
  * amount is the amount of the specific item to be given.
  */
-- (void)giveAmount:(int)amount;
-- (void)giveAmount:(int)amount withEvent:(BOOL)notify;
+- (int)giveAmount:(int)amount;
+- (int)giveAmount:(int)amount withEvent:(BOOL)notify;
 
 /**
  * By performing this action, you take curtain amount of the specific VirtualItem from your user.
  * amount is the amount of the specific item to be taken.
  */
-- (void)takeAmount:(int)amount;
-- (void)takeAmount:(int)amount withEvent:(BOOL)notify;
+- (int)takeAmount:(int)amount;
+- (int)takeAmount:(int)amount withEvent:(BOOL)notify;
 
 /**
  * This function resets the balance to the given balance.
  * balance is the balance of the current virtual item.
  */
-- (void)resetBalance:(int)balance;
-- (void)resetBalance:(int)balance withEvent:(BOOL)notify;
+- (int)resetBalance:(int)balance;
+- (int)resetBalance:(int)balance withEvent:(BOOL)notify;
 @end

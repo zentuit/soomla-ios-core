@@ -33,18 +33,20 @@ static NSString* TAG = @"SOOMLA NonConsumableStorage";
     return val != nil;
 }
 
-- (void)add:(NonConsumableItem*)nonConsumableItem{
+- (BOOL)add:(NonConsumableItem*)nonConsumableItem{
     LogDebug(TAG, ([NSString stringWithFormat:@"Adding NonConsumabel %@", nonConsumableItem.itemId]));
     
     NSString* key = [StoreEncryptor encryptString:[KeyValDatabase keyNonConsExists:nonConsumableItem.itemId]];
     [[[StorageManager getInstance] kvDatabase] setVal:@"" forKey:key];
+    return 1;
 }
 
-- (void)remove:(NonConsumableItem*)nonConsumableItem{
+- (BOOL)remove:(NonConsumableItem*)nonConsumableItem{
     LogDebug(TAG, ([NSString stringWithFormat:@"Removing NonConsumabel %@", nonConsumableItem.itemId]));
     
     NSString* key = [StoreEncryptor encryptString:[KeyValDatabase keyNonConsExists:nonConsumableItem.itemId]];
     [[[StorageManager getInstance] kvDatabase] deleteKeyValWithKey:key];
+    return 0;
 }
 
 

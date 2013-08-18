@@ -32,12 +32,12 @@
  * Adds the given App Store Non-Consumable item to the storage.
  * nonConsumableItem is the required App Store Non-Consumable item.
  */
-- (void)add:(NonConsumableItem*)nonConsumableItem;
+- (BOOL)add:(NonConsumableItem*)nonConsumableItem;
 /**
  * Removes the given App Store Non-Consumable item from the storage.
  * nonConsumableItem is the required App Store Non-Consumable item.
  */
-- (void)remove:(NonConsumableItem*)nonConsumableItem;
+- (BOOL)remove:(NonConsumableItem*)nonConsumableItem;
 
 
 @end
