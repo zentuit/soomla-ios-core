@@ -86,6 +86,7 @@ static NSString* TAG = @"SOOMLA VirtualCurrencyPack";
 - (int)resetBalance:(int)balance withEvent:(BOOL)notify {
     // Not supported for VirtualCurrencyPacks !
     LogError(TAG, @"Someone tried to reset balance of CurrencyPack. That's not right.");
+    return 0;
 }
 
 - (BOOL)canBuy {
