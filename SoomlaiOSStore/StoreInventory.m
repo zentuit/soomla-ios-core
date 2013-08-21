@@ -28,6 +28,7 @@
 #import "VirtualItemNotFoundException.h"
 #import "StoreUtils.h"
 
+
 @implementation StoreInventory
 
 + (void)buyItemWithItemId:(NSString*)itemId {
@@ -132,6 +133,11 @@
 }
 
 + (void)removeUpgrades:(NSString*)goodItemId {
+    NSArray* upgrades = [[StoreInfo getInstance] upgradesForGoodWithItemId:goodItemId];
+    for(UpgradeVG* upgrade in upgrades) {
+        [[[StorageManager getInstance] virtualGoodStorage] removeAmount:1 fromItem:upgrade withEvent:YES];
+    }
+    
     VirtualGood* good = (VirtualGood*)[[StoreInfo getInstance] virtualItemWithId:goodItemId];
     [[[StorageManager getInstance] virtualGoodStorage] removeUpgradesFrom:good];
 }
