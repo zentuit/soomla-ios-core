@@ -16,6 +16,7 @@
 
 
 #import <UIKit/UIKit.h>
+#import <StoreKit/StoreKit.h>
 
 @class AppStoreItem;
 @class VirtualGood;
@@ -38,6 +39,7 @@
 #define EVENT_OPENING_STORE                 @"OpeningStore"
 #define EVENT_APPSTORE_PURCHASE_CANCELLED   @"AppStorePurchaseCancelled"
 #define EVENT_APPSTORE_PURCHASED            @"AppStorePurchased"
+#define EVENT_APPSTORE_PURCHASE_VERIF       @"AppStorePurchaseVerification"
 #define EVENT_APPSTORE_PURCHASE_STARTED     @"AppStorePurchaseProcessStarted"
 #define EVENT_TRANSACTION_RESTORED          @"TransactionRestored"
 #define EVENT_TRANSACTION_RESTORE_STARTED   @"TransactionRestoreStarted"
@@ -54,6 +56,8 @@
 #define DICT_ELEMENT_UpgradeVG         @"UpgradeVG"
 #define DICT_ELEMENT_PURCHASABLE       @"PurchasableVirtualItem"
 #define DICT_ELEMENT_SUCCESS           @"success"
+#define DICT_ELEMENT_VERIFIED          @"verified"
+#define DICT_ELEMENT_TRANSACTION       @"transaction"
 
 
 /**
@@ -79,6 +83,7 @@
 + (void)postOpeningStore;
 + (void)postAppStorePurchaseCancelled:(PurchasableVirtualItem*)purchasableVirtualItem;
 + (void)postAppStorePurchase:(PurchasableVirtualItem*)purchasableVirtualItem;
++ (void)postAppStorePurchaseVerification:(BOOL)verified forItem:(PurchasableVirtualItem*)purchasableVirtualItem andTransaction:(SKPaymentTransaction*)transaction forObject:(id)object;
 + (void)postAppStorePurchaseStarted:(PurchasableVirtualItem*)purchasableVirtualItem;
 + (void)postTransactionRestored:(BOOL)success;
 + (void)postTransactionRestoreStarted;

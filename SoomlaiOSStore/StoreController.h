@@ -19,6 +19,7 @@
 #import "IStoreAsssets.h"
 
 @class AppStoreItem;
+@class PurchasableVirtualItem;
 
 /**
  * This class holds the most basic assets needed to operate the Store.

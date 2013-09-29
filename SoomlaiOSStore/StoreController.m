@@ -34,6 +34,8 @@
 #import "NonConsumableItem.h"
 #import "StoreUtils.h"
 
+#import "SoomlaVerification.h"
+
 #define kInAppPurchaseManagerProductsFetchedNotification @"kInAppPurchaseManagerProductsFetchedNotification"
 
 @implementation StoreController
@@ -64,7 +66,6 @@ static NSString* TAG = @"SOOMLA StoreController";
 }
 
 - (void)initializeWithStoreAssets:(id<IStoreAsssets>)storeAssets andCustomSecret:(NSString*)secret {
-    
     if (secret && secret.length > 0) {
         [ObscuredNSUserDefaults setString:secret forKey:@"ISU#LL#SE#REI"];
     } else if ([[ObscuredNSUserDefaults stringForKey:@"ISU#LL#SE#REI" withDefaultValue:@""] isEqualToString:@""]){
@@ -181,21 +182,49 @@ static NSString* TAG = @"SOOMLA StoreController";
     }
 }
 
+- (void)finalizeTransaction:(SKPaymentTransaction *)transaction forPurchasable:(PurchasableVirtualItem*)pvi {
+    [EventHandling postAppStorePurchase:pvi];
+    [pvi giveAmount:1];
+    [EventHandling postItemPurchased:pvi];
+    
+    // Remove the transaction from the payment queue.
+    [[SKPaymentQueue defaultQueue] finishTransaction: transaction];
+}
+
+- (void)purchaseVerified:(NSNotification*)notification{
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:EVENT_APPSTORE_PURCHASE_VERIF object:notification.object];
+    
+    NSDictionary* userInfo = notification.userInfo;
+    PurchasableVirtualItem* purchasable = [userInfo objectForKey:DICT_ELEMENT_PURCHASABLE];
+    BOOL verified = [(NSNumber*)[userInfo objectForKey:DICT_ELEMENT_VERIFIED] boolValue];
+    SKPaymentTransaction* transaction = [userInfo objectForKey:DICT_ELEMENT_TRANSACTION];
+    
+    if (verified) {
+        [self finalizeTransaction:transaction forPurchasable:purchasable];
+    } else {
+        LogError(TAG, @"Failed to verify transaction receipt. The user will not get what he just bought.");
+        [[SKPaymentQueue defaultQueue] finishTransaction: transaction];
+        [EventHandling postUnexpectedError];
+    }
+}
+
 - (void)givePurchasedItem:(SKPaymentTransaction *)transaction
 {
     @try {
         PurchasableVirtualItem* pvi = [[StoreInfo getInstance] purchasableItemWithProductId:transaction.payment.productIdentifier];
         
-        [EventHandling postAppStorePurchase:pvi];
+        if (VERIFY_PURCHASES) {
+            SoomlaVerification* sv = [[SoomlaVerification alloc] initWithTransaction:transaction andPurchasable:pvi];
+            
+            [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(purchaseVerified:) name:EVENT_APPSTORE_PURCHASE_VERIF object:sv];
+            
+            [sv verifyData];
+        } else {
+            [self finalizeTransaction:transaction forPurchasable:pvi];
+        }
         
-        [pvi giveAmount:1];
-        
-        [EventHandling postItemPurchased:pvi];
-        
-        // Remove the transaction from the payment queue.
-        [[SKPaymentQueue defaultQueue] finishTransaction: transaction];
     } @catch (VirtualItemNotFoundException* e) {
-        LogDebug(TAG, ([NSString stringWithFormat:@"ERROR : Couldn't find the PurchasableVirtualItem with productId: %@"
+        LogError(TAG, ([NSString stringWithFormat:@"An error occured when handling copmleted purchase for PurchasableVirtualItem with productId: %@"
                         @". It's unexpected so an unexpected error is being emitted.", transaction.payment.productIdentifier]));
         [EventHandling postUnexpectedError];
     }
@@ -203,7 +232,6 @@ static NSString* TAG = @"SOOMLA StoreController";
 
 - (void) completeTransaction: (SKPaymentTransaction *)transaction
 {
-    
     LogDebug(TAG, ([NSString stringWithFormat:@"Transaction completed for product: %@", transaction.payment.productIdentifier]));
     [self givePurchasedItem:transaction];
 }

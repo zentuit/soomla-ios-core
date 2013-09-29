@@ -14,18 +14,18 @@
  * limitations under the License.
  */
 
-#import "StoreConfig.h"
+#import <Foundation/Foundation.h>
+#import <StoreKit/StoreKit.h>
 
-const int METADATA_VERSION          = 2;
+@class PurchasableVirtualItem;
 
-#ifdef DEBUG
-BOOL STORE_DEBUG_LOG                = YES;
-#else
-BOOL STORE_DEBUG_LOG                = NO;
-#endif
+@interface SoomlaVerification : NSObject <NSURLConnectionDelegate>{
+    NSMutableData *responseData;
+    PurchasableVirtualItem *purchasable;
+    SKPaymentTransaction* transaction;
+}
 
-NSString* SOOM_SEC  = @"SINC_SSIEEKK";
+- (id) initWithTransaction:(SKPaymentTransaction*)t andPurchasable:(PurchasableVirtualItem*)pvi;
+- (void)verifyData;
 
-BOOL VERIFY_PURCHASES = NO;
-NSString* VERIFY_URL = @"https://verify.soom.la/verify_ios";
-
+@end

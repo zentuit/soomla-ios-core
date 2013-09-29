@@ -35,6 +35,7 @@
     [[NSNotificationCenter defaultCenter] addObserver:observer selector:selector name:EVENT_OPENING_STORE object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:observer selector:selector name:EVENT_APPSTORE_PURCHASE_CANCELLED object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:observer selector:selector name:EVENT_APPSTORE_PURCHASED object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:observer selector:selector name:EVENT_APPSTORE_PURCHASE_VERIF object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:observer selector:selector name:EVENT_APPSTORE_PURCHASE_STARTED object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:observer selector:selector name:EVENT_TRANSACTION_RESTORED object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:observer selector:selector name:EVENT_TRANSACTION_RESTORE_STARTED object:nil];
@@ -113,6 +114,15 @@
 + (void)postAppStorePurchase:(PurchasableVirtualItem*)purchasableVirtualItem{
     NSDictionary *userInfo = [NSDictionary dictionaryWithObject:purchasableVirtualItem forKey:DICT_ELEMENT_PURCHASABLE];
     [[NSNotificationCenter defaultCenter] postNotificationName:EVENT_APPSTORE_PURCHASED object:self userInfo:userInfo];
+}
+
++ (void)postAppStorePurchaseVerification:(BOOL)verified forItem:(PurchasableVirtualItem*)purchasableVirtualItem andTransaction:(SKPaymentTransaction*)transaction forObject:(id)object {
+    NSDictionary *userInfo = [NSDictionary dictionaryWithObjectsAndKeys:
+                              purchasableVirtualItem, DICT_ELEMENT_PURCHASABLE,
+                              [NSNumber numberWithBool:verified], DICT_ELEMENT_VERIFIED,
+                              transaction, DICT_ELEMENT_TRANSACTION,
+                              nil];
+    [[NSNotificationCenter defaultCenter] postNotificationName:EVENT_APPSTORE_PURCHASE_VERIF object:object userInfo:userInfo];
 }
 
 + (void)postAppStorePurchaseStarted:(PurchasableVirtualItem*)purchasableVirtualItem{

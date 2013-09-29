@@ -31,6 +31,9 @@ extern BOOL STORE_DEBUG_LOG;
 /* CHANGE THIS SECRET NOW ! */
 extern NSString* SOOM_SEC;
 
+extern BOOL VERIFY_PURCHASES;
+extern NSString* VERIFY_URL;
+
 
 
 
