@@ -8,7 +8,7 @@ Haven't you ever wanted an in-app purchase one liner that looks like this ?!
 
 ios-store
 ---
-**September 29th, 2013:** Server Side Verification is now implemented into ios-store. The server is a complementary server provided by [SOOMLA](http://soom.la) to help you get more secured purchases in your game. This feature is not enabled by default. In order to enable Server Side verification go to StoreConfig.m and set  **VERIFY_PURCHASES = YES**.
+**September 29th, 2013:** Server Side Verification is now implemented into ios-store. The server is a complementary server provided by [SOOMLA](http://soom.la) to help you get your in-game purchases a bit more secured. This feature is not enabled by default. In order to enable Server Side verification go to StoreConfig.m and set  **VERIFY_PURCHASES = YES**.
 
 Want to learn more about modelV3? Try these:  
 * [Economy Model Objects](https://github.com/soomla/ios-store/wiki/Economy-Model-Objects)  
