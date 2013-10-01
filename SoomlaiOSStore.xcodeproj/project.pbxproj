@@ -132,6 +132,8 @@
 		C02CEC79160DCA31000AA0D2 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C02CEC78160DCA31000AA0D2 /* StoreKit.framework */; };
 		C02CEC7B160DCA3A000AA0D2 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C02CEC7A160DCA3A000AA0D2 /* Security.framework */; };
 		C02CECF6160DCB4A000AA0D2 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C02CECF5160DCB4A000AA0D2 /* UIKit.framework */; };
+		C054F21317FAB22A006F5B8E /* SoomlaVerification.h in Headers */ = {isa = PBXBuildFile; fileRef = C054F21117FAB22A006F5B8E /* SoomlaVerification.h */; };
+		C054F21417FAB22A006F5B8E /* SoomlaVerification.m in Sources */ = {isa = PBXBuildFile; fileRef = C054F21217FAB22A006F5B8E /* SoomlaVerification.m */; };
 		C07DA3C316218309005792DD /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = C07DA3C216218309005792DD /* libsqlite3.0.dylib */; };
 		C08CF2611641CF39007603E8 /* libSoomlaiOSStore.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C02CEC42160DC870000AA0D2 /* libSoomlaiOSStore.a */; };
 		C0CE33CE178168090089A0DE /* OpenUDID.h in Headers */ = {isa = PBXBuildFile; fileRef = C0CE33CC178168090089A0DE /* OpenUDID.h */; };
@@ -240,6 +242,8 @@
 		C02CEC78160DCA31000AA0D2 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		C02CEC7A160DCA3A000AA0D2 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		C02CECF5160DCB4A000AA0D2 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		C054F21117FAB22A006F5B8E /* SoomlaVerification.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoomlaVerification.h; sourceTree = "<group>"; };
+		C054F21217FAB22A006F5B8E /* SoomlaVerification.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SoomlaVerification.m; sourceTree = "<group>"; };
 		C07DA3C216218309005792DD /* libsqlite3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.0.dylib; path = usr/lib/libsqlite3.0.dylib; sourceTree = SDKROOT; };
 		C0CE33CC178168090089A0DE /* OpenUDID.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpenUDID.h; sourceTree = "<group>"; };
 		C0CE33CD178168090089A0DE /* OpenUDID.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OpenUDID.m; sourceTree = "<group>"; };
@@ -284,6 +288,8 @@
 				C0241368176F2512007BB351 /* FBEncryptor */,
 				C024136D176F2512007BB351 /* IStoreAsssets.h */,
 				C024136E176F2512007BB351 /* PurchaseTypes */,
+				C054F21117FAB22A006F5B8E /* SoomlaVerification.h */,
+				C054F21217FAB22A006F5B8E /* SoomlaVerification.m */,
 				C0241375176F2512007BB351 /* SoomlaiOSStore-Prefix.pch */,
 				C0241376176F2512007BB351 /* StoreConfig.h */,
 				C0241377176F2512007BB351 /* StoreConfig.m */,
@@ -506,6 +512,7 @@
 				C02413BD176F2512007BB351 /* SingleUseVG.h in Headers */,
 				C02413C0176F2512007BB351 /* UpgradeVG.h in Headers */,
 				C02413C3176F2512007BB351 /* VirtualGood.h in Headers */,
+				C054F21317FAB22A006F5B8E /* SoomlaVerification.h in Headers */,
 				C02413C6176F2512007BB351 /* VirtualItem.h in Headers */,
 				C02413C9176F2512007BB351 /* EventHandling.h in Headers */,
 				C02413CC176F2512007BB351 /* InsufficientFundsException.h in Headers */,
@@ -653,6 +660,7 @@
 				C02413CD176F2512007BB351 /* InsufficientFundsException.m in Sources */,
 				C02413D0176F2512007BB351 /* NotEnoughGoodsException.m in Sources */,
 				C02413D3176F2512007BB351 /* VirtualItemNotFoundException.m in Sources */,
+				C054F21417FAB22A006F5B8E /* SoomlaVerification.m in Sources */,
 				C02413D6176F2512007BB351 /* FBEncryptorAES.m in Sources */,
 				C02413D9176F2512007BB351 /* NSData-Base64.m in Sources */,
 				C02413DD176F2512007BB351 /* PurchaseType.m in Sources */,

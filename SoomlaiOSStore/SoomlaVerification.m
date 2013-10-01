@@ -87,7 +87,11 @@ static NSString* TAG = @"SOOMLA SoomlaVerification";
     NSString* dataStr = [[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding];
     NSDictionary* responseDict = [StoreUtils jsonStringToDict:dataStr];
     
-    BOOL verified = [(NSNumber*)[responseDict objectForKey:@"verified"] boolValue];
+    NSNumber* verifiedNum = (NSNumber*)[responseDict objectForKey:@"verified"];
+    BOOL verified = NO;
+    if (verifiedNum) {
+	verified = [verifiedNum boolValue];
+    }
     [EventHandling postAppStorePurchaseVerification:verified forItem:purchasable andTransaction:transaction forObject:self];
 }
 
