@@ -20,6 +20,10 @@
 #import "EventHandling.h"
 #import "StoreConfig.h"
 
+#import "FBEncryptorAES.h"
+#import "ObscuredNSUserDefaults.h"
+#import "Soomla.h"
+
 @implementation SoomlaVerification
 
 static NSString* TAG = @"SOOMLA SoomlaVerification";
@@ -49,8 +53,12 @@ static NSString* TAG = @"SOOMLA SoomlaVerification";
     }
     
     if (data) {
-        NSString *post = [NSString stringWithFormat:@"{\"receipt_base64\": \"%@\"}", [data base64Encoding]];
-        NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
+        
+        NSDictionary* postDict = [NSDictionary dictionaryWithObjectsAndKeys:
+                                  [data base64Encoding], @"receipt_base64",
+                                  nil];
+
+        NSData *postData = [[StoreUtils dictToJsonString:postDict] dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
         
         NSString *postLength = [NSString stringWithFormat:@"%d", [postData length]];
         
@@ -66,12 +74,14 @@ static NSString* TAG = @"SOOMLA SoomlaVerification";
         [conn start];
     } else {
         LogError(TAG, ([NSString stringWithFormat:@"An error occured while trying to get receipt data. Stopping the purchasing process for: %@", transaction.payment.productIdentifier]));
-        [EventHandling postUnexpectedError];
+        [EventHandling postUnexpectedError:ERR_VERIFICATION_TIMEOUT forObject:self];
     }
 }
 
 - (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response {
     responseData = [[NSMutableData alloc] init];
+    NSHTTPURLResponse * httpResponse = (NSHTTPURLResponse*)response;
+    responseCode = [httpResponse statusCode];
 }
 
 - (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data {
@@ -86,28 +96,32 @@ static NSString* TAG = @"SOOMLA SoomlaVerification";
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection {
     NSString* dataStr = [[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding];
     NSDictionary* responseDict = [StoreUtils jsonStringToDict:dataStr];
-    
+
     NSNumber* verifiedNum = (NSNumber*)[responseDict objectForKey:@"verified"];
     BOOL verified = NO;
-    if (verifiedNum) {
-	verified = [verifiedNum boolValue];
+    if (responseCode==200 && verifiedNum) {
+        verified = [verifiedNum boolValue];
+        [EventHandling postAppStorePurchaseVerification:verified forItem:purchasable andTransaction:transaction forObject:self];
+    } else {
+        LogError(TAG, @"There was a problem when verifying. Will try again later.");
+        [EventHandling postUnexpectedError:ERR_VERIFICATION_TIMEOUT forObject:self];
     }
-    [EventHandling postAppStorePurchaseVerification:verified forItem:purchasable andTransaction:transaction forObject:self];
 }
 
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
     LogError(TAG, @"Failed to connect to verification server. Not doing anything ... the purchasing process will happen again next time the service is initialized.");
+    [EventHandling postUnexpectedError:ERR_VERIFICATION_TIMEOUT forObject:self];
 }
 
-//- (BOOL)connection:(NSURLConnection *)connection canAuthenticateAgainstProtectionSpace:(NSURLProtectionSpace *)protectionSpace {
-//    return [protectionSpace.authenticationMethod isEqualToString:NSURLAuthenticationMethodServerTrust];
-//}
-//
-//- (void)connection:(NSURLConnection *)connection didReceiveAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge {
-//    if ([challenge.protectionSpace.authenticationMethod isEqualToString:NSURLAuthenticationMethodServerTrust])
-//            [challenge.sender useCredential:[NSURLCredential credentialForTrust:challenge.protectionSpace.serverTrust] forAuthenticationChallenge:challenge];
-//    
-//    [challenge.sender continueWithoutCredentialForAuthenticationChallenge:challenge];
-//}
+- (BOOL)connection:(NSURLConnection *)connection canAuthenticateAgainstProtectionSpace:(NSURLProtectionSpace *)protectionSpace {
+    return [protectionSpace.authenticationMethod isEqualToString:NSURLAuthenticationMethodServerTrust];
+}
+
+- (void)connection:(NSURLConnection *)connection didReceiveAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge {
+    if ([challenge.protectionSpace.authenticationMethod isEqualToString:NSURLAuthenticationMethodServerTrust])
+            [challenge.sender useCredential:[NSURLCredential credentialForTrust:challenge.protectionSpace.serverTrust] forAuthenticationChallenge:challenge];
+    
+    [challenge.sender continueWithoutCredentialForAuthenticationChallenge:challenge];
+}
 
 @end

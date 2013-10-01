@@ -44,7 +44,7 @@ static NSString* TAG = @"SOOMLA PurchaseWithMarket";
     LogDebug(TAG, ([NSString stringWithFormat:@"Starting in-app purchase for productId: %@", self.appStoreItem.productId]));
     
     if (![[StoreController getInstance] buyInAppStoreWithAppStoreItem:self.appStoreItem]) {
-        [EventHandling postUnexpectedError];
+        [EventHandling postUnexpectedError:ERR_PURCHASE_FAIL forObject:self];
         return;
     }
     

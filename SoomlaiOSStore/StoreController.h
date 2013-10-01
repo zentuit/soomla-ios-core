@@ -20,6 +20,7 @@
 
 @class AppStoreItem;
 @class PurchasableVirtualItem;
+@class SoomlaVerification;
 
 /**
  * This class holds the most basic assets needed to operate the Store.
@@ -37,6 +38,7 @@
     @private
     BOOL initialized;
     BOOL storeOpen;
+    SoomlaVerification* sv;
 }
 
 @property BOOL initialized;

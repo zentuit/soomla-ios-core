@@ -192,7 +192,10 @@ static NSString* TAG = @"SOOMLA StoreController";
 }
 
 - (void)purchaseVerified:(NSNotification*)notification{
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:EVENT_APPSTORE_PURCHASE_VERIF object:notification.object];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:EVENT_APPSTORE_PURCHASE_VERIF object:sv];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:EVENT_UNEXPECTED_ERROR_IN_STORE object:sv];
+    
+    sv = nil;
     
     NSDictionary* userInfo = notification.userInfo;
     PurchasableVirtualItem* purchasable = [userInfo objectForKey:DICT_ELEMENT_PURCHASABLE];
@@ -204,8 +207,15 @@ static NSString* TAG = @"SOOMLA StoreController";
     } else {
         LogError(TAG, @"Failed to verify transaction receipt. The user will not get what he just bought.");
         [[SKPaymentQueue defaultQueue] finishTransaction: transaction];
-        [EventHandling postUnexpectedError];
+        [EventHandling postUnexpectedError:ERR_VERIFICATION_FAIL forObject:self];
     }
+}
+
+- (void)unexpectedVerificationError:(NSNotification*)notification{
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:EVENT_APPSTORE_PURCHASE_VERIF object:sv];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:EVENT_UNEXPECTED_ERROR_IN_STORE object:sv];
+    
+    sv = nil;
 }
 
 - (void)givePurchasedItem:(SKPaymentTransaction *)transaction
@@ -214,9 +224,10 @@ static NSString* TAG = @"SOOMLA StoreController";
         PurchasableVirtualItem* pvi = [[StoreInfo getInstance] purchasableItemWithProductId:transaction.payment.productIdentifier];
         
         if (VERIFY_PURCHASES) {
-            SoomlaVerification* sv = [[SoomlaVerification alloc] initWithTransaction:transaction andPurchasable:pvi];
+            sv = [[SoomlaVerification alloc] initWithTransaction:transaction andPurchasable:pvi];
             
             [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(purchaseVerified:) name:EVENT_APPSTORE_PURCHASE_VERIF object:sv];
+            [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(unexpectedVerificationError:) name:EVENT_UNEXPECTED_ERROR_IN_STORE object:sv];
             
             [sv verifyData];
         } else {
@@ -226,7 +237,7 @@ static NSString* TAG = @"SOOMLA StoreController";
     } @catch (VirtualItemNotFoundException* e) {
         LogError(TAG, ([NSString stringWithFormat:@"An error occured when handling copmleted purchase for PurchasableVirtualItem with productId: %@"
                         @". It's unexpected so an unexpected error is being emitted.", transaction.payment.productIdentifier]));
-        [EventHandling postUnexpectedError];
+        [EventHandling postUnexpectedError:ERR_PURCHASE_FAIL forObject:self];
     }
 }
 
@@ -247,7 +258,7 @@ static NSString* TAG = @"SOOMLA StoreController";
     if (transaction.error.code != SKErrorPaymentCancelled) {
         LogError(TAG, ([NSString stringWithFormat:@"An error occured for product id \"%@\" with code \"%d\" and description \"%@\"", transaction.payment.productIdentifier, transaction.error.code, transaction.error.localizedDescription]));
         
-        [EventHandling postUnexpectedError];
+        [EventHandling postUnexpectedError:ERR_PURCHASE_FAIL forObject:self];
     }
     else{
         
@@ -259,7 +270,7 @@ static NSString* TAG = @"SOOMLA StoreController";
         @catch (VirtualItemNotFoundException* e) {
             LogError(TAG, ([NSString stringWithFormat:@"Couldn't find the CANCELLED VirtualCurrencyPack OR AppStoreItem with productId: %@"
                             @". It's unexpected so an unexpected error is being emitted.", transaction.payment.productIdentifier]));
-            [EventHandling postUnexpectedError];
+            [EventHandling postUnexpectedError:ERR_GENERAL forObject:self];
         }
         
     }
