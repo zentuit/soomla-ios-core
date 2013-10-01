@@ -58,6 +58,13 @@
 #define DICT_ELEMENT_SUCCESS           @"success"
 #define DICT_ELEMENT_VERIFIED          @"verified"
 #define DICT_ELEMENT_TRANSACTION       @"transaction"
+#define DICT_ELEMENT_ERROR_CODE        @"error_code"
+
+// Error Codes
+#define ERR_GENERAL                 0
+#define ERR_VERIFICATION_TIMEOUT    1
+#define ERR_VERIFICATION_FAIL       2
+#define ERR_PURCHASE_FAIL           3
 
 
 /**
@@ -87,7 +94,7 @@
 + (void)postAppStorePurchaseStarted:(PurchasableVirtualItem*)purchasableVirtualItem;
 + (void)postTransactionRestored:(BOOL)success;
 + (void)postTransactionRestoreStarted;
-+ (void)postUnexpectedError;
++ (void)postUnexpectedError:(int)code forObject:(id)object;
 + (void)postStoreControllerInitialized;
 
 @end
