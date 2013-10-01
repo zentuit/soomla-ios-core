@@ -21,6 +21,7 @@
 
 @interface SoomlaVerification : NSObject <NSURLConnectionDelegate>{
     NSMutableData *responseData;
+    int responseCode;
     PurchasableVirtualItem *purchasable;
     SKPaymentTransaction* transaction;
 }

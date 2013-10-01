@@ -22,7 +22,6 @@
 
 #import "FBEncryptorAES.h"
 #import "ObscuredNSUserDefaults.h"
-#import "Soomla.h"
 
 @implementation SoomlaVerification
 
