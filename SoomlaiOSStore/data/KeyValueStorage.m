@@ -46,7 +46,10 @@
     NSMutableArray* results = [NSMutableArray array];
     for (NSString* val in vals) {
         if (val && [val length]>0){
-            [results addObject:[StoreEncryptor decryptToString:val]];
+            NSString* valDec = [StoreEncryptor decryptToString:val];
+            if (valDec && [valDec length]>0){
+                [results addObject:valDec];
+            }
         }
     }
     
