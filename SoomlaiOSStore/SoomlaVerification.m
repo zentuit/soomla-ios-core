@@ -62,7 +62,9 @@ static NSString* TAG = @"SOOMLA SoomlaVerification";
         NSString *postLength = [NSString stringWithFormat:@"%d", [postData length]];
         
         NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
-
+        
+        LogDebug(TAG, ([NSString stringWithFormat:@"verifying purchase on server: %@", VERIFY_URL]));
+        
         [request setURL:[NSURL URLWithString:VERIFY_URL]];
         [request setHTTPMethod:@"POST"];
         [request setValue:postLength forHTTPHeaderField:@"Content-Length"];
@@ -94,9 +96,16 @@ static NSString* TAG = @"SOOMLA SoomlaVerification";
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection {
     NSString* dataStr = [[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding];
-    NSDictionary* responseDict = [StoreUtils jsonStringToDict:dataStr];
+    NSNumber* verifiedNum = nil;
+    if (![dataStr isEqualToString:@""]) {
+        @try {
+            NSDictionary* responseDict = [StoreUtils jsonStringToDict:dataStr];
+            verifiedNum = (NSNumber*)[responseDict objectForKey:@"verified"];
+        } @catch (NSException* e) {
+            LogError(TAG, @"There was a problem when verifying when handling response.");
+        }
+    }
 
-    NSNumber* verifiedNum = (NSNumber*)[responseDict objectForKey:@"verified"];
     BOOL verified = NO;
     if (responseCode==200 && verifiedNum) {
         verified = [verifiedNum boolValue];
@@ -109,6 +118,7 @@ static NSString* TAG = @"SOOMLA SoomlaVerification";
 
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
     LogError(TAG, @"Failed to connect to verification server. Not doing anything ... the purchasing process will happen again next time the service is initialized.");
+    LogDebug(TAG, [error description]);
     [EventHandling postUnexpectedError:ERR_VERIFICATION_TIMEOUT forObject:self];
 }
 
