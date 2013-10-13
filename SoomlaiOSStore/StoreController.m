@@ -65,7 +65,7 @@ static NSString* TAG = @"SOOMLA StoreController";
     return _instance;
 }
 
-- (void)initializeWithStoreAssets:(id<IStoreAsssets>)storeAssets andCustomSecret:(NSString*)secret {
+- (void)initializeWithStoreAssets:(id<IStoreAssets>)storeAssets andCustomSecret:(NSString*)secret {
     if (secret && secret.length > 0) {
         [ObscuredNSUserDefaults setString:secret forKey:@"ISU#LL#SE#REI"];
     } else if ([[ObscuredNSUserDefaults stringForKey:@"ISU#LL#SE#REI" withDefaultValue:@""] isEqualToString:@""]){
@@ -76,7 +76,7 @@ static NSString* TAG = @"SOOMLA StoreController";
     [ObscuredNSUserDefaults setInt:[storeAssets getVersion] forKey:@"SA_VER_NEW"];
     
     [StorageManager getInstance];
-    [[StoreInfo getInstance] initializeWithIStoreAsssets:storeAssets];
+    [[StoreInfo getInstance] initializeWithIStoreAssets:storeAssets];
     
     if ([SKPaymentQueue canMakePayments]) {
         [[SKPaymentQueue defaultQueue] addTransactionObserver:self];

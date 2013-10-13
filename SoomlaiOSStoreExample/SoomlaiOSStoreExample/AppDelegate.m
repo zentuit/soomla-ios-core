@@ -30,7 +30,7 @@
     /**
      * We initialize StoreController when the application loads !
      */
-    id<IStoreAsssets> storeAssets = [[MuffinRushAssets alloc] init];
+    id<IStoreAssets> storeAssets = [[MuffinRushAssets alloc] init];
     [[StoreController getInstance] initializeWithStoreAssets:storeAssets andCustomSecret:@"ChangeMe!!!"];
     
     // Checking if it's a first run and adding 10000 currencies if it is.

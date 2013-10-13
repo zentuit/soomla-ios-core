@@ -1,5 +1,5 @@
 #import <Foundation/Foundation.h>
-#import "IStoreAsssets.h"
+#import "IStoreAssets.h"
 
 // Currencies
 extern NSString* const MUFFINS_CURRENCY_ITEM_ID;
@@ -46,7 +46,7 @@ extern NSString* const _1000_MUFFINS_PRODUCT_ID;
 extern NSString* const NO_ADS_NON_CONS_ITEM_ID;
 extern NSString* const NO_ADS_PRODUCT_ID;
 
-@interface MuffinRushAssets : NSObject <IStoreAsssets>{
+@interface MuffinRushAssets : NSObject <IStoreAssets>{
     
 }
 

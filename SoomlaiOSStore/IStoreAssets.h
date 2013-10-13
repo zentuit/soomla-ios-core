@@ -20,7 +20,7 @@
  * Use this protocol to create your assets class that will be transferred to StoreInfo
  * upon initialization.
  */
-@protocol IStoreAsssets <NSObject>
+@protocol IStoreAssets <NSObject>
 
 /**
  * A version for your specific game's store assets

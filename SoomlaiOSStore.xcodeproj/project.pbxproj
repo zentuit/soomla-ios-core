@@ -101,7 +101,7 @@
 		C02413D8176F2512007BB351 /* NSData-Base64.h in Headers */ = {isa = PBXBuildFile; fileRef = C024136B176F2512007BB351 /* NSData-Base64.h */; };
 		C02413D9176F2512007BB351 /* NSData-Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = C024136C176F2512007BB351 /* NSData-Base64.m */; };
 		C02413DA176F2512007BB351 /* NSData-Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = C024136C176F2512007BB351 /* NSData-Base64.m */; };
-		C02413DB176F2512007BB351 /* IStoreAsssets.h in Headers */ = {isa = PBXBuildFile; fileRef = C024136D176F2512007BB351 /* IStoreAsssets.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C02413DB176F2512007BB351 /* IStoreAssets.h in Headers */ = {isa = PBXBuildFile; fileRef = C024136D176F2512007BB351 /* IStoreAssets.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C02413DC176F2512007BB351 /* PurchaseType.h in Headers */ = {isa = PBXBuildFile; fileRef = C024136F176F2512007BB351 /* PurchaseType.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C02413DD176F2512007BB351 /* PurchaseType.m in Sources */ = {isa = PBXBuildFile; fileRef = C0241370176F2512007BB351 /* PurchaseType.m */; };
 		C02413DE176F2512007BB351 /* PurchaseType.m in Sources */ = {isa = PBXBuildFile; fileRef = C0241370176F2512007BB351 /* PurchaseType.m */; };
@@ -215,7 +215,7 @@
 		C024136A176F2512007BB351 /* FBEncryptorAES.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBEncryptorAES.m; sourceTree = "<group>"; };
 		C024136B176F2512007BB351 /* NSData-Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData-Base64.h"; sourceTree = "<group>"; };
 		C024136C176F2512007BB351 /* NSData-Base64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData-Base64.m"; sourceTree = "<group>"; };
-		C024136D176F2512007BB351 /* IStoreAsssets.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IStoreAsssets.h; sourceTree = "<group>"; };
+		C024136D176F2512007BB351 /* IStoreAssets.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IStoreAssets.h; sourceTree = "<group>"; };
 		C024136F176F2512007BB351 /* PurchaseType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PurchaseType.h; sourceTree = "<group>"; };
 		C0241370176F2512007BB351 /* PurchaseType.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PurchaseType.m; sourceTree = "<group>"; };
 		C0241371176F2512007BB351 /* PurchaseWithMarket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PurchaseWithMarket.h; sourceTree = "<group>"; };
@@ -286,7 +286,7 @@
 				C0241361176F2512007BB351 /* exceptions */,
 				C0CE33CB178168090089A0DE /* OpenUDID */,
 				C0241368176F2512007BB351 /* FBEncryptor */,
-				C024136D176F2512007BB351 /* IStoreAsssets.h */,
+				C024136D176F2512007BB351 /* IStoreAssets.h */,
 				C024136E176F2512007BB351 /* PurchaseTypes */,
 				C054F21117FAB22A006F5B8E /* SoomlaVerification.h */,
 				C054F21217FAB22A006F5B8E /* SoomlaVerification.m */,
@@ -520,7 +520,7 @@
 				C02413D2176F2512007BB351 /* VirtualItemNotFoundException.h in Headers */,
 				C02413D5176F2512007BB351 /* FBEncryptorAES.h in Headers */,
 				C02413D8176F2512007BB351 /* NSData-Base64.h in Headers */,
-				C02413DB176F2512007BB351 /* IStoreAsssets.h in Headers */,
+				C02413DB176F2512007BB351 /* IStoreAssets.h in Headers */,
 				C02413DC176F2512007BB351 /* PurchaseType.h in Headers */,
 				C02413DF176F2512007BB351 /* PurchaseWithMarket.h in Headers */,
 				C02413E2176F2512007BB351 /* PurchaseWithVirtualItem.h in Headers */,

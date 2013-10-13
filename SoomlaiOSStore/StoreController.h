@@ -16,7 +16,7 @@
 
 #import <Foundation/Foundation.h>
 #import <StoreKit/StoreKit.h>
-#import "IStoreAsssets.h"
+#import "IStoreAssets.h"
 
 @class AppStoreItem;
 @class PurchasableVirtualItem;
@@ -51,7 +51,7 @@
  * storeAssets is the definition of your application specific assets.
  * customSecret is your encryption secret (it's used to encrypt your data in the database)
  */
-- (void)initializeWithStoreAssets:(id<IStoreAsssets>)storeAssets andCustomSecret:(NSString*)secret;
+- (void)initializeWithStoreAssets:(id<IStoreAssets>)storeAssets andCustomSecret:(NSString*)secret;
 /**
  * Start an in app purchase process in the App Store.
  * appStoreItem is the item to purchase. This item has to be defined EXACTLY the same in iTunes Connect.

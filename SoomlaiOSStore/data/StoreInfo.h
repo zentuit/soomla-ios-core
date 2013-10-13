@@ -15,7 +15,7 @@
  */
 
 #import <Foundation/Foundation.h>
-#import "IStoreAsssets.h"
+#import "IStoreAssets.h"
 
 @class VirtualCategory;
 @class VirtualCurrency;
@@ -70,7 +70,7 @@
  * implementation of IStoreAssets in order to remove the metadata when the application loads.
  * (bumping the version is done by returning a higher number in IStoreAssets:getVersion.
  */
-- (void)initializeWithIStoreAsssets:(id <IStoreAsssets>)storeAssets;
+- (void)initializeWithIStoreAssets:(id <IStoreAssets>)storeAssets;
 
 /**
  * Initializes StoreInfo from the database. This action should be performed only once during the lifetime of

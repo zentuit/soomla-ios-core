@@ -131,7 +131,7 @@ static NSString* TAG = @"SOOMLA StoreInfo";
     [[[StorageManager getInstance] keyValueStorage] setValue:ec forKey:[KeyValDatabase keyMetaStoreInfo]];
 }
 
-- (void)initializeWithIStoreAsssets:(id <IStoreAsssets>)storeAssets{
+- (void)initializeWithIStoreAssets:(id <IStoreAssets>)storeAssets{
     if(storeAssets == NULL){
         LogError(TAG, @"The given store assets can't be null !");
         return;
