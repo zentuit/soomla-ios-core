@@ -65,13 +65,15 @@ static NSString* TAG = @"SOOMLA StoreController";
     return _instance;
 }
 
-- (void)initializeWithStoreAssets:(id<IStoreAssets>)storeAssets andCustomSecret:(NSString*)secret {
+- (BOOL)initializeWithStoreAssets:(id<IStoreAssets>)storeAssets andCustomSecret:(NSString*)secret {
     if (secret && secret.length > 0) {
         [ObscuredNSUserDefaults setString:secret forKey:@"ISU#LL#SE#REI"];
     } else if ([[ObscuredNSUserDefaults stringForKey:@"ISU#LL#SE#REI" withDefaultValue:@""] isEqualToString:@""]){
         LogError(TAG, @"secret is null or empty. can't initialize store !!");
-        return;
+        return NO;
     }
+    
+    LogDebug(TAG, @"StoreController Initializing ...");
     
     [ObscuredNSUserDefaults setInt:[storeAssets getVersion] forKey:@"SA_VER_NEW"];
     
@@ -88,6 +90,8 @@ static NSString* TAG = @"SOOMLA StoreController";
     
     self.initialized = YES;
     [EventHandling postStoreControllerInitialized];
+    
+    return YES;
 }
 
 - (BOOL)buyInAppStoreWithAppStoreItem:(AppStoreItem*)appStoreItem{

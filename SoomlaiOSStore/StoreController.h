@@ -51,7 +51,7 @@
  * storeAssets is the definition of your application specific assets.
  * customSecret is your encryption secret (it's used to encrypt your data in the database)
  */
-- (void)initializeWithStoreAssets:(id<IStoreAssets>)storeAssets andCustomSecret:(NSString*)secret;
+- (BOOL)initializeWithStoreAssets:(id<IStoreAssets>)storeAssets andCustomSecret:(NSString*)secret;
 /**
  * Start an in app purchase process in the App Store.
  * appStoreItem is the item to purchase. This item has to be defined EXACTLY the same in iTunes Connect.
