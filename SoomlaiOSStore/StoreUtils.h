@@ -24,8 +24,10 @@
 + (void)LogDebug:(NSString*)tag withMessage:(NSString*)msg;
 + (void)LogError:(NSString*)tag withMessage:(NSString*)msg;
 + (NSString*)deviceId;
-+ (NSDictionary*)jsonStringToDict:(NSString*)str;
++ (NSMutableDictionary*)jsonStringToDict:(NSString*)str;
++ (NSMutableArray*)jsonStringToArray:(NSString*)str;
 + (NSString*)dictToJsonString:(NSDictionary*)str;
++ (NSString*)arrayToJsonString:(NSArray*)arr;
 
 @end
 

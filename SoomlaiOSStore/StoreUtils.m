@@ -40,9 +40,9 @@ static NSString* TAG = @"SOOMLA StoreUtils";
     }
 }
 
-+ (NSDictionary*)jsonStringToDict:(NSString*)str {
++ (NSMutableDictionary*)jsonStringToDict:(NSString*)str {
     NSError* error = NULL;
-    NSDictionary *dict =
+    NSMutableDictionary *dict =
     [NSJSONSerialization JSONObjectWithData: [str dataUsingEncoding:NSUTF8StringEncoding]
                                     options: NSJSONReadingMutableContainers
                                       error: &error];
@@ -55,6 +55,21 @@ static NSString* TAG = @"SOOMLA StoreUtils";
     return dict;
 }
 
++ (NSMutableArray*)jsonStringToArray:(NSString*)str {
+    NSError* error = NULL;
+    NSMutableArray *arr =
+    [NSJSONSerialization JSONObjectWithData: [str dataUsingEncoding:NSUTF8StringEncoding]
+                                    options: NSJSONReadingMutableContainers
+                                      error: &error];
+    if (error) {
+        LogError(TAG, ([NSString stringWithFormat:@"There was a problem parsing the given JSON string. error: %@", [error localizedDescription]]));
+        
+        return NULL;
+    }
+    
+    return arr;
+}
+
 + (NSString*)dictToJsonString:(NSDictionary*)dict {
     NSError *error;
     NSData *jsonData = [NSJSONSerialization dataWithJSONObject:dict
@@ -63,6 +78,21 @@ static NSString* TAG = @"SOOMLA StoreUtils";
     
     if (! jsonData) {
         LogError(TAG, ([NSString stringWithFormat:@"There was a problem parsing the given NSDictionary. error: %@", [error localizedDescription]]));
+        
+        return NULL;
+    }
+    
+    return [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+}
+
++ (NSString*)arrayToJsonString:(NSArray*)arr {
+    NSError *error;
+    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:arr
+                                                       options:NSJSONWritingPrettyPrinted
+                                                         error:&error];
+    
+    if (! jsonData) {
+        LogError(TAG, ([NSString stringWithFormat:@"There was a problem parsing the given NSArray. error: %@", [error localizedDescription]]));
         
         return NULL;
     }
