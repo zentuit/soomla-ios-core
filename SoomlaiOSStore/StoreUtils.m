@@ -47,7 +47,7 @@ static NSString* TAG = @"SOOMLA StoreUtils";
                                     options: NSJSONReadingMutableContainers
                                       error: &error];
     if (error) {
-        LogError(TAG, ([NSString stringWithFormat:@"There was a problem parsing the given JSON string. error: %@", [error localizedDescription]]));
+        LogError(TAG, ([NSString stringWithFormat:@"There was a problem parsing the given JSON string: %@ error: %@", str, [error localizedDescription]]));
         
         return NULL;
     }
@@ -62,7 +62,7 @@ static NSString* TAG = @"SOOMLA StoreUtils";
                                     options: NSJSONReadingMutableContainers
                                       error: &error];
     if (error) {
-        LogError(TAG, ([NSString stringWithFormat:@"There was a problem parsing the given JSON string. error: %@", [error localizedDescription]]));
+        LogError(TAG, ([NSString stringWithFormat:@"There was a problem parsing the given JSON string: %@ error: %@", str, [error localizedDescription]]));
         
         return NULL;
     }
