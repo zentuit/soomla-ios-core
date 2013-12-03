@@ -51,5 +51,6 @@
 
 
 + (NSString *) applicationDirectory;
++ (BOOL)addSkipBackupAttributeToItemAtURL:(NSURL *)URL;
 
 @end
