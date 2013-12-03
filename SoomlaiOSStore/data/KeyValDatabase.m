@@ -96,6 +96,9 @@ static NSString* TAG = @"SOOMLA KeyValDatabase";
             
             if ([filemgr fileExistsAtPath: databasebPath] == NO) {
                 [self createDBWithPath:[databasebPath UTF8String]];
+                
+                NSURL* url = [NSURL fileURLWithPath:databasebPath];
+                [StorageManager addSkipBackupAttributeToItemAtURL:url];
             }
         }
         return self;
