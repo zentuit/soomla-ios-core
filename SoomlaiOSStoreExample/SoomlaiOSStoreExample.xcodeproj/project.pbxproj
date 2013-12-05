@@ -155,7 +155,7 @@
 		C054F1D017F86DE3006F5B8E /* FBEncryptorAES.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBEncryptorAES.m; sourceTree = "<group>"; };
 		C054F1D117F86DE3006F5B8E /* NSData-Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData-Base64.h"; sourceTree = "<group>"; };
 		C054F1D217F86DE3006F5B8E /* NSData-Base64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData-Base64.m"; sourceTree = "<group>"; };
-		C054F1D317F86DE3006F5B8E /* IStoreAsssets.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IStoreAsssets.h; sourceTree = "<group>"; };
+		C054F1D317F86DE3006F5B8E /* IStoreAssets.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IStoreAssets.h; sourceTree = "<group>"; };
 		C054F1D517F86DE3006F5B8E /* OpenUDID.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpenUDID.h; sourceTree = "<group>"; };
 		C054F1D617F86DE3006F5B8E /* OpenUDID.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OpenUDID.m; sourceTree = "<group>"; };
 		C054F1D817F86DE3006F5B8E /* PurchaseType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PurchaseType.h; sourceTree = "<group>"; };
@@ -256,7 +256,7 @@
 				C054F1C617F86DE3006F5B8E /* EventHandling.m */,
 				C054F1C717F86DE3006F5B8E /* exceptions */,
 				C054F1CE17F86DE3006F5B8E /* FBEncryptor */,
-				C054F1D317F86DE3006F5B8E /* IStoreAsssets.h */,
+				C054F1D317F86DE3006F5B8E /* IStoreAssets.h */,
 				C054F1D417F86DE3006F5B8E /* OpenUDID */,
 				C054F1D717F86DE3006F5B8E /* PurchaseTypes */,
 				C054F1DE17F86DE3006F5B8E /* SoomlaiOSStore-Prefix.pch */,
