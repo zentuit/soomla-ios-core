@@ -286,6 +286,10 @@ static NSString* TAG = @"SOOMLA StoreController";
     [EventHandling postTransactionRestored:YES];
 }
 
+- (void)paymentQueue:(SKPaymentQueue *)queue restoreCompletedTransactionsFailedWithError:(NSError *)error {
+    [EventHandling postTransactionRestored:NO];
+}
+
 
 #pragma mark -
 #pragma mark SKProductsRequestDelegate methods
