@@ -41,6 +41,23 @@
     [[[StorageManager getInstance] kvDatabase] deleteKeyValWithKey:key];
 }
 
+- (NSDictionary*)getKeysValuesForNonEncryptedQuery:(NSString*)query {
+    NSDictionary* dbResults = [[[StorageManager getInstance] kvDatabase] getKeysValsForQuery:query];
+    NSMutableDictionary* results = [NSMutableDictionary dictionary];
+    NSArray* keys = [dbResults allKeys];
+    for (NSString* key in keys) {
+        NSString* val = [dbResults objectForKey:key];
+        if (val && [val length]>0){
+            NSString* valDec = [StoreEncryptor decryptToString:val];
+            if (valDec && [valDec length]>0){
+                [results setObject:valDec forKey:key];
+            }
+        }
+    }
+    
+    return results;
+}
+
 - (NSArray*)getValuesForNonEncryptedQuery:(NSString*)query {
     NSArray* vals = [[[StorageManager getInstance] kvDatabase] getValsForQuery:query];
     NSMutableArray* results = [NSMutableArray array];

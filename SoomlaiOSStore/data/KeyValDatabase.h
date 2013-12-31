@@ -40,6 +40,7 @@
  * key the key of the key-val pair.
  */
 - (NSString*)getValForKey:(NSString *)key;
+- (NSDictionary*)getKeysValsForQuery:(NSString*)query;
 - (NSArray*)getValsForQuery:(NSString*)query;
 - (void)deleteKeyValWithKey:(NSString *)key;
 

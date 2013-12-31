@@ -40,6 +40,7 @@
  */
 - (void)deleteValueForKey:(NSString*)key;
 
+- (NSDictionary*)getKeysValuesForNonEncryptedQuery:(NSString*)query;
 - (NSArray*)getValuesForNonEncryptedQuery:(NSString*)query;
 
 /**
