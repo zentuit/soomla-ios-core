@@ -24,6 +24,7 @@
 + (void)setBool:(BOOL)value forKey:(NSString *)defaultName;
 + (void)setString:(NSString*)value forKey:(NSString *)defaultName;
 + (int)intForKey:(NSString *)defaultName withDefaultValue:(int)def;
++ (int)intForKey:(NSString *)defaultName withDefaultValue:(int)def andDeviceId:(NSString*)deviceId;
 + (void)setInt:(int)value forKey:(NSString *)defaultName;
 + (long long)longlongForKey:(NSString *)defaultName withDefaultValue:(long long)def;
 + (void)setLongLong:(long long)value forKey:(NSString *)defaultName;

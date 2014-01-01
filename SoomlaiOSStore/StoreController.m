@@ -66,6 +66,7 @@ static NSString* TAG = @"SOOMLA StoreController";
 }
 
 - (BOOL)initializeWithStoreAssets:(id<IStoreAssets>)storeAssets andCustomSecret:(NSString*)secret {
+    
     if (secret && secret.length > 0) {
         [ObscuredNSUserDefaults setString:secret forKey:@"ISU#LL#SE#REI"];
     } else if ([[ObscuredNSUserDefaults stringForKey:@"ISU#LL#SE#REI" withDefaultValue:@""] isEqualToString:@""]){

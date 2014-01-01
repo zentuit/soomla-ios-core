@@ -17,6 +17,11 @@
     return [SOOM_SEC stringByAppendingString:[StoreUtils deviceId]];
 }
 
++ (NSString*)keyWithDeviceId:(NSString*)deviceId
+{
+    return [SOOM_SEC stringByAppendingString:deviceId];
+}
+
 + (BOOL)boolForKey:(NSString *)defaultName withDefaultValue:(BOOL)def {
     @synchronized(self) {
         NSString* val = [[NSUserDefaults standardUserDefaults] objectForKey:defaultName];
@@ -59,6 +64,18 @@
         }
         val = [FBEncryptorAES decryptBase64String:val
                                         keyString:[ObscuredNSUserDefaults key]];
+        return [val intValue];
+    }
+}
+
++ (int)intForKey:(NSString *)defaultName withDefaultValue:(int)def andDeviceId:(NSString*)deviceId {
+    @synchronized(self) {
+        NSString* val = [[NSUserDefaults standardUserDefaults] objectForKey:defaultName];
+        if (!val) {
+            return def;
+        }
+        val = [FBEncryptorAES decryptBase64String:val
+                                        keyString:[ObscuredNSUserDefaults keyWithDeviceId:deviceId]];
         return [val intValue];
     }
 }
