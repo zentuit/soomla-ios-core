@@ -40,7 +40,7 @@
 
 @implementation StoreController
 
-@synthesize initialized, storeOpen;
+@synthesize initialized;
 
 static NSString* TAG = @"SOOMLA StoreController";
 
@@ -117,35 +117,6 @@ static NSString* TAG = @"SOOMLA StoreController";
     }
     
     return YES;
-}
-
-- (void)storeOpening{
-    if(![self checkInit]) return;
-    
-    @synchronized(self) {
-        if (self.storeOpen) {
-            LogError(TAG, @"You called storeOpening whern the store was already open !");
-            return;
-        }
-        
-//        if(![[StoreInfo getInstance] initializeFromDB]){
-//            [EventHandling postUnexpectedError];
-//            LogError(TAG, @"An unexpected error occured while trying to initialize storeInfo from DB.");
-//            return;
-//        }
-        
-        [EventHandling postOpeningStore];
-        
-        self.storeOpen = YES;
-    }
-}
-
-- (void)storeClosing{
-    if (!self.storeOpen) return;
-    
-    self.storeOpen = NO;
-    
-    [EventHandling postClosingStore];
 }
 
 

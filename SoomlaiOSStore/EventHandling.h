@@ -47,6 +47,7 @@
 #define EVENT_UNEXPECTED_ERROR_IN_STORE     @"UnexpectedErrorInStore"
 
 
+
 // UserInfo Elements
 #define DICT_ELEMENT_BALANCE           @"balance"
 #define DICT_ELEMENT_CURRENCY          @"VirtualCurrency"
@@ -79,7 +80,6 @@
 
 + (void)postBillingSupported;
 + (void)postBillingNotSupported;
-+ (void)postClosingStore;
 + (void)postChangedBalance:(int)balance forCurrency:(VirtualCurrency*)currency withAmount:(int)amountAdded;
 + (void)postChangedBalance:(int)balance forGood:(VirtualGood*)good withAmount:(int)amountAdded;
 + (void)postGoodEquipped:(EquippableVG*)good;
@@ -87,7 +87,6 @@
 + (void)postGoodUpgrade:(VirtualGood*)good withGoodUpgrade:(UpgradeVG*)goodUpgrade;
 + (void)postItemPurchaseStarted:(PurchasableVirtualItem*)item;
 + (void)postItemPurchased:(PurchasableVirtualItem*)item;
-+ (void)postOpeningStore;
 + (void)postAppStorePurchaseCancelled:(PurchasableVirtualItem*)purchasableVirtualItem;
 + (void)postAppStorePurchase:(PurchasableVirtualItem*)purchasableVirtualItem;
 + (void)postAppStorePurchaseVerification:(BOOL)verified forItem:(PurchasableVirtualItem*)purchasableVirtualItem andTransaction:(SKPaymentTransaction*)transaction forObject:(id)object;

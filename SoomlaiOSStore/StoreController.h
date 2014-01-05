@@ -37,12 +37,10 @@
 @interface StoreController : NSObject <SKProductsRequestDelegate, SKPaymentTransactionObserver>{
     @private
     BOOL initialized;
-    BOOL storeOpen;
     SoomlaVerification* sv;
 }
 
 @property BOOL initialized;
-@property BOOL storeOpen;
 
 + (StoreController*)getInstance;
 
@@ -57,14 +55,6 @@
  * appStoreItem is the item to purchase. This item has to be defined EXACTLY the same in iTunes Connect.
  */
 - (BOOL)buyInAppStoreWithAppStoreItem:(AppStoreItem*)appStoreItem;
-/**
- * Call this function when you open the actual store window
- */
-- (void)storeOpening;
-/**
- * Call this function when you close the actual store window.
- */
-- (void)storeClosing;
 /**
  * Initiate the restoreTransactions process
  */

@@ -24,7 +24,6 @@
 + (void)observeAllEventsWithObserver:(id)observer withSelector:(SEL)selector{
     [[NSNotificationCenter defaultCenter] addObserver:observer selector:selector name:EVENT_BILLING_NOT_SUPPORTED object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:observer selector:selector name:EVENT_BILLING_SUPPORTED object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:observer selector:selector name:EVENT_CLOSING_STORE object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:observer selector:selector name:EVENT_CURRENCY_BALANCE_CHANGED object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:observer selector:selector name:EVENT_GOOD_BALANCE_CHANGED object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:observer selector:selector name:EVENT_GOOD_EQUIPPED object:nil];
@@ -32,7 +31,6 @@
     [[NSNotificationCenter defaultCenter] addObserver:observer selector:selector name:EVENT_GOOD_UPGRADE object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:observer selector:selector name:EVENT_ITEM_PURCHASED object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:observer selector:selector name:EVENT_ITEM_PURCHASE_STARTED object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:observer selector:selector name:EVENT_OPENING_STORE object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:observer selector:selector name:EVENT_APPSTORE_PURCHASE_CANCELLED object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:observer selector:selector name:EVENT_APPSTORE_PURCHASED object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:observer selector:selector name:EVENT_APPSTORE_PURCHASE_VERIF object:nil];
@@ -50,10 +48,6 @@
 
 + (void)postBillingNotSupported{
     [[NSNotificationCenter defaultCenter] postNotificationName:EVENT_BILLING_NOT_SUPPORTED object:self];
-}
-
-+ (void)postClosingStore{
-    [[NSNotificationCenter defaultCenter] postNotificationName:EVENT_CLOSING_STORE object:self];
 }
 
 + (void)postChangedBalance:(int)balance forCurrency:(VirtualCurrency*)currency withAmount:(int)amountAdded {
@@ -100,10 +94,6 @@
 + (void)postItemPurchased:(PurchasableVirtualItem*)item{
     NSDictionary *userInfo = [NSDictionary dictionaryWithObject:item forKey:DICT_ELEMENT_PURCHASABLE];
     [[NSNotificationCenter defaultCenter] postNotificationName:EVENT_ITEM_PURCHASED object:self userInfo:userInfo];
-}
-
-+ (void)postOpeningStore{
-    [[NSNotificationCenter defaultCenter] postNotificationName:EVENT_OPENING_STORE object:self];
 }
 
 + (void)postAppStorePurchaseCancelled:(PurchasableVirtualItem*)purchasableVirtualItem {
