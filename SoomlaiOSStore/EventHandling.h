@@ -28,7 +28,7 @@
 // Events
 #define EVENT_BILLING_NOT_SUPPORTED         @"BillingNotSupported"
 #define EVENT_BILLING_SUPPORTED             @"BillingSupported"
-#define EVENT_CLOSING_STORE                 @"ClosingStore"
+//#define EVENT_CLOSING_STORE                 @"ClosingStore"
 #define EVENT_CURRENCY_BALANCE_CHANGED      @"ChangedCurrencyBalance"
 #define EVENT_GOOD_BALANCE_CHANGED          @"ChangedGoodBalance"
 #define EVENT_GOOD_EQUIPPED                 @"VirtualGoodEquipped"
@@ -36,7 +36,7 @@
 #define EVENT_GOOD_UPGRADE                  @"VirtualGoodUpgrade"
 #define EVENT_ITEM_PURCHASED                @"ItemPurchased"
 #define EVENT_ITEM_PURCHASE_STARTED         @"ItemPurchaseProcessStarted"
-#define EVENT_OPENING_STORE                 @"OpeningStore"
+//#define EVENT_OPENING_STORE                 @"OpeningStore"
 #define EVENT_APPSTORE_PURCHASE_CANCELLED   @"AppStorePurchaseCancelled"
 #define EVENT_APPSTORE_PURCHASED            @"AppStorePurchased"
 #define EVENT_APPSTORE_PURCHASE_VERIF       @"AppStorePurchaseVerification"
