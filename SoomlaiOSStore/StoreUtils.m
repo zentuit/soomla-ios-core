@@ -17,7 +17,6 @@
 #import "StoreUtils.h"
 #import "StoreConfig.h"
 #import "OpenUDID.h"
-#import <AdSupport/AdSupport.h>
 #import "ObscuredNSUserDefaults.h"
 
 @implementation StoreUtils
