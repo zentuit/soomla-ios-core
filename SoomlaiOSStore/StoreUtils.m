@@ -34,16 +34,7 @@ static NSString* TAG = @"SOOMLA StoreUtils";
     NSLog(@"[*** ERROR ***] %@: %@", tag, msg);
 }
 
-+ (NSString*)deviceIdNew {
-    ASIdentifierManager *adIdentManager = [ASIdentifierManager sharedManager];
-    if (adIdentManager && adIdentManager.advertisingTrackingEnabled && [adIdentManager respondsToSelector:@selector(advertisingIdentifier)]) {
-        return [[adIdentManager advertisingIdentifier] UUIDString];
-    } else {
-        return [self deviceIdOld];
-    }
-}
-
-+ (NSString*)deviceIdOld {
++ (NSString*)deviceIdPreferVendor {
     if ([[UIDevice currentDevice] respondsToSelector:@selector(identifierForVendor)]) {
         return [[[UIDevice currentDevice] identifierForVendor] UUIDString];
     } else {
@@ -51,30 +42,11 @@ static NSString* TAG = @"SOOMLA StoreUtils";
     }
 }
 
-// This function is only used to decide what mechanism to use in order to fetch the device's UDID.
-// This is introduced along with the IDFA fetching of UDID in order to backward support previous devices that use the SDK.
-+ (void)udidBackwardInit {
-    NSString* uuidSaved = [[NSUserDefaults standardUserDefaults] stringForKey:@"UDID_SOOMLA"];
-    if (uuidSaved && [uuidSaved length] > 0) {
-        return;
-    }
-    
-    int saVerSaved = [ObscuredNSUserDefaults intForKey:@"SA_VER_NEW" withDefaultValue:-1 andDeviceId:[self deviceIdOld]];
-    if (saVerSaved>-1) {
-        [[NSUserDefaults standardUserDefaults] setObject:[self deviceIdOld] forKey:@"UDID_SOOMLA"];
-        [[NSUserDefaults standardUserDefaults] synchronize];
-    } else {
-        [[NSUserDefaults standardUserDefaults] setObject:[self deviceIdNew] forKey:@"UDID_SOOMLA"];
-        [[NSUserDefaults standardUserDefaults] synchronize];
-    }
-}
-
+/* We check for UDID_SOOMLA to support devices with older versions of ios-store */
 + (NSString*)deviceId {
     NSString* udid = [[NSUserDefaults standardUserDefaults] stringForKey:@"UDID_SOOMLA"];
-    if (!udid) {
-        [self udidBackwardInit];
-        udid = [[NSUserDefaults standardUserDefaults] stringForKey:@"UDID_SOOMLA"];
-        LogDebug(TAG, @"Can't find 'UDID_SOOMLA'. Fetching UDID according to udidBackwardInit policy.");
+    if (!udid || [udid length] == 0) {
+	return [self deviceIdPreferVendor];
     }
     return udid;
 }
