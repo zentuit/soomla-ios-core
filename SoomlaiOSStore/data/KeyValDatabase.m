@@ -56,10 +56,6 @@ static NSString* TAG = @"SOOMLA KeyValDatabase";
     return @"meta.storeinfo";
 }
 
-+ (NSString*) keyMetaStorefrontInfo {
-    return @"meta.storefrontinfo";    
-}
-
 - (void)createDBWithPath:(const char *)dbpath {
     if (sqlite3_open(dbpath, &database) == SQLITE_OK)
     {

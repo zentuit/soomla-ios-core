@@ -31,7 +31,6 @@
  * In addition to initializing this class, you'll also have to call
  * StoreController::storeOpening and StoreController::storeClosing when you open the store window or close it. These two
  * calls initializes important components that support billing and storage information (see implementation below).
- * IMPORTANT: if you use the SOOMLA's storefront, then DON'T call these 2 functions.
  *
  */
 @interface StoreController : NSObject <SKProductsRequestDelegate, SKPaymentTransactionObserver>{

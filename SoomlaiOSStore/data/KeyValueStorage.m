@@ -18,12 +18,36 @@
 #import "KeyValDatabase.h"
 #import "StoreEncryptor.h"
 #import "StorageManager.h"
+#import "KeyValDatabase.h"
+#import "ObscuredNSUserDefaults.h"
+#import "StoreConfig.h"
 
 @implementation KeyValueStorage
 
+@synthesize kvDatabase;
+
+- (id)init{
+    self = [super init];
+    if (self){
+        self.kvDatabase = [[KeyValDatabase alloc] init];
+        
+        int mt_ver = [ObscuredNSUserDefaults intForKey:@"MT_VER" withDefaultValue:0];
+        int sa_ver_old = [ObscuredNSUserDefaults intForKey:@"SA_VER_OLD" withDefaultValue:-1];
+        int sa_ver_new = [ObscuredNSUserDefaults intForKey:@"SA_VER_NEW" withDefaultValue:1];
+        if (mt_ver < METADATA_VERSION || sa_ver_old < sa_ver_new) {
+            [ObscuredNSUserDefaults setInt:METADATA_VERSION forKey:@"MT_VER"];
+            [ObscuredNSUserDefaults setInt:sa_ver_new forKey:@"SA_VER_OLD"];
+            
+            [kvDatabase deleteKeyValWithKey:[StoreEncryptor encryptString:[KeyValDatabase keyMetaStoreInfo]]];
+        }
+    }
+    
+    return self;
+}
+
 - (NSString*)getValueForKey:(NSString*)key {
     key = [StoreEncryptor encryptString:key];
-    NSString* val = [[[StorageManager getInstance] kvDatabase] getValForKey:key];
+    NSString* val = [kvDatabase getValForKey:key];
     if (val && [val length]>0){
         return [StoreEncryptor decryptToString:val];
     }
@@ -33,16 +57,16 @@
 
 - (void)setValue:(NSString*)val forKey:(NSString*)key {
     key = [StoreEncryptor encryptString:key];
-    [[[StorageManager getInstance] kvDatabase] setVal:[StoreEncryptor encryptString:val] forKey:key];
+    [kvDatabase setVal:[StoreEncryptor encryptString:val] forKey:key];
 }
 
 - (void)deleteValueForKey:(NSString*)key {
     key = [StoreEncryptor encryptString:key];
-    [[[StorageManager getInstance] kvDatabase] deleteKeyValWithKey:key];
+    [kvDatabase deleteKeyValWithKey:key];
 }
 
 - (NSDictionary*)getKeysValuesForNonEncryptedQuery:(NSString*)query {
-    NSDictionary* dbResults = [[[StorageManager getInstance] kvDatabase] getKeysValsForQuery:query];
+    NSDictionary* dbResults = [kvDatabase getKeysValsForQuery:query];
     NSMutableDictionary* results = [NSMutableDictionary dictionary];
     NSArray* keys = [dbResults allKeys];
     for (NSString* key in keys) {
@@ -59,7 +83,7 @@
 }
 
 - (NSArray*)getValuesForNonEncryptedQuery:(NSString*)query {
-    NSArray* vals = [[[StorageManager getInstance] kvDatabase] getValsForQuery:query];
+    NSArray* vals = [kvDatabase getValsForQuery:query];
     NSMutableArray* results = [NSMutableArray array];
     for (NSString* val in vals) {
         if (val && [val length]>0){
@@ -75,7 +99,7 @@
 
 
 - (NSString*)getValueForNonEncryptedKey:(NSString*)key {
-    NSString* val = [[[StorageManager getInstance] kvDatabase] getValForKey:key];
+    NSString* val = [kvDatabase getValForKey:key];
     if (val && [val length]>0){
         return [StoreEncryptor decryptToString:val];
     }
@@ -84,11 +108,11 @@
 }
 
 - (void)setValue:(NSString*)val forNonEncryptedKey:(NSString*)key {
-    [[[StorageManager getInstance] kvDatabase] setVal:[StoreEncryptor encryptString:val] forKey:key];
+    [kvDatabase setVal:[StoreEncryptor encryptString:val] forKey:key];
 }
 
 - (void)deleteValueForNonEncryptedKey:(NSString*)key {
-    [[[StorageManager getInstance] kvDatabase] deleteKeyValWithKey:key];
+    [kvDatabase deleteKeyValWithKey:key];
 }
 
 @end

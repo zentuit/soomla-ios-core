@@ -15,13 +15,9 @@
  */
 
 #import "StorageManager.h"
-#import "KeyValDatabase.h"
 #import "VirtualCurrencyStorage.h"
 #import "VirtualGoodStorage.h"
 #import "NonConsumableStorage.h"
-#import "ObscuredNSUserDefaults.h"
-#import "StoreConfig.h"
-#import "StoreEncryptor.h"
 #import "KeyValueStorage.h"
 #import "StoreUtils.h"
 #import "VirtualItemStorage.h"
@@ -29,13 +25,10 @@
 #import "VirtualGood.h"
 #import "VirtualCurrency.h"
 
-//@interface StorageManager (Private)
-//- (void)migrateOldData;
-//@end
 
 @implementation StorageManager
 
-@synthesize kvDatabase, virtualCurrencyStorage, virtualGoodStorage, nonConsumableStorage, keyValueStorage;
+@synthesize virtualCurrencyStorage, virtualGoodStorage, nonConsumableStorage, keyValueStorage;
 
 static NSString* TAG = @"SOOMLA StorageManager";
 
@@ -54,22 +47,10 @@ static NSString* TAG = @"SOOMLA StorageManager";
 - (id)init{
     self = [super init];
     if (self){
-        self.kvDatabase = [[KeyValDatabase alloc] init];
+        self.keyValueStorage = [[KeyValueStorage alloc] init];
         self.virtualCurrencyStorage = [[VirtualCurrencyStorage alloc] init];
         self.virtualGoodStorage = [[VirtualGoodStorage alloc] init];
         self.nonConsumableStorage = [[NonConsumableStorage alloc] init];
-        self.keyValueStorage = [[KeyValueStorage alloc] init];
-        
-        int mt_ver = [ObscuredNSUserDefaults intForKey:@"MT_VER" withDefaultValue:0];
-        int sa_ver_old = [ObscuredNSUserDefaults intForKey:@"SA_VER_OLD" withDefaultValue:-1];
-        int sa_ver_new = [ObscuredNSUserDefaults intForKey:@"SA_VER_NEW" withDefaultValue:1];
-        if (mt_ver < METADATA_VERSION || sa_ver_old < sa_ver_new) {
-            [ObscuredNSUserDefaults setInt:METADATA_VERSION forKey:@"MT_VER"];
-            [ObscuredNSUserDefaults setInt:sa_ver_new forKey:@"SA_VER_OLD"];
-            
-            [kvDatabase deleteKeyValWithKey:[StoreEncryptor encryptString:[KeyValDatabase keyMetaStoreInfo]]];
-            [kvDatabase deleteKeyValWithKey:[StoreEncryptor encryptString:[KeyValDatabase keyMetaStorefrontInfo]]];
-        }
     }
     
     return self;

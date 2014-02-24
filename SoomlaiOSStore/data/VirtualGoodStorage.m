@@ -18,13 +18,13 @@
 #import "VirtualGood.h"
 #import "StorageManager.h"
 #import "KeyValDatabase.h"
-#import "StoreEncryptor.h"
 #import "EventHandling.h"
 #import "StoreUtils.h"
 #import "StoreInfo.h"
 #import "VirtualItemNotFoundException.h"
 #import "UpgradeVG.h"
 #import "EquippableVG.h"
+#import "KeyValueStorage.h"
 
 @implementation VirtualGoodStorage
 
@@ -41,9 +41,9 @@
 - (void)removeUpgradesFrom:(VirtualGood*)good withEvent:(BOOL)notify {
     LogDebug(tag, ([NSString stringWithFormat:@"Removing upgrade information from virtual good: %@", good.name]));
     
-    NSString* key = [StoreEncryptor encryptString:[KeyValDatabase keyGoodUpgrade:good.itemId]];
+    NSString* key = [KeyValDatabase keyGoodUpgrade:good.itemId];
     
-    [[[StorageManager getInstance] kvDatabase] deleteKeyValWithKey:key];
+    [[[StorageManager getInstance] keyValueStorage] deleteValueForKey:key];
     
     [EventHandling postGoodUpgrade:good withGoodUpgrade:nil];
 }
@@ -58,10 +58,9 @@
     
     LogDebug(tag, ([NSString stringWithFormat:@"Assigning upgrade %@ to virtual good: %@", upgradeVG.name, good.name]));
     
-    NSString* key = [StoreEncryptor encryptString:[KeyValDatabase keyGoodUpgrade:good.itemId]];
+    NSString* key = [KeyValDatabase keyGoodUpgrade:good.itemId];
     
-    NSString* upItemId = [StoreEncryptor encryptString:upgradeVG.itemId];
-    [[[StorageManager getInstance] kvDatabase] setVal:upItemId forKey:key];
+    [[[StorageManager getInstance] keyValueStorage] setValue:upgradeVG.itemId forKey:key];
     
     [EventHandling postGoodUpgrade:good withGoodUpgrade:upgradeVG];
 }
@@ -69,9 +68,9 @@
 - (UpgradeVG*)currentUpgradeOf:(VirtualGood*)good {
     LogDebug(tag, ([NSString stringWithFormat:@"Fetching upgrade to virtual good: %@", good.name]));
     
-    NSString* key = [StoreEncryptor encryptString:[KeyValDatabase keyGoodUpgrade:good.itemId]];
+    NSString* key = [KeyValDatabase keyGoodUpgrade:good.itemId];
     
-    NSString* upItemId = [[[StorageManager getInstance] kvDatabase] getValForKey:key];
+    NSString* upItemId = [[[StorageManager getInstance] keyValueStorage] getValueForKey:key];
     
     if(!upItemId) {
         LogDebug(tag, ([NSString stringWithFormat:@"You tried to fetch the current upgrade of %@ but there's no upgrade in the DB for it.", good.name]));
@@ -79,7 +78,6 @@
     }
     
     @try {
-        upItemId = [StoreEncryptor decryptToString:upItemId];
         return (UpgradeVG*)[[StoreInfo getInstance] virtualItemWithId:upItemId];
     } @catch (VirtualItemNotFoundException* ex){
         LogError(tag, @"The current upgrade's itemId from the DB is not found in StoreInfo.");
@@ -93,8 +91,8 @@
 - (BOOL)isGoodEquipped:(EquippableVG*)good {
     LogDebug(tag, ([NSString stringWithFormat:@"checking if virtual good with itemId: %@ is equipped", good.itemId]));
     
-    NSString* key = [StoreEncryptor encryptString:[KeyValDatabase keyGoodEquipped:good.itemId]];
-    NSString* val = [[[StorageManager getInstance] kvDatabase] getValForKey:key];
+    NSString* key = [KeyValDatabase keyGoodEquipped:good.itemId];
+    NSString* val = [[[StorageManager getInstance] keyValueStorage] getValueForKey:key];
     
     if (!val || [val length]==0){
         return NO;
@@ -129,15 +127,15 @@
 - (void)privEquipGood:(EquippableVG*)good withEquipValue:(BOOL)equip withEvent:(BOOL)notify{
     LogDebug(tag, ([NSString stringWithFormat:@"%@ %@.", (equip ? @"equipping" : @"unequipping"), good.name]));
     
-    NSString* key = [StoreEncryptor encryptString:[KeyValDatabase keyGoodEquipped:good.itemId]];
+    NSString* key = [KeyValDatabase keyGoodEquipped:good.itemId];
     
     if (equip) {
-        [[[StorageManager getInstance] kvDatabase] setVal:@"equipped" forKey:key];
+        [[[StorageManager getInstance] keyValueStorage] setValue:@"equipped" forKey:key];
         if (notify) {
             [EventHandling postGoodEquipped:good];
         }
     } else {
-        [[[StorageManager getInstance] kvDatabase] deleteKeyValWithKey:key];
+        [[[StorageManager getInstance] keyValueStorage] deleteValueForKey:key];
         if (notify) {
             [EventHandling postGoodUnEquipped:good];
         }

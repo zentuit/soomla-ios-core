@@ -17,27 +17,25 @@
 #import "VirtualItemStorage.h"
 #import "VirtualItem.h"
 #import "StorageManager.h"
-#import "StoreEncryptor.h"
 #import "KeyValDatabase.h"
 #import "StoreUtils.h"
+#import "KeyValueStorage.h"
 
 @implementation VirtualItemStorage
 
 - (int)balanceForItem:(VirtualItem*)item{
     LogDebug(tag, ([NSString stringWithFormat:@"trying to fetch balance for virtual item with itemId: %@", item.itemId]));
     
-    NSString* key = [StoreEncryptor encryptString:[self keyBalance:item.itemId]];
-    NSString* val = [[[StorageManager getInstance] kvDatabase] getValForKey:key];
+    NSString* key = [self keyBalance:item.itemId];
+    NSString* val = [[[StorageManager getInstance] keyValueStorage] getValueForKey:key];
     
     if (!val || [val length]==0){
         return 0;
     }
     
-    NSNumber* balance = [StoreEncryptor decryptToNumber:val];
+    LogDebug(tag, ([NSString stringWithFormat:@"the balance for %@ is: %d", item.itemId, [val intValue]]));
     
-    LogDebug(tag, ([NSString stringWithFormat:@"the balance for %@ is: %d", item.itemId, [balance intValue]]));
-    
-    return [balance intValue];
+    return [val intValue];
 }
 
 - (int)addAmount:(int)amount toItem:(VirtualItem*)item{
@@ -46,9 +44,9 @@
 - (int)addAmount:(int)amount toItem:(VirtualItem*)item withEvent:(BOOL)notify {
     LogDebug(tag, ([NSString stringWithFormat:@"adding %d %@", amount, item.name]));
     
-    NSString* key = [StoreEncryptor encryptString:[self keyBalance:item.itemId]];
+    NSString* key = [self keyBalance:item.itemId];
     int balance = [self balanceForItem:item] + amount;
-    [[[StorageManager getInstance] kvDatabase] setVal:[StoreEncryptor encryptNumber:[NSNumber numberWithInt:balance]] forKey:key];
+    [[[StorageManager getInstance] keyValueStorage] setValue:[NSString stringWithFormat:@"%d",balance] forKey:key];
 
     if (notify) {
         [self postBalanceChangeToItem:item withBalance:balance andAmountAdded:amount];
@@ -64,13 +62,13 @@
 - (int)removeAmount:(int)amount fromItem:(VirtualItem*)item withEvent:(BOOL)notify {
     LogDebug(tag, ([NSString stringWithFormat:@"removing %d %@", amount, item.name]));
     
-    NSString* key = [StoreEncryptor encryptString:[self keyBalance:item.itemId]];
+    NSString* key = [self keyBalance:item.itemId];
     int balance = [self balanceForItem:item] - amount;
 	if (balance < 0) {
 	    balance = 0;
 	    amount = 0;
 	}
-    [[[StorageManager getInstance] kvDatabase] setVal:[StoreEncryptor encryptNumber:[NSNumber numberWithInt:balance]] forKey:key];
+    [[[StorageManager getInstance] keyValueStorage] setValue:[NSString stringWithFormat:@"%d",balance] forKey:key];
     
     if (notify) {
         [self postBalanceChangeToItem:item withBalance:balance andAmountAdded:(-1*amount)];
@@ -90,8 +88,8 @@
         return balance;
     }
     
-    NSString* key = [StoreEncryptor encryptString:[self keyBalance:item.itemId]];
-    [[[StorageManager getInstance] kvDatabase] setVal:[StoreEncryptor encryptNumber:[NSNumber numberWithInt:balance]] forKey:key];
+    NSString* key = [self keyBalance:item.itemId];
+    [[[StorageManager getInstance] keyValueStorage] setValue:[NSString stringWithFormat:@"%d",balance] forKey:key];
     
     if (notify) {
         [self postBalanceChangeToItem:item withBalance:balance andAmountAdded:0];

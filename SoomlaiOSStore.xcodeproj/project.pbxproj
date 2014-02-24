@@ -29,9 +29,6 @@
 		C0241390176F2512007BB351 /* StoreEncryptor.h in Headers */ = {isa = PBXBuildFile; fileRef = C0241336176F2512007BB351 /* StoreEncryptor.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C0241391176F2512007BB351 /* StoreEncryptor.m in Sources */ = {isa = PBXBuildFile; fileRef = C0241337176F2512007BB351 /* StoreEncryptor.m */; };
 		C0241392176F2512007BB351 /* StoreEncryptor.m in Sources */ = {isa = PBXBuildFile; fileRef = C0241337176F2512007BB351 /* StoreEncryptor.m */; };
-		C0241393176F2512007BB351 /* StorefrontInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = C0241338176F2512007BB351 /* StorefrontInfo.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		C0241394176F2512007BB351 /* StorefrontInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = C0241339176F2512007BB351 /* StorefrontInfo.m */; };
-		C0241395176F2512007BB351 /* StorefrontInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = C0241339176F2512007BB351 /* StorefrontInfo.m */; };
 		C0241396176F2512007BB351 /* StoreInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = C024133A176F2512007BB351 /* StoreInfo.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C0241397176F2512007BB351 /* StoreInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = C024133B176F2512007BB351 /* StoreInfo.m */; };
 		C0241398176F2512007BB351 /* StoreInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = C024133B176F2512007BB351 /* StoreInfo.m */; };
@@ -167,8 +164,6 @@
 		C0241335176F2512007BB351 /* StorageManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StorageManager.m; sourceTree = "<group>"; };
 		C0241336176F2512007BB351 /* StoreEncryptor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StoreEncryptor.h; sourceTree = "<group>"; };
 		C0241337176F2512007BB351 /* StoreEncryptor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StoreEncryptor.m; sourceTree = "<group>"; };
-		C0241338176F2512007BB351 /* StorefrontInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StorefrontInfo.h; sourceTree = "<group>"; };
-		C0241339176F2512007BB351 /* StorefrontInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StorefrontInfo.m; sourceTree = "<group>"; };
 		C024133A176F2512007BB351 /* StoreInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StoreInfo.h; sourceTree = "<group>"; };
 		C024133B176F2512007BB351 /* StoreInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StoreInfo.m; sourceTree = "<group>"; };
 		C024133C176F2512007BB351 /* VirtualCurrencyStorage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VirtualCurrencyStorage.h; sourceTree = "<group>"; };
@@ -320,8 +315,6 @@
 				C0241335176F2512007BB351 /* StorageManager.m */,
 				C0241336176F2512007BB351 /* StoreEncryptor.h */,
 				C0241337176F2512007BB351 /* StoreEncryptor.m */,
-				C0241338176F2512007BB351 /* StorefrontInfo.h */,
-				C0241339176F2512007BB351 /* StorefrontInfo.m */,
 				C024133A176F2512007BB351 /* StoreInfo.h */,
 				C024133B176F2512007BB351 /* StoreInfo.m */,
 				C024133C176F2512007BB351 /* VirtualCurrencyStorage.h */,
@@ -495,7 +488,6 @@
 				C024138A176F2512007BB351 /* ObscuredNSUserDefaults.h in Headers */,
 				C024138D176F2512007BB351 /* StorageManager.h in Headers */,
 				C0241390176F2512007BB351 /* StoreEncryptor.h in Headers */,
-				C0241393176F2512007BB351 /* StorefrontInfo.h in Headers */,
 				C0241396176F2512007BB351 /* StoreInfo.h in Headers */,
 				C0241399176F2512007BB351 /* VirtualCurrencyStorage.h in Headers */,
 				C024139C176F2512007BB351 /* VirtualGoodStorage.h in Headers */,
@@ -638,7 +630,6 @@
 				C024138B176F2512007BB351 /* ObscuredNSUserDefaults.m in Sources */,
 				C024138E176F2512007BB351 /* StorageManager.m in Sources */,
 				C0241391176F2512007BB351 /* StoreEncryptor.m in Sources */,
-				C0241394176F2512007BB351 /* StorefrontInfo.m in Sources */,
 				C0241397176F2512007BB351 /* StoreInfo.m in Sources */,
 				C024139A176F2512007BB351 /* VirtualCurrencyStorage.m in Sources */,
 				C024139D176F2512007BB351 /* VirtualGoodStorage.m in Sources */,
@@ -686,7 +677,6 @@
 				C024138C176F2512007BB351 /* ObscuredNSUserDefaults.m in Sources */,
 				C024138F176F2512007BB351 /* StorageManager.m in Sources */,
 				C0241392176F2512007BB351 /* StoreEncryptor.m in Sources */,
-				C0241395176F2512007BB351 /* StorefrontInfo.m in Sources */,
 				C0241398176F2512007BB351 /* StoreInfo.m in Sources */,
 				C024139B176F2512007BB351 /* VirtualCurrencyStorage.m in Sources */,
 				C024139E176F2512007BB351 /* VirtualGoodStorage.m in Sources */,

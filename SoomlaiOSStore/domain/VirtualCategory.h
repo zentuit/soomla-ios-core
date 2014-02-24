@@ -18,9 +18,7 @@
 
 /**
  * This class is a definition of a category. A single category can be associated with many virtual goods.
- * The purposes of virtual category are:
- * 1. You can use it to arrange virtual goods to their specific categories.
- * 2. SOOMLA's storefront uses this to show the goods in their categories on the UI (for supported themes only).
+ * The purposes of virtual category is it to arrange virtual goods to their specific categories.
  */
 @interface VirtualCategory : NSObject{
     NSString* name;

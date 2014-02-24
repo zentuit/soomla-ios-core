@@ -17,7 +17,6 @@
 #import "VirtualCurrencyStorage.h"
 #import "VirtualCurrency.h"
 #import "StorageManager.h"
-#import "StoreEncryptor.h"
 #import "EventHandling.h"
 #import "KeyValDatabase.h"
 

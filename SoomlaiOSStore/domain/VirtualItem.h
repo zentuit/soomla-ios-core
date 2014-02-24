@@ -35,8 +35,7 @@
 /** Constructor
  *
  * oName is the name of the virtual item.
- * oDescription is the description of the virtual item. If you use SOOMLA's storefront, This will show up
- *                       in the store in the description section.
+ * oDescription is the description of the virtual item.
  * oItemId is the itemId of the virtual item.
  */
 - (id)initWithName:(NSString*)oName andDescription:(NSString*)oDescription andItemId:(NSString*)oItemId;
