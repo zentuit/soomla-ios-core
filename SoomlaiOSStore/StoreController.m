@@ -160,7 +160,7 @@ static NSString* TAG = @"SOOMLA StoreController";
 }
 
 - (void)finalizeTransaction:(SKPaymentTransaction *)transaction forPurchasable:(PurchasableVirtualItem*)pvi {
-    [EventHandling postAppStorePurchase:pvi];
+    [EventHandling postAppStorePurchase:pvi andReceiptUrl:[[NSBundle mainBundle] appStoreReceiptURL]];
     [pvi giveAmount:1];
     [EventHandling postItemPurchased:pvi];
     
