@@ -329,6 +329,15 @@ static NSString* TAG = @"SOOMLA StoreInfo";
     return vi;
 }
 
+- (NSArray*)allProductIds {
+    NSMutableArray* array = [NSMutableArray array];
+    
+    for(PurchasableVirtualItem* pvi in purchasableItems) {
+        [array addObject:pvi];
+    }
+    return array;
+}
+
 - (PurchasableVirtualItem*)purchasableItemWithProductId:(NSString*)productId {
     PurchasableVirtualItem* pvi = [self.purchasableItems objectForKey:productId];
     if (!pvi) {

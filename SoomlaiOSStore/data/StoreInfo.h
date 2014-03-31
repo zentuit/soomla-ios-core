@@ -132,5 +132,6 @@
  */
 - (NSArray*)upgradesForGoodWithItemId:(NSString*)goodItemId;
 
+- (NSArray*)allProductIds;
 - (BOOL)goodHasUpgrades:(NSString*)goodItemId;
 @end

@@ -33,10 +33,9 @@
 #import "AppStoreItem.h"
 #import "NonConsumableItem.h"
 #import "StoreUtils.h"
+#import "PurchaseWithMarket.h"
 
 #import "SoomlaVerification.h"
-
-#define kInAppPurchaseManagerProductsFetchedNotification @"kInAppPurchaseManagerProductsFetchedNotification"
 
 @implementation StoreController
 
@@ -58,7 +57,7 @@ static NSString* TAG = @"SOOMLA StoreController";
     
     @synchronized( self ) {
         if( _instance == nil ) {
-            _instance = [[StoreController alloc ] init];
+            _instance = [[StoreController alloc] init];
         }
     }
     
@@ -88,6 +87,8 @@ static NSString* TAG = @"SOOMLA StoreController";
     } else {
         [EventHandling postBillingNotSupported];
     }
+    
+    [self refreshMarketItemsDetails];
     
     self.initialized = YES;
     [EventHandling postStoreControllerInitialized];
@@ -232,7 +233,7 @@ static NSString* TAG = @"SOOMLA StoreController";
 - (void) failedTransaction: (SKPaymentTransaction *)transaction
 {
     if (transaction.error.code != SKErrorPaymentCancelled) {
-        LogError(TAG, ([NSString stringWithFormat:@"An error occured for product id \"%@\" with code \"%d\" and description \"%@\"", transaction.payment.productIdentifier, transaction.error.code, transaction.error.localizedDescription]));
+        LogError(TAG, ([NSString stringWithFormat:@"An error occured for product id \"%@\" with code \"%ld\" and description \"%@\"", transaction.payment.productIdentifier, (long)transaction.error.code, transaction.error.localizedDescription]));
         
         [EventHandling postUnexpectedError:ERR_PURCHASE_FAIL forObject:self];
     }
@@ -262,30 +263,47 @@ static NSString* TAG = @"SOOMLA StoreController";
     [EventHandling postTransactionRestored:NO];
 }
 
+- (void)refreshMarketItemsDetails {
+    SKProductsRequest *productsRequest = [[SKProductsRequest alloc] initWithProductIdentifiers:[[NSSet alloc] initWithArray:[[StoreInfo getInstance] allProductIds]]];
+    productsRequest.delegate = self;
+    [productsRequest start];
+}
 
-#pragma mark -
-#pragma mark SKProductsRequestDelegate methods
-
-// When using SOOMLA's server you don't need to get information about your products. SOOMLA will keep this information
-// for you and will automatically load it into your game.
 - (void)productsRequest:(SKProductsRequest *)request didReceiveResponse:(SKProductsResponse *)response
 {
-    //    NSArray *products = response.products;
-    //    proUpgradeProduct = [products count] == 1 ? [products objectAtIndex:0] : nil;
-    //    if (proUpgradeProduct)
-    //    {
-    //        NSLog(@"Product title: %@" , proUpgradeProduct.localizedTitle);
-    //        NSLog(@"Product description: %@" , proUpgradeProduct.localizedDescription);
-    //        NSLog(@"Product price: %@" , proUpgradeProduct.price);
-    //        NSLog(@"Product id: %@" , proUpgradeProduct.productIdentifier);
-    //    }
-    //
-    //    for (NSString *invalidProductId in response.invalidProductIdentifiers)
-    //    {
-    //        NSLog(@"Invalid product id: %@" , invalidProductId);
-    //    }
-    //
-    //    [[NSNotificationCenter defaultCenter] postNotificationName:kInAppPurchaseManagerProductsFetchedNotification object:self userInfo:nil];
+    NSArray *products = response.products;
+    for(SKProduct* product in products) {
+        NSString* title = product.localizedTitle;
+        NSString* description = product.localizedDescription;
+        NSDecimalNumber* price = product.price;
+        NSLocale* locale = product.priceLocale;
+        NSString* productId = product.productIdentifier;
+        LogDebug(TAG, ([NSString stringWithFormat:@"title: %@  price: %@  productId: %@  desc: %@",title,[price descriptionWithLocale:locale],productId,description]));
+
+        @try {
+            PurchasableVirtualItem* pvi = [[StoreInfo getInstance] purchasableItemWithProductId:productId];
+            
+            PurchaseType* purchaseType = pvi.purchaseType;
+            if ([purchaseType isKindOfClass:[PurchaseWithMarket class]]) {
+                ((PurchaseWithMarket*)purchaseType).appStoreItem.appStoreDescription = description;
+                ((PurchaseWithMarket*)purchaseType).appStoreItem.appStorePrice = price;
+                ((PurchaseWithMarket*)purchaseType).appStoreItem.appStoreLocale = locale;
+                ((PurchaseWithMarket*)purchaseType).appStoreItem.appStoreTitle = title;
+            }
+        }
+        @catch (VirtualItemNotFoundException* e) {
+            LogError(TAG, ([NSString stringWithFormat:@"Couldn't find the PurchasableVirtualItem with productId: %@"
+                            @". It's unexpected so an unexpected error is being emitted.", productId]));
+            [EventHandling postUnexpectedError:ERR_GENERAL forObject:self];
+        }
+    }
+    
+    for (NSString *invalidProductId in response.invalidProductIdentifiers)
+    {
+        LogError(TAG, ([NSString stringWithFormat: @"Invalid product id (when trying to fetch item details): %@" , invalidProductId]));
+    }
+    
+    [EventHandling postItemsAppStoreRefreshed];
 }
 
 

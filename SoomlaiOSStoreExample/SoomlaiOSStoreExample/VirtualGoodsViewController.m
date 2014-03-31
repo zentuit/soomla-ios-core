@@ -39,8 +39,6 @@
 
 - (void)viewDidLoad
 {
-    [[StoreController getInstance] storeOpening];
-    
     images = [NSDictionary dictionaryWithObjectsAndKeys:
 	      @"chocolate_cake.png", CHOCOLATE_CAKE_GOOD_ITEM_ID,
 	      @"pavlova.png", PAVLOVA_GOOD_ITEM_ID,
@@ -65,7 +63,6 @@
 
 - (IBAction)back:(id)sender {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
-    [[NSNotificationCenter defaultCenter] postNotificationName:EVENT_CLOSING_STORE object:nil];
     [self.navigationController popViewControllerAnimated:YES];
 }
 

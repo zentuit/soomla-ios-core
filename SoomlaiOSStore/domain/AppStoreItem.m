@@ -19,7 +19,7 @@
 
 @implementation AppStoreItem
 
-@synthesize price, productId, consumable;
+@synthesize price, productId, consumable, appStorePrice, appStoreLocale, appStoreTitle, appStoreDescription;
 
 - (id)initWithProductId:(NSString*)oProductId andConsumable:(Consumable)oConsumable andPrice:(double)oPrice{
     self = [super init];
@@ -54,5 +54,25 @@
             [NSNumber numberWithDouble:self.price], JSON_MARKETITEM_PRICE,
             nil];
 }
+
+- (NSString*)priceWithCurrencySymbol {
+    NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
+    [numberFormatter setFormatterBehavior:NSNumberFormatterBehavior10_4];
+    [numberFormatter setNumberStyle:NSNumberFormatterCurrencyStyle];
+    
+    
+    if (self.appStoreLocale) {
+        [numberFormatter setLocale:self.appStoreLocale];
+    } else {
+        [numberFormatter setLocale:[[NSLocale alloc] initWithLocaleIdentifier:@"en_US"]];
+    }
+    
+    if (self.appStoreLocale) {
+        return [numberFormatter stringFromNumber:self.appStorePrice];
+    } else {
+        return [numberFormatter stringFromNumber:[NSNumber numberWithDouble:price]];
+    }
+}
+
 
 @end

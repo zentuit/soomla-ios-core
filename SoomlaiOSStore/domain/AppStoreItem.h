@@ -29,13 +29,23 @@ typedef enum {
  */
 @interface AppStoreItem : NSObject{
     NSString* productId;
-    Consumable consumable;
-    double  price;
+    Consumable      consumable;
+    double          price;
+    
+    NSDecimalNumber *appStorePrice;
+    NSLocale        *appStoreLocale;
+    NSString        *appStoreTitle;
+    NSString        *appStoreDescription;
 }
 
 @property (nonatomic, retain) NSString* productId;
-@property Consumable consumable;
-@property double  price;
+@property Consumable      consumable;
+@property double          price;
+
+@property NSDecimalNumber *appStorePrice;
+@property NSLocale        *appStoreLocale;
+@property NSString        *appStoreTitle;
+@property NSString        *appStoreDescription;
 
 /** Constructor
  *
@@ -46,5 +56,7 @@ typedef enum {
 - (id)initWithProductId:(NSString*)oProductId andConsumable:(Consumable)oConsumable andPrice:(double)oPrice;
 - (id)initWithDictionary:(NSDictionary*)dict;
 - (NSDictionary*)toDictionary;
+- (NSString*)priceWithCurrencySymbol;
+
 
 @end

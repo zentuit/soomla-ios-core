@@ -28,7 +28,6 @@
 // Events
 #define EVENT_BILLING_NOT_SUPPORTED         @"BillingNotSupported"
 #define EVENT_BILLING_SUPPORTED             @"BillingSupported"
-//#define EVENT_CLOSING_STORE                 @"ClosingStore"
 #define EVENT_CURRENCY_BALANCE_CHANGED      @"ChangedCurrencyBalance"
 #define EVENT_GOOD_BALANCE_CHANGED          @"ChangedGoodBalance"
 #define EVENT_GOOD_EQUIPPED                 @"VirtualGoodEquipped"
@@ -36,7 +35,6 @@
 #define EVENT_GOOD_UPGRADE                  @"VirtualGoodUpgrade"
 #define EVENT_ITEM_PURCHASED                @"ItemPurchased"
 #define EVENT_ITEM_PURCHASE_STARTED         @"ItemPurchaseProcessStarted"
-//#define EVENT_OPENING_STORE                 @"OpeningStore"
 #define EVENT_APPSTORE_PURCHASE_CANCELLED   @"AppStorePurchaseCancelled"
 #define EVENT_APPSTORE_PURCHASED            @"AppStorePurchased"
 #define EVENT_APPSTORE_PURCHASE_VERIF       @"AppStorePurchaseVerification"
@@ -44,6 +42,7 @@
 #define EVENT_TRANSACTION_RESTORED          @"TransactionRestored"
 #define EVENT_TRANSACTION_RESTORE_STARTED   @"TransactionRestoreStarted"
 #define EVENT_STORECONTROLLER_INIT          @"StoreControllerInitialized"
+#define EVENT_ITEMS_APPSTORE_REFRESHED      @"ItemsAppStoreRefreshed"
 #define EVENT_UNEXPECTED_ERROR_IN_STORE     @"UnexpectedErrorInStore"
 
 
@@ -60,6 +59,11 @@
 #define DICT_ELEMENT_VERIFIED          @"verified"
 #define DICT_ELEMENT_TRANSACTION       @"transaction"
 #define DICT_ELEMENT_ERROR_CODE        @"error_code"
+#define DICT_ELEMENT_PRODUCTID         @"productId"
+#define DICT_ELEMENT_PRICE             @"price"
+#define DICT_ELEMENT_TITLE             @"title"
+#define DICT_ELEMENT_DESCRIPTION       @"description"
+#define DICT_ELEMENT_LOCALE            @"locale"
 
 // Error Codes
 #define ERR_GENERAL                 0
@@ -93,6 +97,7 @@
 + (void)postAppStorePurchaseStarted:(PurchasableVirtualItem*)purchasableVirtualItem;
 + (void)postTransactionRestored:(BOOL)success;
 + (void)postTransactionRestoreStarted;
++ (void)postItemsAppStoreRefreshed;
 + (void)postUnexpectedError:(int)code forObject:(id)object;
 + (void)postStoreControllerInitialized;
 

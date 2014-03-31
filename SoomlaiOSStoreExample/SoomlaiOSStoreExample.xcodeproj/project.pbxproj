@@ -14,7 +14,6 @@
 		C054F1ED17F86DE3006F5B8E /* ObscuredNSUserDefaults.m in Sources */ = {isa = PBXBuildFile; fileRef = C054F19917F86DE2006F5B8E /* ObscuredNSUserDefaults.m */; };
 		C054F1EE17F86DE3006F5B8E /* StorageManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C054F19B17F86DE2006F5B8E /* StorageManager.m */; };
 		C054F1EF17F86DE3006F5B8E /* StoreEncryptor.m in Sources */ = {isa = PBXBuildFile; fileRef = C054F19D17F86DE2006F5B8E /* StoreEncryptor.m */; };
-		C054F1F017F86DE3006F5B8E /* StorefrontInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = C054F19F17F86DE2006F5B8E /* StorefrontInfo.m */; };
 		C054F1F117F86DE3006F5B8E /* StoreInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = C054F1A117F86DE2006F5B8E /* StoreInfo.m */; };
 		C054F1F217F86DE3006F5B8E /* VirtualCurrencyStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = C054F1A317F86DE2006F5B8E /* VirtualCurrencyStorage.m */; };
 		C054F1F317F86DE3006F5B8E /* VirtualGoodStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = C054F1A517F86DE2006F5B8E /* VirtualGoodStorage.m */; };
@@ -107,8 +106,6 @@
 		C054F19B17F86DE2006F5B8E /* StorageManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StorageManager.m; sourceTree = "<group>"; };
 		C054F19C17F86DE2006F5B8E /* StoreEncryptor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StoreEncryptor.h; sourceTree = "<group>"; };
 		C054F19D17F86DE2006F5B8E /* StoreEncryptor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StoreEncryptor.m; sourceTree = "<group>"; };
-		C054F19E17F86DE2006F5B8E /* StorefrontInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StorefrontInfo.h; sourceTree = "<group>"; };
-		C054F19F17F86DE2006F5B8E /* StorefrontInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StorefrontInfo.m; sourceTree = "<group>"; };
 		C054F1A017F86DE2006F5B8E /* StoreInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StoreInfo.h; sourceTree = "<group>"; };
 		C054F1A117F86DE2006F5B8E /* StoreInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StoreInfo.m; sourceTree = "<group>"; };
 		C054F1A217F86DE2006F5B8E /* VirtualCurrencyStorage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VirtualCurrencyStorage.h; sourceTree = "<group>"; };
@@ -292,8 +289,6 @@
 				C054F19B17F86DE2006F5B8E /* StorageManager.m */,
 				C054F19C17F86DE2006F5B8E /* StoreEncryptor.h */,
 				C054F19D17F86DE2006F5B8E /* StoreEncryptor.m */,
-				C054F19E17F86DE2006F5B8E /* StorefrontInfo.h */,
-				C054F19F17F86DE2006F5B8E /* StorefrontInfo.m */,
 				C054F1A017F86DE2006F5B8E /* StoreInfo.h */,
 				C054F1A117F86DE2006F5B8E /* StoreInfo.m */,
 				C054F1A217F86DE2006F5B8E /* VirtualCurrencyStorage.h */,
@@ -641,7 +636,6 @@
 				C08CF2EE16431847007603E8 /* VirtualCurrencyPackCell.m in Sources */,
 				C054F1FB17F86DE3006F5B8E /* EquippableVG.m in Sources */,
 				C054F20717F86DE3006F5B8E /* NSData-Base64.m in Sources */,
-				C054F1F017F86DE3006F5B8E /* StorefrontInfo.m in Sources */,
 				C054F1EC17F86DE3006F5B8E /* NonConsumableStorage.m in Sources */,
 				C08CF2F1164318AF007603E8 /* VirtualCurrencyPacksViewController.m in Sources */,
 				C054F20617F86DE3006F5B8E /* FBEncryptorAES.m in Sources */,

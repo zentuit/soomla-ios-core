@@ -129,6 +129,10 @@
     [[NSNotificationCenter defaultCenter] postNotificationName:EVENT_TRANSACTION_RESTORE_STARTED object:self userInfo:nil];
 }
 
++ (void)postItemsAppStoreRefreshed {
+    [[NSNotificationCenter defaultCenter] postNotificationName:EVENT_ITEMS_APPSTORE_REFRESHED object:self userInfo:nil];
+}
+
 + (void)postUnexpectedError:(int)code forObject:(id)object{
     NSDictionary *userInfo = [NSDictionary dictionaryWithObject:[NSNumber numberWithInt:code] forKey:DICT_ELEMENT_ERROR_CODE];
     [[NSNotificationCenter defaultCenter] postNotificationName:EVENT_UNEXPECTED_ERROR_IN_STORE object:object userInfo:userInfo];
@@ -137,6 +141,7 @@
 + (void) postStoreControllerInitialized {
     [[NSNotificationCenter defaultCenter] postNotificationName:EVENT_STORECONTROLLER_INIT object:self];
 }
+
 
 
 @end

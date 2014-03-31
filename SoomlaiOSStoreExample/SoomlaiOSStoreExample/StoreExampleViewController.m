@@ -20,6 +20,10 @@
 #import "VirtualGoodsViewController.h"
 #import "StoreInventory.h"
 #import "MuffinRushAssets.h"
+#import "StoreInfo.h"
+#import "PurchasableVirtualItem.h"
+#import "PurchaseWithMarket.h"
+#import "AppStoreItem.h"
 
 @interface StoreExampleViewController (){
     BOOL dragging;
@@ -38,8 +42,6 @@
     [titleLabel setFont:[UIFont fontWithName:@"GoodDog" size:50]];
     [infoLabel setFont:[UIFont fontWithName:@"GoodDog" size:20]];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(closingStore:) name:EVENT_CLOSING_STORE object:nil];
-    
     rightView.layer.cornerRadius = 7;
     
 }
@@ -52,13 +54,6 @@
 
 -(BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation{
     return UIInterfaceOrientationIsPortrait(interfaceOrientation);
-}
-
-- (void)closingStore:(NSNotification*)notification{
-    [rightBg setImage:[UIImage imageNamed:@"right_bg.png"]];
-    [leftView addSubview:logoImageView];
-    [leftView bringSubviewToFront:logoImageView];
-    logoImageView.frame = CGRectMake(0, 0, logoImageView.frame.size.width, logoImageView.frame.size.height);
 }
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
@@ -113,6 +108,17 @@
         
         VirtualGoodsViewController* c = [self.storyboard instantiateViewControllerWithIdentifier:@"VirtualGoodsViewController"];
         [self.navigationController pushViewController:c animated:YES];
+        
+        [rightBg setImage:[UIImage imageNamed:@"right_bg.png"]];
+        [leftView addSubview:logoImageView];
+        [leftView bringSubviewToFront:logoImageView];
+        logoImageView.frame = CGRectMake(0, 0, logoImageView.frame.size.width, logoImageView.frame.size.height);
+        
+        
+        PurchasableVirtualItem* pvi = [[StoreInfo getInstance] purchasableItemWithProductId:@"2500_pack"];
+        PurchaseWithMarket* pt = (PurchaseWithMarket*)pvi.purchaseType;
+        
+        NSLog(@"XXX %f %@ %@ %@", pt.appStoreItem.price, pt.appStoreItem.appStoreTitle, [pt.appStoreItem priceWithCurrencySymbol], pt.appStoreItem.appStoreDescription);
     }
     else{
         logoImageView.frame = CGRectMake(0,0,

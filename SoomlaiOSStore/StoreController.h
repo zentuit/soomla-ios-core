@@ -62,4 +62,10 @@
  * Answers the question: "Were transactions already restored for this game?"
  */
 - (BOOL)transactionsAlreadyRestored;
+
+/**
+ * Refreshes the details of all market-purchasable items that were defined in App Store.
+ * This function will invoke the event EVENT_ITEMS_APPSTORE_REFRESHED when finished
+ */
+- (void)refreshMarketItemsDetails;
 @end
