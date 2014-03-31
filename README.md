@@ -8,6 +8,8 @@ Haven't you ever wanted an in-app purchase one liner that looks like this ?!
 
 ios-store
 ---
+**March 31st, 2014:** StoreController will automatically try to fetch prices for PurchasableItems that has a purchase type of PurchaseWithMarket. The product ids that'll be found in the App Store will update the associated 'AppStoreItem' in special fields: appStorePrice, appStoreLocale, appStoreTitle, appStoreDescription.
+
 **September 29th, 2013:** Server Side Verification is now implemented into ios-store. The server is a complimentary server provided by [SOOMLA](http://soom.la) to help you get your in-game purchases a bit more secured. This feature is not enabled by default. In order to enable Server Side verification go to StoreConfig.m and set  **VERIFY_PURCHASES = YES**.
 
 Want to learn more about modelV3? Try these:  
