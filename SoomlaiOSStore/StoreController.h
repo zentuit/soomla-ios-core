@@ -55,6 +55,10 @@
  */
 - (BOOL)buyInAppStoreWithAppStoreItem:(AppStoreItem*)appStoreItem;
 /**
+ * Initiate the restoreTransactions process and will refresh all purchasable items details from the App Store
+ */
+- (void)refreshInventory;
+/**
  * Initiate the restoreTransactions process
  */
 - (void)restoreTransactions;

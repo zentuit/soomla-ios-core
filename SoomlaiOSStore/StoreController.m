@@ -120,6 +120,10 @@ static NSString* TAG = @"SOOMLA StoreController";
     return YES;
 }
 
+- (void) refreshInventory {
+    [self restoreTransactions];
+    [self refreshMarketItemsDetails];
+}
 
 - (void)restoreTransactions {
     if(![self checkInit]) return;
