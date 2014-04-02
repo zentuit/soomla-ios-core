@@ -14,12 +14,12 @@
  * limitations under the License.
  */
 
-#import "AppStoreItem.h"
+#import "MarketItem.h"
 #import "JSONConsts.h"
 
-@implementation AppStoreItem
+@implementation MarketItem
 
-@synthesize price, productId, consumable, appStorePrice, appStoreLocale, appStoreTitle, appStoreDescription;
+@synthesize price, productId, consumable, marketPrice, marketLocale, marketTitle, marketDescription;
 
 - (id)initWithProductId:(NSString*)oProductId andConsumable:(Consumable)oConsumable andPrice:(double)oPrice{
     self = [super init];
@@ -61,14 +61,14 @@
     [numberFormatter setNumberStyle:NSNumberFormatterCurrencyStyle];
     
     
-    if (self.appStoreLocale) {
-        [numberFormatter setLocale:self.appStoreLocale];
+    if (self.marketLocale) {
+        [numberFormatter setLocale:self.marketLocale];
     } else {
         [numberFormatter setLocale:[[NSLocale alloc] initWithLocaleIdentifier:@"en_US"]];
     }
     
-    if (self.appStoreLocale) {
-        return [numberFormatter stringFromNumber:self.appStorePrice];
+    if (self.marketLocale) {
+        return [numberFormatter stringFromNumber:self.marketPrice];
     } else {
         return [numberFormatter stringFromNumber:[NSNumber numberWithDouble:price]];
     }

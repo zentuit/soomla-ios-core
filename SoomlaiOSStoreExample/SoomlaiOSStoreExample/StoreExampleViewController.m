@@ -23,7 +23,8 @@
 #import "StoreInfo.h"
 #import "PurchasableVirtualItem.h"
 #import "PurchaseWithMarket.h"
-#import "AppStoreItem.h"
+#import "MarketItem.h"
+#import "StoreUtils.h"
 
 @interface StoreExampleViewController (){
     BOOL dragging;
@@ -34,6 +35,8 @@
 @implementation StoreExampleViewController
 
 @synthesize titleLabel, infoLabel, logoImageView, leftView, rightView, rightBg;
+
+static NSString* TAG = @"SOOMLA StoreExampleViewController";
 
 - (void)viewDidLoad
 {
@@ -118,7 +121,7 @@
         PurchasableVirtualItem* pvi = [[StoreInfo getInstance] purchasableItemWithProductId:@"2500_pack"];
         PurchaseWithMarket* pt = (PurchaseWithMarket*)pvi.purchaseType;
         
-        NSLog(@"XXX %f %@ %@ %@", pt.appStoreItem.price, pt.appStoreItem.appStoreTitle, [pt.appStoreItem priceWithCurrencySymbol], pt.appStoreItem.appStoreDescription);
+        LogDebug(TAG, ([NSString stringWithFormat:@"XXX %f %@ %@ %@", pt.marketItem.price, pt.marketItem.marketTitle, [pt.marketItem priceWithCurrencySymbol], pt.marketItem.marketDescription]));
     }
     else{
         logoImageView.frame = CGRectMake(0,0,

@@ -18,7 +18,7 @@
 #import <StoreKit/StoreKit.h>
 #import "IStoreAssets.h"
 
-@class AppStoreItem;
+@class MarketItem;
 @class PurchasableVirtualItem;
 @class SoomlaVerification;
 
@@ -51,9 +51,9 @@
 - (BOOL)initializeWithStoreAssets:(id<IStoreAssets>)storeAssets andCustomSecret:(NSString*)secret;
 /**
  * Start an in app purchase process in the App Store.
- * appStoreItem is the item to purchase. This item has to be defined EXACTLY the same in iTunes Connect.
+ * marketItem is the item to purchase. This item has to be defined EXACTLY the same in iTunes Connect.
  */
-- (BOOL)buyInAppStoreWithAppStoreItem:(AppStoreItem*)appStoreItem;
+- (BOOL)buyInMarketWithMarketItem:(MarketItem*)marketItem;
 /**
  * Initiate the restoreTransactions process and will refresh all purchasable items details from the App Store
  */
@@ -69,7 +69,7 @@
 
 /**
  * Refreshes the details of all market-purchasable items that were defined in App Store.
- * This function will invoke the event EVENT_ITEMS_APPSTORE_REFRESHED when finished
+ * This function will invoke the event EVENT_ITEMS_MARKET_REFRESHED when finished
  */
 - (void)refreshMarketItemsDetails;
 @end

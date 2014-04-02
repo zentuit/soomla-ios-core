@@ -16,16 +16,16 @@
 
 #import "PurchaseType.h"
 
-@class AppStoreItem;
+@class MarketItem;
 
 /**
  * This type of Purchase is used to let users purchase PurchasableVirtualItems with the App Store (with real $$).
  */
 @interface PurchaseWithMarket : PurchaseType {
-    AppStoreItem* appStoreItem;
+    MarketItem* marketItem;
 }
 
-@property (retain, nonatomic) AppStoreItem* appStoreItem;
+@property (retain, nonatomic) MarketItem* marketItem;
 
 /** Constructor
  *
@@ -36,9 +36,9 @@
 
 /** Constructor
  *
- * oAppStoreItem is the representation of the item in the App Store.
+ * oMarketItem is the representation of the item in the App Store.
  */
-- (id)initWithAppStoreItem:(AppStoreItem*)oAppStoreItem;
+- (id)initWithMarketItem:(MarketItem*)oMarketItem;
 
 
 @end

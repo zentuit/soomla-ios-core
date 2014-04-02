@@ -21,7 +21,7 @@
 #import "StoreInventory.h"
 #import "StoreController.h"
 #import "VirtualCurrencyPack.h"
-#import "AppStoreItem.h"
+#import "MarketItem.h"
 #import "VirtualItemNotFoundException.h"
 #import "VirtualCurrencyPackCell.h"
 #import "PurchaseWithMarket.h"
@@ -89,8 +89,8 @@
     VirtualCurrencyPack* pack = [[[StoreInfo getInstance] virtualCurrencyPacks] objectAtIndex:indexPath.row];
     cell.title.text = pack.name;
     cell.description.text = pack.description;
-    cell.price.text = [NSString stringWithFormat:@"%.02f", ((PurchaseWithMarket*)pack.purchaseType).appStoreItem.price];
-    cell.icon.image = [UIImage imageNamed:[images objectForKey:((PurchaseWithMarket*)pack.purchaseType).appStoreItem.productId]];
+    cell.price.text = [NSString stringWithFormat:@"%.02f", ((PurchaseWithMarket*)pack.purchaseType).marketItem.price];
+    cell.icon.image = [UIImage imageNamed:[images objectForKey:((PurchaseWithMarket*)pack.purchaseType).marketItem.productId]];
     
     return cell;
 }

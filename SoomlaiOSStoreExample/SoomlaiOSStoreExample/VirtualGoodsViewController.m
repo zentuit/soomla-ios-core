@@ -25,7 +25,7 @@
 #import "InsufficientFundsException.h"
 #import "PurchaseWithVirtualItem.h"
 #import "PurchaseWithMarket.h"
-#import "AppStoreItem.h"
+#import "MarketItem.h"
 
 @interface VirtualGoodsViewController () {
     NSDictionary* images;
@@ -112,7 +112,7 @@
     if ([good.purchaseType isKindOfClass:[PurchaseWithVirtualItem class]]) {
         cell.price.text = [NSString stringWithFormat:@"%d", ((PurchaseWithVirtualItem*)good.purchaseType).amount];
     } else if ([good.purchaseType isKindOfClass:[PurchaseWithMarket class]]) {
-        cell.price.text = [NSString stringWithFormat:@"%f", ((PurchaseWithMarket*)good.purchaseType).appStoreItem.price];
+        cell.price.text = [NSString stringWithFormat:@"%f", ((PurchaseWithMarket*)good.purchaseType).marketItem.price];
     }
     cell.icon.image = [UIImage imageNamed:[images objectForKey:good.itemId]];
     int balance = [StoreInventory getItemBalance:good.itemId];

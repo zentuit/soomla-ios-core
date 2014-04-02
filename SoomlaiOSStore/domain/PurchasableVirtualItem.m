@@ -19,7 +19,7 @@
 #import "JSONConsts.h"
 #import "PurchaseWithMarket.h"
 #import "PurchaseWithVirtualItem.h"
-#import "AppStoreItem.h"
+#import "MarketItem.h"
 #import "VirtualItem.h"
 #import "StoreUtils.h"
 #import "VirtualItemNotFoundException.h"
@@ -57,7 +57,7 @@ static NSString* TAG = @"SOOMLA PurchasableVirtualItem";
         
         if([purchaseTypeStr isEqualToString:JSON_PURCHASE_TYPE_MARKET]) {
             NSDictionary* marketItemDict = [purchasableDict objectForKey:JSON_PURCHASE_MARKET_ITEM];
-            self.purchaseType = [[PurchaseWithMarket alloc] initWithAppStoreItem:[[AppStoreItem alloc] initWithDictionary:marketItemDict]];
+            self.purchaseType = [[PurchaseWithMarket alloc] initWithMarketItem:[[MarketItem alloc] initWithDictionary:marketItemDict]];
         } else if ([purchaseTypeStr isEqualToString:JSON_PURCHASE_TYPE_VI]) {
             NSString* pItemId = [purchasableDict objectForKey:JSON_PURCHASE_VI_ITEMID];
             int amount = [[purchasableDict objectForKey:JSON_PURCHASE_VI_AMOUNT] intValue];
@@ -84,7 +84,7 @@ static NSString* TAG = @"SOOMLA PurchasableVirtualItem";
     if ([self.purchaseType class] == [PurchaseWithMarket class]) {
         [purchasableDict setObject:JSON_PURCHASE_TYPE_MARKET forKey:JSON_PURCHASE_TYPE];
         
-        AppStoreItem* ai = ((PurchaseWithMarket*)self.purchaseType).appStoreItem;
+        MarketItem* ai = ((PurchaseWithMarket*)self.purchaseType).marketItem;
         [purchasableDict setObject:[ai toDictionary] forKey:JSON_PURCHASE_MARKET_ITEM];
     } else if ([self.purchaseType class] == [PurchaseWithVirtualItem class]) {
         [purchasableDict setObject:JSON_PURCHASE_TYPE_VI forKey:JSON_PURCHASE_TYPE];

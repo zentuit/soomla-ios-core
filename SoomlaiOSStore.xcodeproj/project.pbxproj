@@ -30,8 +30,8 @@
 		C024139D176F2512007BB351 /* VirtualGoodStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = C024133F176F2512007BB351 /* VirtualGoodStorage.m */; };
 		C024139F176F2512007BB351 /* VirtualItemStorage.h in Headers */ = {isa = PBXBuildFile; fileRef = C0241340176F2512007BB351 /* VirtualItemStorage.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C02413A0176F2512007BB351 /* VirtualItemStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = C0241341176F2512007BB351 /* VirtualItemStorage.m */; };
-		C02413A2176F2512007BB351 /* AppStoreItem.h in Headers */ = {isa = PBXBuildFile; fileRef = C0241343176F2512007BB351 /* AppStoreItem.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		C02413A3176F2512007BB351 /* AppStoreItem.m in Sources */ = {isa = PBXBuildFile; fileRef = C0241344176F2512007BB351 /* AppStoreItem.m */; };
+		C02413A2176F2512007BB351 /* MarketItem.h in Headers */ = {isa = PBXBuildFile; fileRef = C0241343176F2512007BB351 /* MarketItem.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C02413A3176F2512007BB351 /* MarketItem.m in Sources */ = {isa = PBXBuildFile; fileRef = C0241344176F2512007BB351 /* MarketItem.m */; };
 		C02413A5176F2512007BB351 /* NonConsumableItem.h in Headers */ = {isa = PBXBuildFile; fileRef = C0241345176F2512007BB351 /* NonConsumableItem.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C02413A6176F2512007BB351 /* NonConsumableItem.m in Sources */ = {isa = PBXBuildFile; fileRef = C0241346176F2512007BB351 /* NonConsumableItem.m */; };
 		C02413A8176F2512007BB351 /* PurchasableVirtualItem.h in Headers */ = {isa = PBXBuildFile; fileRef = C0241347176F2512007BB351 /* PurchasableVirtualItem.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -119,8 +119,8 @@
 		C024133F176F2512007BB351 /* VirtualGoodStorage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VirtualGoodStorage.m; sourceTree = "<group>"; };
 		C0241340176F2512007BB351 /* VirtualItemStorage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VirtualItemStorage.h; sourceTree = "<group>"; };
 		C0241341176F2512007BB351 /* VirtualItemStorage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VirtualItemStorage.m; sourceTree = "<group>"; };
-		C0241343176F2512007BB351 /* AppStoreItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppStoreItem.h; sourceTree = "<group>"; };
-		C0241344176F2512007BB351 /* AppStoreItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppStoreItem.m; sourceTree = "<group>"; };
+		C0241343176F2512007BB351 /* MarketItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MarketItem.h; sourceTree = "<group>"; };
+		C0241344176F2512007BB351 /* MarketItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MarketItem.m; sourceTree = "<group>"; };
 		C0241345176F2512007BB351 /* NonConsumableItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NonConsumableItem.h; sourceTree = "<group>"; };
 		C0241346176F2512007BB351 /* NonConsumableItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NonConsumableItem.m; sourceTree = "<group>"; };
 		C0241347176F2512007BB351 /* PurchasableVirtualItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PurchasableVirtualItem.h; sourceTree = "<group>"; };
@@ -176,10 +176,6 @@
 		C02CEC42160DC870000AA0D2 /* libSoomlaiOSStore.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libSoomlaiOSStore.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		C02CEC45160DC870000AA0D2 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		C02CEC54160DC870000AA0D2 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
-		C02CEC5E160DC870000AA0D2 /* SoomlaiOSStoreTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "SoomlaiOSStoreTests-Info.plist"; sourceTree = "<group>"; };
-		C02CEC60160DC870000AA0D2 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		C02CEC62160DC870000AA0D2 /* SoomlaiOSStoreTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SoomlaiOSStoreTests.h; sourceTree = "<group>"; };
-		C02CEC63160DC870000AA0D2 /* SoomlaiOSStoreTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SoomlaiOSStoreTests.m; sourceTree = "<group>"; };
 		C02CEC78160DCA31000AA0D2 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		C02CEC7A160DCA3A000AA0D2 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		C02CECF5160DCB4A000AA0D2 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -266,8 +262,8 @@
 		C0241342176F2512007BB351 /* domain */ = {
 			isa = PBXGroup;
 			children = (
-				C0241343176F2512007BB351 /* AppStoreItem.h */,
-				C0241344176F2512007BB351 /* AppStoreItem.m */,
+				C0241343176F2512007BB351 /* MarketItem.h */,
+				C0241344176F2512007BB351 /* MarketItem.m */,
 				C0241345176F2512007BB351 /* NonConsumableItem.h */,
 				C0241346176F2512007BB351 /* NonConsumableItem.m */,
 				C0241347176F2512007BB351 /* PurchasableVirtualItem.h */,
@@ -353,7 +349,6 @@
 			isa = PBXGroup;
 			children = (
 				C0241328176F2512007BB351 /* SoomlaiOSStore */,
-				C02CEC5C160DC870000AA0D2 /* SoomlaiOSStoreTests */,
 				C02CEC44160DC870000AA0D2 /* Frameworks */,
 				C02CEC43160DC870000AA0D2 /* Products */,
 			);
@@ -379,25 +374,6 @@
 				C018B47B160F5B23000FE817 /* CoreFoundation.framework */,
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		C02CEC5C160DC870000AA0D2 /* SoomlaiOSStoreTests */ = {
-			isa = PBXGroup;
-			children = (
-				C02CEC62160DC870000AA0D2 /* SoomlaiOSStoreTests.h */,
-				C02CEC63160DC870000AA0D2 /* SoomlaiOSStoreTests.m */,
-				C02CEC5D160DC870000AA0D2 /* Supporting Files */,
-			);
-			path = SoomlaiOSStoreTests;
-			sourceTree = "<group>";
-		};
-		C02CEC5D160DC870000AA0D2 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				C02CEC5E160DC870000AA0D2 /* SoomlaiOSStoreTests-Info.plist */,
-				C02CEC5F160DC870000AA0D2 /* InfoPlist.strings */,
-			);
-			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
 		C0CE33CB178168090089A0DE /* OpenUDID */ = {
@@ -427,7 +403,7 @@
 				C0241399176F2512007BB351 /* VirtualCurrencyStorage.h in Headers */,
 				C024139C176F2512007BB351 /* VirtualGoodStorage.h in Headers */,
 				C024139F176F2512007BB351 /* VirtualItemStorage.h in Headers */,
-				C02413A2176F2512007BB351 /* AppStoreItem.h in Headers */,
+				C02413A2176F2512007BB351 /* MarketItem.h in Headers */,
 				C02413A5176F2512007BB351 /* NonConsumableItem.h in Headers */,
 				C02413A8176F2512007BB351 /* PurchasableVirtualItem.h in Headers */,
 				C02413AB176F2512007BB351 /* VirtualCategory.h in Headers */,
@@ -522,7 +498,7 @@
 				C024139A176F2512007BB351 /* VirtualCurrencyStorage.m in Sources */,
 				C024139D176F2512007BB351 /* VirtualGoodStorage.m in Sources */,
 				C02413A0176F2512007BB351 /* VirtualItemStorage.m in Sources */,
-				C02413A3176F2512007BB351 /* AppStoreItem.m in Sources */,
+				C02413A3176F2512007BB351 /* MarketItem.m in Sources */,
 				C02413A6176F2512007BB351 /* NonConsumableItem.m in Sources */,
 				C02413A9176F2512007BB351 /* PurchasableVirtualItem.m in Sources */,
 				C02413AC176F2512007BB351 /* VirtualCategory.m in Sources */,
@@ -554,17 +530,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXVariantGroup section */
-		C02CEC5F160DC870000AA0D2 /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				C02CEC60160DC870000AA0D2 /* en */,
-			);
-			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		C02CEC65160DC870000AA0D2 /* Debug */ = {

@@ -15,35 +15,35 @@
  */
 
 #import "PurchaseWithMarket.h"
-#import "AppStoreItem.h"
+#import "MarketItem.h"
 #import "StoreUtils.h"
 #import "StoreController.h"
 #import "EventHandling.h"
 
 @implementation PurchaseWithMarket
 
-@synthesize appStoreItem;
+@synthesize marketItem;
 
 static NSString* TAG = @"SOOMLA PurchaseWithMarket";
 
 - (id)initWithProductId:(NSString*)oProductId andPrice:(double)oPrice {
     if (self = [super init]) {
-        self.appStoreItem = [[AppStoreItem alloc] initWithProductId:oProductId andConsumable:kConsumable andPrice:oPrice];
+        self.marketItem = [[MarketItem alloc] initWithProductId:oProductId andConsumable:kConsumable andPrice:oPrice];
     }
     return self;
 }
 
-- (id)initWithAppStoreItem:(AppStoreItem*)oAppStoreItem {
+- (id)initWithMarketItem:(MarketItem*)oMarketItem {
     if (self = [super init]) {
-        self.appStoreItem = oAppStoreItem;
+        self.marketItem = oMarketItem;
     }
     return self;
 }
 
 - (void)buy {
-    LogDebug(TAG, ([NSString stringWithFormat:@"Starting in-app purchase for productId: %@", self.appStoreItem.productId]));
+    LogDebug(TAG, ([NSString stringWithFormat:@"Starting in-app purchase for productId: %@", self.marketItem.productId]));
     
-    if (![[StoreController getInstance] buyInAppStoreWithAppStoreItem:self.appStoreItem]) {
+    if (![[StoreController getInstance] buyInMarketWithMarketItem:self.marketItem]) {
         [EventHandling postUnexpectedError:ERR_PURCHASE_FAIL forObject:self];
         return;
     }

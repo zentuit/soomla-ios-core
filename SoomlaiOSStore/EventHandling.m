@@ -16,7 +16,7 @@
 
 
 #import "EventHandling.h"
-#import "AppStoreItem.h"
+#import "MarketItem.h"
 #import "VirtualGood.h"
 
 @implementation EventHandling
@@ -31,12 +31,12 @@
     [[NSNotificationCenter defaultCenter] addObserver:observer selector:selector name:EVENT_GOOD_UPGRADE object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:observer selector:selector name:EVENT_ITEM_PURCHASED object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:observer selector:selector name:EVENT_ITEM_PURCHASE_STARTED object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:observer selector:selector name:EVENT_APPSTORE_PURCHASE_CANCELLED object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:observer selector:selector name:EVENT_APPSTORE_PURCHASED object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:observer selector:selector name:EVENT_APPSTORE_PURCHASE_VERIF object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:observer selector:selector name:EVENT_APPSTORE_PURCHASE_STARTED object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:observer selector:selector name:EVENT_TRANSACTION_RESTORED object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:observer selector:selector name:EVENT_TRANSACTION_RESTORE_STARTED object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:observer selector:selector name:EVENT_MARKET_PURCHASE_CANCELLED object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:observer selector:selector name:EVENT_MARKET_PURCHASED object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:observer selector:selector name:EVENT_MARKET_PURCHASE_VERIF object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:observer selector:selector name:EVENT_MARKET_PURCHASE_STARTED object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:observer selector:selector name:EVENT_RESTORE_TRANSACTIONS_FINISHED object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:observer selector:selector name:EVENT_RESTORE_TRANSACTIONS_STARTED object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:observer selector:selector name:EVENT_UNEXPECTED_ERROR_IN_STORE object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:observer selector:selector name:EVENT_STORECONTROLLER_INIT object:nil];
 
@@ -96,41 +96,41 @@
     [[NSNotificationCenter defaultCenter] postNotificationName:EVENT_ITEM_PURCHASED object:self userInfo:userInfo];
 }
 
-+ (void)postAppStorePurchaseCancelled:(PurchasableVirtualItem*)purchasableVirtualItem {
++ (void)postMarketPurchaseCancelled:(PurchasableVirtualItem*)purchasableVirtualItem {
     NSDictionary *userInfo = [NSDictionary dictionaryWithObject:purchasableVirtualItem forKey:DICT_ELEMENT_PURCHASABLE];
-    [[NSNotificationCenter defaultCenter] postNotificationName:EVENT_APPSTORE_PURCHASE_CANCELLED object:self userInfo:userInfo];
+    [[NSNotificationCenter defaultCenter] postNotificationName:EVENT_MARKET_PURCHASE_CANCELLED object:self userInfo:userInfo];
 }
 
-+ (void)postAppStorePurchase:(PurchasableVirtualItem*)purchasableVirtualItem andReceiptUrl:(NSURL*)receiptUrl{
++ (void)postMarketPurchase:(PurchasableVirtualItem*)purchasableVirtualItem andReceiptUrl:(NSURL*)receiptUrl{
     NSDictionary *userInfo = @{DICT_ELEMENT_PURCHASABLE: purchasableVirtualItem, DICT_ELEMENT_RECEIPT: receiptUrl};
-    [[NSNotificationCenter defaultCenter] postNotificationName:EVENT_APPSTORE_PURCHASED object:self userInfo:userInfo];
+    [[NSNotificationCenter defaultCenter] postNotificationName:EVENT_MARKET_PURCHASED object:self userInfo:userInfo];
 }
 
-+ (void)postAppStorePurchaseVerification:(BOOL)verified forItem:(PurchasableVirtualItem*)purchasableVirtualItem andTransaction:(SKPaymentTransaction*)transaction forObject:(id)object {
++ (void)postMarketPurchaseVerification:(BOOL)verified forItem:(PurchasableVirtualItem*)purchasableVirtualItem andTransaction:(SKPaymentTransaction*)transaction forObject:(id)object {
     NSDictionary *userInfo = [NSDictionary dictionaryWithObjectsAndKeys:
                               purchasableVirtualItem, DICT_ELEMENT_PURCHASABLE,
                               [NSNumber numberWithBool:verified], DICT_ELEMENT_VERIFIED,
                               transaction, DICT_ELEMENT_TRANSACTION,
                               nil];
-    [[NSNotificationCenter defaultCenter] postNotificationName:EVENT_APPSTORE_PURCHASE_VERIF object:object userInfo:userInfo];
+    [[NSNotificationCenter defaultCenter] postNotificationName:EVENT_MARKET_PURCHASE_VERIF object:object userInfo:userInfo];
 }
 
-+ (void)postAppStorePurchaseStarted:(PurchasableVirtualItem*)purchasableVirtualItem{
++ (void)postMarketPurchaseStarted:(PurchasableVirtualItem*)purchasableVirtualItem{
     NSDictionary *userInfo = [NSDictionary dictionaryWithObject:purchasableVirtualItem forKey:DICT_ELEMENT_PURCHASABLE];
-    [[NSNotificationCenter defaultCenter] postNotificationName:EVENT_APPSTORE_PURCHASE_STARTED object:self userInfo:userInfo];
+    [[NSNotificationCenter defaultCenter] postNotificationName:EVENT_MARKET_PURCHASE_STARTED object:self userInfo:userInfo];
 }
 
-+ (void)postTransactionRestored:(BOOL)success {
++ (void)postItemsMarketRefreshed {
+    [[NSNotificationCenter defaultCenter] postNotificationName:EVENT_ITEMS_MARKET_REFRESHED object:self userInfo:nil];
+}
+
++ (void)postRestoreTransactionsFinished:(BOOL)success {
     NSDictionary *userInfo = [NSDictionary dictionaryWithObject:[NSNumber numberWithBool:success] forKey:DICT_ELEMENT_SUCCESS];
-    [[NSNotificationCenter defaultCenter] postNotificationName:EVENT_TRANSACTION_RESTORED object:self userInfo:userInfo];
+    [[NSNotificationCenter defaultCenter] postNotificationName:EVENT_RESTORE_TRANSACTIONS_FINISHED object:self userInfo:userInfo];
 }
 
-+ (void)postTransactionRestoreStarted {
-    [[NSNotificationCenter defaultCenter] postNotificationName:EVENT_TRANSACTION_RESTORE_STARTED object:self userInfo:nil];
-}
-
-+ (void)postItemsAppStoreRefreshed {
-    [[NSNotificationCenter defaultCenter] postNotificationName:EVENT_ITEMS_APPSTORE_REFRESHED object:self userInfo:nil];
++ (void)postRestoreTransactionsStarted {
+    [[NSNotificationCenter defaultCenter] postNotificationName:EVENT_RESTORE_TRANSACTIONS_STARTED object:self userInfo:nil];
 }
 
 + (void)postUnexpectedError:(int)code forObject:(id)object{

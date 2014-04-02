@@ -109,7 +109,7 @@ static NSString* TAG = @"SOOMLA SoomlaVerification";
     BOOL verified = NO;
     if (responseCode==200 && verifiedNum) {
         verified = [verifiedNum boolValue];
-        [EventHandling postAppStorePurchaseVerification:verified forItem:purchasable andTransaction:transaction forObject:self];
+        [EventHandling postMarketPurchaseVerification:verified forItem:purchasable andTransaction:transaction forObject:self];
     } else {
         LogError(TAG, @"There was a problem when verifying. Will try again later.");
         [EventHandling postUnexpectedError:ERR_VERIFICATION_TIMEOUT forObject:self];

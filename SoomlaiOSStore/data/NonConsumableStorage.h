@@ -24,8 +24,8 @@
 @interface NonConsumableStorage : NSObject
 
 /**
- * Figure out if the given Non-Consumable AppStoreItem exists.
- * nonConsumableItem is the required Non-Consumable AppStoreItem.
+ * Figure out if the given Non-Consumable MarketItem exists.
+ * nonConsumableItem is the required Non-Consumable MarketItem.
  */
 - (BOOL)nonConsumableExists:(NonConsumableItem*)nonConsumableItem;
 /**

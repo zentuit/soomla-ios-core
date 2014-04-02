@@ -30,7 +30,7 @@
 #import "NotEnoughGoodsException.h"
 #import "VirtualItemNotFoundException.h"
 #import "ObscuredNSUserDefaults.h"
-#import "AppStoreItem.h"
+#import "MarketItem.h"
 #import "NonConsumableItem.h"
 #import "StoreUtils.h"
 #import "PurchaseWithMarket.h"
@@ -96,21 +96,21 @@ static NSString* TAG = @"SOOMLA StoreController";
     return YES;
 }
 
-- (BOOL)buyInAppStoreWithAppStoreItem:(AppStoreItem*)appStoreItem{
+- (BOOL)buyInMarketWithMarketItem:(MarketItem*)marketItem{
     if (![self checkInit]) return NO;
     
     if ([SKPaymentQueue canMakePayments]) {
         SKMutablePayment *payment = [[SKMutablePayment alloc] init] ;
-        payment.productIdentifier = appStoreItem.productId;
+        payment.productIdentifier = marketItem.productId;
         payment.quantity = 1;
         [[SKPaymentQueue defaultQueue] addPayment:payment];
         
         @try {
-            PurchasableVirtualItem* pvi = [[StoreInfo getInstance] purchasableItemWithProductId:appStoreItem.productId];
-            [EventHandling postAppStorePurchaseStarted:pvi];
+            PurchasableVirtualItem* pvi = [[StoreInfo getInstance] purchasableItemWithProductId:marketItem.productId];
+            [EventHandling postMarketPurchaseStarted:pvi];
         }
         @catch (NSException *exception) {
-            LogError(TAG, ([NSString stringWithFormat:@"Couldn't find a purchasable item with productId: %@", appStoreItem.productId]));
+            LogError(TAG, ([NSString stringWithFormat:@"Couldn't find a purchasable item with productId: %@", marketItem.productId]));
         }
     } else {
         LogError(TAG, @"Can't make purchases. Parental control is probably enabled.");
@@ -133,7 +133,7 @@ static NSString* TAG = @"SOOMLA StoreController";
         [[SKPaymentQueue defaultQueue] restoreCompletedTransactions];
     }
     
-    [EventHandling postTransactionRestoreStarted];
+    [EventHandling postRestoreTransactionsStarted];
 }
 
 - (BOOL)transactionsAlreadyRestored {
@@ -164,7 +164,7 @@ static NSString* TAG = @"SOOMLA StoreController";
 }
 
 - (void)finalizeTransaction:(SKPaymentTransaction *)transaction forPurchasable:(PurchasableVirtualItem*)pvi {
-    [EventHandling postAppStorePurchase:pvi andReceiptUrl:[[NSBundle mainBundle] appStoreReceiptURL]];
+    [EventHandling postMarketPurchase:pvi andReceiptUrl:[[NSBundle mainBundle] appStoreReceiptURL]];
     [pvi giveAmount:1];
     [EventHandling postItemPurchased:pvi];
     
@@ -173,7 +173,7 @@ static NSString* TAG = @"SOOMLA StoreController";
 }
 
 - (void)purchaseVerified:(NSNotification*)notification{
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:EVENT_APPSTORE_PURCHASE_VERIF object:sv];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:EVENT_MARKET_PURCHASE_VERIF object:sv];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:EVENT_UNEXPECTED_ERROR_IN_STORE object:sv];
     
     sv = nil;
@@ -193,7 +193,7 @@ static NSString* TAG = @"SOOMLA StoreController";
 }
 
 - (void)unexpectedVerificationError:(NSNotification*)notification{
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:EVENT_APPSTORE_PURCHASE_VERIF object:sv];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:EVENT_MARKET_PURCHASE_VERIF object:sv];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:EVENT_UNEXPECTED_ERROR_IN_STORE object:sv];
     
     sv = nil;
@@ -207,7 +207,7 @@ static NSString* TAG = @"SOOMLA StoreController";
         if (VERIFY_PURCHASES) {
             sv = [[SoomlaVerification alloc] initWithTransaction:transaction andPurchasable:pvi];
             
-            [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(purchaseVerified:) name:EVENT_APPSTORE_PURCHASE_VERIF object:sv];
+            [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(purchaseVerified:) name:EVENT_MARKET_PURCHASE_VERIF object:sv];
             [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(unexpectedVerificationError:) name:EVENT_UNEXPECTED_ERROR_IN_STORE object:sv];
             
             [sv verifyData];
@@ -246,10 +246,10 @@ static NSString* TAG = @"SOOMLA StoreController";
         @try {
             PurchasableVirtualItem* pvi = [[StoreInfo getInstance] purchasableItemWithProductId:transaction.payment.productIdentifier];
             
-            [EventHandling postAppStorePurchaseCancelled:pvi];
+            [EventHandling postMarketPurchaseCancelled:pvi];
         }
         @catch (VirtualItemNotFoundException* e) {
-            LogError(TAG, ([NSString stringWithFormat:@"Couldn't find the CANCELLED VirtualCurrencyPack OR AppStoreItem with productId: %@"
+            LogError(TAG, ([NSString stringWithFormat:@"Couldn't find the CANCELLED VirtualCurrencyPack OR MarketItem with productId: %@"
                             @". It's unexpected so an unexpected error is being emitted.", transaction.payment.productIdentifier]));
             [EventHandling postUnexpectedError:ERR_GENERAL forObject:self];
         }
@@ -260,11 +260,11 @@ static NSString* TAG = @"SOOMLA StoreController";
 
 - (void)paymentQueueRestoreCompletedTransactionsFinished:(SKPaymentQueue *)queue {
     [ObscuredNSUserDefaults setBool:YES forKey:@"RESTORED"];
-    [EventHandling postTransactionRestored:YES];
+    [EventHandling postRestoreTransactionsFinished:YES];
 }
 
 - (void)paymentQueue:(SKPaymentQueue *)queue restoreCompletedTransactionsFailedWithError:(NSError *)error {
-    [EventHandling postTransactionRestored:NO];
+    [EventHandling postRestoreTransactionsFinished:NO];
 }
 
 - (void)refreshMarketItemsDetails {
@@ -289,10 +289,10 @@ static NSString* TAG = @"SOOMLA StoreController";
             
             PurchaseType* purchaseType = pvi.purchaseType;
             if ([purchaseType isKindOfClass:[PurchaseWithMarket class]]) {
-                ((PurchaseWithMarket*)purchaseType).appStoreItem.appStoreDescription = description;
-                ((PurchaseWithMarket*)purchaseType).appStoreItem.appStorePrice = price;
-                ((PurchaseWithMarket*)purchaseType).appStoreItem.appStoreLocale = locale;
-                ((PurchaseWithMarket*)purchaseType).appStoreItem.appStoreTitle = title;
+                ((PurchaseWithMarket*)purchaseType).marketItem.marketDescription = description;
+                ((PurchaseWithMarket*)purchaseType).marketItem.marketPrice = price;
+                ((PurchaseWithMarket*)purchaseType).marketItem.marketLocale = locale;
+                ((PurchaseWithMarket*)purchaseType).marketItem.marketTitle = title;
             }
         }
         @catch (VirtualItemNotFoundException* e) {
@@ -307,7 +307,7 @@ static NSString* TAG = @"SOOMLA StoreController";
         LogError(TAG, ([NSString stringWithFormat: @"Invalid product id (when trying to fetch item details): %@" , invalidProductId]));
     }
     
-    [EventHandling postItemsAppStoreRefreshed];
+    [EventHandling postItemsMarketRefreshed];
 }
 
 

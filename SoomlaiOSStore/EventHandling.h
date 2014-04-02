@@ -18,7 +18,7 @@
 #import <UIKit/UIKit.h>
 #import <StoreKit/StoreKit.h>
 
-@class AppStoreItem;
+@class MarketItem;
 @class VirtualGood;
 @class VirtualCurrency;
 @class PurchasableVirtualItem;
@@ -35,14 +35,14 @@
 #define EVENT_GOOD_UPGRADE                  @"VirtualGoodUpgrade"
 #define EVENT_ITEM_PURCHASED                @"ItemPurchased"
 #define EVENT_ITEM_PURCHASE_STARTED         @"ItemPurchaseProcessStarted"
-#define EVENT_APPSTORE_PURCHASE_CANCELLED   @"AppStorePurchaseCancelled"
-#define EVENT_APPSTORE_PURCHASED            @"AppStorePurchased"
-#define EVENT_APPSTORE_PURCHASE_VERIF       @"AppStorePurchaseVerification"
-#define EVENT_APPSTORE_PURCHASE_STARTED     @"AppStorePurchaseProcessStarted"
-#define EVENT_TRANSACTION_RESTORED          @"TransactionRestored"
-#define EVENT_TRANSACTION_RESTORE_STARTED   @"TransactionRestoreStarted"
+#define EVENT_MARKET_PURCHASE_CANCELLED     @"MarketPurchaseCancelled"
+#define EVENT_MARKET_PURCHASED              @"MarketPurchased"
+#define EVENT_MARKET_PURCHASE_VERIF         @"MarketPurchaseVerification"
+#define EVENT_MARKET_PURCHASE_STARTED       @"MarketPurchaseProcessStarted"
+#define EVENT_RESTORE_TRANSACTIONS_FINISHED @"RestoreTransactionsFinished"
+#define EVENT_RESTORE_TRANSACTIONS_STARTED  @"RestoreTransactionsStarted"
 #define EVENT_STORECONTROLLER_INIT          @"StoreControllerInitialized"
-#define EVENT_ITEMS_APPSTORE_REFRESHED      @"ItemsAppStoreRefreshed"
+#define EVENT_ITEMS_MARKET_REFRESHED        @"ItemsMarketRefreshed"
 #define EVENT_UNEXPECTED_ERROR_IN_STORE     @"UnexpectedErrorInStore"
 
 
@@ -92,13 +92,13 @@
 + (void)postGoodUpgrade:(VirtualGood*)good withGoodUpgrade:(UpgradeVG*)goodUpgrade;
 + (void)postItemPurchaseStarted:(PurchasableVirtualItem*)item;
 + (void)postItemPurchased:(PurchasableVirtualItem*)item;
-+ (void)postAppStorePurchaseCancelled:(PurchasableVirtualItem*)purchasableVirtualItem;
-+ (void)postAppStorePurchase:(PurchasableVirtualItem*)purchasableVirtualItem andReceiptUrl:(NSURL*)receiptUrl;
-+ (void)postAppStorePurchaseVerification:(BOOL)verified forItem:(PurchasableVirtualItem*)purchasableVirtualItem andTransaction:(SKPaymentTransaction*)transaction forObject:(id)object;
-+ (void)postAppStorePurchaseStarted:(PurchasableVirtualItem*)purchasableVirtualItem;
-+ (void)postTransactionRestored:(BOOL)success;
-+ (void)postTransactionRestoreStarted;
-+ (void)postItemsAppStoreRefreshed;
++ (void)postMarketPurchaseCancelled:(PurchasableVirtualItem*)purchasableVirtualItem;
++ (void)postMarketPurchase:(PurchasableVirtualItem*)purchasableVirtualItem andReceiptUrl:(NSURL*)receiptUrl;
++ (void)postMarketPurchaseVerification:(BOOL)verified forItem:(PurchasableVirtualItem*)purchasableVirtualItem andTransaction:(SKPaymentTransaction*)transaction forObject:(id)object;
++ (void)postMarketPurchaseStarted:(PurchasableVirtualItem*)purchasableVirtualItem;
++ (void)postItemsMarketRefreshed;
++ (void)postRestoreTransactionsFinished:(BOOL)success;
++ (void)postRestoreTransactionsStarted;
 + (void)postUnexpectedError:(int)code forObject:(id)object;
 + (void)postStoreControllerInitialized;
 

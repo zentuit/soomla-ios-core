@@ -24,7 +24,7 @@
 #import "VirtualCurrencyPack.h"
 #import "NonConsumableItem.h"
 #import "VirtualItemNotFoundException.h"
-#import "AppStoreItem.h"
+#import "MarketItem.h"
 #import "ObscuredNSUserDefaults.h"
 #import "StoreUtils.h"
 #import "PurchaseType.h"
@@ -58,7 +58,7 @@ static NSString* TAG = @"SOOMLA StoreInfo";
 - (void)checkAndAddPurchasable:(PurchasableVirtualItem*)pvi toTempPurchasables:(NSMutableDictionary*)tmpPurchasableItems {
     PurchaseType* purchaseType = pvi.purchaseType;
     if ([purchaseType isKindOfClass:[PurchaseWithMarket class]]) {
-        [tmpPurchasableItems setObject:pvi forKey:((PurchaseWithMarket*) purchaseType).appStoreItem.productId];
+        [tmpPurchasableItems setObject:pvi forKey:((PurchaseWithMarket*) purchaseType).marketItem.productId];
     }
 }
 

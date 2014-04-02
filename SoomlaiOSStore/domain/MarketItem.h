@@ -27,25 +27,25 @@ typedef enum {
  * Every PurchasableVirtualItem with PurchaseType of PurchaseWithMarket has an instance of this class which is a
  * representation of the same currency pack as an item on the App Store.
  */
-@interface AppStoreItem : NSObject{
+@interface MarketItem : NSObject{
     NSString* productId;
     Consumable      consumable;
     double          price;
     
-    NSDecimalNumber *appStorePrice;
-    NSLocale        *appStoreLocale;
-    NSString        *appStoreTitle;
-    NSString        *appStoreDescription;
+    NSDecimalNumber *marketPrice;
+    NSLocale        *marketLocale;
+    NSString        *marketTitle;
+    NSString        *marketDescription;
 }
 
 @property (nonatomic, retain) NSString* productId;
 @property Consumable      consumable;
 @property double          price;
 
-@property NSDecimalNumber *appStorePrice;
-@property NSLocale        *appStoreLocale;
-@property NSString        *appStoreTitle;
-@property NSString        *appStoreDescription;
+@property NSDecimalNumber *marketPrice;
+@property NSLocale        *marketLocale;
+@property NSString        *marketTitle;
+@property NSString        *marketDescription;
 
 /** Constructor
  *

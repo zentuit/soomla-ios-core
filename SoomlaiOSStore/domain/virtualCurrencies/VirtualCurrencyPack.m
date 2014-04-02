@@ -18,7 +18,7 @@
 #import "VirtualCurrency.h"
 #import "JSONConsts.h"
 #import "VirtualItemNotFoundException.h"
-#import "AppStoreItem.h"
+#import "MarketItem.h"
 #import "StoreUtils.h"
 #import "StorageManager.h"
 #import "VirtualCurrencyStorage.h"
