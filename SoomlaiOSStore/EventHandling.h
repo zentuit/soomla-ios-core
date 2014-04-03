@@ -97,7 +97,7 @@
 + (void)postMarketPurchase:(PurchasableVirtualItem*)purchasableVirtualItem andReceiptUrl:(NSURL*)receiptUrl;
 + (void)postMarketPurchaseVerification:(BOOL)verified forItem:(PurchasableVirtualItem*)purchasableVirtualItem andTransaction:(SKPaymentTransaction*)transaction forObject:(id)object;
 + (void)postMarketPurchaseStarted:(PurchasableVirtualItem*)purchasableVirtualItem;
-+ (void)postItemsMarketRefreshed:(NSArray*)marketItems;
++ (void)postMarketItemsRefreshed:(NSArray*)marketItems;
 + (void)postRestoreTransactionsFinished:(BOOL)success;
 + (void)postRestoreTransactionsStarted;
 + (void)postUnexpectedError:(int)code forObject:(id)object;

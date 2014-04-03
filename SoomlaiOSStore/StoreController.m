@@ -311,7 +311,7 @@ static NSString* TAG = @"SOOMLA StoreController";
         LogError(TAG, ([NSString stringWithFormat: @"Invalid product id (when trying to fetch item details): %@" , invalidProductId]));
     }
     
-    [EventHandling postItemsMarketRefreshed:marketItems];
+    [EventHandling postMarketItemsRefreshed:marketItems];
 }
 
 
