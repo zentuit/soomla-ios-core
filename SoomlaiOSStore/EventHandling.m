@@ -39,7 +39,7 @@
     [[NSNotificationCenter defaultCenter] addObserver:observer selector:selector name:EVENT_RESTORE_TRANSACTIONS_STARTED object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:observer selector:selector name:EVENT_UNEXPECTED_ERROR_IN_STORE object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:observer selector:selector name:EVENT_STORECONTROLLER_INIT object:nil];
-
+    [[NSNotificationCenter defaultCenter] addObserver:observer selector:selector name:EVENT_MARKET_ITEMS_REFRESHED object:nil];
 }
 
 + (void)postBillingSupported{
