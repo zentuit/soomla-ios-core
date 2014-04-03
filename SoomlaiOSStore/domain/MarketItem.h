@@ -42,10 +42,10 @@ typedef enum {
 @property Consumable      consumable;
 @property double          price;
 
-@property NSDecimalNumber *marketPrice;
-@property NSLocale        *marketLocale;
-@property NSString        *marketTitle;
-@property NSString        *marketDescription;
+@property (nonatomic, retain) NSDecimalNumber *marketPrice;
+@property (nonatomic, retain) NSLocale        *marketLocale;
+@property (nonatomic, retain) NSString        *marketTitle;
+@property (nonatomic, retain) NSString        *marketDescription;
 
 /** Constructor
  *

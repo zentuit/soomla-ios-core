@@ -42,7 +42,7 @@
 #define EVENT_RESTORE_TRANSACTIONS_FINISHED @"RestoreTransactionsFinished"
 #define EVENT_RESTORE_TRANSACTIONS_STARTED  @"RestoreTransactionsStarted"
 #define EVENT_STORECONTROLLER_INIT          @"StoreControllerInitialized"
-#define EVENT_ITEMS_MARKET_REFRESHED        @"ItemsMarketRefreshed"
+#define EVENT_MARKET_ITEMS_REFRESHED        @"MarketItemsRefreshed"
 #define EVENT_UNEXPECTED_ERROR_IN_STORE     @"UnexpectedErrorInStore"
 
 
@@ -65,6 +65,7 @@
 #define DICT_ELEMENT_TITLE             @"title"
 #define DICT_ELEMENT_DESCRIPTION       @"description"
 #define DICT_ELEMENT_LOCALE            @"locale"
+#define DICT_ELEMENT_MARKET_ITEMS      @"marketItems"
 
 // Error Codes
 #define ERR_GENERAL                 0
@@ -96,7 +97,7 @@
 + (void)postMarketPurchase:(PurchasableVirtualItem*)purchasableVirtualItem andReceiptUrl:(NSURL*)receiptUrl;
 + (void)postMarketPurchaseVerification:(BOOL)verified forItem:(PurchasableVirtualItem*)purchasableVirtualItem andTransaction:(SKPaymentTransaction*)transaction forObject:(id)object;
 + (void)postMarketPurchaseStarted:(PurchasableVirtualItem*)purchasableVirtualItem;
-+ (void)postItemsMarketRefreshed;
++ (void)postItemsMarketRefreshed:(NSArray*)marketItems;
 + (void)postRestoreTransactionsFinished:(BOOL)success;
 + (void)postRestoreTransactionsStarted;
 + (void)postUnexpectedError:(int)code forObject:(id)object;

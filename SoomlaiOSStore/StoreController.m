@@ -275,6 +275,7 @@ static NSString* TAG = @"SOOMLA StoreController";
 
 - (void)productsRequest:(SKProductsRequest *)request didReceiveResponse:(SKProductsResponse *)response
 {
+    NSMutableArray* marketItems = [NSMutableArray array];
     NSArray *products = response.products;
     for(SKProduct* product in products) {
         NSString* title = product.localizedTitle;
@@ -289,10 +290,13 @@ static NSString* TAG = @"SOOMLA StoreController";
             
             PurchaseType* purchaseType = pvi.purchaseType;
             if ([purchaseType isKindOfClass:[PurchaseWithMarket class]]) {
-                ((PurchaseWithMarket*)purchaseType).marketItem.marketDescription = description;
-                ((PurchaseWithMarket*)purchaseType).marketItem.marketPrice = price;
-                ((PurchaseWithMarket*)purchaseType).marketItem.marketLocale = locale;
-                ((PurchaseWithMarket*)purchaseType).marketItem.marketTitle = title;
+                MarketItem* mi = ((PurchaseWithMarket*)purchaseType).marketItem;
+                mi.marketDescription = description;
+                mi.marketPrice = price;
+                mi.marketLocale = locale;
+                mi.marketTitle = title;
+                
+                [marketItems addObject:mi];
             }
         }
         @catch (VirtualItemNotFoundException* e) {
@@ -307,7 +311,7 @@ static NSString* TAG = @"SOOMLA StoreController";
         LogError(TAG, ([NSString stringWithFormat: @"Invalid product id (when trying to fetch item details): %@" , invalidProductId]));
     }
     
-    [EventHandling postItemsMarketRefreshed];
+    [EventHandling postItemsMarketRefreshed:marketItems];
 }
 
 

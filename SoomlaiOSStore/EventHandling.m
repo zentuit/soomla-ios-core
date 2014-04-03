@@ -120,8 +120,9 @@
     [[NSNotificationCenter defaultCenter] postNotificationName:EVENT_MARKET_PURCHASE_STARTED object:self userInfo:userInfo];
 }
 
-+ (void)postItemsMarketRefreshed {
-    [[NSNotificationCenter defaultCenter] postNotificationName:EVENT_ITEMS_MARKET_REFRESHED object:self userInfo:nil];
++ (void)postItemsMarketRefreshed:(NSArray*)marketItems {
+    NSDictionary *userInfo = @{DICT_ELEMENT_MARKET_ITEMS: marketItems};
+    [[NSNotificationCenter defaultCenter] postNotificationName:EVENT_MARKET_ITEMS_REFRESHED object:self userInfo:userInfo];
 }
 
 + (void)postRestoreTransactionsFinished:(BOOL)success {
