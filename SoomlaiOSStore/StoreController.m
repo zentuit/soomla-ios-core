@@ -310,7 +310,14 @@ static NSString* TAG = @"SOOMLA StoreController";
     {
         LogError(TAG, ([NSString stringWithFormat: @"Invalid product id (when trying to fetch item details): %@" , invalidProductId]));
     }
-    
+
+    NSUInteger idsCount = [[[StoreInfo getInstance] allProductIds] count];
+    NSUInteger productsCount = [products count];
+    if (idsCount != productsCount)
+    {
+        LogError(TAG, ([NSString stringWithFormat: @"Expecting %d products but only fetched %d from iTunes Store" , (int)idsCount, (int)productsCount]));
+    }
+
     [EventHandling postMarketItemsRefreshed:marketItems];
 }
 
