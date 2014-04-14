@@ -51,6 +51,46 @@
 		C02CECF6160DCB4A000AA0D2 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C02CECF5160DCB4A000AA0D2 /* UIKit.framework */; };
 		C054F21417FAB22A006F5B8E /* SoomlaVerification.m in Sources */ = {isa = PBXBuildFile; fileRef = C054F21217FAB22A006F5B8E /* SoomlaVerification.m */; };
 		C07DA3C316218309005792DD /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = C07DA3C216218309005792DD /* libsqlite3.0.dylib */; };
+		C097627518FBF277000A4403 /* EventHandling.h in Headers */ = {isa = PBXBuildFile; fileRef = C024135F176F2512007BB351 /* EventHandling.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C097627618FBF277000A4403 /* IStoreAssets.h in Headers */ = {isa = PBXBuildFile; fileRef = C024136D176F2512007BB351 /* IStoreAssets.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C097627718FBF277000A4403 /* SoomlaVerification.h in Headers */ = {isa = PBXBuildFile; fileRef = C054F21117FAB22A006F5B8E /* SoomlaVerification.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		C097627818FBF277000A4403 /* StoreConfig.h in Headers */ = {isa = PBXBuildFile; fileRef = C0241376176F2512007BB351 /* StoreConfig.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C097627918FBF277000A4403 /* StoreController.h in Headers */ = {isa = PBXBuildFile; fileRef = C0241378176F2512007BB351 /* StoreController.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C097627A18FBF277000A4403 /* StoreInventory.h in Headers */ = {isa = PBXBuildFile; fileRef = C024137A176F2512007BB351 /* StoreInventory.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C097627B18FBF277000A4403 /* StoreUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = C024137C176F2512007BB351 /* StoreUtils.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C097627C18FBF27F000A4403 /* PurchaseType.h in Headers */ = {isa = PBXBuildFile; fileRef = C024136F176F2512007BB351 /* PurchaseType.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C097627D18FBF27F000A4403 /* PurchaseWithMarket.h in Headers */ = {isa = PBXBuildFile; fileRef = C0241371176F2512007BB351 /* PurchaseWithMarket.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C097627E18FBF27F000A4403 /* PurchaseWithVirtualItem.h in Headers */ = {isa = PBXBuildFile; fileRef = C0241373176F2512007BB351 /* PurchaseWithVirtualItem.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C097627F18FBF286000A4403 /* FBEncryptorAES.h in Headers */ = {isa = PBXBuildFile; fileRef = C0241369176F2512007BB351 /* FBEncryptorAES.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		C097628018FBF286000A4403 /* NSData-Base64.h in Headers */ = {isa = PBXBuildFile; fileRef = C024136B176F2512007BB351 /* NSData-Base64.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		C097628118FBF28C000A4403 /* OpenUDID.h in Headers */ = {isa = PBXBuildFile; fileRef = C0CE33CC178168090089A0DE /* OpenUDID.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		C097628218FBF292000A4403 /* InsufficientFundsException.h in Headers */ = {isa = PBXBuildFile; fileRef = C0241362176F2512007BB351 /* InsufficientFundsException.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C097628318FBF292000A4403 /* NotEnoughGoodsException.h in Headers */ = {isa = PBXBuildFile; fileRef = C0241364176F2512007BB351 /* NotEnoughGoodsException.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C097628418FBF292000A4403 /* VirtualItemNotFoundException.h in Headers */ = {isa = PBXBuildFile; fileRef = C0241366176F2512007BB351 /* VirtualItemNotFoundException.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C097628518FBF2C5000A4403 /* MarketItem.h in Headers */ = {isa = PBXBuildFile; fileRef = C0241343176F2512007BB351 /* MarketItem.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C097628618FBF2C5000A4403 /* NonConsumableItem.h in Headers */ = {isa = PBXBuildFile; fileRef = C0241345176F2512007BB351 /* NonConsumableItem.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C097628718FBF2C5000A4403 /* PurchasableVirtualItem.h in Headers */ = {isa = PBXBuildFile; fileRef = C0241347176F2512007BB351 /* PurchasableVirtualItem.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C097628818FBF2C5000A4403 /* VirtualCategory.h in Headers */ = {isa = PBXBuildFile; fileRef = C0241349176F2512007BB351 /* VirtualCategory.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C097628918FBF2C5000A4403 /* VirtualCurrency.h in Headers */ = {isa = PBXBuildFile; fileRef = C024134C176F2512007BB351 /* VirtualCurrency.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C097628A18FBF2C5000A4403 /* VirtualCurrencyPack.h in Headers */ = {isa = PBXBuildFile; fileRef = C024134E176F2512007BB351 /* VirtualCurrencyPack.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C097628B18FBF2C5000A4403 /* EquippableVG.h in Headers */ = {isa = PBXBuildFile; fileRef = C0241351176F2512007BB351 /* EquippableVG.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C097628C18FBF2C5000A4403 /* LifetimeVG.h in Headers */ = {isa = PBXBuildFile; fileRef = C0241353176F2512007BB351 /* LifetimeVG.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C097628D18FBF2C5000A4403 /* SingleUsePackVG.h in Headers */ = {isa = PBXBuildFile; fileRef = C0241355176F2512007BB351 /* SingleUsePackVG.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C097628E18FBF2C5000A4403 /* SingleUseVG.h in Headers */ = {isa = PBXBuildFile; fileRef = C0241357176F2512007BB351 /* SingleUseVG.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C097628F18FBF2C5000A4403 /* UpgradeVG.h in Headers */ = {isa = PBXBuildFile; fileRef = C0241359176F2512007BB351 /* UpgradeVG.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C097629018FBF2C5000A4403 /* VirtualGood.h in Headers */ = {isa = PBXBuildFile; fileRef = C024135B176F2512007BB351 /* VirtualGood.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C097629118FBF2C5000A4403 /* VirtualItem.h in Headers */ = {isa = PBXBuildFile; fileRef = C024135D176F2512007BB351 /* VirtualItem.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C097629218FBF2D9000A4403 /* JSONConsts.h in Headers */ = {isa = PBXBuildFile; fileRef = C024132A176F2512007BB351 /* JSONConsts.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		C097629318FBF2D9000A4403 /* KeyValDatabase.h in Headers */ = {isa = PBXBuildFile; fileRef = C024132C176F2512007BB351 /* KeyValDatabase.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		C097629418FBF2D9000A4403 /* KeyValueStorage.h in Headers */ = {isa = PBXBuildFile; fileRef = C024132E176F2512007BB351 /* KeyValueStorage.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C097629518FBF2D9000A4403 /* NonConsumableStorage.h in Headers */ = {isa = PBXBuildFile; fileRef = C0241330176F2512007BB351 /* NonConsumableStorage.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		C097629618FBF2D9000A4403 /* ObscuredNSUserDefaults.h in Headers */ = {isa = PBXBuildFile; fileRef = C0241332176F2512007BB351 /* ObscuredNSUserDefaults.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		C097629718FBF2D9000A4403 /* StorageManager.h in Headers */ = {isa = PBXBuildFile; fileRef = C0241334176F2512007BB351 /* StorageManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C097629818FBF2D9000A4403 /* StoreEncryptor.h in Headers */ = {isa = PBXBuildFile; fileRef = C0241336176F2512007BB351 /* StoreEncryptor.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		C097629918FBF2D9000A4403 /* StoreInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = C024133A176F2512007BB351 /* StoreInfo.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C097629A18FBF2D9000A4403 /* VirtualCurrencyStorage.h in Headers */ = {isa = PBXBuildFile; fileRef = C024133C176F2512007BB351 /* VirtualCurrencyStorage.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		C097629B18FBF2D9000A4403 /* VirtualGoodStorage.h in Headers */ = {isa = PBXBuildFile; fileRef = C024133E176F2512007BB351 /* VirtualGoodStorage.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		C097629C18FBF2D9000A4403 /* VirtualItemStorage.h in Headers */ = {isa = PBXBuildFile; fileRef = C0241340176F2512007BB351 /* VirtualItemStorage.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		C0CE33CF178168090089A0DE /* OpenUDID.m in Sources */ = {isa = PBXBuildFile; fileRef = C0CE33CD178168090089A0DE /* OpenUDID.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 /* End PBXBuildFile section */
 
@@ -351,6 +391,46 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C097627C18FBF27F000A4403 /* PurchaseType.h in Headers */,
+				C097629418FBF2D9000A4403 /* KeyValueStorage.h in Headers */,
+				C097629918FBF2D9000A4403 /* StoreInfo.h in Headers */,
+				C097627618FBF277000A4403 /* IStoreAssets.h in Headers */,
+				C097627818FBF277000A4403 /* StoreConfig.h in Headers */,
+				C097627B18FBF277000A4403 /* StoreUtils.h in Headers */,
+				C097627D18FBF27F000A4403 /* PurchaseWithMarket.h in Headers */,
+				C097627E18FBF27F000A4403 /* PurchaseWithVirtualItem.h in Headers */,
+				C097627918FBF277000A4403 /* StoreController.h in Headers */,
+				C097627A18FBF277000A4403 /* StoreInventory.h in Headers */,
+				C097628218FBF292000A4403 /* InsufficientFundsException.h in Headers */,
+				C097628518FBF2C5000A4403 /* MarketItem.h in Headers */,
+				C097629B18FBF2D9000A4403 /* VirtualGoodStorage.h in Headers */,
+				C097628718FBF2C5000A4403 /* PurchasableVirtualItem.h in Headers */,
+				C097629018FBF2C5000A4403 /* VirtualGood.h in Headers */,
+				C097628418FBF292000A4403 /* VirtualItemNotFoundException.h in Headers */,
+				C097629118FBF2C5000A4403 /* VirtualItem.h in Headers */,
+				C097627518FBF277000A4403 /* EventHandling.h in Headers */,
+				C097628318FBF292000A4403 /* NotEnoughGoodsException.h in Headers */,
+				C097628918FBF2C5000A4403 /* VirtualCurrency.h in Headers */,
+				C097628618FBF2C5000A4403 /* NonConsumableItem.h in Headers */,
+				C097629318FBF2D9000A4403 /* KeyValDatabase.h in Headers */,
+				C097628E18FBF2C5000A4403 /* SingleUseVG.h in Headers */,
+				C097629A18FBF2D9000A4403 /* VirtualCurrencyStorage.h in Headers */,
+				C097628A18FBF2C5000A4403 /* VirtualCurrencyPack.h in Headers */,
+				C097628818FBF2C5000A4403 /* VirtualCategory.h in Headers */,
+				C097629518FBF2D9000A4403 /* NonConsumableStorage.h in Headers */,
+				C097627718FBF277000A4403 /* SoomlaVerification.h in Headers */,
+				C097628118FBF28C000A4403 /* OpenUDID.h in Headers */,
+				C097627F18FBF286000A4403 /* FBEncryptorAES.h in Headers */,
+				C097628018FBF286000A4403 /* NSData-Base64.h in Headers */,
+				C097628B18FBF2C5000A4403 /* EquippableVG.h in Headers */,
+				C097629C18FBF2D9000A4403 /* VirtualItemStorage.h in Headers */,
+				C097629218FBF2D9000A4403 /* JSONConsts.h in Headers */,
+				C097628C18FBF2C5000A4403 /* LifetimeVG.h in Headers */,
+				C097628F18FBF2C5000A4403 /* UpgradeVG.h in Headers */,
+				C097629618FBF2D9000A4403 /* ObscuredNSUserDefaults.h in Headers */,
+				C097629718FBF2D9000A4403 /* StorageManager.h in Headers */,
+				C097629818FBF2D9000A4403 /* StoreEncryptor.h in Headers */,
+				C097628D18FBF2C5000A4403 /* SingleUsePackVG.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -364,6 +444,7 @@
 				C02CEC3E160DC870000AA0D2 /* Sources */,
 				C02CEC3F160DC870000AA0D2 /* Frameworks */,
 				C062234A162579D500101FE8 /* Headers */,
+				C058877018FBD62D007EE0F3 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -399,6 +480,22 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		C058877018FBD62D007EE0F3 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "##########################################\n#\n# c.f. http://stackoverflow.com/questions/3520977/build-fat-static-library-device-simulator-using-xcode-and-sdk-4\n#\n# Version 2.7\n#\n# Latest Change:\n# - Supports iPhone 5 / iPod Touch 5 (uses Apple's workaround to lipo bug)\n#\n# Purpose:\n#   Automatically create a Universal static library for iPhone + iPad + iPhone Simulator from within XCode\n#\n# Author: Adam Martin - http://twitter.com/redglassesapps\n# Based on: original script from Eonil (main changes: Eonil's script WILL NOT WORK in Xcode GUI - it WILL CRASH YOUR COMPUTER)\n#\n\nset -e\nset -o pipefail\n\n#################[ Tests: helps workaround any future bugs in Xcode ]########\n#\nDEBUG_THIS_SCRIPT=\"false\"\n\nif [ $DEBUG_THIS_SCRIPT = \"true\" ]\nthen\necho \"########### TESTS #############\"\necho \"Use the following variables when debugging this script; note that they may change on recursions\"\necho \"BUILD_DIR = $BUILD_DIR\"\necho \"BUILD_ROOT = $BUILD_ROOT\"\necho \"CONFIGURATION_BUILD_DIR = $CONFIGURATION_BUILD_DIR\"\necho \"BUILT_PRODUCTS_DIR = $BUILT_PRODUCTS_DIR\"\necho \"CONFIGURATION_TEMP_DIR = $CONFIGURATION_TEMP_DIR\"\necho \"TARGET_BUILD_DIR = $TARGET_BUILD_DIR\"\nfi\n\n#####################[ part 1 ]##################\n# First, work out the BASESDK version number (NB: Apple ought to report this, but they hide it)\n#    (incidental: searching for substrings in sh is a nightmare! Sob)\n\nSDK_VERSION=$(echo ${SDK_NAME} | grep -o '.\\{3\\}$')\n\n# Next, work out if we're in SIM or DEVICE\n\nif [ ${PLATFORM_NAME} = \"iphonesimulator\" ]\nthen\nOTHER_SDK_TO_BUILD=iphoneos${SDK_VERSION}\nelse\nOTHER_SDK_TO_BUILD=iphonesimulator${SDK_VERSION}\nfi\n\necho \"XCode has selected SDK: ${PLATFORM_NAME} with version: ${SDK_VERSION} (although back-targetting: ${IPHONEOS_DEPLOYMENT_TARGET})\"\necho \"...therefore, OTHER_SDK_TO_BUILD = ${OTHER_SDK_TO_BUILD}\"\n#\n#####################[ end of part 1 ]##################\n\n#####################[ part 2 ]##################\n#\n# IF this is the original invocation, invoke WHATEVER other builds are required\n#\n# Xcode is already building ONE target...\n#\n# ...but this is a LIBRARY, so Apple is wrong to set it to build just one.\n# ...we need to build ALL targets\n# ...we MUST NOT re-build the target that is ALREADY being built: Xcode WILL CRASH YOUR COMPUTER if you try this (infinite recursion!)\n#\n#\n# So: build ONLY the missing platforms/configurations.\n\nif [ \"true\" == ${ALREADYINVOKED:-false} ]\nthen\necho \"RECURSION: I am NOT the root invocation, so I'm NOT going to recurse\"\nelse\n# CRITICAL:\n# Prevent infinite recursion (Xcode sucks)\nexport ALREADYINVOKED=\"true\"\n\necho \"RECURSION: I am the root ... recursing all missing build targets NOW...\"\necho \"RECURSION: ...about to invoke: xcodebuild -configuration \\\"${CONFIGURATION}\\\" -project \\\"${PROJECT_NAME}.xcodeproj\\\" -target \\\"${TARGET_NAME}\\\" -sdk \\\"${OTHER_SDK_TO_BUILD}\\\" ${ACTION} RUN_CLANG_STATIC_ANALYZER=NO\" BUILD_DIR=\\\"${BUILD_DIR}\\\" BUILD_ROOT=\\\"${BUILD_ROOT}\\\" SYMROOT=\\\"${SYMROOT}\\\"\n\nxcodebuild -configuration \"${CONFIGURATION}\" -project \"${PROJECT_NAME}.xcodeproj\" -target \"${TARGET_NAME}\" -sdk \"${OTHER_SDK_TO_BUILD}\" ${ACTION} RUN_CLANG_STATIC_ANALYZER=NO BUILD_DIR=\"${BUILD_DIR}\" BUILD_ROOT=\"${BUILD_ROOT}\" SYMROOT=\"${SYMROOT}\"\n\nACTION=\"build\"\n\n#Merge all platform binaries as a fat binary for each configurations.\n\n# Calculate where the (multiple) built files are coming from:\nCURRENTCONFIG_DEVICE_DIR=${SYMROOT}/${CONFIGURATION}-iphoneos\nCURRENTCONFIG_SIMULATOR_DIR=${SYMROOT}/${CONFIGURATION}-iphonesimulator\n\necho \"Taking device build from: ${CURRENTCONFIG_DEVICE_DIR}\"\necho \"Taking simulator build from: ${CURRENTCONFIG_SIMULATOR_DIR}\"\n\nif [[ -z $CREATING_UNIVERSAL_DIR ]]\nthen\nCREATING_UNIVERSAL_DIR=${SYMROOT}/${CONFIGURATION}-universal\nfi\necho \"...I will output a universal build to: ${CREATING_UNIVERSAL_DIR}\"\n\n# ... remove the products of previous runs of this script\n#      NB: this directory is ONLY created by this script - it should be safe to delete!\n\nrm -rf \"${CREATING_UNIVERSAL_DIR}\"\nmkdir \"${CREATING_UNIVERSAL_DIR}\"\n\n#\necho \"lipo: for current configuration (${CONFIGURATION}) creating output file: ${CREATING_UNIVERSAL_DIR}/${EXECUTABLE_NAME}\"\nxcrun -sdk iphoneos lipo -create -output \"${CREATING_UNIVERSAL_DIR}/${EXECUTABLE_NAME}\" \"${CURRENTCONFIG_DEVICE_DIR}/${EXECUTABLE_NAME}\" \"${CURRENTCONFIG_SIMULATOR_DIR}/${EXECUTABLE_NAME}\"\n\n#########\n#\n# Added: StackOverflow suggestion to also copy \"include\" files\n#    (untested, but should work OK)\n#\necho \"Fetching headers from ${PUBLIC_HEADERS_FOLDER_PATH}\"\necho \"  (if you embed your library project in another project, you will need to add\"\necho \"   a \"User Search Headers\" build setting of: (NB INCLUDE THE DOUBLE QUOTES BELOW!)\"\necho '        \"$(TARGET_BUILD_DIR)/usr/local/include/\"'\nif [ -d \"${CURRENTCONFIG_DEVICE_DIR}${PUBLIC_HEADERS_FOLDER_PATH}\" ]\nthen\nmkdir -p \"${CREATING_UNIVERSAL_DIR}${PUBLIC_HEADERS_FOLDER_PATH}\"\n# * needs to be outside the double quotes?\ncp -r \"${CURRENTCONFIG_DEVICE_DIR}${PUBLIC_HEADERS_FOLDER_PATH}/\"* \"${CREATING_UNIVERSAL_DIR}${PUBLIC_HEADERS_FOLDER_PATH}\"\nfi\nfi\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		C02CEC3E160DC870000AA0D2 /* Sources */ = {
@@ -507,11 +604,13 @@
 				GCC_PREFIX_HEADER = "SoomlaiOSStore/SoomlaiOSStore-Prefix.pch";
 				LINK_WITH_STANDARD_LIBRARIES = NO;
 				MACH_O_TYPE = staticlib;
+				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "";
 				PRIVATE_HEADERS_FOLDER_PATH = /headers/private;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PUBLIC_HEADERS_FOLDER_PATH = /headers/public;
 				SKIP_INSTALL = YES;
+				VALID_ARCHS = "$(inherited)";
 				WRAPPER_EXTENSION = framework;
 			};
 			name = Debug;
@@ -531,6 +630,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PUBLIC_HEADERS_FOLDER_PATH = /headers/public;
 				SKIP_INSTALL = YES;
+				VALID_ARCHS = "$(inherited)";
 				WRAPPER_EXTENSION = framework;
 			};
 			name = Release;
