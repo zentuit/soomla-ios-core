@@ -72,4 +72,6 @@
  * This function will invoke the event EVENT_ITEMS_MARKET_REFRESHED when finished
  */
 - (void)refreshMarketItemsDetails;
+
+- (BOOL)isInitialized;
 @end

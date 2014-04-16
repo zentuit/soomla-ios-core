@@ -273,6 +273,10 @@ static NSString* TAG = @"SOOMLA StoreController";
     [productsRequest start];
 }
 
+- (BOOL)isInitialized {
+    return self.initialized;
+}
+
 - (void)productsRequest:(SKProductsRequest *)request didReceiveResponse:(SKProductsResponse *)response
 {
     NSMutableArray* marketItems = [NSMutableArray array];
