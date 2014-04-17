@@ -164,6 +164,18 @@ static NSString* TAG = @"SOOMLA StoreController";
 }
 
 - (void)finalizeTransaction:(SKPaymentTransaction *)transaction forPurchasable:(PurchasableVirtualItem*)pvi {
+    if ([pvi isKindOfClass:[NonConsumableItem class]]) {
+        NonConsumableItem* nonCons = (NonConsumableItem*)pvi;
+        BOOL exists = [[[StorageManager getInstance] nonConsumableStorage] nonConsumableExists:nonCons];
+        if (exists) {
+            
+            // Remove the transaction from the payment queue.
+            [[SKPaymentQueue defaultQueue] finishTransaction: transaction];
+            
+            return;
+        }
+    }
+    
     [EventHandling postMarketPurchase:pvi andReceiptUrl:[[NSBundle mainBundle] appStoreReceiptURL]];
     [pvi giveAmount:1];
     [EventHandling postItemPurchased:pvi];
