@@ -29,7 +29,11 @@
  */
 + (NSString*)key
 {
-    return [[ObscuredNSUserDefaults stringForKey:@"ISU#LL#SE#REI" withDefaultValue:@""] stringByAppendingString:[StoreUtils deviceId]];
+    NSString* sec = [ObscuredNSUserDefaults stringForKey:@"ISU#LL#SE#REI" withDefaultValue:@""];
+    if (!sec || [sec length]==0) {
+        LogError(@"SOOMLA StoreEncryptor", @"Custom sercet not provided. This is serious and can lead to multiple errors!");
+    }
+    return [sec stringByAppendingString:[StoreUtils deviceId]];
 }
 
 + (NSString *)encryptString:(NSString *)data{
