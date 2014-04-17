@@ -134,4 +134,5 @@
 
 - (NSArray*)allProductIds;
 - (BOOL)goodHasUpgrades:(NSString*)goodItemId;
+- (void)save;
 @end

@@ -70,6 +70,13 @@ static NSString* TAG = @"SOOMLA StoreInfo";
     [self checkAndAddPurchasable:good toTempPurchasables:tmpPurchasableItems];
 }
 
+- (void) save {
+    // put StoreInfo in the database as JSON
+    NSString* storeInfoJSON = [StoreUtils dictToJsonString:[self toDictionary]];
+    NSString* ec = [[NSString alloc] initWithData:[storeInfoJSON dataUsingEncoding:NSUTF8StringEncoding] encoding:NSUTF8StringEncoding];
+    [[[StorageManager getInstance] keyValueStorage] setValue:ec forKey:[KeyValDatabase keyMetaStoreInfo]];
+}
+
 - (void)privInitializeWithIStoreAssets:(id)storeAssets {
     LogDebug(TAG, @"Initializing StoreInfo with a given store assets.");
     self.virtualGoods = [storeAssets virtualGoods];
@@ -125,10 +132,7 @@ static NSString* TAG = @"SOOMLA StoreInfo";
     self.goodsCategories = tmpGoodsCategories;
     self.goodsUpgrades = tmpGoodsUpgrades;
     
-    // put StoreInfo in the database as JSON
-    NSString* storeInfoJSON = [StoreUtils dictToJsonString:[self toDictionary]];
-    NSString* ec = [[NSString alloc] initWithData:[storeInfoJSON dataUsingEncoding:NSUTF8StringEncoding] encoding:NSUTF8StringEncoding];
-    [[[StorageManager getInstance] keyValueStorage] setValue:ec forKey:[KeyValDatabase keyMetaStoreInfo]];
+    [self save];
 }
 
 - (void)initializeWithIStoreAssets:(id <IStoreAssets>)storeAssets{
