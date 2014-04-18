@@ -55,19 +55,19 @@ static NSString* TAG = @"SOOMLA StoreInfo";
     return _instance;
 }
 
-- (void)checkAndAddPurchasable:(PurchasableVirtualItem*)pvi toTempPurchasables:(NSMutableDictionary*)tmpPurchasableItems {
+- (void)checkAndAddPurchasable:(PurchasableVirtualItem*)pvi {
     PurchaseType* purchaseType = pvi.purchaseType;
     if ([purchaseType isKindOfClass:[PurchaseWithMarket class]]) {
-        [tmpPurchasableItems setObject:pvi forKey:((PurchaseWithMarket*) purchaseType).marketItem.productId];
+        [self.purchasableItems setObject:pvi forKey:((PurchaseWithMarket*) purchaseType).marketItem.productId];
     }
 }
 
-- (void)addVirtualGood:(VirtualGood*)good withTempGoods:(NSMutableArray*)tmpGoods andTempItems:(NSMutableDictionary*)tmpVirtualItems andTempPurchasables:(NSMutableDictionary*)tmpPurchasableItems{
-    [tmpGoods addObject:good];
+- (void)addVirtualGood:(VirtualGood*)good {
+    [self.virtualGoods addObject:good];
     
-    [tmpVirtualItems setObject:good forKey:good.itemId];
+    [self.virtualItems setObject:good forKey:good.itemId];
     
-    [self checkAndAddPurchasable:good toTempPurchasables:tmpPurchasableItems];
+    [self checkAndAddPurchasable:good];
 }
 
 - (void) save {
@@ -77,60 +77,125 @@ static NSString* TAG = @"SOOMLA StoreInfo";
     [[[StorageManager getInstance] keyValueStorage] setValue:ec forKey:[KeyValDatabase keyMetaStoreInfo]];
 }
 
+- (void)save:(VirtualItem*)virtualItem {
+    [self replaceVirtualItem:virtualItem];
+    [self save];
+}
+
+- (void)replaceVirtualItem:(VirtualItem*)virtualItem {
+    [self.virtualItems setObject:virtualItem forKey:virtualItem.itemId];
+    
+    if ([virtualItem isKindOfClass:[VirtualCurrency class]]) {
+        for(int i=0; i<[self.virtualCurrencies count]; i++) {
+            if ([((VirtualCurrency*)[self.virtualCurrencies objectAtIndex:i]).itemId isEqualToString:virtualItem.itemId]) {
+                [self.virtualCurrencies removeObjectAtIndex:i];
+                break;
+            }
+        }
+        [self.virtualCurrencies addObject:virtualItem];
+    }
+    
+    if ([virtualItem isKindOfClass:[VirtualCurrencyPack class]]) {
+
+        [self checkAndAddPurchasable:(VirtualCurrencyPack*)virtualItem];
+        
+        for(int i=0; i<[self.virtualCurrencyPacks count]; i++) {
+            if ([((VirtualCurrencyPack*)[self.virtualCurrencyPacks objectAtIndex:i]).itemId isEqualToString:virtualItem.itemId]) {
+                [self.virtualCurrencyPacks removeObjectAtIndex:i];
+                break;
+            }
+        }
+        [self.virtualCurrencyPacks addObject:virtualItem];
+        
+    }
+    
+    if ([virtualItem isKindOfClass:[VirtualGood class]]) {
+        
+        if ([virtualItem isKindOfClass:[UpgradeVG class]]) {
+            NSMutableArray* upgrades = [self.goodsUpgrades objectForKey:((UpgradeVG*)virtualItem).goodItemId];
+            if (!upgrades) {
+                upgrades = [NSMutableArray array];
+                [self.goodsUpgrades setObject:upgrades forKey:((UpgradeVG*)virtualItem).goodItemId];
+            }
+            [upgrades addObject:virtualItem];
+        }
+        
+        [self checkAndAddPurchasable:(VirtualGood*)virtualItem];
+        
+        for(int i=0; i<[self.virtualGoods count]; i++) {
+            if ([((VirtualGood*)[self.virtualGoods objectAtIndex:i]).itemId isEqualToString:virtualItem.itemId]) {
+                [self.virtualGoods removeObjectAtIndex:i];
+                break;
+            }
+        }
+        [self.virtualGoods addObject:virtualItem];
+    }
+    
+    if ([virtualItem isKindOfClass:[NonConsumableItem class]]) {
+        
+        [self checkAndAddPurchasable:(NonConsumableItem*)virtualItem];
+        
+        for(int i=0; i<[self.nonConsumableItems count]; i++) {
+            if ([((VirtualGood*)[self.nonConsumableItems objectAtIndex:i]).itemId isEqualToString:virtualItem.itemId]) {
+                [self.nonConsumableItems removeObjectAtIndex:i];
+                break;
+            }
+        }
+        [self.nonConsumableItems addObject:virtualItem];
+        
+    }
+}
+
 - (void)privInitializeWithIStoreAssets:(id)storeAssets {
     LogDebug(TAG, @"Initializing StoreInfo with a given store assets.");
-    self.virtualGoods = [storeAssets virtualGoods];
-    self.virtualCurrencies = [storeAssets virtualCurrencies];
-    self.virtualCurrencyPacks = [storeAssets virtualCurrencyPacks];
-    self.virtualCategories = [storeAssets virtualCategories];
-    self.nonConsumableItems = [storeAssets nonConsumableItems];
     
-    NSMutableDictionary* tmpVirtualItems = [NSMutableDictionary dictionary];
-    NSMutableDictionary* tmpPurchasableItems = [NSMutableDictionary dictionary];
-    NSMutableDictionary* tmpGoodsCategories = [NSMutableDictionary dictionary];
-    NSMutableDictionary* tmpGoodsUpgrades = [NSMutableDictionary dictionary];
+    self.virtualGoods = [NSMutableArray arrayWithArray:[storeAssets virtualGoods]];
+    self.virtualCurrencies = [NSMutableArray arrayWithArray:[storeAssets virtualCurrencies]];
+    self.virtualCurrencyPacks = [NSMutableArray arrayWithArray:[storeAssets virtualCurrencyPacks]];
+    self.virtualCategories = [NSMutableArray arrayWithArray:[storeAssets virtualCategories]];
+    self.nonConsumableItems = [NSMutableArray arrayWithArray:[storeAssets nonConsumableItems]];
+    
+    self.virtualItems = [NSMutableDictionary dictionary];
+    self.purchasableItems = [NSMutableDictionary dictionary];
+    self.goodsCategories = [NSMutableDictionary dictionary];
+    self.goodsUpgrades = [NSMutableDictionary dictionary];
     
     for(VirtualCurrency* vi in self.virtualCurrencies) {
-        [tmpVirtualItems setObject:vi forKey:vi.itemId];
+        [self.virtualItems setObject:vi forKey:vi.itemId];
     }
     
     for(VirtualCurrencyPack* vi in self.virtualCurrencyPacks) {
-        [tmpVirtualItems setObject:vi forKey:vi.itemId];
+        [self.virtualItems setObject:vi forKey:vi.itemId];
         
-        [self checkAndAddPurchasable:vi toTempPurchasables:tmpPurchasableItems];
+        [self checkAndAddPurchasable:vi];
     }
     
     for(VirtualGood* vi in self.virtualGoods) {
-        [tmpVirtualItems setObject:vi forKey:vi.itemId];
+        [self.virtualItems setObject:vi forKey:vi.itemId];
         
         if ([vi isKindOfClass:[UpgradeVG class]]) {
-            NSMutableArray* upgrades = [tmpGoodsUpgrades objectForKey:((UpgradeVG*)vi).goodItemId];
+            NSMutableArray* upgrades = [self.goodsUpgrades objectForKey:((UpgradeVG*)vi).goodItemId];
             if (!upgrades) {
                 upgrades = [NSMutableArray array];
-                [tmpGoodsUpgrades setObject:upgrades forKey:((UpgradeVG*)vi).goodItemId];
+                [self.goodsUpgrades setObject:upgrades forKey:((UpgradeVG*)vi).goodItemId];
             }
             [upgrades addObject:vi];
         }
         
-        [self checkAndAddPurchasable:vi toTempPurchasables:tmpPurchasableItems];
+        [self checkAndAddPurchasable:vi];
     }
     
     for(NonConsumableItem* vi in self.nonConsumableItems) {
-        [tmpVirtualItems setObject:vi forKey:vi.itemId];
+        [self.virtualItems setObject:vi forKey:vi.itemId];
         
-        [self checkAndAddPurchasable:vi toTempPurchasables:tmpPurchasableItems];
+        [self checkAndAddPurchasable:vi];
     }
     
     for(VirtualCategory* category in self.virtualCategories) {
         for(NSString* goodItemId in category.goodsItemIds) {
-            [tmpGoodsCategories setObject:category forKey:goodItemId];
+            [self.goodsCategories setObject:category forKey:goodItemId];
         }
     }
-    
-    self.virtualItems = tmpVirtualItems;
-    self.purchasableItems = tmpPurchasableItems;
-    self.goodsCategories = tmpGoodsCategories;
-    self.goodsUpgrades = tmpGoodsUpgrades;
     
     [self save];
 }
@@ -161,32 +226,30 @@ static NSString* TAG = @"SOOMLA StoreInfo";
         
         NSDictionary* storeInfo = [StoreUtils jsonStringToDict:storeInfoJSON];
         
-        NSMutableDictionary* tmpVirtualItems = [NSMutableDictionary dictionary];
-        NSMutableDictionary* tmpPurchasableItems = [NSMutableDictionary dictionary];
-        NSMutableDictionary* tmpGoodsCategories = [NSMutableDictionary dictionary];
-        NSMutableDictionary* tmpGoodsUpgrades = [NSMutableDictionary dictionary];
+        self.virtualItems = [NSMutableDictionary dictionary];
+        self.purchasableItems = [NSMutableDictionary dictionary];
+        self.goodsCategories = [NSMutableDictionary dictionary];
+        self.goodsUpgrades = [NSMutableDictionary dictionary];
         
-        NSMutableArray* currencies = [[NSMutableArray alloc] init];
+        self.virtualCurrencies = [[NSMutableArray alloc] init];
         NSArray* currenciesDicts = [storeInfo objectForKey:JSON_STORE_CURRENCIES];
         for(NSDictionary* currencyDict in currenciesDicts){
             VirtualCurrency* o = [[VirtualCurrency alloc] initWithDictionary: currencyDict];
-            [currencies addObject:o];
+            [self.virtualCurrencies addObject:o];
             
-            [tmpVirtualItems setObject:o forKey:o.itemId];
+            [self.virtualItems setObject:o forKey:o.itemId];
         }
-        self.virtualCurrencies = currencies;
         
-        NSMutableArray* currencyPacks = [[NSMutableArray alloc] init];
+        self.virtualCurrencyPacks = [[NSMutableArray alloc] init];
         NSArray* currencyPacksDicts = [storeInfo objectForKey:JSON_STORE_CURRENCYPACKS];
         for(NSDictionary* currencyPackDict in currencyPacksDicts){
             VirtualCurrencyPack* o = [[VirtualCurrencyPack alloc] initWithDictionary: currencyPackDict];
-            [currencyPacks addObject:o];
+            [self.virtualCurrencyPacks addObject:o];
             
-            [tmpVirtualItems setObject:o forKey:o.itemId];
+            [self.virtualItems setObject:o forKey:o.itemId];
             
-            [self checkAndAddPurchasable:o toTempPurchasables:tmpPurchasableItems];
+            [self checkAndAddPurchasable:o];
         }
-        self.virtualCurrencyPacks = currencyPacks;
         
         
         NSDictionary* goodsDict = [storeInfo objectForKey:JSON_STORE_GOODS];
@@ -195,65 +258,57 @@ static NSString* TAG = @"SOOMLA StoreInfo";
         NSArray* eqGoods = [goodsDict objectForKey:JSON_STORE_GOODS_EQ];
         NSArray* upGoods = [goodsDict objectForKey:JSON_STORE_GOODS_UP];
         NSArray* paGoods = [goodsDict objectForKey:JSON_STORE_GOODS_PA];
-        NSMutableArray* goods = [[NSMutableArray alloc] init];
+        self.virtualGoods = [[NSMutableArray alloc] init];
         for(NSDictionary* gDict in suGoods){
             SingleUseVG* g = [[SingleUseVG alloc] initWithDictionary: gDict];
-            [self addVirtualGood:g withTempGoods:goods andTempItems:tmpVirtualItems andTempPurchasables:tmpPurchasableItems];
+            [self addVirtualGood:g];
         }
         for(NSDictionary* gDict in ltGoods){
             LifetimeVG* g = [[LifetimeVG alloc] initWithDictionary: gDict];
-            [self addVirtualGood:g withTempGoods:goods andTempItems:tmpVirtualItems andTempPurchasables:tmpPurchasableItems];
+            [self addVirtualGood:g];
         }
         for(NSDictionary* gDict in eqGoods){
             EquippableVG* g = [[EquippableVG alloc] initWithDictionary: gDict];
-            [self addVirtualGood:g withTempGoods:goods andTempItems:tmpVirtualItems andTempPurchasables:tmpPurchasableItems];
+            [self addVirtualGood:g];
         }
         for(NSDictionary* gDict in upGoods){
             UpgradeVG* g = [[UpgradeVG alloc] initWithDictionary: gDict];
             
-            NSMutableArray* upgrades = [tmpGoodsUpgrades objectForKey:g.goodItemId];
+            NSMutableArray* upgrades = [self.goodsUpgrades objectForKey:g.goodItemId];
             if (!upgrades) {
                 upgrades = [NSMutableArray array];
-                [tmpGoodsUpgrades setObject:upgrades forKey:g.goodItemId];
+                [self.goodsUpgrades setObject:upgrades forKey:g.goodItemId];
             }
             [upgrades addObject:g];
             
-            [self addVirtualGood:g withTempGoods:goods andTempItems:tmpVirtualItems andTempPurchasables:tmpPurchasableItems];
+            [self addVirtualGood:g];
         }
         for(NSDictionary* gDict in paGoods){
             SingleUsePackVG* g = [[SingleUsePackVG alloc] initWithDictionary: gDict];
-            [self addVirtualGood:g withTempGoods:goods andTempItems:tmpVirtualItems andTempPurchasables:tmpPurchasableItems];
+            [self addVirtualGood:g];
         }
-        self.virtualGoods = goods;
         
-        NSMutableArray* categories = [[NSMutableArray alloc] init];
+        self.virtualCategories = [[NSMutableArray alloc] init];
         NSArray* categoriesDicts = [storeInfo objectForKey:JSON_STORE_CATEGORIES];
         for(NSDictionary* categoryDict in categoriesDicts){
             VirtualCategory* c = [[VirtualCategory alloc] initWithDictionary: categoryDict];
-            [categories addObject:c];
+            [self.virtualCategories addObject:c];
             
             for(NSString* goodItemId in c.goodsItemIds) {
-                [tmpGoodsCategories setObject:c forKey:goodItemId];
+                [self.goodsCategories setObject:c forKey:goodItemId];
             }
         }
-        self.virtualCategories = categories;
         
-        NSMutableArray* nonConsumables = [[NSMutableArray alloc] init];
+        self.nonConsumableItems = [[NSMutableArray alloc] init];
         NSArray* nonConsumableItemsDict = [storeInfo objectForKey:JSON_STORE_NONCONSUMABLES];
         for(NSDictionary* nonConsumableItemDict in nonConsumableItemsDict){
             NonConsumableItem* non = [[NonConsumableItem alloc] initWithDictionary:nonConsumableItemDict];
-            [nonConsumables addObject:non];
+            [self.nonConsumableItems addObject:non];
             
-            [tmpVirtualItems setObject:non forKey:non.itemId];
+            [self.virtualItems setObject:non forKey:non.itemId];
             
-            [self checkAndAddPurchasable:non toTempPurchasables:tmpPurchasableItems];
+            [self checkAndAddPurchasable:non];
         }
-        self.nonConsumableItems = nonConsumables;
-        
-        self.virtualItems = tmpVirtualItems;
-        self.purchasableItems = tmpPurchasableItems;
-        self.goodsCategories = tmpGoodsCategories;
-        self.goodsUpgrades = tmpGoodsUpgrades;
         
         // everything went well... StoreInfo is initialized from the local DB.
         // it's ok to return now.

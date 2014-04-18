@@ -36,27 +36,27 @@
  */
 @interface StoreInfo : NSObject{
     @private
-    NSDictionary* virtualItems;
-    NSDictionary* purchasableItems;
-    NSDictionary* goodsCategories;
-    NSDictionary* goodsUpgrades;
+    NSMutableDictionary* virtualItems;
+    NSMutableDictionary* purchasableItems;
+    NSMutableDictionary* goodsCategories;
+    NSMutableDictionary* goodsUpgrades;
     @public
-    NSArray* virtualCurrencies;
-    NSArray* virtualGoods;
-    NSArray* virtualCurrencyPacks;
-    NSArray* nonConsumableItems;
-    NSArray* virtualCategories;
+    NSMutableArray* virtualCurrencies;
+    NSMutableArray* virtualGoods;
+    NSMutableArray* virtualCurrencyPacks;
+    NSMutableArray* nonConsumableItems;
+    NSMutableArray* virtualCategories;
 }
 
-@property (nonatomic, retain) NSArray* virtualCurrencies;
-@property (nonatomic, retain) NSArray* virtualGoods;
-@property (nonatomic, retain) NSArray* virtualCurrencyPacks;
-@property (nonatomic, retain) NSArray* nonConsumableItems;
-@property (nonatomic, retain) NSArray* virtualCategories;
-@property (nonatomic, retain) NSDictionary* virtualItems;
-@property (nonatomic, retain) NSDictionary* purchasableItems;
-@property (nonatomic, retain) NSDictionary* goodsCategories;
-@property (nonatomic, retain) NSDictionary* goodsUpgrades;
+@property (nonatomic, retain) NSMutableArray* virtualCurrencies;
+@property (nonatomic, retain) NSMutableArray* virtualGoods;
+@property (nonatomic, retain) NSMutableArray* virtualCurrencyPacks;
+@property (nonatomic, retain) NSMutableArray* nonConsumableItems;
+@property (nonatomic, retain) NSMutableArray* virtualCategories;
+@property (nonatomic, retain) NSMutableDictionary* virtualItems;
+@property (nonatomic, retain) NSMutableDictionary* purchasableItems;
+@property (nonatomic, retain) NSMutableDictionary* goodsCategories;
+@property (nonatomic, retain) NSMutableDictionary* goodsUpgrades;
 
 + (StoreInfo*)getInstance;
 
@@ -135,4 +135,6 @@
 - (NSArray*)allProductIds;
 - (BOOL)goodHasUpgrades:(NSString*)goodItemId;
 - (void)save;
+- (void)save:(VirtualItem*)virtualItem;
+- (void)replaceVirtualItem:(VirtualItem*)virtualItem;
 @end
