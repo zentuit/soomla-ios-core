@@ -1,4 +1,4 @@
-  ### v3.3.1 [view commit logs](https://github.com/soomla/android-store/compare/v3.3.0...v3.3.1)
+### v3.3.1 [view commit logs](https://github.com/soomla/android-store/compare/v3.3.0...v3.3.1)
 
 * New Features
   * Added the option to overwrite an object in StoreInfo and save it.
