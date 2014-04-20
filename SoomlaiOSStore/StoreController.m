@@ -176,7 +176,14 @@ static NSString* TAG = @"SOOMLA StoreController";
         }
     }
     
-    [EventHandling postMarketPurchase:pvi andReceiptUrl:[[NSBundle mainBundle] appStoreReceiptURL]];
+    float version = [[[UIDevice currentDevice] systemVersion] floatValue];
+    
+    NSURL* receiptUrl = NULL;
+    if (version >= 7) {
+        receiptUrl = [[NSBundle mainBundle] appStoreReceiptURL];
+    }
+    
+    [EventHandling postMarketPurchase:pvi andReceiptUrl:receiptUrl];
     [pvi giveAmount:1];
     [EventHandling postItemPurchased:pvi];
     
