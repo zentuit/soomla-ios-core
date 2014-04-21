@@ -84,7 +84,7 @@
 		C097629318FBF2D9000A4403 /* KeyValDatabase.h in Headers */ = {isa = PBXBuildFile; fileRef = C024132C176F2512007BB351 /* KeyValDatabase.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		C097629418FBF2D9000A4403 /* KeyValueStorage.h in Headers */ = {isa = PBXBuildFile; fileRef = C024132E176F2512007BB351 /* KeyValueStorage.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C097629518FBF2D9000A4403 /* NonConsumableStorage.h in Headers */ = {isa = PBXBuildFile; fileRef = C0241330176F2512007BB351 /* NonConsumableStorage.h */; settings = {ATTRIBUTES = (Private, ); }; };
-		C097629618FBF2D9000A4403 /* ObscuredNSUserDefaults.h in Headers */ = {isa = PBXBuildFile; fileRef = C0241332176F2512007BB351 /* ObscuredNSUserDefaults.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		C097629618FBF2D9000A4403 /* ObscuredNSUserDefaults.h in Headers */ = {isa = PBXBuildFile; fileRef = C0241332176F2512007BB351 /* ObscuredNSUserDefaults.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C097629718FBF2D9000A4403 /* StorageManager.h in Headers */ = {isa = PBXBuildFile; fileRef = C0241334176F2512007BB351 /* StorageManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C097629818FBF2D9000A4403 /* StoreEncryptor.h in Headers */ = {isa = PBXBuildFile; fileRef = C0241336176F2512007BB351 /* StoreEncryptor.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		C097629918FBF2D9000A4403 /* StoreInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = C024133A176F2512007BB351 /* StoreInfo.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -419,6 +419,7 @@
 				C097628818FBF2C5000A4403 /* VirtualCategory.h in Headers */,
 				C097629518FBF2D9000A4403 /* NonConsumableStorage.h in Headers */,
 				C097627718FBF277000A4403 /* SoomlaVerification.h in Headers */,
+				C097629618FBF2D9000A4403 /* ObscuredNSUserDefaults.h in Headers */,
 				C097628118FBF28C000A4403 /* OpenUDID.h in Headers */,
 				C097627F18FBF286000A4403 /* FBEncryptorAES.h in Headers */,
 				C097628018FBF286000A4403 /* NSData-Base64.h in Headers */,
@@ -427,7 +428,6 @@
 				C097629218FBF2D9000A4403 /* JSONConsts.h in Headers */,
 				C097628C18FBF2C5000A4403 /* LifetimeVG.h in Headers */,
 				C097628F18FBF2C5000A4403 /* UpgradeVG.h in Headers */,
-				C097629618FBF2D9000A4403 /* ObscuredNSUserDefaults.h in Headers */,
 				C097629718FBF2D9000A4403 /* StorageManager.h in Headers */,
 				C097629818FBF2D9000A4403 /* StoreEncryptor.h in Headers */,
 				C097628D18FBF2C5000A4403 /* SingleUsePackVG.h in Headers */,
