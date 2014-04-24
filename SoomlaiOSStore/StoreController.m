@@ -178,7 +178,7 @@ static NSString* TAG = @"SOOMLA StoreController";
     
     float version = [[[UIDevice currentDevice] systemVersion] floatValue];
     
-    NSURL* receiptUrl = NULL;
+    NSURL* receiptUrl = [NSURL URLWithString:@"file:///"];
     if (version >= 7) {
         receiptUrl = [[NSBundle mainBundle] appStoreReceiptURL];
     }
