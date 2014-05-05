@@ -29,6 +29,9 @@
     return self;
 }
 
+/*
+ * see parent
+ */
 - (id)initWithDictionary:(NSDictionary*)dict{
     if (self = [super initWithDictionary:dict]) {
     }
@@ -36,10 +39,16 @@
     return self;
 }
 
+/*
+ * see parent
+ */
 - (NSDictionary*)toDictionary{
     return [super toDictionary];
 }
 
+/*
+ * see parent
+ */
 - (int)resetBalance:(int)balance withEvent:(BOOL)notify {
     return [[StorageManager getInstance].virtualGoodStorage setBalance:balance toItem:self withEvent:notify];
 }

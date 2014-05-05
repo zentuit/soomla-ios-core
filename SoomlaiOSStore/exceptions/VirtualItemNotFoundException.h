@@ -16,6 +16,9 @@
 
 #import <Foundation/Foundation.h>
 
+/**
+ * This exception is thrown when looking for a Virtual Item that cannot be found.
+ */
 @interface VirtualItemNotFoundException : NSException
 
 - (id)initWithLookupField:(NSString*)lookupField andLookupValue:(NSString*)lookupVal;

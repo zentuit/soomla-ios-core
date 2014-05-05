@@ -14,6 +14,7 @@
  * limitations under the License.
  */
 
+
 typedef enum {
     kConsumable = 1,
     kNonConsumable = 2,
@@ -41,21 +42,31 @@ typedef enum {
 @property (nonatomic, retain) NSString* productId;
 @property Consumable      consumable;
 @property double          price;
-
 @property (nonatomic, retain) NSDecimalNumber *marketPrice;
 @property (nonatomic, retain) NSLocale        *marketLocale;
 @property (nonatomic, retain) NSString        *marketTitle;
 @property (nonatomic, retain) NSString        *marketDescription;
 
-/** Constructor
+/** 
+ * Constructor
  *
- * oProductId is the Id of the current item in the App Store.
- * oConsumable is the type of the current item in the App Store.
- * oPrice is the actual $$ cost of the current item in the App Store.
+ * oProductId - the Id of the current item in the App Store.
+ * oConsumable - the type of the current item in the App Store.
+ * oPrice - the actual $$ cost of the current item in the App Store.
  */
 - (id)initWithProductId:(NSString*)oProductId andConsumable:(Consumable)oConsumable andPrice:(double)oPrice;
+
+/**
+ * Constructor
+ * 
+ * 
+ */
 - (id)initWithDictionary:(NSDictionary*)dict;
+
+
 - (NSDictionary*)toDictionary;
+
+
 - (NSString*)priceWithCurrencySymbol;
 
 

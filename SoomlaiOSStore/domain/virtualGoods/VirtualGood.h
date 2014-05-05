@@ -17,9 +17,20 @@
 #import "PurchasableVirtualItem.h"
 
 /**
- * This is an abstract representation of the application's virtual good.
- * Your game's virtual economy revolves around virtual goods. This class defines the abstract
- * and most common virtual good while the descendants of this class defines specific definitions of VirtualGood.
+ * A LifetimeVG is a virtual good that is bought only once and kept forever.
+ *
+ * The LifetimeVG's characteristics are:
+ *  1. Can only be purchased once.
+ *  2. Your users cannot have more than one of this item.
+ *
+ * Real Games Examples: 'No Ads', 'Double Coins'
+ *
+ * This VirtualItem is purchasable.
+ * NOTE: In case you want this item to be available for purchase in the App Store
+ * (PurchaseWithMarket), you'll need to define the app store item in iTunes Connect.
+ * (https://itunesconnect.apple.com)
+ *
+ * Inheritance: LifeTimeVG > VirtualGood > PurchasableVirtualItem > VirtualItem
  */
 @interface VirtualGood : PurchasableVirtualItem{
 }

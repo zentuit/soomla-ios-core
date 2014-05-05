@@ -18,6 +18,12 @@
 
 @class VirtualItem;
 
+/**
+ * This type of purchase allows users to purchase a virtual item with other virtual items.
+ *
+ * Real Game Example: Purchase a Sword in exchange for 100 Gems. Sword is the item to be purchased,
+ * Gem is the target item, and 100 is the amount.
+ */
 @interface PurchaseWithVirtualItem : PurchaseType {
     NSString* targetItemId;
     int amount;
@@ -26,6 +32,13 @@
 @property (retain, nonatomic) NSString* targetItemId;
 @property (nonatomic) int amount;
 
+/**
+ * Constructor
+ *
+ * oTargetItemId - the itemId of the VirtualItem that is used to "pay" in order to
+ *                     make the purchase
+ * oAmount - the number of target items needed in order to make the purchase
+ */
 - (id) initWithVirtualItem:(NSString*)oTargetItemId andAmount:(int)oAmount;
 
 

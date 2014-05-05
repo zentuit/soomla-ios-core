@@ -37,6 +37,9 @@ static NSString* TAG = @"SOOMLA SingleUsePackVG";
     return self;
 }
 
+/**
+ * see parent
+ */
 - (id)initWithDictionary:(NSDictionary *)dict {
     if (self = [super initWithDictionary:dict]) {
         self.goodItemId = [dict objectForKey:JSON_VGP_GOOD_ITEMID];
@@ -46,6 +49,9 @@ static NSString* TAG = @"SOOMLA SingleUsePackVG";
     return self;
 }
 
+/**
+ * see parent
+ */
 - (NSDictionary*)toDictionary {
     NSDictionary* parentDict = [super toDictionary];
     
@@ -56,6 +62,9 @@ static NSString* TAG = @"SOOMLA SingleUsePackVG";
     return toReturn;
 }
 
+/**
+ * see parent
+ */
 - (int)giveAmount:(int)oAmount withEvent:(BOOL)notify {
     SingleUseVG* good = NULL;
     @try {
@@ -67,6 +76,9 @@ static NSString* TAG = @"SOOMLA SingleUsePackVG";
     return [[[StorageManager getInstance] virtualGoodStorage] addAmount:self.amount*oAmount toItem:good withEvent:notify];
 }
 
+/**
+ * see parent
+ */
 - (int)takeAmount:(int)oAmount withEvent:(BOOL)notify {
     SingleUseVG* good = NULL;
     @try {
@@ -78,6 +90,9 @@ static NSString* TAG = @"SOOMLA SingleUsePackVG";
     return [[[StorageManager getInstance] virtualGoodStorage] removeAmount:self.amount*oAmount fromItem:good withEvent:notify];
 }
 
+/**
+ * see parent
+ */
 - (BOOL)canBuy {
     return YES;
 }

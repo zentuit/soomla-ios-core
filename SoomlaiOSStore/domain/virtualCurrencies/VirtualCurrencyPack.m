@@ -60,7 +60,9 @@ static NSString* TAG = @"SOOMLA VirtualCurrencyPack";
     return toReturn;
 }
 
-
+/**
+ * see parent
+ */
 - (int)giveAmount:(int)amount withEvent:(BOOL)notify {
     VirtualCurrency* currency = NULL;
     @try {
@@ -72,6 +74,9 @@ static NSString* TAG = @"SOOMLA VirtualCurrencyPack";
     return [[[StorageManager getInstance] virtualCurrencyStorage] addAmount:amount*self.currencyAmount toItem:currency withEvent:notify];
 }
 
+/**
+ * see parent
+ */
 - (int)takeAmount:(int)amount withEvent:(BOOL)notify {
     VirtualCurrency* currency = NULL;
     @try {
@@ -83,12 +88,18 @@ static NSString* TAG = @"SOOMLA VirtualCurrencyPack";
     return [[[StorageManager getInstance] virtualCurrencyStorage] removeAmount:amount*self.currencyAmount fromItem:currency withEvent:notify];
 }
 
+/**
+ * see parent
+ */
 - (int)resetBalance:(int)balance withEvent:(BOOL)notify {
     // Not supported for VirtualCurrencyPacks !
     LogError(TAG, @"Someone tried to reset balance of CurrencyPack. That's not right.");
     return 0;
 }
 
+/**
+ * see parent
+ */
 - (BOOL)canBuy {
     return YES;
 }

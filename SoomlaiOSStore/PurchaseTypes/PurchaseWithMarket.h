@@ -29,14 +29,14 @@
 
 /** Constructor
  *
- * oProductId is the productId to purchase in the App Store.
+ * oProductId - the productId to purchase in the App Store.
  * oPrice is the price in the App Store.
  */
 - (id)initWithProductId:(NSString*)oProductId andPrice:(double)oPrice;
 
 /** Constructor
  *
- * oMarketItem is the representation of the item in the App Store.
+ * oMarketItem - the representation of the item in the App Store.
  */
 - (id)initWithMarketItem:(MarketItem*)oMarketItem;
 

@@ -40,7 +40,9 @@ static NSString* TAG = @"SOOMLA PurchaseWithVirtualItem";
     return self;
 }
 
-
+/*
+ * see parent
+ */
 - (void)buy {
     LogDebug(TAG, ([NSString stringWithFormat:@"Trying to buy a %@ with %d pieces of %@.",
                     self.associatedItem.name, self.amount, self.targetItemId]));

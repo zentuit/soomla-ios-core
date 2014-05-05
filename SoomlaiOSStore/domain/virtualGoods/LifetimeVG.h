@@ -17,17 +17,18 @@
 #import "VirtualGood.h"
 
 /**
- * A Lifetime virtual good is a special time that allows you to offer virtual goods that are bought only once.
+ * A LifetimeVG is a virtual good that is bought only once and kept forever.
  *
  * The LifetimeVG's characteristics are:
  *  1. Can only be purchased once.
- *  2. Your users can't have more than one of this item. In other words, (0 <= [LifetimeVG's balance] <= 1) == true.
+ *  2. Your users cannot have more than one of this item.
  *
- * - Example usage: 'No Ads', 'Double Coins'
+ * Real Games Examples: 'No Ads', 'Double Coins'
  *
  * This VirtualItem is purchasable.
- * In case you purchase this item in the App Store (PurchaseWithMarket), You need to define the app store item in
- * iTunes Connect. ( https://itunesconnect.apple.com )
+ * In case you want this item to be available for purchase in the App Store (PurchaseWithMarket), you will need to define the app store item in iTunes Connect. ( https://itunesconnect.apple.com ) 
+ *
+ * Inheritance: LifeTimeVG > VirtualGood > PurchasableVirtualItem > VirtualItem
  */
 @interface LifetimeVG : VirtualGood
 

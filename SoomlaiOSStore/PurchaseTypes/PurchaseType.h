@@ -30,10 +30,11 @@
 
 - (id)init;
 
-/**
- * Buy the associated item.
+/*
+ * Buys the purchasable virtual item.
+ * Implementation in subclasses will be according to specific type of purchase.
  *
- * throws InsufficientFundsException
+ * throws InsufficientFundsException if the user does not have enough funds to buy.
  */
 - (void)buy;
 

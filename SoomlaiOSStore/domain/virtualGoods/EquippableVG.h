@@ -30,9 +30,8 @@ typedef enum {
 #define EquippingModelArray @"local", @"category", @"global", nil
 
 /**
- * An Equippable virtual good is a special type of Lifetime Virtual good.
- * In addition to the fact that this virtual good can be purchased once, it can be equipped by your users.
- * - Equipping means that the user decides to currently use a specific virtual good.
+ * An Equippable virtual good is a special type of Lifetime Virtual good that can be equipped
+ * by your users. Equipping means that the user decides to currently use a specific virtual good.
  *
  * The EquippableVG's characteristics are:
  *  1. Can be purchased only once.
@@ -41,15 +40,31 @@ typedef enum {
  *
  * There are 3 ways to equip an EquippableVG:
  *  1. LOCAL    - The current EquippableVG's equipping status doesn't affect any other EquippableVG.
- *  2. CATEGORY - In the containing category, if this EquippableVG is equipped, all other EquippableVGs are unequipped.
- *  3. GLOBAL   - In the whole game, if this EquippableVG is equipped, all other EquippableVGs are unequipped.
+ *  2. CATEGORY - In the containing category, if this EquippableVG is equipped, all other
+ *                EquippableVGs must stay unequipped.
+ *  3. GLOBAL   - In the whole game, if this EquippableVG is equipped, all other EquippableVG's
+ *                must stay unequipped.
  *
- * - Example Usage: different characters (play with a specific character),
- *                  'binoculars' (users might only want to take them at night)
+ * Real Game Examples:
+ *  1. LOCAL: Say your game offers 3 weapons: a sword, a gun, and an axe (LifetimeVGs). Let’s
+ *  suppose your user has already bought all 3. These are euippables that do not affect one another
+ *  - your user can “carry” the sword, gun, and axe at the same time if he chooses to!
  *
- * This VirtualItem is purchasable.
- * In case you purchase this item in the App Store (PurchaseWithMarket), You need to define the app store item in
- * iTunes Connect. ( https://itunesconnect.apple.com )
+ *  2. CATEGORY: Suppose your game offers “shirts” and “hats”. Let’s say there are 4 available
+ *  shirts and 2 available hats, and your user has already purchased all of the clothing items
+ *  available. He can equip a shirt and a hat at the same time, but cannot equip more than 1 shirt
+ *  or more than 1 hat at the same time. In other words, he can equip at most one of each clothing
+ *  category (shirts, hats)!
+ *
+ *  3. GLOBAL: Suppose your game offers multiple characters (LifetimeVGs): RobotX and RobotY.
+ *  Let’s say your user has bought both. In other words he owns both characters and will own them
+ *  forever (because they are LifetimeVGs) . Your user can only play as (i.e. Equip) one character
+ *  at a time, either RobotX or RobotY, but never both at the same time!
+ *
+ * NOTE: In case you want this item to be available for purchase in the App Store (PurchaseWithMarket), 
+ * you will need to define the app store item in iTunes Connect. ( https://itunesconnect.apple.com )
+ *
+ * Inheritance: EquippableVG > LifeTimeVG > VirtualGood > PurchasableVirtualItem > VirtualItem
  */
 @interface EquippableVG : LifetimeVG {
     EquippingModel equippingModel;
@@ -69,14 +84,16 @@ typedef enum {
          andItemId:(NSString *)oItemId andPurchaseType:(PurchaseType *)oPurchaseType andEquippingModel:(EquippingModel)oEquippingModel;
 
 /**
- * This function equips the current EquippableVG
+ * Equips the current EquippableVG.
+ * The equipping is done according to the equipping model ('GLOBAL', 'CATEGORY', or 'LOCAL').
+ *
  * throws NotEnoughGoodsException
  */
 - (void)equip;
 - (void)equipWithEvent:(BOOL)notify;
 
 /**
- * This function unequips the current EquippableVG
+ * Unequips the current EquippableVG
  */
 - (void)unequip;
 - (void)unequipWithEvent:(BOOL)notify;

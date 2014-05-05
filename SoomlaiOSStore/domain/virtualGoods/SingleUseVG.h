@@ -20,15 +20,34 @@
  * SingleUse virtual goods are the most common type of VirtualGood.
  *
  * The SingleUseVG's characteristics are:
- *  1. Can be purchased unlimited number of times.
- *  2. Has a balance and saved in the database. Its balance goes up when you "give" it or "buy" it. The balance goes
- *      down when it's taken or refunded (in case of an unfriendly refund).
+ *  1. Can be purchased an unlimited number of times.
+ *  2. Has a balance that is saved in the database. Its balance goes up when you
+ *     "give"it or "buy" it. The balance goes down when you "take" or (unfriendly)
+ *     "refund" it.
  *
- * - Usage Examples: 'Hat', 'Sword'
+ * Real Game Examples: 'Hat', 'Sword'
  *
- * This VirtualItem is purchasable.
- * In case you purchase this item in the App Store (PurchaseWithMarket), You need to define the app store item in
- * iTunes Connect. ( https://itunesconnect.apple.com )
+ * NOTE: This VirtualItem is purchasable. In case you purchase this item in the App Store 
+ (PurchaseWithMarket), You need to define the app store item in iTunes Connect. 
+ (https://itunesconnect.apple.com)
+ * 
+ * Inheritance Path: SingleUseVG > VirtualGood > PurchasableVirtualItem > VirtualItem
+ */
+/**
+ * SingleUse virtual goods are the most common type of VirtualGood.
+ *
+ * The SingleUseVG's characteristics are:
+ *  1. Can be purchased an unlimited number of times.
+ *  2. Has a balance that is saved in the database. Its balance goes up when you "give" it or
+ *     "buy" it. The balance goes down when you "take" or (unfriendly) "refund" it.
+ *
+ * Real Game Examples: 'Hat', 'Sword', 'Muffin'
+ *
+ * NOTE: In case you want this item to be available for purchase in the App Store
+ (PurchaseWithMarket), you'll need to define the app store item in iTunes Connect.
+ (https://itunesconnect.apple.com)
+ *
+ * Inheritance: SingleUseVG > VirtualGood > PurchasableVirtualItem > VirtualItem
  */
 @interface SingleUseVG : VirtualGood {
     

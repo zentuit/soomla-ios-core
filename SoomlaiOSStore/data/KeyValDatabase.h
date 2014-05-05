@@ -20,7 +20,7 @@
  * The KeyValDatabase provides basic key-value store above SQLite.
  */
 @interface KeyValDatabase : NSObject{
-@private
+    @private
     sqlite3 *database;
 }
 
@@ -29,19 +29,25 @@
 /**
  * Sets the given value to the given key
  *
- * key is the key of the key-val pair.
- * val is the val of the key-val pair.
+ * key - the key of the key-val pair.
+ * val - the val of the key-val pair.
  */
 - (void)setVal:(NSString *)val forKey:(NSString *)key;
 
 /**
  * Gets the value for the given key.
  *
- * key the key of the key-val pair.
+ * key - the key of the key-val pair.
  */
 - (NSString*)getValForKey:(NSString *)key;
+
+
 - (NSDictionary*)getKeysValsForQuery:(NSString*)query;
+
+
 - (NSArray*)getValsForQuery:(NSString*)query;
+
+
 - (void)deleteKeyValWithKey:(NSString *)key;
 
 

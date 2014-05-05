@@ -38,6 +38,9 @@ static NSString* TAG = @"SOOMLA UpgradeVG";
     return self;
 }
 
+/*
+ * see parent
+ */
 - (id)initWithDictionary:(NSDictionary *)dict {
     if (self = [super initWithDictionary:dict]) {
         self.goodItemId = [dict objectForKey:JSON_VGU_GOOD_ITEMID];
@@ -48,6 +51,9 @@ static NSString* TAG = @"SOOMLA UpgradeVG";
     return self;
 }
 
+/*
+ * see parent
+ */
 - (NSDictionary*)toDictionary {
     NSDictionary* parentDict = [super toDictionary];
     
@@ -60,11 +66,18 @@ static NSString* TAG = @"SOOMLA UpgradeVG";
 }
 
 /**
- * Assigning the current upgrade to the associated VirtualGood (mGood).
+ * Assigning the current upgrade to the associated VirtualGood.
  *
- * This action doesn't check nothing!! It just assigns the current UpgradeVG to the associated mGood.
+ * This action doesn't check anything!! It just assigns the current UpgradeVG to the associated mGood.
  *
  * amount is NOT USED HERE !
+ 
+ * Assigns the current upgrade to the associated VirtualGood.
+ *
+ * NOTE: This action doesn't check anything! It just assigns the current UpgradeVG to the associated good.
+ *
+ * amount - NOT USED HERE!
+ * return: 1 if the user was given the good, 0 otherwise
  */
 - (int)giveAmount:(int)amount withEvent:(BOOL)notify {
     LogDebug(TAG, ([NSString stringWithFormat:@"Assigning %@ to: %@", self.name, self.goodItemId]));
@@ -82,12 +95,14 @@ static NSString* TAG = @"SOOMLA UpgradeVG";
 }
 
 /**
- * This is actually a downgrade of the associated VirtualGood (with goodItemId).
- * We check if the current Upgrade is really associated with the VirtualGood and:
- *  if YES we downgrade to the previous upgrade (or removing upgrades in case of null).
- *  if NO we return (do nothing).
+ * Takes Upgrade from the user, or in other words DOWNGRADES the associated VirtualGood.
+ * Checks if the current Upgrade is really associated with the VirtualGood and:
+ *   if YES - downgrades to the previous upgrade (or remove upgrades in case of null).
+ *   if NO  - returns 0 (does nothing).
  *
- * amount is NOT USED HERE !
+ * amount - NOT USED HERE!
+ * notify - see parent
+ * return: see parent
  */
 - (int)takeAmount:(int)amount withEvent:(BOOL)notify {
     VirtualGood* good = NULL;
@@ -123,8 +138,9 @@ static NSString* TAG = @"SOOMLA UpgradeVG";
 }
 
 /**
- * We want to enforce the logic of allowing/rejecting upgrades here so users won't buy when they are not supposed to.
- * If you want to give your users upgrades for free, use the "give" function.
+ * Determines if the user is in a state that allows him to buy an UpgradeVG
+ * This method enforces allowing/rejecting of upgrades here so users won't buy them when they are not supposed to.
+ * If you want to give your users free upgrades, use the "give" function.
  */
 - (BOOL)canBuy {
     VirtualGood* good = NULL;

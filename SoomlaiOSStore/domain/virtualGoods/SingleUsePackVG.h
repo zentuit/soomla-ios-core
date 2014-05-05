@@ -23,16 +23,16 @@
  * This kind of virtual good can be used to let your users buy more than one SingleUseVG at once.
  *
  * The SingleUsePackVG's characteristics are:
- *  1. Can be purchased unlimited number of times.
- *  2. Doesn't Have a balance in the database. The SingleUseVG there's associated with this pack has its own balance. When
- *      your users buy a SingleUsePackVG, the balance of the associated SingleUseVG goes up in the amount that this pack
- *      represents (mGoodAmount).
+ *  1. Can be purchased an unlimited number of times.
+ *  2. Doesn't have a balance in the database. The SingleUseVG that's associated with this pack
+ *     has its own balance. When your users buy a SingleUsePackVG, the balance of the associated
+ *     SingleUseVG goes up in the amount that this pack represents (mGoodAmount).
  *
- *  - Usage Examples: 'Box Of Chocolates', '10 Swords'
+ * Real Game Examples: 'Box Of Chocolates', '10 Swords'
  *
- * This VirtualItem is purchasable.
- * In case you purchase this item in the App Store (PurchaseWithMarket), You need to define the app store item in
- * iTunes Connect. ( https://itunesconnect.apple.com )
+ * NOTE: In case you want this item to be available for purchase in the App Store (PurchaseWithMarket), you'll need to define the app store item in iTunes Connect. (https://itunesconnect.apple.com)
+ *
+ * Inheritance: SingleUsePackVG > VirtualGood > PurchasableVirtualItem > VirtualItem
  */
 @interface SingleUsePackVG : VirtualGood {
     NSString* goodItemId;
@@ -48,8 +48,8 @@
  * oDescription see parent
  * oItemId see parent
  * oPurchaseType see parent
- * oGoodItemId is the SingleUseVG associated with this pack - MUST BE A SingleUseVG itemId !
- * oAmount is the number of SingleUseVG in the pack.
+ * oGoodItemId - the SingleUseVG associated with this pack - MUST BE A SingleUseVG itemId!
+ * oAmount - the number of SingleUseVG in the pack.
  */
 - (id)initWithName:(NSString *)oName andDescription:(NSString *)oDescription andItemId:(NSString *)oItemId andPurchaseType:(PurchaseType *)oPurchaseType andSingleUseGood:(NSString*)oGoodItemId andAmount:(int)oAmount;
 

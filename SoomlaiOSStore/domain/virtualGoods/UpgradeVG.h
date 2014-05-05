@@ -36,6 +36,30 @@
  * In case you purchase this item in the App Store (PurchaseWithMarket), You need to define the app store item in
  * iTunes Connect. ( https://itunesconnect.apple.com )
  */
+
+/**
+ * An upgrade virtual good is one VG in a series of VGs that define an upgrade scale of an
+ * associated VirtualGood.
+ *
+ * This type of virtual good is best explained with an example:
+ * Let's say there's a strength attribute to one of the characters in your game and that strength is
+ * on a scale of 1-5. You want to provide your users with the ability to upgrade that strength.
+ * This is what you'll need to create:
+ *  1. SingleUseVG for 'strength'
+ *  2. UpgradeVG for strength 'level 1'
+ *  3. UpgradeVG for strength 'level 2'
+ *  4. UpgradeVG for strength 'level 3'
+ *  5. UpgradeVG for strength 'level 4'
+ *  6. UpgradeVG for strength 'level 5'
+ *
+ * When the user buys this UpgradeVG, we check and make sure the appropriate conditions are
+ * met and buy it for you (which actually means we upgrade the associated VirtualGood).
+ *
+ * NOTE: In case you want this item to be available for purchase in the App Store (PurchaseWithMarket), You need to define the app store item in
+ * iTunes Connect. ( https://itunesconnect.apple.com ) 
+ *
+ * Inheritance: UpgradeVG > LifeTimeVG > VirtualGood > PurchasableVirtualItem > VirtualItem
+ */
 @interface UpgradeVG : LifetimeVG {
     NSString* goodItemId;
     NSString* prevGoodItemId;
@@ -52,9 +76,9 @@
  * oDescription see parent
  * oItemId see parent
  * oPurchaseType see parent
- * oGoodItemId is the itemId of the VirtualGood associated with this Upgrade. It can be any VirtualGood type.
- * oPrevItemId is the itemId of the previous UpgradeVG. MUST BE AN UpgardeVG's itemId !
- * oNextItemId is the itemId of the following UpgradeVG. MUST BE AN UpgardeVG's itemId !
+ * oGoodItemId - the itemId of the VirtualGood associated with this Upgrade. It can be any VirtualGood type.
+ * oPrevItemId - the itemId of the previous UpgradeVG. MUST BE AN UpgradeVG's itemId!
+ * oNextItemId - the itemId of the following UpgradeVG. MUST BE AN UpgradeVG's itemId!
  */
 - (id)initWithName:(NSString *)oName andDescription:(NSString *)oDescription andItemId:(NSString *)oItemId andPurchaseType:(PurchaseType *)oPurchaseType andLinkedGood:(NSString*)oGoodItemId andPreviousUpgrade:(NSString*)oPrevItemId andNextUpgrade:(NSString*)oNextItemId;
 

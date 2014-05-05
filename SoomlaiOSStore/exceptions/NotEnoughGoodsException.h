@@ -16,6 +16,17 @@
 
 #import <Foundation/Foundation.h>
 
+/**
+ * When a user tries to equip a virtual good which he does not own.
+ *
+ * Real Game Example:
+ *  Example Inventory: { currency_coin: 100, robot_character: 3 }
+ *  Suppose that your user would like to equip (LOCAL) a robot_character.
+ *  You'll probably call equipVirtualGood("robot_character").
+ *  NotEnoughGoodException will be thrown with "robot_character" as the itemId.
+ *  You can catch this exception in order to notify the user that he doesn't
+ *  own a robot_character (so he cannot equip it!).
+ */
 @interface NotEnoughGoodsException : NSException
 
 - (id)initWithItemId:(NSString*)itemId;

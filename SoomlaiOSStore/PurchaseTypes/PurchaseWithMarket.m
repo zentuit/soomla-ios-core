@@ -40,6 +40,9 @@ static NSString* TAG = @"SOOMLA PurchaseWithMarket";
     return self;
 }
 
+/*
+ * see parent
+ */
 - (void)buy {
     LogDebug(TAG, ([NSString stringWithFormat:@"Starting in-app purchase for productId: %@", self.marketItem.productId]));
     

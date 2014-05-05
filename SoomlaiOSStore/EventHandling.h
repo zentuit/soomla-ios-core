@@ -85,22 +85,39 @@
 + (void)observeAllEventsWithObserver:(id)observer withSelector:(SEL)selector;
 
 + (void)postBillingSupported;
+
 + (void)postBillingNotSupported;
+
 + (void)postChangedBalance:(int)balance forCurrency:(VirtualCurrency*)currency withAmount:(int)amountAdded;
+
 + (void)postChangedBalance:(int)balance forGood:(VirtualGood*)good withAmount:(int)amountAdded;
+
 + (void)postGoodEquipped:(EquippableVG*)good;
+
 + (void)postGoodUnEquipped:(EquippableVG*)good;
+
 + (void)postGoodUpgrade:(VirtualGood*)good withGoodUpgrade:(UpgradeVG*)goodUpgrade;
+
 + (void)postItemPurchaseStarted:(PurchasableVirtualItem*)item;
+
 + (void)postItemPurchased:(PurchasableVirtualItem*)item;
+
 + (void)postMarketPurchaseCancelled:(PurchasableVirtualItem*)purchasableVirtualItem;
+
 + (void)postMarketPurchase:(PurchasableVirtualItem*)purchasableVirtualItem andReceiptUrl:(NSURL*)receiptUrl;
+
 + (void)postMarketPurchaseVerification:(BOOL)verified forItem:(PurchasableVirtualItem*)purchasableVirtualItem andTransaction:(SKPaymentTransaction*)transaction forObject:(id)object;
+
 + (void)postMarketPurchaseStarted:(PurchasableVirtualItem*)purchasableVirtualItem;
+
 + (void)postMarketItemsRefreshed:(NSArray*)marketItems;
+
 + (void)postRestoreTransactionsFinished:(BOOL)success;
+
 + (void)postRestoreTransactionsStarted;
+
 + (void)postUnexpectedError:(int)code forObject:(id)object;
+
 + (void)postStoreControllerInitialized;
 
 @end
