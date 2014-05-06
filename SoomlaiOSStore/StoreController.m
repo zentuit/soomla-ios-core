@@ -43,27 +43,6 @@
 
 static NSString* TAG = @"SOOMLA StoreController";
 
-- (BOOL)checkInit {
-    if (!self.initialized) {
-        LogDebug(TAG, @"You can't perform any of StoreController's actions before it was initialized. Initialize it once when your game loads.");
-        return NO;
-    }
-    
-    return YES;
-}
-
-+ (StoreController*)getInstance{
-    static StoreController* _instance = nil;
-    
-    @synchronized( self ) {
-        if( _instance == nil ) {
-            _instance = [[StoreController alloc] init];
-        }
-    }
-    
-    return _instance;
-}
-
 - (BOOL)initializeWithStoreAssets:(id<IStoreAssets>)storeAssets andCustomSecret:(NSString*)secret {
     
     if (secret && secret.length > 0) {
@@ -138,6 +117,40 @@ static NSString* TAG = @"SOOMLA StoreController";
 
 - (BOOL)transactionsAlreadyRestored {
     return [ObscuredNSUserDefaults boolForKey:@"RESTORED" withDefaultValue:NO];
+}
+
+- (void)refreshMarketItemsDetails {
+    SKProductsRequest *productsRequest = [[SKProductsRequest alloc] initWithProductIdentifiers:[[NSSet alloc] initWithArray:[[StoreInfo getInstance] allProductIds]]];
+    productsRequest.delegate = self;
+    [productsRequest start];
+}
+
+- (BOOL)isInitialized {
+    return self.initialized;
+}
+
+
+/** PRIVATE FUNCTIONS **/
+
+- (BOOL)checkInit {
+    if (!self.initialized) {
+        LogDebug(TAG, @"You can't perform any of StoreController's actions before it was initialized. Initialize it once when your game loads.");
+        return NO;
+    }
+    
+    return YES;
+}
+
++ (StoreController*)getInstance{
+    static StoreController* _instance = nil;
+    
+    @synchronized( self ) {
+        if( _instance == nil ) {
+            _instance = [[StoreController alloc] init];
+        }
+    }
+    
+    return _instance;
 }
 
 #pragma mark -
@@ -284,16 +297,6 @@ static NSString* TAG = @"SOOMLA StoreController";
 
 - (void)paymentQueue:(SKPaymentQueue *)queue restoreCompletedTransactionsFailedWithError:(NSError *)error {
     [EventHandling postRestoreTransactionsFinished:NO];
-}
-
-- (void)refreshMarketItemsDetails {
-    SKProductsRequest *productsRequest = [[SKProductsRequest alloc] initWithProductIdentifiers:[[NSSet alloc] initWithArray:[[StoreInfo getInstance] allProductIds]]];
-    productsRequest.delegate = self;
-    [productsRequest start];
-}
-
-- (BOOL)isInitialized {
-    return self.initialized;
 }
 
 - (void)productsRequest:(SKProductsRequest *)request didReceiveResponse:(SKProductsResponse *)response

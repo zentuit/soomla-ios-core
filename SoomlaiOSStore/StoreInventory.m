@@ -36,8 +36,6 @@
     [pvi buy];
 }
 
-
-
 + (int)getItemBalance:(NSString*)itemId {
     VirtualItem* item = [[StoreInfo getInstance] virtualItemWithId:itemId];
     return [[[StorageManager getInstance] virtualItemStorage:item] balanceForItem:item];
@@ -52,8 +50,6 @@
     VirtualItem* item = [[StoreInfo getInstance] virtualItemWithId:itemId];
     [item takeAmount:amount];
 }
-
-
 
 + (void)equipVirtualGoodWithItemId:(NSString*)goodItemId {
     EquippableVG* good = (EquippableVG*)[[StoreInfo getInstance] virtualItemWithId:goodItemId];

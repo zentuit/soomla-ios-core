@@ -19,19 +19,21 @@
  */
 
 
-// ***NEVER*** CHANGE THE VALUE FOR THIS VARIABLE !!!
-// This value defines the version of the metadata located in your database.
+/** ***NEVER*** CHANGE THE VALUE FOR THIS VARIABLE !!!
+ * This value defines the version of the metadata located in your database.
+ */
 extern const int METADATA_VERSION;
 
-/*
- * do you want to print out debug messages?
+/**
+ * Set to true if you want to print out debug messages
  */
-extern BOOL STORE_DEBUG_LOG;
+ extern BOOL STORE_DEBUG_LOG;
 
 /* CHANGE THIS SECRET NOW ! */
 extern NSString* SOOM_SEC;
 
 extern BOOL VERIFY_PURCHASES;
+
 extern NSString* VERIFY_URL;
 
 

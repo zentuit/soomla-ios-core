@@ -44,34 +44,47 @@
 + (StoreController*)getInstance;
 
 /**
- * This initializer also initializes StoreInfo.
- * storeAssets is the definition of your application specific assets.
- * customSecret is your encryption secret (it's used to encrypt your data in the database)
+ * Initializes StoreController from your implementation of IStoreAssets. This initializer also initializes StoreInfo.
+ *
+ * storeAssets - the definition of your application specific assets.
+ * customSecret - your encryption secret (it's used to encrypt your data in the database)
  */
 - (BOOL)initializeWithStoreAssets:(id<IStoreAssets>)storeAssets andCustomSecret:(NSString*)secret;
+
 /**
- * Start an in app purchase process in the App Store.
- * marketItem is the item to purchase. This item has to be defined EXACTLY the same in iTunes Connect.
+ * Starts an in app purchase process in the App Store.
+ *
+ * marketItem - the item to purchase. This item has to be defined EXACTLY the same in iTunes Connect.
  */
 - (BOOL)buyInMarketWithMarketItem:(MarketItem*)marketItem;
+
 /**
- * Initiate the restoreTransactions process and will refresh all purchasable items details from the App Store
+ * Initiates the restoreTransactions process and will refresh all purchasable items' details from the App Store.
  */
 - (void)refreshInventory;
+
 /**
- * Initiate the restoreTransactions process
+ * Initiates the restoreTransactions process.
  */
 - (void)restoreTransactions;
+
 /**
- * Answers the question: "Were transactions already restored for this game?"
+ * Checks if transactions were already restored.
+ *
+ * return: true if transactions were restored, false otherwise.
  */
 - (BOOL)transactionsAlreadyRestored;
 
 /**
  * Refreshes the details of all market-purchasable items that were defined in App Store.
- * This function will invoke the event EVENT_ITEMS_MARKET_REFRESHED when finished
+ * This function will invoke the event EVENT_ITEMS_MARKET_REFRESHED when finished.
  */
 - (void)refreshMarketItemsDetails;
 
+/**
+ * Checks if StoreController has already been initialized.
+ *
+ * return: true if initialized, false otherwise.
+ */
 - (BOOL)isInitialized;
 @end

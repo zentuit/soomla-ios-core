@@ -21,12 +21,36 @@
 
 @interface StoreUtils : NSObject
 
+/**
+ * Creates Log Debug message according to given tag and message.
+ *
+ * tag - the name of the class whose instance called this function.
+ * msg - debug message to output to log.
+ */
 + (void)LogDebug:(NSString*)tag withMessage:(NSString*)msg;
+
+/**
+ * Creates Log Error message according to given tag and message.
+ *
+ * tag - the name of the class whose instance called this function.
+ * msg - error message to output to log.
+ */
 + (void)LogError:(NSString*)tag withMessage:(NSString*)msg;
+
+/**
+ * Retrieves device Id.
+ *
+ * return: id of the device being used.
+ */
 + (NSString*)deviceId;
+
+
 + (NSMutableDictionary*)jsonStringToDict:(NSString*)str;
+
 + (NSMutableArray*)jsonStringToArray:(NSString*)str;
+
 + (NSString*)dictToJsonString:(NSDictionary*)str;
+
 + (NSString*)arrayToJsonString:(NSArray*)arr;
 
 @end
