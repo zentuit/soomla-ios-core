@@ -24,18 +24,23 @@
 @interface NonConsumableStorage : NSObject
 
 /**
- * Figure out if the given Non-Consumable MarketItem exists.
- * nonConsumableItem is the required Non-Consumable MarketItem.
+ * Determines if the given Non-Consumable MarketItem exists.
+ *
+ * nonConsumableItem - the required Non-Consumable MarketItem.
  */
 - (BOOL)nonConsumableExists:(NonConsumableItem*)nonConsumableItem;
+
 /**
  * Adds the given App Store Non-Consumable item to the storage.
- * nonConsumableItem is the required App Store Non-Consumable item.
+ *
+ * nonConsumableItem - the required App Store Non-Consumable item.
  */
 - (BOOL)add:(NonConsumableItem*)nonConsumableItem;
+
 /**
  * Removes the given App Store Non-Consumable item from the storage.
- * nonConsumableItem is the required App Store Non-Consumable item.
+ *
+ * nonConsumableItem - the required App Store Non-Consumable item.
  */
 - (BOOL)remove:(NonConsumableItem*)nonConsumableItem;
 

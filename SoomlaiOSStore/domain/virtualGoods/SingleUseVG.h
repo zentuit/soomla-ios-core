@@ -21,23 +21,6 @@
  *
  * The SingleUseVG's characteristics are:
  *  1. Can be purchased an unlimited number of times.
- *  2. Has a balance that is saved in the database. Its balance goes up when you
- *     "give"it or "buy" it. The balance goes down when you "take" or (unfriendly)
- *     "refund" it.
- *
- * Real Game Examples: 'Hat', 'Sword'
- *
- * NOTE: This VirtualItem is purchasable. In case you purchase this item in the App Store 
- (PurchaseWithMarket), You need to define the app store item in iTunes Connect. 
- (https://itunesconnect.apple.com)
- * 
- * Inheritance Path: SingleUseVG > VirtualGood > PurchasableVirtualItem > VirtualItem
- */
-/**
- * SingleUse virtual goods are the most common type of VirtualGood.
- *
- * The SingleUseVG's characteristics are:
- *  1. Can be purchased an unlimited number of times.
  *  2. Has a balance that is saved in the database. Its balance goes up when you "give" it or
  *     "buy" it. The balance goes down when you "take" or (unfriendly) "refund" it.
  *

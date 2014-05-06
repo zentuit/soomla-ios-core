@@ -22,15 +22,16 @@
 @class EquippableVG;
 
 /**
- * This class provide basic storage operations on VirtualGoods.
+ * This class provides basic storage operations on VirtualGoods.
  */
 @interface VirtualGoodStorage : VirtualItemStorage
 
 - (id)init;
 
 /**
- * This function removes any upgrade associated with the given VirtualGood.
- * good is the VirtualGood to remove upgrade from.
+ * Removes any upgrade associated with the given VirtualGood.
+ 
+ * good - the VirtualGood to remove upgrade from.
  */
 - (void)removeUpgradesFrom:(VirtualGood*)good;
 - (void)removeUpgradesFrom:(VirtualGood*)good withEvent:(BOOL)notify;
@@ -45,26 +46,30 @@
 
 /**
  * Retrieves the current upgrade for the given VirtualGood.
- * good is the VirtualGood to retrieve upgrade for.
+ *
+ * good - the VirtualGood to retrieve upgrade for.
  */
 - (UpgradeVG*)currentUpgradeOf:(VirtualGood*)good;
 
 /**
- * Check the equipping status of the given EquippableVG.
- * good is the EquippableVG to check the status for.
+ * Checks the equipping status of the given EquippableVG.
+ *
+ * good - the EquippableVG to check the status for.
  */
 - (BOOL)isGoodEquipped:(EquippableVG*)good;
 
 /**
- * Equip the given EquippableVG.
- * good is the EquippableVG to equip.
+ * Equips the given EquippableVG.
+ *
+ * good - the EquippableVG to equip.
  */
 - (void)equipGood:(EquippableVG*)good;
 - (void)equipGood:(EquippableVG*)good withEvent:(BOOL)notify;
 
 /**
- * UnEquip the given EquippableVG.
- * good is the EquippableVG to unequip.
+ * UnEquips the given EquippableVG.
+ *
+ * good - the EquippableVG to unequip.
  */
 - (void)unequipGood:(EquippableVG*)good;
 - (void)unequipGood:(EquippableVG*)good withEvent:(BOOL)notify;

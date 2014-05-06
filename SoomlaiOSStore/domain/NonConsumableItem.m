@@ -44,14 +44,23 @@ static NSString* TAG = @"SOOMLA NonConsumableItem";
     return [super toDictionary];
 }
 
+/**
+ * see parent
+ */
 - (int)giveAmount:(int)amount withEvent:(BOOL)notify {
     return [[[StorageManager getInstance] nonConsumableStorage] add:self];
 }
 
+/**
+ * see parent
+ */
 - (int)takeAmount:(int)amount withEvent:(BOOL)notify {
     return [[[StorageManager getInstance] nonConsumableStorage] remove:self];
 }
 
+/**
+ * see parent
+ */
 - (int)resetBalance:(int)balance withEvent:(BOOL)notify {
     if (balance > 0) {
         return [[[StorageManager getInstance] nonConsumableStorage] add:self];
@@ -60,6 +69,9 @@ static NSString* TAG = @"SOOMLA NonConsumableItem";
     }
 }
 
+/**
+ * see parent
+ */
 - (BOOL)canBuy {
     if ([[[StorageManager getInstance] nonConsumableStorage] nonConsumableExists:self]) {
         LogDebug(TAG, @"You can't buy a NonConsumableItem that was already given to the user.");

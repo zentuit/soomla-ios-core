@@ -30,32 +30,6 @@
 
 @implementation KeyValDatabase
 
-static NSString* TAG = @"SOOMLA KeyValDatabase";
-
-+ (NSString*) keyGoodBalance:(NSString*)itemId {
-    return [NSString stringWithFormat:@"good.%@.balance", itemId];
-}
-
-+ (NSString*) keyGoodEquipped:(NSString*)itemId {
-    return [NSString stringWithFormat:@"good.%@.equipped", itemId];
-}
-
-+ (NSString*) keyGoodUpgrade:(NSString*)itemId {
-    return [NSString stringWithFormat:@"good.%@.currentUpgrade", itemId];
-}
-
-+ (NSString*) keyCurrencyBalance:(NSString*)itemId {
-    return [NSString stringWithFormat:@"currency.%@.balance", itemId];
-}
-
-+ (NSString*) keyNonConsExists:(NSString*)productId {
-    return [NSString stringWithFormat:@"nonconsumable.%@.exists", productId];
-}
-
-+ (NSString*) keyMetaStoreInfo {
-    return @"meta.storeinfo";
-}
-
 - (void)createDBWithPath:(const char *)dbpath {
     if (sqlite3_open(dbpath, &database) == SQLITE_OK)
     {
@@ -304,5 +278,32 @@ static NSString* TAG = @"SOOMLA KeyValDatabase";
         NSString *basePath = ([paths count] > 0) ? [paths objectAtIndex:0] : nil;
         return basePath;
 }
+
+static NSString* TAG = @"SOOMLA KeyValDatabase";
+
++ (NSString*) keyGoodBalance:(NSString*)itemId {
+    return [NSString stringWithFormat:@"good.%@.balance", itemId];
+}
+
++ (NSString*) keyGoodEquipped:(NSString*)itemId {
+    return [NSString stringWithFormat:@"good.%@.equipped", itemId];
+}
+
++ (NSString*) keyGoodUpgrade:(NSString*)itemId {
+    return [NSString stringWithFormat:@"good.%@.currentUpgrade", itemId];
+}
+
++ (NSString*) keyCurrencyBalance:(NSString*)itemId {
+    return [NSString stringWithFormat:@"currency.%@.balance", itemId];
+}
+
++ (NSString*) keyNonConsExists:(NSString*)productId {
+    return [NSString stringWithFormat:@"nonconsumable.%@.exists", productId];
+}
+
++ (NSString*) keyMetaStoreInfo {
+    return @"meta.storeinfo";
+}
+
 
 @end

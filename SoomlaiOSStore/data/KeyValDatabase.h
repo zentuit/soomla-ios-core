@@ -35,19 +35,33 @@
 - (void)setVal:(NSString *)val forKey:(NSString *)key;
 
 /**
- * Gets the value for the given key.
+ * Retrieves the value for the given key.
  *
  * key - the key of the key-val pair.
  */
 - (NSString*)getValForKey:(NSString *)key;
 
-
+/**
+ * Retrieves from DB the key-val pairs that answer the given query.
+ *
+ * query - what to fetch from DB
+ * return: key-val pairs
+ */
 - (NSDictionary*)getKeysValsForQuery:(NSString*)query;
 
-
+/**
+ * Retrieves from DB the Vals of the key-val pairs that answer the given query.
+ *
+ * query - query that says what to fetch from DB
+ * return: vals of the key-val pairs
+ */
 - (NSArray*)getValsForQuery:(NSString*)query;
 
-
+/**
+ * Deletes from DB the key-val pair with the given key.
+ *
+ * key - key whose key-val pair is to be deleted
+ */
 - (void)deleteKeyValWithKey:(NSString *)key;
 
 

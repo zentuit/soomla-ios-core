@@ -61,80 +61,106 @@
 + (StoreInfo*)getInstance;
 
 /**
- * This function initializes StoreInfo. On first initialization, when the
- * database doesn't have any previous version of the store metadata, StoreInfo
- * is being loaded from the given IStoreAssets. After the first initialization,
- * StoreInfo will be initialized from the database.
+ * Initializes StoreInfo, either from IStoreAssets or from database.
+ * On first initialization, when the database doesn't have any previous version of the store
+ * metadata, StoreInfo gets loaded from the given IStoreAssets.
+ * After the first initialization, StoreInfo will be initialized from the database.
  *
- * IMPORTANT: If you want to override the current StoreInfo, you'll have to bump the version of your
- * implementation of IStoreAssets in order to remove the metadata when the application loads.
- * (bumping the version is done by returning a higher number in IStoreAssets:getVersion.
+ * IMPORTANT: If you want to override the current StoreInfo, you'll have to bump the version
+ * of your implementation of IStoreAssets in order to remove the metadata when the application
+ * loads. Bumping the version is done by returning a higher number in
+ * IStoreAssets's function getVersion().
  */
 - (void)initializeWithIStoreAssets:(id <IStoreAssets>)storeAssets;
 
 /**
- * Initializes StoreInfo from the database. This action should be performed only once during the lifetime of
- * a session of the game. StoreController automatically initializes StoreInfo. Don't do it if you don't know what
- * you're doing.
- * return success.
+ * Initializes StoreInfo from the database.
+ * This action should be performed only once during the lifetime of a session of the game.
+ * StoreController automatically initializes StoreInfo.
+ * Don't do it if you don't know what you're doing.
+ *
+ * return: true if successful
  */
 - (BOOL)initializeFromDB;
+
 - (NSDictionary*)toDictionary;
 
-
 /**
- * A utility function to retrieve a single VirtualItem that resides in the meta data.
+ * Retrieves a single VirtualItem that resides in the metadata.
  *
- * itemId is the itemId of the required VirtualItem.
- *
- * throws VirtualItemNotFoundException when the given itemId was not found.
+ * itemId - the itemId of the required VirtualItem.
+ * throws VirtualItemNotFoundException when the given itemId is not found.
  */
 - (VirtualItem*)virtualItemWithId:(NSString*)itemId;
 
 /**
- * A utility function to retrieve a single PurchasableVirtualItem that resides in the meta data.
+ * Retrieves a single PurchasableVirtualItem that resides in the metadata.
  *
- * IMPORTANT: The retrieved PurchasableVirtualItems are only those which has a purchaseType of PurchaseWithMarket.
- * (This is why we fetch here with productId)
+ * IMPORTANT: The retrieved PurchasableVirtualItem has a purchaseType of PurchaseWithMarket. This is why we fetch here with productId and not with itemId (productId is the id of the product in the App Store).
  *
- * productId the productId of the required PurchasableVirtualItem.
- *
+ * productId - the productId of the required PurchasableVirtualItem.
  * throws VirtualItemNotFoundException when the given productId was not found.
  */
 - (PurchasableVirtualItem*)purchasableItemWithProductId:(NSString*)productId;
 
 /**
- * A utility function to retrieve a single VirtualCategory for a given VirtualGood itemId.
+ * Retrieves a single VirtualCategory for the given VirtualGood itemId.
  *
- * goodItemId is the virtualGood in the category.
- *
- * returns a VirtualCategory for the given VirtualGood.
- *
- * throws VirtualItemNotFoundException when the given goodItemId was not found.
+ * goodItemId - the item id of the virtualGood in the category
+ * returns: a VirtualCategory for the VirtualGood with the given goodItemId.
+ * throws VirtualItemNotFoundException when the given goodItemId is not found.
  */
 - (VirtualCategory*)categoryForGoodWithItemId:(NSString*)goodItemId;
 
 /**
- * A utility function to retrieve a first UpgradeVG for a given VirtualGood itemId.
- * goodItemId is the VirtualGood we're searching the upgrade for.
+ * Retrieves a first UpgradeVG for a given VirtualGood itemId.
+ *
+ * goodItemId - the VirtualGood we're searching the upgrade for.
  */
 - (UpgradeVG*)firstUpgradeForGoodWithItemId:(NSString*)goodItemId;
 
 /**
- * A utility function to retrieve a last UpgradeVG for a given VirtualGood itemId.
- * goodItemId is the VirtualGood we're searching the upgrade for.
+ * Retrieves a last UpgradeVG for a given VirtualGood itemId.
+ *
+ * goodItemId - the VirtualGood we're searching the upgrade for.
  */
 - (UpgradeVG*)lastUpgradeForGoodWithItemId:(NSString*)goodItemId;
 
 /**
- * A utility function to retrieve all UpgradeVGs for a given VirtualGood itemId.
- * goodItemId is the VirtualGood we're searching the upgrades for.
+ * Retrieves all UpgradeVGs for a given VirtualGood itemId.
+ *
+ * goodItemId - the VirtualGood we're searching the upgrades for.
  */
 - (NSArray*)upgradesForGoodWithItemId:(NSString*)goodItemId;
 
+/**
+ * Retrieves all productIds.
+ *
+ * return: array of all product Ids
+ */
 - (NSArray*)allProductIds;
+
+/**
+ * Checks if the virtual good with the given goodItemId has upgrades.
+ *
+ * return: true if the good has upgrades
+ */
 - (BOOL)goodHasUpgrades:(NSString*)goodItemId;
+
+/**
+ * Puts StoreInfo in the database as JSON
+ */
 - (void)save;
 - (void)save:(VirtualItem*)virtualItem;
+
+/**
+ * Replaces an old virtual item with a new one by doing the following:
+ *   1. Determines the type of the given virtual item.
+ *   2. Looks for the given virtual item in the relevant list, according to its type.
+ *   3. If found, removes it.
+ *   4. Adds the given virtual item.
+ *
+ * virtualItem - if the given virtual item exists in relevant list, replace with the given virtual item, otherwise add the given virtual item.
+ */
 - (void)replaceVirtualItem:(VirtualItem*)virtualItem;
 @end

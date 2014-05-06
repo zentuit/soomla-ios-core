@@ -30,20 +30,20 @@
 
 /** Constructor
  *
- * oName is the category's name.
- * oGoodsItemIds is the list of itemIds of VirtualGoods in this category.
+ * oName - the category's name.
+ * oGoodsItemIds - the list of itemIds of VirtualGoods in this category.
  */
 - (id)initWithName:(NSString*)oName andGoodsItemIds:(NSArray*)oGoodsItemIds;
 
 /** Constructor
  *
- * Generates an instance of VirtualCategory from a NSDictionary.
- * dict is a NSDictionary representation of the wanted VirtualCategory.
+ * Generates an instance of VirtualCategory from an NSDictionary.
+ * dict - a NSDictionary representation of the wanted VirtualCategory.
  */
 - (id)initWithDictionary:(NSDictionary*)dict;
 
 /**
- * Converts the current VirtualCategory to a NSDictionary.
+ * Converts the current VirtualCategory to an NSDictionary.
  */
 - (NSDictionary*)toDictionary;
 

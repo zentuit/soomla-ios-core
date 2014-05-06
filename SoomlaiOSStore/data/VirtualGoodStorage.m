@@ -142,10 +142,16 @@
     }
 }
 
+/**
+ * see parent
+ */
 - (NSString*)keyBalance:(NSString*)itemId {
     return [KeyValDatabase keyGoodBalance:itemId];
 }
 
+/**
+ * see parent
+ */
 - (void)postBalanceChangeToItem:(VirtualItem*)item withBalance:(int)balance andAmountAdded:(int)amountAdded {
     [EventHandling postChangedBalance:balance forGood:(VirtualGood*)item withAmount:amountAdded];
 }

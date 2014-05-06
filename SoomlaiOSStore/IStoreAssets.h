@@ -23,19 +23,22 @@
 @protocol IStoreAssets <NSObject>
 
 /**
- * A version for your specific game's store assets
- * 
+ * Retrieves the current version of your IStoreAssets.
+ *
  * This value will determine if the saved data in the database will be deleted or not.
  * Bump the version every time you want to delete the old data in the DB.
- * If you don't bump this value, you won't be able to see changes you've made to the objects in this file.
  *
- * NOTE: You can NOT bump this value and just delete the app from your device to see changes. You can't do this after
- * you publish your application on the market.
+ * Real Game Example:
+ *   Suppose that your game has a VirtualGood called "Hat".
+ *   Let's say your game's IStoreAssets version is currently 0.
+ *   Now you want to change the name "Hat" to "Green Hat" - you will need to bump the version
+ *   from 0 to 1, in order for the new name, "Green Hat" to replace the old one, "Hat".
  *
- * For example: If you previously created a VirtualGood with name "Hat" and you published your application,
- * the name "Hat will be saved in any of your users' databases. If you want to change the name to "Green Hat"
- * than you'll also have to bump the version (from 0 to 1). Now the new "Green Hat" name will replace the old one.
- */
+ * Explanation: The local database on every one of your users' devices keeps your economy's metadata, such as the VirtualGood's name "Hat". When you change IStoreAssets, you must bump the version in order for the data to change in your users' local databases.
+ *
+ * You need to bump the version after ANY change in IStoreAssets for the local database to realize it needs to refresh its data.
+ *
+ * @return the version of your specific IStoreAssets.
 - (int)getVersion;
 
 /**
@@ -59,7 +62,7 @@
 - (NSArray*)virtualCategories;
 
 /**
- * You can define non consumable items that you'd like to use for your needs.
+ * You can define non-consumable items that you'd like to use for your needs.
  * CONSUMABLE items are usually just currency packs.
  * NON-CONSUMABLE items are usually used to let users purchase a "no-ads" token.
  */

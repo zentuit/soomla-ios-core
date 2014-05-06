@@ -44,10 +44,11 @@
 + (StorageManager*)getInstance;
 
 - (id)init;
+
 - (VirtualItemStorage*)virtualItemStorage:(VirtualItem*)item;
 
-
 + (NSString *) applicationDirectory;
+
 + (BOOL)addSkipBackupAttributeToItemAtURL:(NSURL *)URL;
 
 @end

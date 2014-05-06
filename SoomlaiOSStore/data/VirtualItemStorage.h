@@ -27,33 +27,53 @@
 }
 
 /**
- * Fetch the balance of the given virtual item.
- * item is the required virtual item.
+ * Retrieves the balance of the given virtual item.
+ *
+ * item - the required virtual item.
  */
 - (int)balanceForItem:(VirtualItem*)item;
+
 /**
  * Adds the given amount of items to the storage.
+ *
  * item is the required virtual item.
- * amount is the amount of items to add.
+ * amount - the amount of items to add.
  */
 - (int)addAmount:(int)amount toItem:(VirtualItem*)item;
 - (int)addAmount:(int)amount toItem:(VirtualItem*)item withEvent:(BOOL)notify;
+
 /**
  * Removes the given amount from the given virtual item's balance.
+ *
  * item is the virtual item to remove the given amount from.
- * amount is the amount to remove.
+ * amount - the amount to remove.
  */
 - (int)removeAmount:(int)amount fromItem:(VirtualItem*)item;
 - (int)removeAmount:(int)amount fromItem:(VirtualItem*)item withEvent:(BOOL)notify;
 
 /**
- * Set the balance of the given virtual item.
- * item is the required virtual item.
+ * Sets the balance of the given virtual item.
+ *
+ * item - the required virtual item.
  */
 - (int)setBalance:(int)balance toItem:(VirtualItem*)item;
 - (int)setBalance:(int)balance toItem:(VirtualItem*)item withEvent:(BOOL)notify;
 
+/**
+ * Retrieves the balance of the virtual item with the given itemId (from the KeyValDatabase).
+ *
+ * itemId - id of the virtual item whose balance is to be retrieved.
+ * return: String containing name of storage base, itemId, and balance
+ */
 - (NSString*)keyBalance:(NSString*)itemId;
+
+/**
+ * Posts the given amount changed in the given balance of the given virtual item.
+ *
+ * item - virtual item whose balance has changed.
+ * balance - the balance that has changed.
+ * amountAdded - the amount added to the item's balance.
+ */
 - (void)postBalanceChangeToItem:(VirtualItem*)item withBalance:(int)balance andAmountAdded:(int)amountAdded;
 
 @end

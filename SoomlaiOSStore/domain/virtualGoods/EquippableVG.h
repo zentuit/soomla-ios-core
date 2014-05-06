@@ -98,6 +98,9 @@ typedef enum {
 - (void)unequip;
 - (void)unequipWithEvent:(BOOL)notify;
 
+/**
+ * Transforms the given equipping model to a string.
+ */
 +(NSString*) equippingModelEnumToString:(EquippingModel)emVal;
 +(EquippingModel) equippingModelStringToEnum:(NSString*)emStr;
 

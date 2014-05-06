@@ -14,7 +14,9 @@
  * limitations under the License.
  */
 
-
+/**
+ *Items offered in In-App Purchase fall within one of the five following purchase types.
+ */
 typedef enum {
     kConsumable = 1,
     kNonConsumable = 2,
@@ -56,17 +58,23 @@ typedef enum {
  */
 - (id)initWithProductId:(NSString*)oProductId andConsumable:(Consumable)oConsumable andPrice:(double)oPrice;
 
-/**
- * Constructor
- * 
- * 
+/** Constructor
+ *
+ * Generates an instance of VirtualCategory from an NSDictionary.
+ * dict - a NSDictionary representation of the wanted VirtualCategory.
  */
 - (id)initWithDictionary:(NSDictionary*)dict;
 
-
+/**
+ * Converts the current VirtualCategory to an NSDictionary.
+ */
 - (NSDictionary*)toDictionary;
 
-
+/**
+ * Retrieves price of Market Item with its currency symbol
+ *
+ * return: price
+ */
 - (NSString*)priceWithCurrencySymbol;
 
 

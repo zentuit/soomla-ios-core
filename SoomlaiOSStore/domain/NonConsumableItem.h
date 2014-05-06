@@ -17,11 +17,12 @@
 #import "PurchasableVirtualItem.h"
 
 /**
- * A representation of a non-consumable item in the App Store. 
- * These kinds of items are bought by the user once and kept for him forever.
+ * A representation of a non-consumable item in the Market. These kinds of items are bought by the user once and kept for him forever.
  *
- * Don't get confused... this is not a Lifetime VirtualGood. It's an item in the App Store.
- * This item will be retrieved when you "restoreTransactions"
+ * NOTE: Don't be confused: this is not a Lifetime VirtualGood, it's a MANAGED item in the Market. This means that the product can be purchased only once per user (such as a new levelin a game), and is remembered by the Market (can be restored if this application is uninstalled and then re-installed).
+ * If you want to make a LifetimeVG available for purchase in the market (purchase with real money $$), you will need to declare it as a NonConsumableItem.
+ *
+ * Inheritance: NonConsumableItem > PurchasableVirtualItem > VirtualItem
  */
 @interface NonConsumableItem : PurchasableVirtualItem {
 }
@@ -36,8 +37,7 @@
 - (id)initWithName:(NSString*)oName andDescription:(NSString*)oDescription
                 andItemId:(NSString*)oItemId andPurchaseType:(PurchaseType*)oPurchaseType;
 
-/** Constructor
- *
+/**
  * see parent
  */
 - (id)initWithDictionary:(NSDictionary*)dict;

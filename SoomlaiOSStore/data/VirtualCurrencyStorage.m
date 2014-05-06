@@ -29,10 +29,23 @@
     return self;
 }
 
+/**
+ * Retrieves the balance of the virtual item with the given itemId (from the KeyValDatabase).
+ *
+ * itemId - id of the virtual item whose balance is to be retrieved
+ * return: String containing name of storage base, itemId, and balance
+ */
 - (NSString*)keyBalance:(NSString*)itemId {
     return [KeyValDatabase keyCurrencyBalance:itemId];
 }
 
+/**
+ * Posts the given amount changed in the given balance of the given virtual item.
+ *
+ * item - virtual item whose balance has changed
+ * balance - the balance that has changed
+ * amountAdded - the amount added to the item's balance
+ */
 - (void)postBalanceChangeToItem:(VirtualItem*)item withBalance:(int)balance andAmountAdded:(int)amountAdded {
     [EventHandling postChangedBalance:balance forCurrency:(VirtualCurrency*)item withAmount:amountAdded];
 }

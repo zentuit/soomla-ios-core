@@ -17,27 +17,6 @@
 #import "LifetimeVG.h"
 
 /**
- * An upgrade virtual good is one VG in a series of VGs that define an upgrade scale of an associated VirtualGood.
- *
- * This type of virtual good is best explained with an example:
- * Lets say you have a strength attribute to your character in the game and that strength is on the scale 1-5.
- * You want to provide your users with the ability to upgrade that strength. This is what you'll need to create:
- *  1. SingleUseVG for 'strength'
- *  2. UpgradeVG for strength 'level 1'
- *  3. UpgradeVG for strength 'level 2'
- *  4. UpgradeVG for strength 'level 3'
- *  5. UpgradeVG for strength 'level 4'
- *  6. UpgradeVG for strength 'level 5'
- *
- * Now, when the user buys this UpgradeVG, we check and make sure the appropriate conditions are met and buy it for you
- * (which actually means we upgrading the associated VirtualGood).
- *
- * This VirtualItem is purchasable.
- * In case you purchase this item in the App Store (PurchaseWithMarket), You need to define the app store item in
- * iTunes Connect. ( https://itunesconnect.apple.com )
- */
-
-/**
  * An upgrade virtual good is one VG in a series of VGs that define an upgrade scale of an
  * associated VirtualGood.
  *
