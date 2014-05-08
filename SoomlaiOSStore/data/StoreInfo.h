@@ -83,6 +83,9 @@
  */
 - (BOOL)initializeFromDB;
 
+/**
+ * Converts StoreInfo to a NSDictionary.
+ */
 - (NSDictionary*)toDictionary;
 
 /**

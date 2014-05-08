@@ -75,7 +75,7 @@
 
 
 /**
- * This class is used register and post all the supported events.
+ * This class is used to register and post all the supported events.
  * Use this class to invoke events on handlers when they occur.
  *
  * SOOMLA uses iOS's NSNotificationCenter to handle events across the SDK.

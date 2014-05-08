@@ -26,7 +26,6 @@
 /**
  * This is the place where all the relevant storage classes are created.
  * This class contains static methods for you to retrieve the various storages.
- *
  * You will usually need the storage in order to get/set the amounts of virtual goods/currency.
  */
 @interface StorageManager : NSObject{
@@ -45,6 +44,12 @@
 
 - (id)init;
 
+/*
+ * Checks whether item belongs to VirtualGoodStorage or VirtualCurrencyStorage.
+ *
+ * item - the item to check what type of storage it belongs to.
+ * return: the type of VirtualItemStorage.
+ */
 - (VirtualItemStorage*)virtualItemStorage:(VirtualItem*)item;
 
 + (NSString *) applicationDirectory;

@@ -36,7 +36,7 @@
 /**
  * Adds the given amount of items to the storage.
  *
- * item is the required virtual item.
+ * item - the required virtual item.
  * amount - the amount of items to add.
  */
 - (int)addAmount:(int)amount toItem:(VirtualItem*)item;
@@ -45,7 +45,7 @@
 /**
  * Removes the given amount from the given virtual item's balance.
  *
- * item is the virtual item to remove the given amount from.
+ * item - the virtual item to remove the given amount from.
  * amount - the amount to remove.
  */
 - (int)removeAmount:(int)amount fromItem:(VirtualItem*)item;

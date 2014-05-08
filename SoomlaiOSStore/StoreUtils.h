@@ -44,7 +44,6 @@
  */
 + (NSString*)deviceId;
 
-
 + (NSMutableDictionary*)jsonStringToDict:(NSString*)str;
 
 + (NSMutableArray*)jsonStringToArray:(NSString*)str;

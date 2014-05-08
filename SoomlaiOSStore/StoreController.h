@@ -47,7 +47,8 @@
  * Initializes StoreController from your implementation of IStoreAssets. This initializer also initializes StoreInfo.
  *
  * storeAssets - the definition of your application specific assets.
- * customSecret - your encryption secret (it's used to encrypt your data in the database)
+ * customSecret - your encryption secret (it's used to encrypt your data in the database).
+ * return: true if successful
  */
 - (BOOL)initializeWithStoreAssets:(id<IStoreAssets>)storeAssets andCustomSecret:(NSString*)secret;
 
@@ -55,6 +56,7 @@
  * Starts an in app purchase process in the App Store.
  *
  * marketItem - the item to purchase. This item has to be defined EXACTLY the same in iTunes Connect.
+ * return: true if successful
  */
 - (BOOL)buyInMarketWithMarketItem:(MarketItem*)marketItem;
 

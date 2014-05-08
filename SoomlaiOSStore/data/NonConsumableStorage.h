@@ -19,14 +19,15 @@
 @class NonConsumableItem;
 
 /**
- * This class provide basic storage operations on the App Store's Non-Consumable items.
+ * This class provides basic storage operations on the App Store's Non-Consumable items.
  */
 @interface NonConsumableStorage : NSObject
 
 /**
- * Determines if the given Non-Consumable MarketItem exists.
+ * Determines if the given Non-Consumable item exists.
  *
- * nonConsumableItem - the required Non-Consumable MarketItem.
+ * nonConsumableItem - the Non-Consumable item to check if exists.
+ * return: true if exists, false otherwise
  */
 - (BOOL)nonConsumableExists:(NonConsumableItem*)nonConsumableItem;
 
@@ -34,6 +35,7 @@
  * Adds the given App Store Non-Consumable item to the storage.
  *
  * nonConsumableItem - the required App Store Non-Consumable item.
+ * return: true if exists, false otherwise
  */
 - (BOOL)add:(NonConsumableItem*)nonConsumableItem;
 
@@ -41,6 +43,7 @@
  * Removes the given App Store Non-Consumable item from the storage.
  *
  * nonConsumableItem - the required App Store Non-Consumable item.
+ * return: true if exists, false otherwise
  */
 - (BOOL)remove:(NonConsumableItem*)nonConsumableItem;
 

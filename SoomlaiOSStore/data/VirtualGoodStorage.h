@@ -30,7 +30,7 @@
 
 /**
  * Removes any upgrade associated with the given VirtualGood.
- 
+ *
  * good - the VirtualGood to remove upgrade from.
  */
 - (void)removeUpgradesFrom:(VirtualGood*)good;
@@ -38,8 +38,9 @@
 
 /**
  * Assigns a specific upgrade to the given VirtualGood.
- * good is the VirtualGood to upgrade.
- * upgradeVG is the upgrade to assign.
+ *
+ * good - the VirtualGood to upgrade.
+ * upgradeVG - the upgrade to assign.
  */
 - (void)assignCurrentUpgrade:(UpgradeVG*)upgradeVG toGood:(VirtualGood*)good;
 - (void)assignCurrentUpgrade:(UpgradeVG*)upgradeVG toGood:(VirtualGood*)good withEvent:(BOOL)notify;

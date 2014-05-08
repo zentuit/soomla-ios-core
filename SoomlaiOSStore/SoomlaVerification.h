@@ -27,6 +27,7 @@
 }
 
 - (id) initWithTransaction:(SKPaymentTransaction*)t andPurchasable:(PurchasableVirtualItem*)pvi;
+
 - (void)verifyData;
 
 @end

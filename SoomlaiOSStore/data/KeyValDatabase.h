@@ -29,8 +29,8 @@
 /**
  * Sets the given value to the given key
  *
- * key - the key of the key-val pair.
  * val - the val of the key-val pair.
+ * key - the key of the key-val pair.
  */
 - (void)setVal:(NSString *)val forKey:(NSString *)key;
 
@@ -50,7 +50,7 @@
 - (NSDictionary*)getKeysValsForQuery:(NSString*)query;
 
 /**
- * Retrieves from DB the Vals of the key-val pairs that answer the given query.
+ * Retrieves from DB the vals of the key-val pairs that answer the given query.
  *
  * query - query that says what to fetch from DB
  * return: vals of the key-val pairs

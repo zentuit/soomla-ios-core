@@ -15,7 +15,7 @@
  */
 
 /**
- *Items offered in In-App Purchase fall within one of the five following purchase types.
+ * Items offered in In-App Purchase fall within one of the five following purchase types.
  */
 typedef enum {
     kConsumable = 1,
@@ -27,14 +27,13 @@ typedef enum {
 
 /**
  * This class represents an item in the App Store.
- * Every PurchasableVirtualItem with PurchaseType of PurchaseWithMarket has an instance of this class which is a
- * representation of the same currency pack as an item on the App Store.
+ * Every PurchasableVirtualItem with PurchaseType of PurchaseWithMarket has an instance of this class.
  */
 @interface MarketItem : NSObject{
     NSString* productId;
     Consumable      consumable;
     double          price;
-    
+
     NSDecimalNumber *marketPrice;
     NSLocale        *marketLocale;
     NSString        *marketTitle;
@@ -60,13 +59,12 @@ typedef enum {
 
 /** Constructor
  *
- * Generates an instance of VirtualCategory from an NSDictionary.
- * dict - a NSDictionary representation of the wanted VirtualCategory.
+ * dict - an NSDictionary representation of the Market Item.
  */
 - (id)initWithDictionary:(NSDictionary*)dict;
 
 /**
- * Converts the current VirtualCategory to an NSDictionary.
+ * Converts the current MarketItem to an NSDictionary.
  */
 - (NSDictionary*)toDictionary;
 

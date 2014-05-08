@@ -77,8 +77,8 @@
 /**
  * Sets the given value to the given key.
  *
- * key is the key in the key-val pair.
  * val is the val in the key-val pair.
+ * key is the key in the key-val pair.
  */
 - (void)setValue:(NSString*)val forNonEncryptedKey:(NSString*)key;
 

@@ -27,10 +27,15 @@
 + (NSString*)key;
 
 + (NSString *)encryptString:(NSString *)data;
+
 + (NSString *)decryptToString:(NSString *)data;
+
 + (NSString *)encryptNumber:(NSNumber *)data;
+
 + (NSNumber *)decryptToNumber:(NSString *)data;
+
 + (NSString *)encryptBoolean:(BOOL)data;
+
 + (BOOL)decryptToBoolean:(NSString *)data;
 
 @end
