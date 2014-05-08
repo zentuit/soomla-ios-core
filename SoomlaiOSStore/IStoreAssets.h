@@ -38,7 +38,8 @@
  *
  * You need to bump the version after ANY change in IStoreAssets for the local database to realize it needs to refresh its data.
  *
- * @return the version of your specific IStoreAssets.
+ * return: the version of your specific IStoreAssets.
+ */
 - (int)getVersion;
 
 /**

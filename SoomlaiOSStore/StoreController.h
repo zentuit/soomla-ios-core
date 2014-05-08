@@ -54,7 +54,7 @@
 
 /**
  * Starts an in app purchase process in the App Store.
- *
+ * 
  * marketItem - the item to purchase. This item has to be defined EXACTLY the same in iTunes Connect.
  * return: true if successful
  */
