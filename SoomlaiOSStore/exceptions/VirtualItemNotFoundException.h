@@ -21,6 +21,13 @@
  */
 @interface VirtualItemNotFoundException : NSException
 
+/**
+ * Constructor
+ *
+ * For example,
+ * @param lookupField the field of the virtual item to look for
+ * @param lookupVal the value of the field to look for
+ */
 - (id)initWithLookupField:(NSString*)lookupField andLookupValue:(NSString*)lookupVal;
 
 @end

@@ -37,9 +37,9 @@
 
 /** Constructor
  *
- * oName - the name of the virtual item.
- * oDescription - the description of the virtual item.
- * oItemId - the itemId of the virtual item.
+ * @param oName - the name of the virtual item.
+ * @param oDescription - the description of the virtual item.
+ * @param oItemId - the itemId of the virtual item.
  */
 - (id)initWithName:(NSString*)oName andDescription:(NSString*)oDescription andItemId:(NSString*)oItemId;
 
@@ -47,7 +47,7 @@
  *
  * Generates an instance of VirtualItem from an NSDictionary.
  *
- * dict - an NSDictionary representation of the wanted VirtualItem.
+ * @param dict an NSDictionary representation of the wanted VirtualItem.
  */
 - (id)initWithDictionary:(NSDictionary*)dict;
 
@@ -57,37 +57,59 @@
 - (NSDictionary*)toDictionary;
 
 /**
- * Gives your user the given amount of the specific virtual item.
+ * Gives your user the given amount of the specific @c VirtualItem @c.
  * For example, when your user plays your game for the first time you GIVE him 1000 gems.
  *
- * NOTE: This action is different than buy:
- * You use give to give your user something for free.
- * You use buy to give your user something and get something in return.
+ * NOTE: This action is different than `buy()`:
+ * You use `giveAmount()` to give your user something for free.
+ * You use `buy()` to give your user something and get something in return.
  *
- * amount - the amount of the specific item to be given
- 
- * return: balance after the giving process
+ * @param amount the amount of the specific item to be given
+ * @return balance after the giving process
  */
 - (int)giveAmount:(int)amount;
+
+/**
+ * Takes from your user the given amount of the specific virtual item.
+ * For example, when you want to downgrade a virtual good, you take the upgrade.
+ *
+ * @param amount the amount of the specific item to be taken
+ * @return balance after the taking process
+ */
 - (int)giveAmount:(int)amount withEvent:(BOOL)notify;
 
 /**
  * Takes from your user the given amount of the specific virtual item.
- * For example, when your user requests a refund (and let's say it's not a friendly refund),
- * you need to TAKE the item he is returning from him (and give him his money back).
+ * For example, when you want to downgrade a virtual good, you take the upgrade.
  *
- * amount - the amount of the specific item to be taken
- * return: balance after the taking process
+ * @param amount the amount of the specific item to be taken
+ * @return balance after the taking process
  */
 - (int)takeAmount:(int)amount;
+
+/**
+ * Takes from your user the given amount of the specific virtual item.
+ * For example, when you want to downgrade a virtual good, you take the upgrade.
+ *
+ * @param amount the amount of the specific item to be taken
+ * @return balance after the taking process
+ */
 - (int)takeAmount:(int)amount withEvent:(BOOL)notify;
 
 /**
  * Resets this Virtual Item's balance to the given balance.
  *
- * balance - the balance of the current virtual item
- * return: balance after the reset process
+ * @param balance the balance of the current virtual item
+ * @return balance after the reset process
  */
 - (int)resetBalance:(int)balance;
+
+/**
+ * Takes from your user the given amount of the specific virtual item.
+ * For example, when you want to downgrade a virtual good, you take the upgrade.
+ *
+ * @param amount the amount of the specific item to be taken
+ * @return balance after the taking process
+ */
 - (int)resetBalance:(int)balance withEvent:(BOOL)notify;
 @end

@@ -35,6 +35,11 @@
 
 @property (nonatomic, retain) NSString* itemId;
 
+/**
+ * Constructor
+ *
+ * @param itemId of the item that caused the exception
+ */
 - (id)initWithItemId:(NSString*)itemId;
 
 @end

@@ -1,6 +1,13 @@
 #import <Foundation/Foundation.h>
 #import "IStoreAssets.h"
 
+
+/**
+ * This class defines our game's economy model, which includes virtual goods, virtual currencies
+ * and currency packs, virtual categories, and non-consumable items.
+ */
+
+
 // Currencies
 extern NSString* const MUFFINS_CURRENCY_ITEM_ID;
 

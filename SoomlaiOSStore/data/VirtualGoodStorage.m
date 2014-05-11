@@ -38,6 +38,7 @@
 - (void)removeUpgradesFrom:(VirtualGood*)good {
     [self removeUpgradesFrom:good withEvent:YES];
 }
+
 - (void)removeUpgradesFrom:(VirtualGood*)good withEvent:(BOOL)notify {
     LogDebug(tag, ([NSString stringWithFormat:@"Removing upgrade information from virtual good: %@", good.name]));
     
@@ -51,6 +52,7 @@
 - (void)assignCurrentUpgrade:(UpgradeVG*)upgradeVG toGood:(VirtualGood*)good {
     [self assignCurrentUpgrade:upgradeVG toGood:good withEvent:YES];
 }
+
 - (void)assignCurrentUpgrade:(UpgradeVG*)upgradeVG toGood:(VirtualGood*)good withEvent:(BOOL)notify {
     if ([[self currentUpgradeOf:good].itemId isEqualToString:upgradeVG.itemId]) {
         return;

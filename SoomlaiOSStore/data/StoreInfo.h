@@ -32,7 +32,7 @@
  * - Virtual Currency Packs
  * - All kinds of Virtual Goods
  * - Virtual Categories
- * - NonConsumables
+ * - Non-Consumables
  */
 @interface StoreInfo : NSObject{
     @private
@@ -61,109 +61,113 @@
 + (StoreInfo*)getInstance;
 
 /**
- * Initializes StoreInfo, either from IStoreAssets or from database.
+ * Initializes `StoreInfo`, either from `IStoreAssets` or from database.
  * On first initialization, when the database doesn't have any previous version of the store
- * metadata, StoreInfo gets loaded from the given IStoreAssets.
- * After the first initialization, StoreInfo will be initialized from the database.
+ * metadata, `StoreInfo` gets loaded from the given `IStoreAssets`.
+ * After the first initialization, `StoreInfo` will be initialized from the database.
  *
- * IMPORTANT: If you want to override the current StoreInfo, you'll have to bump the version
- * of your implementation of IStoreAssets in order to remove the metadata when the application
+ * IMPORTANT: If you want to override the current `StoreInfo`, you'll have to bump the version
+ * of your implementation of `IStoreAssets` in order to remove the metadata when the application
  * loads. Bumping the version is done by returning a higher number in
- * IStoreAssets's function getVersion().
+ * `IStoreAssets`'s function `getVersion()`.
  */
 - (void)initializeWithIStoreAssets:(id <IStoreAssets>)storeAssets;
 
 /**
- * Initializes StoreInfo from the database.
+ * Initializes `StoreInfo` from the database.
  * This action should be performed only once during the lifetime of a session of the game.
- * StoreController automatically initializes StoreInfo.
+ * `StoreController` automatically initializes `StoreInfo`.
  * Don't do it if you don't know what you're doing.
  *
- * return: true if successful
+ * @return YES if successful, NO otherwise
  */
 - (BOOL)initializeFromDB;
 
 /**
- * Converts StoreInfo to a NSDictionary.
+ * Converts this to an `NSDictionary`.
  */
 - (NSDictionary*)toDictionary;
 
 /**
- * Retrieves a single VirtualItem that resides in the metadata.
+ * Retrieves a single `VirtualItem` that resides in the metadata.
  *
- * itemId - the itemId of the required VirtualItem.
- * throws VirtualItemNotFoundException when the given itemId is not found.
+ * @param itemId the item id of the required `VirtualItem`.
+ * @exception VirtualItemNotFoundException when the given `itemId` is not found.
  */
 - (VirtualItem*)virtualItemWithId:(NSString*)itemId;
 
 /**
- * Retrieves a single PurchasableVirtualItem that resides in the metadata.
+ * Retrieves a single `PurchasableVirtualItem` that resides in the metadata.
  *
- * IMPORTANT: The retrieved PurchasableVirtualItem has a purchaseType of PurchaseWithMarket. This is why we fetch here with productId and not with itemId (productId is the id of the product in the App Store).
+ * IMPORTANT: The retrieved `PurchasableVirtualItem` has a purchaseType of `PurchaseWithMarket`. This is why we fetch here with `productId` and not with `itemId` (`productId` is the id of the product in the App Store).
  *
- * productId - the productId of the required PurchasableVirtualItem.
- * throws VirtualItemNotFoundException when the given productId was not found.
+ * @param productId the product id of the required `PurchasableVirtualItem`.
+ * @exception VirtualItemNotFoundException when the given productId was not found.
  */
 - (PurchasableVirtualItem*)purchasableItemWithProductId:(NSString*)productId;
 
 /**
- * Retrieves a single VirtualCategory for the given VirtualGood itemId.
+ * Retrieves a single `VirtualCategory` for the given `VirtualGood` `itemId`.
  *
- * goodItemId - the item id of the virtualGood in the category
- * returns: a VirtualCategory for the VirtualGood with the given goodItemId.
- * throws VirtualItemNotFoundException when the given goodItemId is not found.
+ * @param goodItemId the item id of the `virtualGood` in the category
+ * @return a VirtualCategory for the `VirtualGood` with the given `goodItemId`.
+ * @exception VirtualItemNotFoundException when the given `goodItemId` is not found.
  */
 - (VirtualCategory*)categoryForGoodWithItemId:(NSString*)goodItemId;
 
 /**
- * Retrieves a first UpgradeVG for a given VirtualGood itemId.
+ * Retrieves a first `UpgradeVG` for a given `VirtualGood` `itemId`.
  *
- * goodItemId - the VirtualGood we're searching the upgrade for.
+ * @param goodItemId the `VirtualGood` we're searching the upgrade for.
  */
 - (UpgradeVG*)firstUpgradeForGoodWithItemId:(NSString*)goodItemId;
 
 /**
- * Retrieves a last UpgradeVG for a given VirtualGood itemId.
+ * Retrieves a last `UpgradeVG` for a given `VirtualGood` `itemId`.
  *
- * goodItemId - the VirtualGood we're searching the upgrade for.
+ * @param goodItemId the `VirtualGood` we're searching the upgrade for.
  */
 - (UpgradeVG*)lastUpgradeForGoodWithItemId:(NSString*)goodItemId;
 
 /**
- * Retrieves all UpgradeVGs for a given VirtualGood itemId.
+ * Retrieves all `UpgradeVG`s for a given `VirtualGood` `itemId`.
  *
- * goodItemId - the VirtualGood we're searching the upgrades for.
+ * @param goodItemId the `VirtualGood` we're searching the upgrades for.
  */
 - (NSArray*)upgradesForGoodWithItemId:(NSString*)goodItemId;
 
 /**
- * Retrieves all productIds.
+ * Retrieves all `productId`s.
  *
- * return: array of all product Ids
+ * @return array of all `product Id`s
  */
 - (NSArray*)allProductIds;
 
 /**
- * Checks if the virtual good with the given goodItemId has upgrades.
+ * Checks if the virtual good with the given `goodItemId` has upgrades.
  *
- * return: true if the good has upgrades
+ * @return true if the good has upgrades
  */
 - (BOOL)goodHasUpgrades:(NSString*)goodItemId;
 
 /**
- * Puts StoreInfo in the database as JSON
+ * Saves the store's metadata in the database as JSON.
  */
 - (void)save;
+
+/**
+ * Replaces the given virtual item, and then saves the store's metadata.
+ *
+ * @param virtualItem the virtual item to replace
+ */
 - (void)save:(VirtualItem*)virtualItem;
 
 /**
- * Replaces an old virtual item with a new one by doing the following:
- *   1. Determines the type of the given virtual item.
- *   2. Looks for the given virtual item in the relevant list, according to its type.
- *   3. If found, removes it.
- *   4. Adds the given virtual item.
+ * Replaces an old virtual item with the given one by removing the given virtual item from the
+ * relevant list if it exists, and then adds the given virtual item.
  *
- * virtualItem - if the given virtual item exists in relevant list, replace with the given virtual item, otherwise add the given virtual item.
+ * @param virtualItem if the given virtual item exists in relevant list, replace with the
+ *                    given virtual item, otherwise add the given virtual item.
  */
 - (void)replaceVirtualItem:(VirtualItem*)virtualItem;
 @end

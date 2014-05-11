@@ -26,26 +26,25 @@
 /**
  * Determines if the given Non-Consumable item exists.
  *
- * nonConsumableItem - the Non-Consumable item to check if exists.
- * return: true if exists, false otherwise
+ * @param nonConsumableItem the Non-Consumable item to check if exists.
+ * @return YES if exists, NO otherwise
  */
 - (BOOL)nonConsumableExists:(NonConsumableItem*)nonConsumableItem;
 
 /**
  * Adds the given App Store Non-Consumable item to the storage.
  *
- * nonConsumableItem - the required App Store Non-Consumable item.
- * return: true if exists, false otherwise
+ * @param nonConsumableItem the required App Store Non-Consumable item.
+ * @return 1
  */
 - (BOOL)add:(NonConsumableItem*)nonConsumableItem;
 
 /**
  * Removes the given App Store Non-Consumable item from the storage.
  *
- * nonConsumableItem - the required App Store Non-Consumable item.
- * return: true if exists, false otherwise
+ * @param nonConsumableItem the required App Store Non-Consumable item.
+ * @return 0
  */
 - (BOOL)remove:(NonConsumableItem*)nonConsumableItem;
-
 
 @end

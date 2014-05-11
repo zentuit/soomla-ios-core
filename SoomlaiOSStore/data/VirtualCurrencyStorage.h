@@ -20,7 +20,7 @@
 @class VirtualCurrency;
 
 /**
- * This class provide basic storage operations on VirtualCurrencies.
+ * This class provide basic storage operations on `VirtualCurrencies`.
  */
 @interface VirtualCurrencyStorage : VirtualItemStorage
 

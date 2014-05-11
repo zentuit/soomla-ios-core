@@ -19,13 +19,13 @@
 @class VirtualCurrency;
 
 /**
- * Every game has its virtualCurrencies. Here you represent a pack of a specific VirtualCurrency.
+ * Every game has its virtual currencies. Here you represent a pack of a specific `VirtualCurrency`.
  *
  * Real Game Example: If virtual currency in your game is a 'Coin', you will sell packs of 'Coins'
  * (e.g. "10 Coins Set" or "Super Saver Pack").
  *
- * NOTE: In case you want this item to be available for purchase in the App Store (PurchaseWithMarket),
- * you will need to define the item in iTunes Connect. ( https://itunesconnect.apple.com )
+ * NOTE: In case you want this item to be available for purchase in the App Store with real money,
+ * you'll need to define the item in iTunes Connect. ( https://itunesconnect.apple.com )
  *
  * Inheritance: VirtualCurrencyPack > PurchasableVirtualItem > VirtualItem
  */
@@ -39,12 +39,12 @@
 
 /** Constructor
  *
- * oName see parent
- * oDescription see parent
- * oItemId see parent
- * oCurrencyAmount - the amount of currency in the pack.
- * oCurrencyItemId - the itemId of the currency associated with this pack.
- * oPurchaseType see parent
+ * @param oName see parent
+ * @param oDescription see parent
+ * @param oItemId see parent
+ * @param oCurrencyAmount the amount of currency in the pack.
+ * @param oCurrencyItemId the itemId of the currency associated with this pack.
+ * @param oPurchaseType see parent
  */
 - (id)initWithName:(NSString*)oName andDescription:(NSString*)oDescription
      andItemId:(NSString*)oItemId andCurrencyAmount:(int)oCurrencyAmount andCurrency:(NSString*)oCurrencyItemId

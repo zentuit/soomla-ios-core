@@ -30,62 +30,62 @@
 /**
  * Retrieves the value for the given key.
  *
- * key - the key in the key-val pair.
- * return: val
+ * @param key the key in the key-val pair.
+ * @return val
  */
 - (NSString*)getValueForKey:(NSString*)key;
 
 /**
  * Sets the given value to the given key.
  *
- * key - the key in the key-val pair.
- * val - the val in the key-val pair.
+ * @param key the key in the key-val pair.
+ * @param val the val in the key-val pair.
  */
 - (void)setValue:(NSString*)val forKey:(NSString*)key;
 
 /**
  * Deletes a key-val pair with the given key.
  *
- * key - the key in the key-val pair.
+ * @param key the key in the key-val pair.
  */
 - (void)deleteValueForKey:(NSString*)key;
 
 /**
  * Retrieves key-val pairs that answer the given query.
  *
- * query - what to fetch from DB
- * return: key-val pairs
+ * @param query what to fetch from DB
+ * @return key-val pairs
  */
 - (NSDictionary*)getKeysValuesForNonEncryptedQuery:(NSString*)query;
 
 /**
  * Retrieves vals of the key-val pairs that answer the given query.
  *
- * query - what to fetch from DB
- * return: array of vals
+ * @param query what to fetch from DB
+ * @return array of vals
  */
 - (NSArray*)getValuesForNonEncryptedQuery:(NSString*)query;
 
 /**
  * Retrieves the value for the given key.
  *
- * key - the key in the key-val pair.
- * return: val
+ * @param key the key in the key-val pair.
+ * @return val
  */
 - (NSString*)getValueForNonEncryptedKey:(NSString*)key;
 
 /**
  * Sets the given value to the given key.
  *
- * val is the val in the key-val pair.
- * key is the key in the key-val pair.
+ * @param val the val in the key-val pair.
+ * @param key the key in the key-val pair.
  */
 - (void)setValue:(NSString*)val forNonEncryptedKey:(NSString*)key;
 
 /**
  * Deletes the key-val pair with the given key.
  *
- * key - the key in the key-val pair.
+ * @param key the key in the key-val pair.
  */
 - (void)deleteValueForNonEncryptedKey:(NSString*)key;
 

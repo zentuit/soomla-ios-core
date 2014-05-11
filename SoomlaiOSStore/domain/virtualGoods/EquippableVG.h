@@ -30,23 +30,23 @@ typedef enum {
 #define EquippingModelArray @"local", @"category", @"global", nil
 
 /**
- * An Equippable virtual good is a special type of Lifetime Virtual good that can be equipped
+ * An Equippable virtual good is a special type of Lifetime virtual good that can be equipped
  * by your users. Equipping means that the user decides to currently use a specific virtual good.
  *
- * The EquippableVG's characteristics are:
+ * The `EquippableVG`'s characteristics are:
  *  1. Can be purchased only once.
  *  2. Can be equipped by the user.
  *  3. Inherits the definition of LifetimeVG.
  *
  * There are 3 ways to equip an EquippableVG:
- *  1. LOCAL    - The current EquippableVG's equipping status doesn't affect any other EquippableVG.
+ *  1. LOCAL    - The current `EquippableVG`'s equipping status doesn't affect any other `EquippableVG`.
  *  2. CATEGORY - In the containing category, if this EquippableVG is equipped, all other
- *                EquippableVGs must stay unequipped.
- *  3. GLOBAL   - In the whole game, if this EquippableVG is equipped, all other EquippableVG's
+ *                `EquippableVG`s must stay unequipped.
+ *  3. GLOBAL   - In the whole game, if this `EquippableVG` is equipped, all other `EquippableVG`'s
  *                must stay unequipped.
  *
  * Real Game Examples:
- *  1. LOCAL: Say your game offers 3 weapons: a sword, a gun, and an axe (LifetimeVGs). Let’s
+ *  1. LOCAL: Say your game offers 3 weapons: a sword, a gun, and an axe (`LifetimeVG`s). Let’s
  *  suppose your user has already bought all 3. These are euippables that do not affect one another
  *  - your user can “carry” the sword, gun, and axe at the same time if he chooses to!
  *
@@ -58,7 +58,7 @@ typedef enum {
  *
  *  3. GLOBAL: Suppose your game offers multiple characters (LifetimeVGs): RobotX and RobotY.
  *  Let’s say your user has bought both. In other words he owns both characters and will own them
- *  forever (because they are LifetimeVGs) . Your user can only play as (i.e. Equip) one character
+ *  forever (because they are `LifetimeVG`s) . Your user can only play as (i.e. Equip) one character
  *  at a time, either RobotX or RobotY, but never both at the same time!
  *
  * NOTE: In case you want this item to be available for purchase in the App Store (PurchaseWithMarket), 
@@ -74,34 +74,46 @@ typedef enum {
 
 /** Constructor
  *
- * oEquippingModel is the way this EquippableVG is equipped.
- * oName see parent
- * oDescription see parent
- * oItemId see parent
- * oPurchaseType see parent
+ * @param oEquippingModel is the way this `EquippableVG` is equipped.
+ * @param oName see parent
+ * @param oDescription see parent
+ * @param oItemId see parent
+ * @param oPurchaseType see parent
  */
 - (id)initWithName:(NSString *)oName andDescription:(NSString *)oDescription
          andItemId:(NSString *)oItemId andPurchaseType:(PurchaseType *)oPurchaseType andEquippingModel:(EquippingModel)oEquippingModel;
 
 /**
- * Equips the current EquippableVG.
+ * Equips the current `EquippableVG`.
  * The equipping is done according to the equipping model ('GLOBAL', 'CATEGORY', or 'LOCAL').
  *
- * throws NotEnoughGoodsException
+ * @exception NotEnoughGoodsException
  */
 - (void)equip;
+
+/**
+ * Equips the current `EquippableVG`.
+ * The equipping is done according to the equipping model ('GLOBAL', 'CATEGORY', or 'LOCAL').
+ *
+ * @exception NotEnoughGoodsException
+ */
 - (void)equipWithEvent:(BOOL)notify;
 
 /**
- * Unequips the current EquippableVG
+ * Unequips the current `EquippableVG`
  */
 - (void)unequip;
+
+/**
+ * Unequips the current `EquippableVG`
+ */
 - (void)unequipWithEvent:(BOOL)notify;
 
 /**
  * Transforms the given equipping model to a string.
  */
 +(NSString*) equippingModelEnumToString:(EquippingModel)emVal;
+
 +(EquippingModel) equippingModelStringToEnum:(NSString*)emStr;
 
 @end

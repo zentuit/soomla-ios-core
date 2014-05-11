@@ -19,7 +19,7 @@
 @class MarketItem;
 
 /**
- * This type of Purchase is used to let users purchase PurchasableVirtualItems with the App Store (with real $$).
+ * This type of Purchase is used to let users purchase `PurchasableVirtualItems` with the App Store (with real $$).
  */
 @interface PurchaseWithMarket : PurchaseType {
     MarketItem* marketItem;
@@ -29,14 +29,14 @@
 
 /** Constructor
  *
- * oProductId - the productId to purchase in the App Store.
- * oPrice is the price in the App Store.
+ * @param oProductId the productId to purchase in the App Store.
+ * @param oPrice the price in the App Store.
  */
 - (id)initWithProductId:(NSString*)oProductId andPrice:(double)oPrice;
 
 /** Constructor
  *
- * oMarketItem - the representation of the item in the App Store.
+ * @param oMarketItem the representation of the item in the App Store.
  */
 - (id)initWithMarketItem:(MarketItem*)oMarketItem;
 

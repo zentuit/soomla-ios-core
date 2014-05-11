@@ -35,9 +35,9 @@
 /**
  * Constructor
  *
- * oTargetItemId - the itemId of the VirtualItem that is used to "pay" in order to
- *                     make the purchase
- * oAmount - the number of target items needed in order to make the purchase
+ * @param oTargetItemId - the itemId of the `VirtualItem` that is used to "pay" in order to
+ *                     make the purchase.
+ * @param oAmount - the number of target items needed in order to make the purchase.
  */
 - (id) initWithVirtualItem:(NSString*)oTargetItemId andAmount:(int)oAmount;
 

@@ -17,8 +17,7 @@
 #import <Foundation/Foundation.h>
 
 /**
- * This class is a definition of a category. A single category can be associated with many virtual goods.
- * The purposes of virtual category is it to arrange virtual goods to their specific categories.
+ * This class is a definition of a category. A single category can be associated with many virtual goods. Virtual categories help in organizing your economy's virtual goods.
  */
 @interface VirtualCategory : NSObject{
     NSString* name;
@@ -30,20 +29,20 @@
 
 /** Constructor
  *
- * oName - the category's name.
- * oGoodsItemIds - the list of itemIds of VirtualGoods in this category.
+ * @param oName - the category's name.
+ * @param oGoodsItemIds - the list of `itemId`s of `VirtualGood`s in this category.
  */
 - (id)initWithName:(NSString*)oName andGoodsItemIds:(NSArray*)oGoodsItemIds;
 
 /** Constructor
  *
- * Generates an instance of VirtualCategory from an NSDictionary.
- * dict - a NSDictionary representation of the wanted VirtualCategory.
+ * Generates an instance of `VirtualCategory` from an `NSDictionary`.
+ * @param dict - a `NSDictionary` representation of the wanted `VirtualCategory`.
  */
 - (id)initWithDictionary:(NSDictionary*)dict;
 
 /**
- * Converts the current VirtualCategory to an NSDictionary.
+ * Converts the current `VirtualCategory` to an `NSDictionary`.
  */
 - (NSDictionary*)toDictionary;
 

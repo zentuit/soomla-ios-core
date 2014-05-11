@@ -19,10 +19,10 @@
 @interface StoreInventory : NSObject
 
 /**
- * Buys the item with the given itemId.
+ * Buys the item with the given `itemId`.
  *
- * itemId - id of the item to be purchased.
- * throws InsufficientFundsException, VirtualItemNotFoundException
+ * @param itemId id of the item to be purchased.
+ * @exception InsufficientFundsException, VirtualItemNotFoundException
  */
 + (void)buyItemWithItemId:(NSString*)itemId;
 
@@ -30,35 +30,35 @@
 /** VIRTUAL ITEMS **/
 
 /**
- * Retrieves the balance of the virtual item with the given itemId.
+ * Retrieves the balance of the virtual item with the given `itemId`.
  *
- * itemId - id of the virtual item to be fetched - must be of VirtualCurrency or SingleUseVG or LifetimeVG or EquippableVG.
- * return: balance of the virtual item with the given itemId.
- * throws VirtualItemNotFoundException
+ * @param itemId id of the virtual item to be fetched - must be of `VirtualCurrency` or `SingleUseVG` or `LifetimeVG` or `EquippableVG`.
+ * @return balance of the virtual item with the given `itemId`.
+ * @exception VirtualItemNotFoundException
  */
 + (int)getItemBalance:(NSString*)itemId;
 
 /**
- * Gives your user the given amount of the virtual item with the given itemId.
+ * Gives your user the given amount of the virtual item with the given `itemId`.
  * For example, when your user plays your game for the first time you GIVE him 1000 gems.
  *
  * NOTE: This action is different than buy -
  * You use give(int amount) to give your user something for free.
  * You use buy() to give your user something and you get something in return.
  *
- * itemId - id of the virtual item to be given
- * amount - amount of the item to be given
- * throws VirtualItemNotFoundException
+ * @param amount amount of the item to be given
+ * @param itemId id of the virtual item to be given
+ * @exception VirtualItemNotFoundException
  */
 + (void)giveAmount:(int)amount ofItem:(NSString*)itemId;
 
 /**
- * Takes from your user the given amount of the virtual item with the given itemId.
- * For example, when your user requests a refund (and let's say it's not a friendly refund), you need to TAKE the item he is returning from him (and give him his money back).
- *
- * itemId - id of the virtual item to be taken
- * amount - amount of the item to be given
- * throws VirtualItemNotFoundException
+ * Takes from your user the given amount of the virtual item with the given `itemId`.
+ * For example, when you want to downgrade a virtual good, you take the upgrade.
+ * 
+ * @param amount amount of the item to be given
+ * @param itemId id of the virtual item to be taken
+ * @exception VirtualItemNotFoundException
  */
 + (void)takeAmount:(int)amount ofItem:(NSString*)itemId;
 
@@ -66,36 +66,34 @@
 /** VIRTUAL GOODS **/
 
 /**
- * Equips the virtual good with the given goodItemId.
+ * Equips the virtual good with the given `goodItemId`.
  * Equipping means that the user decides to currently use a specific virtual good.
- * For more details and examples see {@link com.soomla.store.domain.virtualGoods.EquippableVG}.
+ * For more details and examples see EquippableVG.
  *
- * goodItemId - id of the virtual good to be equipped. Id MUST be of an EquippableVG.
+ * @param goodItemId id of the virtual good to be equipped. Id MUST be of an `EquippableVG`.
+ * @exception VirtualItemNotFoundException
  */
 + (void)equipVirtualGoodWithItemId:(NSString*)goodItemId;
 
 /**
  * Unequips the virtual good with the given goodItemId. Unequipping means that the user decides to stop using the virtual good he is currently using.
- * For more details and examples see EquippableVG.
+ * For more details and examples see `EquippableVG`.
  *
- * goodItemId - id of the virtual good to be unequipped. Id MUST be of an EquippableVG.
+ * @param goodItemId id of the virtual good to be unequipped. Id MUST be of an `EquippableVG`.
+ * @exception VirtualItemNotFoundException
  */
 + (void)unEquipVirtualGoodWithItemId:(NSString*)goodItemId;
 
 /**
- * The goodItemId must be of a EquippableVG
+ * Checks if the virtual good with the given `goodItemId` is equipped (currently being used).
  *
- * throws VirtualItemNotFoundException
- */
-/**
- * Checks if the virtual good with the given goodItemId is equipped (currently being used).
- *
- * goodItemId - id of the virtual good to check on. Id MUST be of an EquippableVG.
+ * @param goodItemId id of the virtual good to check on. Id MUST be of an `EquippableVG`.
+ * @exception VirtualItemNotFoundException
  */
 + (BOOL)isVirtualGoodWithItemIdEquipped:(NSString*)goodItemId;
 
 /**
- * Retrieves the upgrade level of the virtual good with the given goodItemId.
+ * Retrieves the upgrade level of the virtual good with the given `goodItemId`.
  *
  * For Example:
  * Let's say there's a strength attribute to one of the characters in your game and you provide
@@ -107,46 +105,46 @@
  *  4. UpgradeVG for strength 'level 3'
  * In the example, this function will retrieve the upgrade level for "strength" (1, 2, or 3)
  *
- * goodItemId - id of the virtual good whose upgrade level we want to know. The goodItemId can be of any VirtualGood.
- * return: upgrade level
- * throws VirtualItemNotFoundException
+ * @param goodItemId id of the virtual good whose upgrade level we want to know. The `goodItemId` can be of any VirtualGood.
+ * @return upgrade level
+ * @exception VirtualItemNotFoundException
  */
 + (int)goodUpgradeLevel:(NSString*)goodItemId;
 
 /**
- * Retrieves the itemId of the current upgrade of the virtual good with the given goodItemId.
+ * Retrieves the itemId of the current upgrade of the virtual good with the given `goodItemId`.
  *
- * goodItemId - id of the virtual good whose upgrade id we want to know. The goodItemId can be of any VirtualGood.
- * return: upgrade id if exists, or empty string otherwise
- * throws VirtualItemNotFoundException
+ * @param goodItemId id of the virtual good whose upgrade id we want to know. The `goodItemId` can be of any VirtualGood.
+ * @return upgrade id if exists, or empty string otherwise
+ * @exception VirtualItemNotFoundException
  */
 + (NSString*)goodCurrentUpgrade:(NSString*)goodItemId;
 
 /**
- * Upgrades the virtual good with the given goodItemId by doing the following:
- * 1. Checks if the good is currently upgraded or if this is the firs time being upgraded.
+ * Upgrades the virtual good with the given `goodItemId` by doing the following:
+ * 1. Checks if the good is currently upgraded or if this is the first time being upgraded.
  * 2. If the good is currently upgraded, upgrades to the next upgrade in the series, or in other words, buy()s the next upgrade. In case there are no more upgrades available (meaning the current upgrade is the last available) the function returns.
  * 3. If the good has never been upgraded before, the function upgrades it to the first available upgrade, or in other words, buy()s the first upgrade in the series.
  *
- * goodItemId - the id of the virtual good to be upgraded. The upgradeItemId can be of an UpgradeVG
- * throws VirtualItemNotFoundException
+ * @param goodItemId the id of the virtual good to be upgraded. The upgradeItemId can be of an UpgradeVG
+ * @exception VirtualItemNotFoundException
  */
 + (void)upgradeVirtualGood:(NSString*)goodItemId;
 
 /**
- * Upgrades the good with the given upgradeItemId for FREE (you are GIVING him the upgrade).
- * In case that the good is not an upgradeable item, an error message will be produced. forceUpgrade() is different than upgradeVirtualGood() because forceUpgrade() is a FREE upgrade.
+ * Upgrades the good with the given `upgradeItemId` for FREE (you are GIVING the upgrade).
+ * In case that the good is not an upgradeable item, an error message will be produced. `forceUpgrade()` is different than `upgradeVirtualGood()` because `forceUpgrade()` is a FREE upgrade.
  *
- * upgradeItemId - id of the virtual good who we want to force an upgrade upon. The upgradeItemId can be of an UpgradeVG
- * throws VirtualItemNotFoundException
+ * @param upgradeItemId id of the virtual good who we want to force an upgrade upon. The `upgradeItemId` can be of an `UpgradeVG`.
+ * @exception VirtualItemNotFoundException
  */
 + (void)forceUpgrade:(NSString*)upgradeItemId;
 
 /**
- * Removes all upgrades from the virtual good with the given goodItemId.
+ * Removes all upgrades from the virtual good with the given `goodItemId`.
  *
- * goodItemId - id of the virtual good we want to remove all upgrades from.
- * throws VirtualItemNotFoundException
+ * @param goodItemId id of the virtual good we want to remove all upgrades from.
+ * @exception VirtualItemNotFoundException
  */
 + (void)removeUpgrades:(NSString*)goodItemId;
 
@@ -154,23 +152,23 @@
 /** NON-CONSUMABLES **/
 
 /**
- * Checks if item with given itemId exists in nonConsumableStorage.
+ * Checks if item with given itemId exists in `nonConsumableStorage`.
  *
- * throws VirtualItemNotFoundException
+ * @exception VirtualItemNotFoundException
  */
 + (BOOL) nonConsumableItemExists:(NSString*)itemId;
 
 /**
- * Adds non-consumable item with the given itemId to nonConsumableStorage.
+ * Adds non-consumable item with the given itemId to `nonConsumableStorage`.
  *
- * throws VirtualItemNotFoundException
+ * @exception VirtualItemNotFoundException
  */
 + (void) addNonConsumableItem:(NSString*)itemId;
 
 /**
- * Removes non-consumable item with the given itemId from nonConsumableStorage.
+ * Removes non-consumable item with the given itemId from `nonConsumableStorage`.
  *
- * throws VirtualItemNotFoundException
+ * @exception VirtualItemNotFoundException
  */
 + (void) removeNonConsumableItem:(NSString*)itemId;
 

@@ -19,7 +19,7 @@
 @class PurchaseType;
 
 /** ABSTRACT
- * A representation of a VirtualItem you can actually purchase.
+ * A representation of a `VirtualItem` that you can actually purchase.
  */
 @interface PurchasableVirtualItem : VirtualItem {
     PurchaseType* purchaseType;
@@ -29,10 +29,10 @@
 
 /** Constructor
  *
- * oName see parent
- * oDescription see parent
- * oItemId see parent
- * oPurchaseType is the way this item is purchased.
+ * @param oName see parent
+ * @param oDescription see parent
+ * @param oItemId see parent
+ * @param oPurchaseType is the way this item is purchased
  */
 - (id)initWithName:(NSString *)oName andDescription:(NSString *)oDescription
          andItemId:(NSString *)oItemId andPurchaseType:(PurchaseType*)oPurchaseType;
@@ -48,14 +48,14 @@
 - (NSDictionary*)toDictionary;
 
 /**
- * Buys a Virtual Item. This action uses the associated PurchaseType to perform the purchase.
+ * Buys a `VirtualItem`. This action uses the associated `PurchaseType` to perform the purchase.
  *
- * throws InsufficientFundsException if user does not have enough funds to buy the desired item.
+ * @exception InsufficientFundsException if user does not have enough funds to buy the desired item.
  */
 - (void)buy;
 
 /**
- * Determines if the user is in a state that allows him to buy a specific VirtualItem.
+ * Determines if the user is in a state that allows him to buy a specific `VirtualItem`.
  */
 - (BOOL)canBuy;
 

@@ -32,7 +32,12 @@ extern const int METADATA_VERSION;
 /* CHANGE THIS SECRET NOW ! */
 extern NSString* SOOM_SEC;
 
-extern BOOL VERIFY_PURCHASES;
+/**
+ * When set to YES, this removes the need to verify purchases when there's no signature.
+ * This is useful while you are in development and testing stages of your game.
+ *
+ * WARNING: Set to 'NO' beforeyou publich your app!!!
+ */extern BOOL VERIFY_PURCHASES;
 
 extern NSString* VERIFY_URL;
 

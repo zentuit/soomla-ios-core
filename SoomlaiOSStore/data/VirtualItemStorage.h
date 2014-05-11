@@ -29,15 +29,15 @@
 /**
  * Retrieves the balance of the given virtual item.
  *
- * item - the required virtual item.
+ * @param item the required virtual item.
  */
 - (int)balanceForItem:(VirtualItem*)item;
 
 /**
  * Adds the given amount of items to the storage.
  *
- * item - the required virtual item.
- * amount - the amount of items to add.
+ * @param item the required virtual item.
+ * @param amount the amount of items to add.
  */
 - (int)addAmount:(int)amount toItem:(VirtualItem*)item;
 - (int)addAmount:(int)amount toItem:(VirtualItem*)item withEvent:(BOOL)notify;
@@ -45,8 +45,8 @@
 /**
  * Removes the given amount from the given virtual item's balance.
  *
- * item - the virtual item to remove the given amount from.
- * amount - the amount to remove.
+ * @param item the virtual item to remove the given amount from.
+ * @param amount the amount to remove.
  */
 - (int)removeAmount:(int)amount fromItem:(VirtualItem*)item;
 - (int)removeAmount:(int)amount fromItem:(VirtualItem*)item withEvent:(BOOL)notify;
@@ -54,7 +54,7 @@
 /**
  * Sets the balance of the given virtual item.
  *
- * item - the required virtual item.
+ * @param item the required virtual item.
  */
 - (int)setBalance:(int)balance toItem:(VirtualItem*)item;
 - (int)setBalance:(int)balance toItem:(VirtualItem*)item withEvent:(BOOL)notify;
@@ -62,17 +62,17 @@
 /**
  * Retrieves the balance of the virtual item with the given itemId (from the KeyValDatabase).
  *
- * itemId - id of the virtual item whose balance is to be retrieved.
- * return: String containing name of storage base, itemId, and balance
+ * @param itemId id of the virtual item whose balance is to be retrieved.
+ * @return String containing name of storage base, itemId, and balance
  */
 - (NSString*)keyBalance:(NSString*)itemId;
 
 /**
  * Posts the given amount changed in the given balance of the given virtual item.
  *
- * item - virtual item whose balance has changed.
- * balance - the balance that has changed.
- * amountAdded - the amount added to the item's balance.
+ * @param item virtual item whose balance has changed.
+ * @param balance the balance that has changed.
+ * @param amountAdded the amount added to the item's balance.
  */
 - (void)postBalanceChangeToItem:(VirtualItem*)item withBalance:(int)balance andAmountAdded:(int)amountAdded;
 

@@ -19,8 +19,7 @@
 @class PurchasableVirtualItem;
 
 /** ABSTRACT
-* A PurchaseType is a way to purchase a PurchasableVirtualItem. This abstract class describes basic features
-* of the actual implementations of PurchaseType.
+* A PurchaseType is a way to purchase a `PurchasableVirtualItem`. This abstract class describes basic features of the actual implementations of `PurchaseType`.
 */
 @interface PurchaseType : NSObject {
     PurchasableVirtualItem* associatedItem;
@@ -34,7 +33,7 @@
  * Buys the purchasable virtual item.
  * Implementation in subclasses will be according to specific type of purchase.
  *
- * throws InsufficientFundsException if the user does not have enough funds to buy.
+ * @exception InsufficientFundsException if the user does not have enough funds to buy.
  */
 - (void)buy;
 

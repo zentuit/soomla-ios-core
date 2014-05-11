@@ -19,8 +19,8 @@
 /**
  * A representation of a non-consumable item in the Market. These kinds of items are bought by the user once and kept for him forever.
  *
- * NOTE: Don't be confused: this is not a Lifetime VirtualGood, it's a MANAGED item in the Market. This means that the product can be purchased only once per user (such as a new levelin a game), and is remembered by the Market (can be restored if this application is uninstalled and then re-installed).
- * If you want to make a LifetimeVG available for purchase in the market (purchase with real money $$), you will need to declare it as a NonConsumableItem.
+ * NOTE: Don't be confused: this is not a `LifetimeVG`, it's a MANAGED item in the Market. This means that the product can be purchased only once per user (such as a new levelin a game), and is remembered by the Market (can be restored if this application is uninstalled and then re-installed).
+ * If you want to make a `LifetimeVG` available for purchase in the market (purchase with real money $$), you will need to declare it as a `NonConsumableItem`.
  *
  * Inheritance: NonConsumableItem > PurchasableVirtualItem > VirtualItem
  */
@@ -29,10 +29,10 @@
 
 /** Constructor
  *
- * oName see parent
- * oDescription see parent
- * oItemId see parent
- * oPurchaseType see parent
+ * @param oName see parent
+ * @param oDescription see parent
+ * @param oItemId see parent
+ * @param oPurchaseType see parent
  */
 - (id)initWithName:(NSString*)oName andDescription:(NSString*)oDescription
                 andItemId:(NSString*)oItemId andPurchaseType:(PurchaseType*)oPurchaseType;

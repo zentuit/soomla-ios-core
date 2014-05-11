@@ -22,7 +22,7 @@
  * The SingleUseVG's characteristics are:
  *  1. Can be purchased an unlimited number of times.
  *  2. Has a balance that is saved in the database. Its balance goes up when you "give" it or
- *     "buy" it. The balance goes down when you "take" or (unfriendly) "refund" it.
+ *     "buy" it. The balance goes down when you "take" it.
  *
  * Real Game Examples: 'Hat', 'Sword', 'Muffin'
  *

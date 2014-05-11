@@ -19,10 +19,10 @@
 @class SingleUseVG;
 
 /**
- * SingleUsePacks are just bundles of SingleUse virtual goods.
- * This kind of virtual good can be used to let your users buy more than one SingleUseVG at once.
+ * SingleUsePacks are just bundles of `SingleUseVG`s.
+ * This kind of virtual good can be used to let your users buy more than one `SingleUseVG` at once.
  *
- * The SingleUsePackVG's characteristics are:
+ * The `SingleUsePackVG`'s characteristics are:
  *  1. Can be purchased an unlimited number of times.
  *  2. Doesn't have a balance in the database. The SingleUseVG that's associated with this pack
  *     has its own balance. When your users buy a SingleUsePackVG, the balance of the associated
@@ -44,12 +44,12 @@
 
 /** Constructor
  *
- * oName see parent
- * oDescription see parent
- * oItemId see parent
- * oPurchaseType see parent
- * oGoodItemId - the SingleUseVG associated with this pack - MUST BE A SingleUseVG itemId!
- * oAmount - the number of SingleUseVG in the pack.
+ * @param oName see parent
+ * @param oDescription see parent
+ * @param oItemId see parent
+ * @param oPurchaseType see parent
+ * @param oGoodItemId - the SingleUseVG associated with this pack - MUST BE A SingleUseVG itemId!
+ * @param oAmount - the number of SingleUseVG in the pack.
  */
 - (id)initWithName:(NSString *)oName andDescription:(NSString *)oDescription andItemId:(NSString *)oItemId andPurchaseType:(PurchaseType *)oPurchaseType andSingleUseGood:(NSString*)oGoodItemId andAmount:(int)oAmount;
 

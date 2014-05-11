@@ -46,7 +46,6 @@
 #define EVENT_UNEXPECTED_ERROR_IN_STORE     @"UnexpectedErrorInStore"
 
 
-
 // UserInfo Elements
 #define DICT_ELEMENT_BALANCE           @"balance"
 #define DICT_ELEMENT_CURRENCY          @"VirtualCurrency"
@@ -67,6 +66,7 @@
 #define DICT_ELEMENT_LOCALE            @"locale"
 #define DICT_ELEMENT_MARKET_ITEMS      @"marketItems"
 
+
 // Error Codes
 #define ERR_GENERAL                 0
 #define ERR_VERIFICATION_TIMEOUT    1
@@ -78,7 +78,7 @@
  * This class is used to register and post all the supported events.
  * Use this class to invoke events on handlers when they occur.
  *
- * SOOMLA uses iOS's NSNotificationCenter to handle events across the SDK.
+ * SOOMLA uses iOS's `NSNotificationCenter` to handle events across the SDK.
  */
 @interface EventHandling : NSObject
 

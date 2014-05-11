@@ -22,57 +22,82 @@
 @class EquippableVG;
 
 /**
- * This class provides basic storage operations on VirtualGoods.
+ * This class provides basic storage operations on `VirtualGoods`.
  */
 @interface VirtualGoodStorage : VirtualItemStorage
 
 - (id)init;
 
 /**
- * Removes any upgrade associated with the given VirtualGood.
+ * Removes any upgrade associated with the given `VirtualGood`.
  *
- * good - the VirtualGood to remove upgrade from.
+ * @param good the `VirtualGood` to remove upgrade from.
  */
 - (void)removeUpgradesFrom:(VirtualGood*)good;
+
+/**
+ * Removes any upgrade associated with the given VirtualGood.
+ *
+ * @param good the `VirtualGood` to remove the upgrade from
+ */
 - (void)removeUpgradesFrom:(VirtualGood*)good withEvent:(BOOL)notify;
 
 /**
- * Assigns a specific upgrade to the given VirtualGood.
+ * Assigns a specific upgrade to the given `VirtualGood`.
  *
- * good - the VirtualGood to upgrade.
- * upgradeVG - the upgrade to assign.
+ * @param good the `VirtualGood` to upgrade.
+ * @param upgradeVG the upgrade to assign.
  */
 - (void)assignCurrentUpgrade:(UpgradeVG*)upgradeVG toGood:(VirtualGood*)good;
+
+/**
+ * Assigns a specific upgrade to the given `VirtualGood`.
+ *
+ * @param good the `VirtualGood` to upgrade.
+ * @param upgradeVG the upgrade to assign.
+ */
 - (void)assignCurrentUpgrade:(UpgradeVG*)upgradeVG toGood:(VirtualGood*)good withEvent:(BOOL)notify;
 
 /**
- * Retrieves the current upgrade for the given VirtualGood.
+ * Retrieves the current upgrade for the given `VirtualGood`.
  *
- * good - the VirtualGood to retrieve upgrade for.
+ * @param good the `VirtualGood` to retrieve upgrade for.
  */
 - (UpgradeVG*)currentUpgradeOf:(VirtualGood*)good;
 
 /**
- * Checks the equipping status of the given EquippableVG.
+ * Checks the equipping status of the given `EquippableVG`.
  *
- * good - the EquippableVG to check the status for.
+ * @param good the `EquippableVG` to check the status for.
  */
 - (BOOL)isGoodEquipped:(EquippableVG*)good;
 
 /**
- * Equips the given EquippableVG.
+ * Equips the given `EquippableVG`.
  *
- * good - the EquippableVG to equip.
+ * @param good the `EquippableVG` to equip.
  */
 - (void)equipGood:(EquippableVG*)good;
+
+/**
+ * Equips the given `EquippableVG`.
+ *
+ * @param good the `EquippableVG` to equip.
+ */
 - (void)equipGood:(EquippableVG*)good withEvent:(BOOL)notify;
 
 /**
- * UnEquips the given EquippableVG.
+ * UnEquips the given `EquippableVG`.
  *
- * good - the EquippableVG to unequip.
+ * @param good the `EquippableVG` to unequip.
  */
 - (void)unequipGood:(EquippableVG*)good;
+
+/**
+ * UnEquips the given `EquippableVG`.
+ *
+ * @param good the `EquippableVG` to unequip.
+ */
 - (void)unequipGood:(EquippableVG*)good withEvent:(BOOL)notify;
 
 @end

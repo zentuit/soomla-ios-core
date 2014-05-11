@@ -18,15 +18,15 @@
 
 /**
  * This is a representation of a game's virtual currency.
- * Each game can have multiple instances of a virtual currency, all kept in StoreInfo
+ * Each game can have multiple instances of a virtual currency, all kept in `StoreInfo`
  *
  * Real Game Examples: 'Coin', 'Gem', 'Muffin'
  *
  * NOTE: This item is NOT purchasable!
- * However, a VirtualCurrencyPack IS purchasable.
- * For example, if the virtual currency in your game is a 'Coin' and you want to make a single 'Coin' available for purchase you will need to define a VirtualCurrencyPack of 1'Coin'.
+ * However, a `VirtualCurrencyPack` IS purchasable.
+ * For example, if the virtual currency in your game is a 'Coin' and you want to make a single 'Coin' available for purchase you will need to define a `VirtualCurrencyPack` of 1'Coin'.
  */
-@interface VirtualCurrency : VirtualItem{
+@interface VirtualCurrency : VirtualItem {
     
 }
 

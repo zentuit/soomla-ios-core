@@ -27,11 +27,6 @@
  * You can use it to purchase products from the App Store.
  *
  * This is the only class you need to initialize in order to use the SOOMLA SDK.
- *
- * In addition to initializing this class, you'll also have to call
- * StoreController::storeOpening and StoreController::storeClosing when you open the store window or close it. These two
- * calls initializes important components that support billing and storage information (see implementation below).
- *
  */
 @interface StoreController : NSObject <SKProductsRequestDelegate, SKPaymentTransactionObserver>{
     @private
@@ -39,54 +34,57 @@
     SoomlaVerification* sv;
 }
 
+
 @property BOOL initialized;
+
 
 + (StoreController*)getInstance;
 
 /**
  * Initializes StoreController from your implementation of IStoreAssets. This initializer also initializes StoreInfo.
  *
- * storeAssets - the definition of your application specific assets.
- * customSecret - your encryption secret (it's used to encrypt your data in the database).
- * return: true if successful
+ * @param storeAssets the definition of your application specific assets.
+ * @param customSecret your encryption secret (it's used to encrypt your data in the database).
+ * @return true if successful
  */
 - (BOOL)initializeWithStoreAssets:(id<IStoreAssets>)storeAssets andCustomSecret:(NSString*)secret;
 
 /**
  * Starts an in app purchase process in the App Store.
  * 
- * marketItem - the item to purchase. This item has to be defined EXACTLY the same in iTunes Connect.
- * return: true if successful
+ * @param marketItem the item to purchase. This item has to be defined EXACTLY the same in iTunes Connect.
+ * @return YES if successful
  */
 - (BOOL)buyInMarketWithMarketItem:(MarketItem*)marketItem;
 
 /**
- * Initiates the restoreTransactions process and will refresh all purchasable items' details from the App Store.
+ * Initiates the restoreTransactions process and the refreshMarketItemDetails process that will refresh all purchasable items' details from the App Store.
  */
 - (void)refreshInventory;
 
 /**
- * Initiates the restoreTransactions process.
+ * Initiates the `restoreTransactions` process.
  */
 - (void)restoreTransactions;
 
 /**
  * Checks if transactions were already restored.
  *
- * return: true if transactions were restored, false otherwise.
+ * @return YES if transactions were restored, NO otherwise.
  */
 - (BOOL)transactionsAlreadyRestored;
 
 /**
  * Refreshes the details of all market-purchasable items that were defined in App Store.
- * This function will invoke the event EVENT_ITEMS_MARKET_REFRESHED when finished.
+ * This function will invoke the event `EVENT_ITEMS_MARKET_REFRESHED` when finished.
  */
 - (void)refreshMarketItemsDetails;
 
 /**
- * Checks if StoreController has already been initialized.
+ * Checks if `StoreController` has already been initialized.
  *
- * return: true if initialized, false otherwise.
+ * @return YES if initialized, NO otherwise.
  */
 - (BOOL)isInitialized;
+
 @end

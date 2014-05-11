@@ -27,7 +27,7 @@ typedef enum {
 
 /**
  * This class represents an item in the App Store.
- * Every PurchasableVirtualItem with PurchaseType of PurchaseWithMarket has an instance of this class.
+ * Every `PurchasableVirtualItem` with `PurchaseType` of `PurchaseWithMarket` has an instance of this class.
  */
 @interface MarketItem : NSObject{
     NSString* productId;
@@ -51,27 +51,27 @@ typedef enum {
 /** 
  * Constructor
  *
- * oProductId - the Id of the current item in the App Store.
- * oConsumable - the type of the current item in the App Store.
- * oPrice - the actual $$ cost of the current item in the App Store.
+ * @param oProductId the Id of the current item in the App Store.
+ * @param oConsumable the type of the current item in the App Store.
+ * @param oPrice the actual $$ cost of the current item in the App Store.
  */
 - (id)initWithProductId:(NSString*)oProductId andConsumable:(Consumable)oConsumable andPrice:(double)oPrice;
 
 /** Constructor
  *
- * dict - an NSDictionary representation of the Market Item.
+ * @param dict an `NSDictionary` representation of the `MarketItem.`
  */
 - (id)initWithDictionary:(NSDictionary*)dict;
 
 /**
- * Converts the current MarketItem to an NSDictionary.
+ * Converts the current `MarketItem` to an `NSDictionary`.
  */
 - (NSDictionary*)toDictionary;
 
 /**
- * Retrieves price of Market Item with its currency symbol
+ * Retrieves price of `MarketItem` with its currency symbol.
  *
- * return: price
+ * @return price
  */
 - (NSString*)priceWithCurrencySymbol;
 
