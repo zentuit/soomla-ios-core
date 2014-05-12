@@ -31,7 +31,7 @@
  * Retrieves the value for the given key.
  *
  * @param key the key in the key-val pair.
- * @return val
+ * @return value for given key.
  */
 - (NSString*)getValueForKey:(NSString*)key;
 
@@ -70,7 +70,7 @@
  * Retrieves the value for the given key.
  *
  * @param key the key in the key-val pair.
- * @return val
+ * @return value for given key.
  */
 - (NSString*)getValueForNonEncryptedKey:(NSString*)key;
 
