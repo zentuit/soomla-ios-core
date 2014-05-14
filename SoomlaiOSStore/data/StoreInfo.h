@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2012 Soomla Inc.
+ * Copyright (C) 2012-2014 Soomla Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -62,14 +62,15 @@
 
 /**
  * Initializes `StoreInfo`, either from `IStoreAssets` or from database.
- * On first initialization, when the database doesn't have any previous version of the store
- * metadata, `StoreInfo` gets loaded from the given `IStoreAssets`.
- * After the first initialization, `StoreInfo` will be initialized from the database.
+ * On first initialization, when the database doesn't have any previous version 
+ * of the store metadata, `StoreInfo` gets loaded from the given `IStoreAssets`.
+ * After the first initialization, `StoreInfo` will be initialized from the 
+ * database.
  *
- * IMPORTANT: If you want to override the current `StoreInfo`, you'll have to bump the version
- * of your implementation of `IStoreAssets` in order to remove the metadata when the application
- * loads. Bumping the version is done by returning a higher number in
- * `IStoreAssets`'s function `getVersion()`.
+ * IMPORTANT: If you want to override the current `StoreInfo`, you'll have to 
+ * bump the version of your implementation of `IStoreAssets` in order to remove 
+ * the metadata when the application loads. Bumping the version is done by 
+ * returning a higher number in `IStoreAssets`'s function `getVersion()`.
  */
 - (void)initializeWithIStoreAssets:(id <IStoreAssets>)storeAssets;
 
@@ -107,30 +108,31 @@
 - (PurchasableVirtualItem*)purchasableItemWithProductId:(NSString*)productId;
 
 /**
- * Retrieves a single `VirtualCategory` for the given `VirtualGood` `itemId`.
+ * Retrieves a single `VirtualCategory` for the given `VirtualGood`'s `itemId`.
  *
  * @param goodItemId the item id of the `virtualGood` in the category
- * @return a VirtualCategory for the `VirtualGood` with the given `goodItemId`.
+ * @return a `VirtualCategory` for the `VirtualGood` with the given `goodItemId`.
  * @exception VirtualItemNotFoundException when the given `goodItemId` is not found.
  */
 - (VirtualCategory*)categoryForGoodWithItemId:(NSString*)goodItemId;
 
 /**
- * Retrieves a first `UpgradeVG` for a given `VirtualGood` `itemId`.
+ * Retrieves the first `UpgradeVG` for the`VirtualGood` with the given`itemId`.
  *
  * @param goodItemId the `VirtualGood` we're searching the upgrade for.
+ * @return the first `UpgradeVG` for the `VirtualGood` with the given`itemId`.
  */
 - (UpgradeVG*)firstUpgradeForGoodWithItemId:(NSString*)goodItemId;
 
 /**
- * Retrieves a last `UpgradeVG` for a given `VirtualGood` `itemId`.
+ * Retrieves a last `UpgradeVG` for the given `VirtualGood` `itemId`.
  *
  * @param goodItemId the `VirtualGood` we're searching the upgrade for.
  */
 - (UpgradeVG*)lastUpgradeForGoodWithItemId:(NSString*)goodItemId;
 
 /**
- * Retrieves all `UpgradeVG`s for a given `VirtualGood` `itemId`.
+ * Retrieves all `UpgradeVG`s for the given `VirtualGood` `itemId`.
  *
  * @param goodItemId the `VirtualGood` we're searching the upgrades for.
  */

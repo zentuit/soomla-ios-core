@@ -96,18 +96,21 @@
  * Retrieves the upgrade level of the virtual good with the given `goodItemId`.
  *
  * For Example:
- * Let's say there's a strength attribute to one of the characters in your game and you provide
- * your users with the ability to upgrade that strength on a scale of 1-3.
+ * Let's say there's a strength attribute to one of the characters in your game 
+ *   and you provide your users with the ability to upgrade that strength on a
+ *   scale of 1-3.
  * This is what you've created:
  *  1. SingleUseVG for "strength"
  *  2. UpgradeVG for strength 'level 1'
  *  3. UpgradeVG for strength 'level 2'
  *  4. UpgradeVG for strength 'level 3'
- * In the example, this function will retrieve the upgrade level for "strength" (1, 2, or 3)
+ * In the example, this function will retrieve the upgrade level for "strength" 
+ *   (1, 2, or 3).
  *
- * @param goodItemId id of the virtual good whose upgrade level we want to know. The `goodItemId` can be of any VirtualGood.
+ * @param goodItemId id of the virtual good whose upgrade level we want to know. 
+ *   The `goodItemId` can be of any `VirtualGood`.
  * @return upgrade level
- * @exception VirtualItemNotFoundException
+ * @exception VirtualItemNotFoundException if the item is not found.
  */
 + (int)goodUpgradeLevel:(NSString*)goodItemId;
 

@@ -48,7 +48,7 @@
  * Checks whether item belongs to `VirtualGoodStorage` or `VirtualCurrencyStorage`.
  *
  * @param item the item to check what type of storage it belongs to.
- * @return the type of `VirtualItemStorage`.
+ * @return the instance of the relevant storage.
  */
 - (VirtualItemStorage*)virtualItemStorage:(VirtualItem*)item;
 
