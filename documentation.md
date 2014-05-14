@@ -37,19 +37,20 @@
 SOOMLA is licensed under the Apache License. This copyright message must be included in every file at the top.
 
 ```
-/* Copyright (C) 2012 Soomla Inc.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
+/*
+ Copyright (C) 2012-2014 Soomla Inc.
+ 
+ Licensed under the Apache License, Version 2.0 (the "License");
+ you may not use this file except in compliance with the License.
+ You may obtain a copy of the License at
+ 
+ http://www.apache.org/licenses/LICENSE-2.0
+ 
+ Unless required by applicable law or agreed to in writing, software
+ distributed under the License is distributed on an "AS IS" BASIS,
+ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ See the License for the specific language governing permissions and
+ limitations under the License.
  */
 
 ```
@@ -65,8 +66,7 @@ SOOMLA is licensed under the Apache License. This copyright message must be incl
 - Insert a blank line between the description and the list of @tags.
 - The first line of a comment MUST begin with the begin-comment delimiter ( /**).
 - The last line of a comment MUST end with the end-comment delimiter ( */).
-- Each line in between the begin-comment delimiter and end-comment delimiter should
-- start with * .
+- Each line in between the begin-comment delimiter and end-comment delimiter should NOT begin with an asterisk (*). See examples below.
 - Limit any doc-comment lines to 80 characters.
 
 
@@ -89,6 +89,18 @@ For more information about AppleDoc conventions see https://github.com/tomaz/app
 
 **Classes and Interfaces**
 
+- If this is an abstract class write 'ABSTRACT.' before the description. The description should follow on the next line.
+
+    ```
+    /**
+     ABSTRACT.
+     This class ...
+     */
+    @interface MyClass : NSObject { 
+        ... 
+    }
+    ```
+
 - State the purpose of this class or interface.
 - Include possible 'Real Game Examples' to make the purpose clearer.
 - Include any important notes or warnings the user should know.
@@ -99,20 +111,20 @@ Example:
 
 ```
 /**
- * SingleUse virtual goods are the most common type of VirtualGood.
- *
- * The SingleUseVG's characteristics are:
- *  1. Can be purchased an unlimited number of times.
- *  2. Has a balance that is saved in the database. Its balance goes up when you "give" it or
- *     "buy" it. The balance goes down when you "take" it.
- *
- * Real Game Examples: 'Hat', 'Sword', 'Muffin'
- *
- * NOTE: In case you want this item to be available for purchase in the App Store
- (PurchaseWithMarket), you'll need to define the app store item in iTunes Connect.
- (https://itunesconnect.apple.com)
- *
- * Inheritance: SingleUseVG > VirtualGood > PurchasableVirtualItem > VirtualItem
+ SingleUse virtual goods are the most common type of VirtualGood.
+ 
+ The SingleUseVG's characteristics are:
+  1. Can be purchased an unlimited number of times.
+  2. Has a balance that is saved in the database. Its balance goes up when you "give" it or
+      "buy" it. The balance goes down when you "take" it.
+ 
+ Real Game Examples: 'Hat', 'Sword', 'Muffin'
+ 
+ NOTE: In case you want this item to be available for purchase in the App Store, 
+ you'll need to define the app store item in iTunes Connect.
+(https://itunesconnect.apple.com)
+ 
+ Inheritance: SingleUseVG > VirtualGood > PurchasableVirtualItem > VirtualItem
  */
 @interface SingleUseVG : VirtualGood {
     ...
@@ -129,28 +141,29 @@ Example:
 - Include possible examples to make the purpose of the method clearer.
 - Include any important notes or warnings the user should know.
 - Overriding methods - if the overriding method’s description is exactly the same as its parent method’s description, write: “see parent”. Otherwise, write a description.
+- In iOS-store there are many methods that have two forms - one receives a flag parameter (for triggering an event), and the other does not. Only the latter should be documented, not both.
 
 Example:
 ```
 /**
- * Retrieves the upgrade level of the virtual good with the given `goodItemId`.
- *
- * For Example:
- * Let's say there's a strength attribute to one of the characters in your game 
- *   and you provide your users with the ability to upgrade that strength on a
- *   scale of 1-3.
- * This is what you've created:
- *  1. SingleUseVG for "strength"
- *  2. UpgradeVG for strength 'level 1'
- *  3. UpgradeVG for strength 'level 2'
- *  4. UpgradeVG for strength 'level 3'
- * In the example, this function will retrieve the upgrade level for "strength" 
- *   (1, 2, or 3).
- *
- * @param goodItemId id of the virtual good whose upgrade level we want to know. 
- *   The `goodItemId` can be of any `VirtualGood`.
- * @return upgrade level
- * @exception VirtualItemNotFoundException if the item is not found.
+ Retrieves the upgrade level of the virtual good with the given `goodItemId`.
+ 
+ For Example:
+ Let's say there's a strength attribute to one of the characters in your game 
+ and you provide your users with the ability to upgrade that strength on a
+ scale of 1-3.
+ This is what you've created:
+  1. SingleUseVG for "strength"
+  2. UpgradeVG for strength 'level 1'
+  3. UpgradeVG for strength 'level 2'
+  4. UpgradeVG for strength 'level 3'
+ In the example, this function will retrieve the upgrade level for "strength" 
+ (1, 2, or 3).
+ 
+ @param goodItemId id of the virtual good whose upgrade level we want to know. 
+ The `goodItemId` can be of any `VirtualGood`.
+ @return upgrade level
+ @exception VirtualItemNotFoundException if the item is not found.
  */
 + (int)goodUpgradeLevel:(NSString*)goodItemId;
 ```
@@ -166,7 +179,7 @@ For non-trivial fields, write a clear description of the variable. Many fields h
 
     Note: Single-line comments should begin with three slashes (`///`).
 
-Example:
+Examples:
 ```
 static NSString* TAG = @"SOOMLA equippingModel"; /// used for Log error messages
 
@@ -174,8 +187,8 @@ static NSString* TAG = @"SOOMLA equippingModel"; /// used for Log error messages
 static NSString* TAG = @"SOOMLA equippingModel";
 
 /**
- * TAG is used for Log error messages ... more-text more-text more-text more-text
- * more-text more-text more-text more-text more-text more-text more-text more-text...
+ TAG is used for Log error messages ... more-text more-text more-text more-text
+ more-text more-text more-text more-text more-text more-text more-text more-text...
  */
 static NSString* TAG = @"SOOMLA equippingModel";
 ```
