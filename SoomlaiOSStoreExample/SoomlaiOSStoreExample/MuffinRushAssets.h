@@ -19,8 +19,9 @@
 
 
 /**
- * This class defines our game's economy model, which includes virtual goods, virtual currencies
- * and currency packs, virtual categories, and non-consumable items.
+ This class defines our game's economy model, which includes virtual goods, 
+ virtual currencies and currency packs, virtual categories, and non-consumable
+ items.
  */
 
 

@@ -30,10 +30,10 @@
 /** 
  Constructor
  
- @param oName see parent
- @param oDescription see parent
- @param oItemId see parent
- @param oPurchaseType see parent
+ @param oName see parent.
+ @param oDescription see parent.
+ @param oItemId see parent.
+ @param oPurchaseType see parent.
  */
 - (id)initWithName:(NSString*)oName andDescription:(NSString*)oDescription
          andItemId:(NSString*)oItemId andPurchaseType:(PurchaseType*)oPurchaseType;

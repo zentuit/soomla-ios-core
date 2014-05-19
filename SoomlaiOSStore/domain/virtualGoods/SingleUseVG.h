@@ -17,9 +17,9 @@
 #import "VirtualGood.h"
 
 /**
- SingleUse virtual goods are the most common type of VirtualGood.
+ SingleUse virtual goods are the most common type of `VirtualGood`.
  
- The SingleUseVG's characteristics are:
+ The `SingleUseVG`'s characteristics are:
   1. Can be purchased an unlimited number of times.
   2. Has a balance that is saved in the database. Its balance goes up when you 
      `give` it or `buy` it. The balance goes down when you `take` it.

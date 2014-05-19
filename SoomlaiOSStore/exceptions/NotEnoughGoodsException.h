@@ -24,8 +24,8 @@
   Suppose that your user would like to equip (LOCAL) a robot_character.
   You'll probably call `equipVirtualGood("robot_character")`.
   NotEnoughGoodException will be thrown with "robot_character" as the `itemId`.
-  You can catch this exception in order to notify the user that he doesn't
-  own a robot_character (so he cannot equip it!).
+  You can catch this exception in order to notify the user that he/she doesn't
+  own a robot_character (so he/she cannot equip it!).
  */
 @interface NotEnoughGoodsException : NSException
 

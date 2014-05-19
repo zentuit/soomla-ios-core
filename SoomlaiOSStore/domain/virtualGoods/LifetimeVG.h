@@ -24,7 +24,7 @@
   2. Your users cannot have more than one of this item.
  
  Real Games Examples: 'No Ads', 'Double Coins'
- *
+ 
  This `VirtualItem` is purchasable.
  In case you want this item to be available for purchase in the App Store, 
  you'll need to define the app store item in iTunes Connect. 

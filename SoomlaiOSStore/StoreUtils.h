@@ -19,6 +19,9 @@
 #define LogDebug(x,y) [StoreUtils LogDebug:x withMessage:y];
 #define LogError(x,y) [StoreUtils LogError:x withMessage:y];
 
+/**
+ This class handles printing of error and debug messages.
+ */
 @interface StoreUtils : NSObject
 
 /**

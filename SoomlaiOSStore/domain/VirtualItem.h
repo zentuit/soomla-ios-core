@@ -19,8 +19,8 @@
 /**
  ABSTRACT.
  This is the parent class of all virtual items in the application.
- Almost every entity in your virtual economy will be a virtual item. There are
- many types of virtual items - each one of the various types extends 
+ Almost every entity in your virtual economy will be a virtual item. There
+ are many types of virtual items - each one of the various types extends
  `VirtualItem` and adds its own behavior on top of it.
  */
 @interface VirtualItem : NSObject {
@@ -40,6 +40,7 @@
  
  @param oName The name of the virtual item.
  @param oDescription The description of the virtual item.
+ @param oItemId The id of the virtual item. 
  */
 - (id)initWithName:(NSString*)oName andDescription:(NSString*)oDescription andItemId:(NSString*)oItemId;
 

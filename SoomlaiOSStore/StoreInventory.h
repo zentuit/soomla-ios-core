@@ -16,6 +16,11 @@
 
 #import <Foundation/Foundation.h>
 
+/**
+ This class will help you do your day to day virtual economy operations easily.
+ You can give or take items from your users. You can buy items or upgrade them.
+ You can also check their equipping status and change it.
+ */
 @interface StoreInventory : NSObject
 
 /**
@@ -45,8 +50,8 @@
 
 /**
  Gives your user the given amount of the virtual item with the given `itemId`.
- For example, when your user plays your game for the first time you GIVE him 
- 1000 gems.
+ For example, when your user plays your game for the first time you GIVE 
+ him/her 1000 gems.
  
  NOTE: This action is different than `buy` -
  You use `give` to give your user something for free.
@@ -88,7 +93,7 @@
 
 /**
  Unequips the virtual good with the given goodItemId. Unequipping means that the 
- user decides to stop using the virtual good he is currently using.
+ user decides to stop using the virtual good he/she is currently using.
  For more details and examples see `EquippableVG`.
  
  @param goodItemId The id of the virtual good to be unequipped. Id MUST be of an 
@@ -104,7 +109,7 @@
  
  @param goodItemId The id of the virtual good to check on. Id MUST be of an 
     `EquippableVG`.
- @return
+ @return YES if the virtual good with the given id is equipped, NO otherwise.
  @exception VirtualItemNotFoundException Thrown if the virtual item is not
     found.
  */
@@ -150,7 +155,7 @@
  1. Checks if the good is currently upgraded or if this is the first time being 
  upgraded.
  2. If the good is currently upgraded, upgrades to the next upgrade in the 
- series, or in other words, buy()s the next upgrade. In case there are no more 
+ series, or in other words, buys the next upgrade. In case there are no more
  upgrades available (meaning the current upgrade is the last available) the 
  function returns.
  3. If the good has never been upgraded before, the function upgrades it to the 
@@ -179,7 +184,7 @@
 
 /**
  Removes all upgrades from the virtual good with the given `goodItemId`.
- *
+ 
  @param goodItemId The id of the virtual good we want to remove all upgrades 
     from. The `upgradeItemId` can be of any `UpgradeVG`.
  @exception VirtualItemNotFoundException Thrown if the virtual item is not
@@ -193,7 +198,9 @@
 /**
  Checks if the item with the given `itemId` exists in `nonConsumableStorage`.
  
- @return YES if the item with the given id exists in `nonConsumableStorage`.
+ @param itemId The id of the item to check if exists.
+ @return YES if the item with the given id exists in `nonConsumableStorage`, NO
+    otherwise.
  @exception VirtualItemNotFoundException Thrown if the virtual item is not
     found.
  */
@@ -202,15 +209,17 @@
 /**
  Adds the non-consumable item with the given itemId to `nonConsumableStorage`.
  
+ @param itemId The id of the item to add to the storage.
  @exception VirtualItemNotFoundException Thrown if the virtual item is not
     found.
  */
 + (void) addNonConsumableItem:(NSString*)itemId;
 
 /**
- Removes the non-consumable item with the given itemId from 
+ Removes the non-consumable item with the given `itemId` from 
  `nonConsumableStorage`.
  
+ @param itemId The id of the item to remove from the storage.
  @exception VirtualItemNotFoundException Thrown if the virtual item is not
     found.
  */

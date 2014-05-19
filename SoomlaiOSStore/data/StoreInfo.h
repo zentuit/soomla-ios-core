@@ -27,7 +27,7 @@
 @class UpgradeVG;
 
 /**
- This class holds the store's meta data including:
+ This class holds the store's metadata including:
  virtual currencies,
  virtual currency packs,
  all virtual goods,
@@ -130,26 +130,26 @@
 - (VirtualCategory*)categoryForGoodWithItemId:(NSString*)goodItemId;
 
 /**
- Retrieves the first `UpgradeVG` for the`VirtualGood` with the given`itemId`.
+ Retrieves the first `UpgradeVG` for the `VirtualGood` with the given `itemId`.
  
  @param goodItemId The `VirtualGood` whose upgrade is being retrieved.
- @return The first `UpgradeVG` for the virtual good with the given`itemId`.
+ @return The first `UpgradeVG` for the virtual good with the given `itemId`.
  */
 - (UpgradeVG*)firstUpgradeForGoodWithItemId:(NSString*)goodItemId;
 
 /**
- Retrieves the last `UpgradeVG` for the`VirtualGood` with the given`itemId`.
+ Retrieves the last `UpgradeVG` for the `VirtualGood` with the given `itemId`.
  
  @param goodItemId the `VirtualGood` we're searching the upgrade for.
- @return
+ @return The last `UpgradeVG` for the virtual good with the given `ItemId`.
  */
 - (UpgradeVG*)lastUpgradeForGoodWithItemId:(NSString*)goodItemId;
 
 /**
- Retrieves all `UpgradeVG`s for the`VirtualGood` with the given`itemId`.
+ Retrieves all `UpgradeVG`s for the `VirtualGood` with the given`itemId`.
  
  @param goodItemId the `VirtualGood` we're searching the upgrades for.
- @return 
+ @return Array of all upgrades for the good with the given item id.
  */
 - (NSArray*)upgradesForGoodWithItemId:(NSString*)goodItemId;
 
