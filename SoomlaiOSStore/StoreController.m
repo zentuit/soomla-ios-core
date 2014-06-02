@@ -290,6 +290,7 @@ static NSString* TAG = @"SOOMLA StoreController";
     SKProductsRequest *productsRequest = [[SKProductsRequest alloc] initWithProductIdentifiers:[[NSSet alloc] initWithArray:[[StoreInfo getInstance] allProductIds]]];
     productsRequest.delegate = self;
     [productsRequest start];
+    [EventHandling postMarketItemsRefreshStarted];
 }
 
 - (BOOL)isInitialized {
@@ -341,7 +342,7 @@ static NSString* TAG = @"SOOMLA StoreController";
         LogError(TAG, ([NSString stringWithFormat: @"Expecting %d products but only fetched %d from iTunes Store" , (int)idsCount, (int)productsCount]));
     }
 
-    [EventHandling postMarketItemsRefreshed:marketItems];
+    [EventHandling postMarketItemsRefreshFinished:marketItems];
 }
 
 

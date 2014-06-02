@@ -42,7 +42,8 @@
 #define EVENT_RESTORE_TRANSACTIONS_FINISHED @"RestoreTransactionsFinished"
 #define EVENT_RESTORE_TRANSACTIONS_STARTED  @"RestoreTransactionsStarted"
 #define EVENT_STORECONTROLLER_INIT          @"StoreControllerInitialized"
-#define EVENT_MARKET_ITEMS_REFRESHED        @"MarketItemsRefreshed"
+#define EVENT_MARKET_ITEMS_REFRESH_STARTED  @"MarketItemsRefreshStarted"
+#define EVENT_MARKET_ITEMS_REFRESH_FINISHED @"MarketItemsRefreshFinished"
 #define EVENT_UNEXPECTED_ERROR_IN_STORE     @"UnexpectedErrorInStore"
 
 
@@ -98,7 +99,8 @@
 + (void)postMarketPurchase:(PurchasableVirtualItem*)purchasableVirtualItem withReceiptUrl:(NSURL*)receiptUrl andPurchaseToken:(NSString*)token;
 + (void)postMarketPurchaseVerification:(BOOL)verified forItem:(PurchasableVirtualItem*)purchasableVirtualItem andTransaction:(SKPaymentTransaction*)transaction forObject:(id)object;
 + (void)postMarketPurchaseStarted:(PurchasableVirtualItem*)purchasableVirtualItem;
-+ (void)postMarketItemsRefreshed:(NSArray*)marketItems;
++ (void)postMarketItemsRefreshStarted;
++ (void)postMarketItemsRefreshFinished:(NSArray*)marketItems;
 + (void)postRestoreTransactionsFinished:(BOOL)success;
 + (void)postRestoreTransactionsStarted;
 + (void)postUnexpectedError:(int)code forObject:(id)object;
