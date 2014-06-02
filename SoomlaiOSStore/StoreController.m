@@ -141,12 +141,6 @@ static NSString* TAG = @"SOOMLA StoreController";
     return [ObscuredNSUserDefaults boolForKey:@"RESTORED" withDefaultValue:NO];
 }
 
-- (void)refreshMarketItemsDetails {
-    SKProductsRequest *productsRequest = [[SKProductsRequest alloc] initWithProductIdentifiers:[[NSSet alloc] initWithArray:[[StoreInfo getInstance] allProductIds]]];
-    productsRequest.delegate = self;
-    [productsRequest start];
-}
-
 - (BOOL)isInitialized {
     return self.initialized;
 }
@@ -303,10 +297,6 @@ static NSString* TAG = @"SOOMLA StoreController";
     productsRequest.delegate = self;
     [productsRequest start];
     [EventHandling postMarketItemsRefreshStarted];
-}
-
-- (BOOL)isInitialized {
-    return self.initialized;
 }
 
 - (void)productsRequest:(SKProductsRequest *)request didReceiveResponse:(SKProductsResponse *)response
