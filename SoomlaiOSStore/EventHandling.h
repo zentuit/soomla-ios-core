@@ -1,17 +1,17 @@
 /*
- * Copyright (C) 2012 Soomla Inc.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
+ Copyright (C) 2012-2014 Soomla Inc.
+
+ Licensed under the Apache License, Version 2.0 (the "License");
+ you may not use this file except in compliance with the License.
+ You may obtain a copy of the License at
+
+ http://www.apache.org/licenses/LICENSE-2.0
+
+ Unless required by applicable law or agreed to in writing, software
+ distributed under the License is distributed on an "AS IS" BASIS,
+ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ See the License for the specific language governing permissions and
+ limitations under the License.
  */
 
 
@@ -47,7 +47,6 @@
 #define EVENT_UNEXPECTED_ERROR_IN_STORE     @"UnexpectedErrorInStore"
 
 
-
 // UserInfo Elements
 #define DICT_ELEMENT_BALANCE           @"balance"
 #define DICT_ELEMENT_CURRENCY          @"VirtualCurrency"
@@ -69,6 +68,7 @@
 #define DICT_ELEMENT_LOCALE            @"locale"
 #define DICT_ELEMENT_MARKET_ITEMS      @"marketItems"
 
+
 // Error Codes
 #define ERR_GENERAL                 0
 #define ERR_VERIFICATION_TIMEOUT    1
@@ -77,34 +77,51 @@
 
 
 /**
- * This class is used register and post all the supported events.
+ * This class is used to register and post all the supported events.
  * Use this class to invoke events on handlers when they occur.
  *
- * SOOMLA uses iOS's NSNotificationCenter to handle events across the SDK.
+ * SOOMLA uses iOS's `NSNotificationCenter` to handle events across the SDK.
  */
 @interface EventHandling : NSObject
 
 + (void)observeAllEventsWithObserver:(id)observer withSelector:(SEL)selector;
 
 + (void)postBillingSupported;
+
 + (void)postBillingNotSupported;
+
 + (void)postChangedBalance:(int)balance forCurrency:(VirtualCurrency*)currency withAmount:(int)amountAdded;
+
 + (void)postChangedBalance:(int)balance forGood:(VirtualGood*)good withAmount:(int)amountAdded;
+
 + (void)postGoodEquipped:(EquippableVG*)good;
+
 + (void)postGoodUnEquipped:(EquippableVG*)good;
+
 + (void)postGoodUpgrade:(VirtualGood*)good withGoodUpgrade:(UpgradeVG*)goodUpgrade;
+
 + (void)postItemPurchaseStarted:(PurchasableVirtualItem*)item;
+
 + (void)postItemPurchased:(PurchasableVirtualItem*)item;
+
 + (void)postMarketPurchaseCancelled:(PurchasableVirtualItem*)purchasableVirtualItem;
+
 + (void)postMarketPurchase:(PurchasableVirtualItem*)purchasableVirtualItem withReceiptUrl:(NSURL*)receiptUrl andPurchaseToken:(NSString*)token;
+
 + (void)postMarketPurchaseVerification:(BOOL)verified forItem:(PurchasableVirtualItem*)purchasableVirtualItem andTransaction:(SKPaymentTransaction*)transaction forObject:(id)object;
+
 + (void)postMarketPurchaseStarted:(PurchasableVirtualItem*)purchasableVirtualItem;
+
 + (void)postMarketItemsRefreshStarted;
+
 + (void)postMarketItemsRefreshFinished:(NSArray*)marketItems;
+
 + (void)postRestoreTransactionsFinished:(BOOL)success;
+
 + (void)postRestoreTransactionsStarted;
+
 + (void)postUnexpectedError:(int)code forObject:(id)object;
+
 + (void)postStoreControllerInitialized;
 
 @end
-
