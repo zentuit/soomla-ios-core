@@ -26,7 +26,7 @@
 #import "UpgradeVG.h"
 #import "EquippableVG.h"
 #import "VirtualItemNotFoundException.h"
-#import "StoreUtils.h"
+#import "SoomlaUtils.h"
 
 
 @implementation StoreInventory

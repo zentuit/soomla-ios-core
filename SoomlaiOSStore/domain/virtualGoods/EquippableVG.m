@@ -20,7 +20,7 @@
 #import "VirtualGoodStorage.h"
 #import "NotEnoughGoodsException.h"
 #import "VirtualItemNotFoundException.h"
-#import "StoreUtils.h"
+#import "SoomlaUtils.h"
 #import "VirtualCategory.h"
 #import "StoreInfo.h"
 

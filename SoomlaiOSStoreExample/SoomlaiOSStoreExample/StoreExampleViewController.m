@@ -16,7 +16,7 @@
 
 #import "StoreExampleViewController.h"
 #import <QuartzCore/QuartzCore.h>
-#import "EventHandling.h"
+#import "StoreEventHandling.h"
 #import "VirtualGoodsViewController.h"
 #import "StoreInventory.h"
 #import "MuffinRushAssets.h"
@@ -24,7 +24,7 @@
 #import "PurchasableVirtualItem.h"
 #import "PurchaseWithMarket.h"
 #import "MarketItem.h"
-#import "StoreUtils.h"
+#import "SoomlaUtils.h"
 
 @interface StoreExampleViewController (){
     BOOL dragging;

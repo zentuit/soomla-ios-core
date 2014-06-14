@@ -18,8 +18,6 @@
 #import "VirtualCurrencyStorage.h"
 #import "VirtualGoodStorage.h"
 #import "NonConsumableStorage.h"
-#import "KeyValueStorage.h"
-#import "StoreUtils.h"
 #import "VirtualItemStorage.h"
 #import "VirtualItem.h"
 #import "VirtualGood.h"
@@ -28,7 +26,7 @@
 
 @implementation StorageManager
 
-@synthesize virtualCurrencyStorage, virtualGoodStorage, nonConsumableStorage, keyValueStorage;
+@synthesize virtualCurrencyStorage, virtualGoodStorage, nonConsumableStorage;
 
 static NSString* TAG = @"SOOMLA StorageManager";
 
@@ -47,7 +45,6 @@ static NSString* TAG = @"SOOMLA StorageManager";
 - (id)init{
     self = [super init];
     if (self){
-        self.keyValueStorage = [[KeyValueStorage alloc] init];
         self.virtualCurrencyStorage = [[VirtualCurrencyStorage alloc] init];
         self.virtualGoodStorage = [[VirtualGoodStorage alloc] init];
         self.nonConsumableStorage = [[NonConsumableStorage alloc] init];
@@ -66,50 +63,6 @@ static NSString* TAG = @"SOOMLA StorageManager";
     }
     
     return storage;
-}
-
-+ (BOOL)addSkipBackupAttributeToItemAtURL:(NSURL *)URL
-{
-    assert([[NSFileManager defaultManager] fileExistsAtPath: [URL path]]);
-    
-    NSError *error = nil;
-    BOOL success = [URL setResourceValue: [NSNumber numberWithBool: YES]
-                                  forKey: NSURLIsExcludedFromBackupKey error: &error];
-    if(!success){
-        NSLog(@"Error excluding %@ from backup %@", [URL lastPathComponent], error);
-    }
-    return success;
-}
-
-+ (NSString *) applicationDirectory
-{
-    static NSString* appDir = nil;
-    
-    if (appDir == nil) {
-        NSArray *paths = NSSearchPathForDirectoriesInDomains(NSApplicationSupportDirectory, NSUserDomainMask, YES);
-        if ([paths count] == 0)
-        {
-            // *** creation and return of error object omitted for space
-            return nil;
-        }
-        
-        NSString *basePath = [paths objectAtIndex:0];
-        NSError *error;
-        
-        NSFileManager *fManager = [NSFileManager defaultManager];
-        if (![fManager fileExistsAtPath:basePath]) {
-            if (![fManager createDirectoryAtPath:basePath
-                     withIntermediateDirectories:YES
-                                      attributes:nil
-                                           error:&error])
-            {
-                LogError(TAG, ([NSString stringWithFormat:@"Create directory error: %@", error]));
-                return nil;
-            }
-        }
-        appDir = [basePath copy];
-    }
-    return appDir;
 }
 
 @end

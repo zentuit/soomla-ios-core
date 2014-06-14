@@ -18,7 +18,7 @@
 #import "JSONConsts.h"
 #import "StorageManager.h"
 #import "VirtualGoodStorage.h"
-#import "StoreUtils.h"
+#import "SoomlaUtils.h"
 #import "StoreInfo.h"
 #import "VirtualItemNotFoundException.h"
 

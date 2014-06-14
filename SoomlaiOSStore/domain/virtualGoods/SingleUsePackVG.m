@@ -20,7 +20,7 @@
 #import "VirtualGoodStorage.h"
 #import "SingleUseVG.h"
 #import "StoreInfo.h"
-#import "StoreUtils.h"
+#import "SoomlaUtils.h"
 #import "VirtualItemNotFoundException.h"
 
 @implementation SingleUsePackVG

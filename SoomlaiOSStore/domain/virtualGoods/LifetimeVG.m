@@ -15,7 +15,7 @@
  */
 
 #import "LifetimeVG.h"
-#import "StoreUtils.h"
+#import "SoomlaUtils.h"
 #import "StorageManager.h"
 #import "VirtualGoodStorage.h"
 

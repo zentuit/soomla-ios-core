@@ -17,7 +17,7 @@
 #import "NonConsumableStorage.h"
 #import "StorageManager.h"
 #import "NonConsumableItem.h"
-#import "StoreUtils.h"
+#import "SoomlaUtils.h"
 #import "KeyValueStorage.h"
 #import "KeyValDatabase.h"
 
@@ -28,25 +28,29 @@ static NSString* TAG = @"SOOMLA NonConsumableStorage";
 - (BOOL)nonConsumableExists:(NonConsumableItem*)nonConsumableItem{
     LogDebug(TAG, @"trying to figure out if the given NonConsumable item exists.")
     
-    NSString* key = [KeyValDatabase keyNonConsExists:nonConsumableItem.itemId];
-    NSString* val = [[[StorageManager getInstance] keyValueStorage] getValueForKey:key];
+    NSString* key = [NonConsumableStorage keyNonConsExists:nonConsumableItem.itemId];
+    NSString* val = [KeyValueStorage getValueForKey:key];
     return val != nil;
 }
 
 - (BOOL)add:(NonConsumableItem*)nonConsumableItem{
     LogDebug(TAG, ([NSString stringWithFormat:@"Adding NonConsumable %@", nonConsumableItem.itemId]));
     
-    NSString* key = [KeyValDatabase keyNonConsExists:nonConsumableItem.itemId];
-    [[[StorageManager getInstance] keyValueStorage] setValue:@"" forKey:key];
+    NSString* key = [NonConsumableStorage keyNonConsExists:nonConsumableItem.itemId];
+    [KeyValueStorage setValue:@"" forKey:key];
     return 1;
 }
 
 - (BOOL)remove:(NonConsumableItem*)nonConsumableItem{
     LogDebug(TAG, ([NSString stringWithFormat:@"Removing NonConsumable %@", nonConsumableItem.itemId]));
     
-    NSString* key = [KeyValDatabase keyNonConsExists:nonConsumableItem.itemId];
-    [[[StorageManager getInstance] keyValueStorage] deleteValueForKey:key];
+    NSString* key = [NonConsumableStorage keyNonConsExists:nonConsumableItem.itemId];
+    [KeyValueStorage deleteValueForKey:key];
     return 0;
+}
+
++ (NSString*) keyNonConsExists:(NSString*)productId {
+    return [NSString stringWithFormat:@"nonconsumable.%@.exists", productId];
 }
 
 

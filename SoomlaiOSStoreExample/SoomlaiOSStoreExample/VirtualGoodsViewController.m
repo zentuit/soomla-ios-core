@@ -20,7 +20,7 @@
 #import "VirtualGood.h"
 #import "VirtualGoodCell.h"
 #import "StoreController.h"
-#import "EventHandling.h"
+#import "StoreEventHandling.h"
 #import "StoreInventory.h"
 #import "InsufficientFundsException.h"
 #import "PurchaseWithVirtualItem.h"

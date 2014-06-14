@@ -21,7 +21,7 @@
 #import "PurchaseWithVirtualItem.h"
 #import "MarketItem.h"
 #import "VirtualItem.h"
-#import "StoreUtils.h"
+#import "SoomlaUtils.h"
 #import "VirtualItemNotFoundException.h"
 
 @implementation PurchasableVirtualItem

@@ -17,9 +17,8 @@
 #import "VirtualGoodStorage.h"
 #import "VirtualGood.h"
 #import "StorageManager.h"
-#import "KeyValDatabase.h"
-#import "EventHandling.h"
-#import "StoreUtils.h"
+#import "StoreEventHandling.h"
+#import "SoomlaUtils.h"
 #import "StoreInfo.h"
 #import "VirtualItemNotFoundException.h"
 #import "UpgradeVG.h"
@@ -42,11 +41,11 @@
 - (void)removeUpgradesFrom:(VirtualGood*)good withEvent:(BOOL)notify {
     LogDebug(tag, ([NSString stringWithFormat:@"Removing upgrade information from virtual good: %@", good.name]));
     
-    NSString* key = [KeyValDatabase keyGoodUpgrade:good.itemId];
+    NSString* key = [VirtualGoodStorage keyGoodUpgrade:good.itemId];
     
-    [[[StorageManager getInstance] keyValueStorage] deleteValueForKey:key];
+    [KeyValueStorage deleteValueForKey:key];
     
-    [EventHandling postGoodUpgrade:good withGoodUpgrade:nil];
+    [StoreEventHandling postGoodUpgrade:good withGoodUpgrade:nil];
 }
 
 - (void)assignCurrentUpgrade:(UpgradeVG*)upgradeVG toGood:(VirtualGood*)good {
@@ -60,19 +59,19 @@
     
     LogDebug(tag, ([NSString stringWithFormat:@"Assigning upgrade %@ to virtual good: %@", upgradeVG.name, good.name]));
     
-    NSString* key = [KeyValDatabase keyGoodUpgrade:good.itemId];
+    NSString* key = [VirtualGoodStorage keyGoodUpgrade:good.itemId];
     
-    [[[StorageManager getInstance] keyValueStorage] setValue:upgradeVG.itemId forKey:key];
+    [KeyValueStorage setValue:upgradeVG.itemId forKey:key];
     
-    [EventHandling postGoodUpgrade:good withGoodUpgrade:upgradeVG];
+    [StoreEventHandling postGoodUpgrade:good withGoodUpgrade:upgradeVG];
 }
 
 - (UpgradeVG*)currentUpgradeOf:(VirtualGood*)good {
     LogDebug(tag, ([NSString stringWithFormat:@"Fetching upgrade to virtual good: %@", good.name]));
     
-    NSString* key = [KeyValDatabase keyGoodUpgrade:good.itemId];
+    NSString* key = [VirtualGoodStorage keyGoodUpgrade:good.itemId];
     
-    NSString* upItemId = [[[StorageManager getInstance] keyValueStorage] getValueForKey:key];
+    NSString* upItemId = [KeyValueStorage getValueForKey:key];
     
     if(!upItemId) {
         LogDebug(tag, ([NSString stringWithFormat:@"You tried to fetch the current upgrade of %@ but there's no upgrade in the DB for it.", good.name]));
@@ -93,8 +92,8 @@
 - (BOOL)isGoodEquipped:(EquippableVG*)good {
     LogDebug(tag, ([NSString stringWithFormat:@"checking if virtual good with itemId: %@ is equipped", good.itemId]));
     
-    NSString* key = [KeyValDatabase keyGoodEquipped:good.itemId];
-    NSString* val = [[[StorageManager getInstance] keyValueStorage] getValueForKey:key];
+    NSString* key = [VirtualGoodStorage keyGoodEquipped:good.itemId];
+    NSString* val = [KeyValueStorage getValueForKey:key];
     
     if (!val || [val length]==0){
         return NO;
@@ -129,17 +128,17 @@
 - (void)privEquipGood:(EquippableVG*)good withEquipValue:(BOOL)equip withEvent:(BOOL)notify{
     LogDebug(tag, ([NSString stringWithFormat:@"%@ %@.", (equip ? @"equipping" : @"unequipping"), good.name]));
     
-    NSString* key = [KeyValDatabase keyGoodEquipped:good.itemId];
+    NSString* key = [VirtualGoodStorage keyGoodEquipped:good.itemId];
     
     if (equip) {
-        [[[StorageManager getInstance] keyValueStorage] setValue:@"equipped" forKey:key];
+        [KeyValueStorage setValue:@"equipped" forKey:key];
         if (notify) {
-            [EventHandling postGoodEquipped:good];
+            [StoreEventHandling postGoodEquipped:good];
         }
     } else {
-        [[[StorageManager getInstance] keyValueStorage] deleteValueForKey:key];
+        [KeyValueStorage deleteValueForKey:key];
         if (notify) {
-            [EventHandling postGoodUnEquipped:good];
+            [StoreEventHandling postGoodUnEquipped:good];
         }
     }
 }
@@ -148,14 +147,26 @@
  * see parent
  */
 - (NSString*)keyBalance:(NSString*)itemId {
-    return [KeyValDatabase keyGoodBalance:itemId];
+    return [VirtualGoodStorage keyGoodBalance:itemId];
 }
 
 /**
  * see parent
  */
 - (void)postBalanceChangeToItem:(VirtualItem*)item withBalance:(int)balance andAmountAdded:(int)amountAdded {
-    [EventHandling postChangedBalance:balance forGood:(VirtualGood*)item withAmount:amountAdded];
+    [StoreEventHandling postChangedBalance:balance forGood:(VirtualGood*)item withAmount:amountAdded];
+}
+
++ (NSString*) keyGoodBalance:(NSString*)itemId {
+    return [NSString stringWithFormat:@"good.%@.balance", itemId];
+}
+
++ (NSString*) keyGoodEquipped:(NSString*)itemId {
+    return [NSString stringWithFormat:@"good.%@.equipped", itemId];
+}
+
++ (NSString*) keyGoodUpgrade:(NSString*)itemId {
+    return [NSString stringWithFormat:@"good.%@.currentUpgrade", itemId];
 }
 
 @end

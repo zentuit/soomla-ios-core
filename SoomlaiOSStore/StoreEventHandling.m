@@ -15,11 +15,11 @@
  */
 
 
-#import "EventHandling.h"
+#import "StoreEventHandling.h"
 #import "MarketItem.h"
 #import "VirtualGood.h"
 
-@implementation EventHandling
+@implementation StoreEventHandling
 
 + (void)observeAllEventsWithObserver:(id)observer withSelector:(SEL)selector{
     [[NSNotificationCenter defaultCenter] addObserver:observer selector:selector name:EVENT_BILLING_NOT_SUPPORTED object:nil];

@@ -16,9 +16,9 @@
 
 #import "PurchaseWithMarket.h"
 #import "MarketItem.h"
-#import "StoreUtils.h"
+#import "SoomlaUtils.h"
 #import "StoreController.h"
-#import "EventHandling.h"
+#import "StoreEventHandling.h"
 
 @implementation PurchaseWithMarket
 
@@ -47,11 +47,11 @@ static NSString* TAG = @"SOOMLA PurchaseWithMarket";
     LogDebug(TAG, ([NSString stringWithFormat:@"Starting in-app purchase for productId: %@", self.marketItem.productId]));
     
     if (![[StoreController getInstance] buyInMarketWithMarketItem:self.marketItem]) {
-        [EventHandling postUnexpectedError:ERR_PURCHASE_FAIL forObject:self];
+        [StoreEventHandling postUnexpectedError:ERR_PURCHASE_FAIL forObject:self];
         return;
     }
     
-    [EventHandling postItemPurchaseStarted:self.associatedItem];
+    [StoreEventHandling postItemPurchaseStarted:self.associatedItem];
 }
 
 @end

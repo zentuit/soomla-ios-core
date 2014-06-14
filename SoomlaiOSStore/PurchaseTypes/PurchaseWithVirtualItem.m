@@ -15,9 +15,9 @@
  */
 
 #import "PurchaseWithVirtualItem.h"
-#import "StoreUtils.h"
+#import "SoomlaUtils.h"
 #import "VirtualItem.h"
-#import "EventHandling.h"
+#import "StoreEventHandling.h"
 #import "PurchasableVirtualItem.h"
 #import "VirtualItemStorage.h"
 #import "StorageManager.h"
@@ -47,7 +47,7 @@ static NSString* TAG = @"SOOMLA PurchaseWithVirtualItem";
     LogDebug(TAG, ([NSString stringWithFormat:@"Trying to buy a %@ with %d pieces of %@.",
                     self.associatedItem.name, self.amount, self.targetItemId]));
     
-    [EventHandling postItemPurchaseStarted:self.associatedItem];
+    [StoreEventHandling postItemPurchaseStarted:self.associatedItem];
     
     VirtualItem* item = NULL;
     @try {
@@ -68,7 +68,7 @@ static NSString* TAG = @"SOOMLA PurchaseWithVirtualItem";
     [storage removeAmount:amount fromItem:item];
     
     [self.associatedItem giveAmount:1];
-    [EventHandling postItemPurchased:self.associatedItem];
+    [StoreEventHandling postItemPurchased:self.associatedItem];
 }
 
 

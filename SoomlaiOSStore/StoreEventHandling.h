@@ -82,7 +82,7 @@
  *
  * SOOMLA uses iOS's `NSNotificationCenter` to handle events across the SDK.
  */
-@interface EventHandling : NSObject
+@interface StoreEventHandling : NSObject
 
 + (void)observeAllEventsWithObserver:(id)observer withSelector:(SEL)selector;
 

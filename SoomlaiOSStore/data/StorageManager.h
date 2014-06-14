@@ -19,7 +19,6 @@
 @class VirtualGoodStorage;
 @class VirtualCurrencyStorage;
 @class NonConsumableStorage;
-@class KeyValueStorage;
 @class VirtualItemStorage;
 @class VirtualItem;
 
@@ -33,13 +32,11 @@
     VirtualGoodStorage* virtualGoodStorage;
     VirtualCurrencyStorage* virtualCurrenctStorage;
     NonConsumableStorage* nonConsumableStorage;
-    KeyValueStorage* keyValueStorage;
 }
 
 @property (nonatomic, retain)VirtualGoodStorage* virtualGoodStorage;
 @property (nonatomic, retain)VirtualCurrencyStorage* virtualCurrencyStorage;
 @property (nonatomic, retain)NonConsumableStorage* nonConsumableStorage;
-@property (nonatomic, retain)KeyValueStorage* keyValueStorage;
 
 + (StorageManager*)getInstance;
 
@@ -53,13 +50,5 @@
  */
 - (VirtualItemStorage*)virtualItemStorage:(VirtualItem*)item;
 
-+ (NSString *) applicationDirectory;
-
-/**
- Prevent the file with the given URL from being backed up to iCloud
-
- See https://developer.apple.com/library/ios/qa/qa1719/_index.html
- */
-+ (BOOL)addSkipBackupAttributeToItemAtURL:(NSURL *)URL;
 
 @end

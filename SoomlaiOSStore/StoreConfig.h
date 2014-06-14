@@ -26,16 +26,6 @@
 extern const int METADATA_VERSION;
 
 /**
- Set to 'YES' if you want to print out debug messages
- */
-extern BOOL STORE_DEBUG_LOG;
-
-/** 
- CHANGE THIS SECRET NOW !
- */
-extern NSString* SOOM_SEC;
-
-/**
  When set to 'YES', this removes the need to verify purchases when there's no
  signature.
  NOTE: This is useful while you are in development and testing stages of your 
@@ -46,7 +36,3 @@ extern NSString* SOOM_SEC;
 extern BOOL VERIFY_PURCHASES;
 
 extern NSString* VERIFY_URL;
-
-
-
-

@@ -453,6 +453,7 @@
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 					"../SoomlaiOSStore/**",
+					"../submodules/soomla-ios-core/SoomlaiOSCore/**",
 				);
 				INFOPLIST_FILE = "SoomlaiOSStoreExample/SoomlaiOSStoreExample-Info.plist";
 				OTHER_LDFLAGS = "-ObjC";
@@ -471,6 +472,7 @@
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 					"../SoomlaiOSStore/**",
+					"../submodules/soomla-ios-core/SoomlaiOSCore/**",
 				);
 				INFOPLIST_FILE = "SoomlaiOSStoreExample/SoomlaiOSStoreExample-Info.plist";
 				OTHER_LDFLAGS = "-ObjC";

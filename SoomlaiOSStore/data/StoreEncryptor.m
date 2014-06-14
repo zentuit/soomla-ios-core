@@ -19,7 +19,7 @@
 #import <CommonCrypto/CommonCryptor.h>
 #import "FBEncryptorAES.h"
 #import "ObscuredNSUserDefaults.h"
-#import "StoreUtils.h"
+#import "SoomlaUtils.h"
 
 @implementation StoreEncryptor
 
@@ -33,7 +33,7 @@
     if (!sec || [sec length]==0) {
         LogError(@"SOOMLA StoreEncryptor", @"Custom sercet not provided. This is serious and can lead to multiple errors!");
     }
-    return [sec stringByAppendingString:[StoreUtils deviceId]];
+    return [sec stringByAppendingString:[SoomlaUtils deviceId]];
 }
 
 + (NSString *)encryptString:(NSString *)data{

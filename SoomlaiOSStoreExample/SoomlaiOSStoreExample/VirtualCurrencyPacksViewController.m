@@ -17,7 +17,7 @@
 #import "VirtualCurrencyPacksViewController.h"
 #import "MuffinRushAssets.h"
 #import "StoreInfo.h"
-#import "EventHandling.h"
+#import "StoreEventHandling.h"
 #import "StoreInventory.h"
 #import "StoreController.h"
 #import "VirtualCurrencyPack.h"

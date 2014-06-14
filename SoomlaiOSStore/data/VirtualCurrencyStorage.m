@@ -17,7 +17,7 @@
 #import "VirtualCurrencyStorage.h"
 #import "VirtualCurrency.h"
 #import "StorageManager.h"
-#import "EventHandling.h"
+#import "StoreEventHandling.h"
 #import "KeyValDatabase.h"
 
 @implementation VirtualCurrencyStorage
@@ -36,7 +36,7 @@
  @return A string that contains the name of the storage base, the itemId, and balance.
  */
 - (NSString*)keyBalance:(NSString*)itemId {
-    return [KeyValDatabase keyCurrencyBalance:itemId];
+    return [VirtualCurrencyStorage keyCurrencyBalance:itemId];
 }
 
 /**
@@ -47,7 +47,11 @@
  @param amountAdded The amount added to the item's balance.
  */
 - (void)postBalanceChangeToItem:(VirtualItem*)item withBalance:(int)balance andAmountAdded:(int)amountAdded {
-    [EventHandling postChangedBalance:balance forCurrency:(VirtualCurrency*)item withAmount:amountAdded];
+    [StoreEventHandling postChangedBalance:balance forCurrency:(VirtualCurrency*)item withAmount:amountAdded];
+}
+
++ (NSString*) keyCurrencyBalance:(NSString*)itemId {
+    return [NSString stringWithFormat:@"currency.%@.balance", itemId];
 }
 
 @end

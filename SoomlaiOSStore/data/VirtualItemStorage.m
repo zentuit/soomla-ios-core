@@ -18,7 +18,7 @@
 #import "VirtualItem.h"
 #import "StorageManager.h"
 #import "KeyValDatabase.h"
-#import "StoreUtils.h"
+#import "SoomlaUtils.h"
 #import "KeyValueStorage.h"
 
 @implementation VirtualItemStorage
@@ -27,7 +27,7 @@
     LogDebug(tag, ([NSString stringWithFormat:@"trying to fetch balance for virtual item with itemId: %@", item.itemId]));
     
     NSString* key = [self keyBalance:item.itemId];
-    NSString* val = [[[StorageManager getInstance] keyValueStorage] getValueForKey:key];
+    NSString* val = [KeyValueStorage getValueForKey:key];
     
     if (!val || [val length]==0){
         return 0;
@@ -46,7 +46,7 @@
     
     NSString* key = [self keyBalance:item.itemId];
     int balance = [self balanceForItem:item] + amount;
-    [[[StorageManager getInstance] keyValueStorage] setValue:[NSString stringWithFormat:@"%d",balance] forKey:key];
+    [KeyValueStorage setValue:[NSString stringWithFormat:@"%d",balance] forKey:key];
 
     if (notify) {
         [self postBalanceChangeToItem:item withBalance:balance andAmountAdded:amount];
@@ -68,7 +68,7 @@
 	    balance = 0;
 	    amount = 0;
 	}
-    [[[StorageManager getInstance] keyValueStorage] setValue:[NSString stringWithFormat:@"%d",balance] forKey:key];
+    [KeyValueStorage setValue:[NSString stringWithFormat:@"%d",balance] forKey:key];
     
     if (notify) {
         [self postBalanceChangeToItem:item withBalance:balance andAmountAdded:(-1*amount)];
@@ -89,7 +89,7 @@
     }
     
     NSString* key = [self keyBalance:item.itemId];
-    [[[StorageManager getInstance] keyValueStorage] setValue:[NSString stringWithFormat:@"%d",balance] forKey:key];
+    [KeyValueStorage setValue:[NSString stringWithFormat:@"%d",balance] forKey:key];
     
     if (notify) {
         [self postBalanceChangeToItem:item withBalance:balance andAmountAdded:0];

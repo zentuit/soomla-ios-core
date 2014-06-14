@@ -26,7 +26,7 @@
 #import "VirtualItemNotFoundException.h"
 #import "MarketItem.h"
 #import "ObscuredNSUserDefaults.h"
-#import "StoreUtils.h"
+#import "SoomlaUtils.h"
 #import "PurchaseType.h"
 #import "PurchaseWithMarket.h"
 #import "PurchaseWithVirtualItem.h"
@@ -36,6 +36,7 @@
 #import "SingleUsePackVG.h"
 #import "UpgradeVG.h"
 #import "KeyValueStorage.h"
+#import "StoreConfig.h"
 
 @implementation StoreInfo
 
@@ -49,6 +50,7 @@ static NSString* TAG = @"SOOMLA StoreInfo";
     @synchronized( self ) {
         if( _instance == nil ) {
             _instance = [[StoreInfo alloc ] init];
+            [self checkMetadataVersion];
         }
     }
     
@@ -72,9 +74,9 @@ static NSString* TAG = @"SOOMLA StoreInfo";
 
 - (void) save {
     // put StoreInfo in the database as JSON
-    NSString* storeInfoJSON = [StoreUtils dictToJsonString:[self toDictionary]];
+    NSString* storeInfoJSON = [SoomlaUtils dictToJsonString:[self toDictionary]];
     NSString* ec = [[NSString alloc] initWithData:[storeInfoJSON dataUsingEncoding:NSUTF8StringEncoding] encoding:NSUTF8StringEncoding];
-    [[[StorageManager getInstance] keyValueStorage] setValue:ec forKey:[KeyValDatabase keyMetaStoreInfo]];
+    [KeyValueStorage setValue:ec forKey:[StoreInfo keyMetaStoreInfo]];
 }
 
 - (void)save:(VirtualItem*)virtualItem {
@@ -213,7 +215,7 @@ static NSString* TAG = @"SOOMLA StoreInfo";
 }
 
 - (BOOL)initializeFromDB{
-    NSString* storeInfoJSON = [[[StorageManager getInstance] keyValueStorage] getValueForKey:[KeyValDatabase keyMetaStoreInfo]];
+    NSString* storeInfoJSON = [KeyValueStorage getValueForKey:[StoreInfo keyMetaStoreInfo]];
     
     if(!storeInfoJSON || [storeInfoJSON length] == 0){
         LogDebug(TAG, @"store json is not in DB yet.")
@@ -224,7 +226,7 @@ static NSString* TAG = @"SOOMLA StoreInfo";
     
     @try {
         
-        NSDictionary* storeInfo = [StoreUtils jsonStringToDict:storeInfoJSON];
+        NSDictionary* storeInfo = [SoomlaUtils jsonStringToDict:storeInfoJSON];
         
         self.virtualItems = [NSMutableDictionary dictionary];
         self.purchasableItems = [NSMutableDictionary dictionary];
@@ -450,6 +452,22 @@ static NSString* TAG = @"SOOMLA StoreInfo";
 
 - (BOOL)goodHasUpgrades:(NSString*)goodItemId {
     return [goodsUpgrades objectForKey:goodItemId] != NULL;
+}
+
++ (void)checkMetadataVersion {
+    int mt_ver = [ObscuredNSUserDefaults intForKey:@"MT_VER" withDefaultValue:0];
+    int sa_ver_old = [ObscuredNSUserDefaults intForKey:@"SA_VER_OLD" withDefaultValue:-1];
+    int sa_ver_new = [ObscuredNSUserDefaults intForKey:@"SA_VER_NEW" withDefaultValue:1];
+    if (mt_ver < METADATA_VERSION || sa_ver_old < sa_ver_new) {
+        [ObscuredNSUserDefaults setInt:METADATA_VERSION forKey:@"MT_VER"];
+        [ObscuredNSUserDefaults setInt:sa_ver_new forKey:@"SA_VER_OLD"];
+        
+        [KeyValueStorage deleteValueForKey:[self keyMetaStoreInfo]];
+    }
+}
+
++ (NSString*) keyMetaStoreInfo {
+    return @"meta.storeinfo";
 }
 
 @end

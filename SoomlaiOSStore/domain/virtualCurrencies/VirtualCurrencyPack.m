@@ -19,7 +19,7 @@
 #import "JSONConsts.h"
 #import "VirtualItemNotFoundException.h"
 #import "MarketItem.h"
-#import "StoreUtils.h"
+#import "SoomlaUtils.h"
 #import "StorageManager.h"
 #import "VirtualCurrencyStorage.h"
 #import "StoreInfo.h"

@@ -15,9 +15,9 @@
  */
 
 #import "SoomlaVerification.h"
-#import "StoreUtils.h"
+#import "SoomlaUtils.h"
 #import "PurchasableVirtualItem.h"
-#import "EventHandling.h"
+#import "StoreEventHandling.h"
 #import "StoreConfig.h"
 
 #import "FBEncryptorAES.h"
@@ -57,7 +57,7 @@ static NSString* TAG = @"SOOMLA SoomlaVerification";
                                   [data base64Encoding], @"receipt_base64",
                                   nil];
 
-        NSData *postData = [[StoreUtils dictToJsonString:postDict] dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
+        NSData *postData = [[SoomlaUtils dictToJsonString:postDict] dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
         
         NSString *postLength = [NSString stringWithFormat:@"%d", [postData length]];
         
@@ -75,7 +75,7 @@ static NSString* TAG = @"SOOMLA SoomlaVerification";
         [conn start];
     } else {
         LogError(TAG, ([NSString stringWithFormat:@"An error occured while trying to get receipt data. Stopping the purchasing process for: %@", transaction.payment.productIdentifier]));
-        [EventHandling postUnexpectedError:ERR_VERIFICATION_TIMEOUT forObject:self];
+        [StoreEventHandling postUnexpectedError:ERR_VERIFICATION_TIMEOUT forObject:self];
     }
 }
 
@@ -99,7 +99,7 @@ static NSString* TAG = @"SOOMLA SoomlaVerification";
     NSNumber* verifiedNum = nil;
     if (![dataStr isEqualToString:@""]) {
         @try {
-            NSDictionary* responseDict = [StoreUtils jsonStringToDict:dataStr];
+            NSDictionary* responseDict = [SoomlaUtils jsonStringToDict:dataStr];
             verifiedNum = (NSNumber*)[responseDict objectForKey:@"verified"];
         } @catch (NSException* e) {
             LogError(TAG, @"There was a problem when verifying when handling response.");
@@ -109,17 +109,17 @@ static NSString* TAG = @"SOOMLA SoomlaVerification";
     BOOL verified = NO;
     if (responseCode==200 && verifiedNum) {
         verified = [verifiedNum boolValue];
-        [EventHandling postMarketPurchaseVerification:verified forItem:purchasable andTransaction:transaction forObject:self];
+        [StoreEventHandling postMarketPurchaseVerification:verified forItem:purchasable andTransaction:transaction forObject:self];
     } else {
         LogError(TAG, @"There was a problem when verifying. Will try again later.");
-        [EventHandling postUnexpectedError:ERR_VERIFICATION_TIMEOUT forObject:self];
+        [StoreEventHandling postUnexpectedError:ERR_VERIFICATION_TIMEOUT forObject:self];
     }
 }
 
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
     LogError(TAG, @"Failed to connect to verification server. Not doing anything ... the purchasing process will happen again next time the service is initialized.");
     LogDebug(TAG, [error description]);
-    [EventHandling postUnexpectedError:ERR_VERIFICATION_TIMEOUT forObject:self];
+    [StoreEventHandling postUnexpectedError:ERR_VERIFICATION_TIMEOUT forObject:self];
 }
 
 // - (BOOL)connection:(NSURLConnection *)connection canAuthenticateAgainstProtectionSpace:(NSURLProtectionSpace *)protectionSpace {

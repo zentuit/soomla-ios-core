@@ -18,7 +18,7 @@
 #import "StoreConfig.h"
 #import "StorageManager.h"
 #import "StoreInfo.h"
-#import "EventHandling.h"
+#import "StoreEventHandling.h"
 #import "VirtualGood.h"
 #import "VirtualCategory.h"
 #import "VirtualCurrency.h"
@@ -32,7 +32,7 @@
 #import "ObscuredNSUserDefaults.h"
 #import "MarketItem.h"
 #import "NonConsumableItem.h"
-#import "StoreUtils.h"
+#import "SoomlaUtils.h"
 #import "PurchaseWithMarket.h"
 
 #import "SoomlaVerification.h"
@@ -84,15 +84,15 @@ static NSString* TAG = @"SOOMLA StoreController";
     if ([SKPaymentQueue canMakePayments]) {
         [[SKPaymentQueue defaultQueue] addTransactionObserver:self];
 
-        [EventHandling postBillingSupported];
+        [StoreEventHandling postBillingSupported];
     } else {
-        [EventHandling postBillingNotSupported];
+        [StoreEventHandling postBillingNotSupported];
     }
 
     [self refreshMarketItemsDetails];
 
     self.initialized = YES;
-    [EventHandling postStoreControllerInitialized];
+    [StoreEventHandling postStoreControllerInitialized];
 
     return YES;
 }
@@ -108,7 +108,7 @@ static NSString* TAG = @"SOOMLA StoreController";
 
         @try {
             PurchasableVirtualItem* pvi = [[StoreInfo getInstance] purchasableItemWithProductId:marketItem.productId];
-            [EventHandling postMarketPurchaseStarted:pvi];
+            [StoreEventHandling postMarketPurchaseStarted:pvi];
         }
         @catch (NSException *exception) {
             LogError(TAG, ([NSString stringWithFormat:@"Couldn't find a purchasable item with productId: %@", marketItem.productId]));
@@ -134,7 +134,7 @@ static NSString* TAG = @"SOOMLA StoreController";
         [[SKPaymentQueue defaultQueue] restoreCompletedTransactions];
     }
 
-    [EventHandling postRestoreTransactionsStarted];
+    [StoreEventHandling postRestoreTransactionsStarted];
 }
 
 - (BOOL)transactionsAlreadyRestored {
@@ -188,9 +188,9 @@ static NSString* TAG = @"SOOMLA StoreController";
         receiptUrl = [[NSBundle mainBundle] appStoreReceiptURL];
     }
 
-    [EventHandling postMarketPurchase:pvi withReceiptUrl:receiptUrl andPurchaseToken:transaction.transactionIdentifier];
+    [StoreEventHandling postMarketPurchase:pvi withReceiptUrl:receiptUrl andPurchaseToken:transaction.transactionIdentifier];
     [pvi giveAmount:1];
-    [EventHandling postItemPurchased:pvi];
+    [StoreEventHandling postItemPurchased:pvi];
 
     // Remove the transaction from the payment queue.
     [[SKPaymentQueue defaultQueue] finishTransaction: transaction];
@@ -212,7 +212,7 @@ static NSString* TAG = @"SOOMLA StoreController";
     } else {
         LogError(TAG, @"Failed to verify transaction receipt. The user will not get what he just bought.");
         [[SKPaymentQueue defaultQueue] finishTransaction: transaction];
-        [EventHandling postUnexpectedError:ERR_VERIFICATION_FAIL forObject:self];
+        [StoreEventHandling postUnexpectedError:ERR_VERIFICATION_FAIL forObject:self];
     }
 }
 
@@ -242,7 +242,7 @@ static NSString* TAG = @"SOOMLA StoreController";
     } @catch (VirtualItemNotFoundException* e) {
         LogError(TAG, ([NSString stringWithFormat:@"An error occured when handling copmleted purchase for PurchasableVirtualItem with productId: %@"
                         @". It's unexpected so an unexpected error is being emitted.", transaction.payment.productIdentifier]));
-        [EventHandling postUnexpectedError:ERR_PURCHASE_FAIL forObject:self];
+        [StoreEventHandling postUnexpectedError:ERR_PURCHASE_FAIL forObject:self];
     }
 }
 
@@ -263,19 +263,19 @@ static NSString* TAG = @"SOOMLA StoreController";
     if (transaction.error.code != SKErrorPaymentCancelled) {
         LogError(TAG, ([NSString stringWithFormat:@"An error occured for product id \"%@\" with code \"%ld\" and description \"%@\"", transaction.payment.productIdentifier, (long)transaction.error.code, transaction.error.localizedDescription]));
 
-        [EventHandling postUnexpectedError:ERR_PURCHASE_FAIL forObject:self];
+        [StoreEventHandling postUnexpectedError:ERR_PURCHASE_FAIL forObject:self];
     }
     else{
 
         @try {
             PurchasableVirtualItem* pvi = [[StoreInfo getInstance] purchasableItemWithProductId:transaction.payment.productIdentifier];
 
-            [EventHandling postMarketPurchaseCancelled:pvi];
+            [StoreEventHandling postMarketPurchaseCancelled:pvi];
         }
         @catch (VirtualItemNotFoundException* e) {
             LogError(TAG, ([NSString stringWithFormat:@"Couldn't find the CANCELLED VirtualCurrencyPack OR MarketItem with productId: %@"
                             @". It's unexpected so an unexpected error is being emitted.", transaction.payment.productIdentifier]));
-            [EventHandling postUnexpectedError:ERR_GENERAL forObject:self];
+            [StoreEventHandling postUnexpectedError:ERR_GENERAL forObject:self];
         }
 
     }
@@ -284,11 +284,11 @@ static NSString* TAG = @"SOOMLA StoreController";
 
 - (void)paymentQueueRestoreCompletedTransactionsFinished:(SKPaymentQueue *)queue {
     [ObscuredNSUserDefaults setBool:YES forKey:@"RESTORED"];
-    [EventHandling postRestoreTransactionsFinished:YES];
+    [StoreEventHandling postRestoreTransactionsFinished:YES];
 }
 
 - (void)paymentQueue:(SKPaymentQueue *)queue restoreCompletedTransactionsFailedWithError:(NSError *)error {
-    [EventHandling postRestoreTransactionsFinished:NO];
+    [StoreEventHandling postRestoreTransactionsFinished:NO];
 }
 
 
@@ -296,7 +296,7 @@ static NSString* TAG = @"SOOMLA StoreController";
     SKProductsRequest *productsRequest = [[SKProductsRequest alloc] initWithProductIdentifiers:[[NSSet alloc] initWithArray:[[StoreInfo getInstance] allProductIds]]];
     productsRequest.delegate = self;
     [productsRequest start];
-    [EventHandling postMarketItemsRefreshStarted];
+    [StoreEventHandling postMarketItemsRefreshStarted];
 }
 
 - (void)productsRequest:(SKProductsRequest *)request didReceiveResponse:(SKProductsResponse *)response
@@ -328,7 +328,7 @@ static NSString* TAG = @"SOOMLA StoreController";
         @catch (VirtualItemNotFoundException* e) {
             LogError(TAG, ([NSString stringWithFormat:@"Couldn't find the PurchasableVirtualItem with productId: %@"
                             @". It's unexpected so an unexpected error is being emitted.", productId]));
-            [EventHandling postUnexpectedError:ERR_GENERAL forObject:self];
+            [StoreEventHandling postUnexpectedError:ERR_GENERAL forObject:self];
         }
     }
 
@@ -344,7 +344,7 @@ static NSString* TAG = @"SOOMLA StoreController";
         LogError(TAG, ([NSString stringWithFormat: @"Expecting %d products but only fetched %d from iTunes Store" , (int)idsCount, (int)productsCount]));
     }
 
-    [EventHandling postMarketItemsRefreshFinished:marketItems];
+    [StoreEventHandling postMarketItemsRefreshFinished:marketItems];
 }
 
 

@@ -17,7 +17,7 @@
 #import "NonConsumableItem.h"
 #import "StorageManager.h"
 #import "NonConsumableStorage.h"
-#import "StoreUtils.h"
+#import "SoomlaUtils.h"
 
 @implementation NonConsumableItem
 
