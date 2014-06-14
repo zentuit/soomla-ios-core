@@ -89,6 +89,7 @@
 		C023347A194B05C0005DE53A /* SequenceReward.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SequenceReward.m; sourceTree = "<group>"; };
 		C0233487194B06C1005DE53A /* SoomlaEventHandling.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoomlaEventHandling.h; sourceTree = "<group>"; };
 		C0233488194B06C1005DE53A /* SoomlaEventHandling.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SoomlaEventHandling.m; sourceTree = "<group>"; };
+		C02334C1194B7431005DE53A /* libSoomlaiOSStore.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libSoomlaiOSStore.a; path = "../../../../../Library/Developer/Xcode/DerivedData/SoomlaiOSStore-clnhbmzrwjohwlalusgueasqjdke/Build/Products/Release-iphoneos/libSoomlaiOSStore.a"; sourceTree = "<group>"; };
 		C0B3C5EF168C6D0C00161FAA /* libSoomlaiOSCore.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libSoomlaiOSCore.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		C0B3C5F2168C6D0C00161FAA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
@@ -179,6 +180,7 @@
 		C0B3C5F1168C6D0C00161FAA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				C02334C1194B7431005DE53A /* libSoomlaiOSStore.a */,
 				C0B3C5F2168C6D0C00161FAA /* Foundation.framework */,
 			);
 			name = Frameworks;
@@ -375,7 +377,10 @@
 				GCC_PREFIX_HEADER = "SoomlaiOSCore/SoomlaiOSCore-Prefix.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
 				HEADER_SEARCH_PATHS = "";
-				LIBRARY_SEARCH_PATHS = ../../../Soomla/Assets/Plugins/iOS;
+				LIBRARY_SEARCH_PATHS = (
+					../../../Soomla/Assets/Plugins/iOS,
+					"$(USER_LIBRARY_DIR)/Developer/Xcode/DerivedData/SoomlaiOSStore-clnhbmzrwjohwlalusgueasqjdke/Build/Products/Release-iphoneos",
+				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRIVATE_HEADERS_FOLDER_PATH = headers/private;
 				PRODUCT_NAME = SoomlaiOSCore;
@@ -392,7 +397,10 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "SoomlaiOSCore/SoomlaiOSCore-Prefix.pch";
 				HEADER_SEARCH_PATHS = "";
-				LIBRARY_SEARCH_PATHS = ../../../Soomla/Assets/Plugins/iOS;
+				LIBRARY_SEARCH_PATHS = (
+					../../../Soomla/Assets/Plugins/iOS,
+					"$(USER_LIBRARY_DIR)/Developer/Xcode/DerivedData/SoomlaiOSStore-clnhbmzrwjohwlalusgueasqjdke/Build/Products/Release-iphoneos",
+				);
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "-ObjC";
 				PRIVATE_HEADERS_FOLDER_PATH = headers/private;

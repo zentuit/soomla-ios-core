@@ -25,7 +25,7 @@
 static NSString* TAG = @"SOOMLA StoreUtils";
 
 + (void)LogDebug:(NSString*)tag withMessage:(NSString*)msg {
-    if (STORE_DEBUG_LOG) {
+    if (DEBUG_LOG) {
         NSLog(@"[Debug] %@: %@", tag, msg);
     }
 }
