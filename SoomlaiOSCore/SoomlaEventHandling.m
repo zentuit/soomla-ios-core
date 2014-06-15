@@ -15,7 +15,7 @@
 + (void)postRewardGiven:(Reward *)reward {
     NSDictionary *userInfo = [NSDictionary dictionaryWithObjectsAndKeys:
                               reward, DICT_ELEMENT_REWARD,
-                              [reward isKindOfClass:[BadgeReward class]], DICT_ELEMENT_IS_BADGE,
+                              [NSNumber numberWithBool:[reward isKindOfClass:[BadgeReward class]]], DICT_ELEMENT_IS_BADGE,
                               nil];
     [[NSNotificationCenter defaultCenter] postNotificationName:EVENT_BP_REWARD_GIVEN object:self userInfo:userInfo];
 }
