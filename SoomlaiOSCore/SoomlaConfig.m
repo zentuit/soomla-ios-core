@@ -16,11 +16,7 @@
 
 #import "SoomlaConfig.h"
 
-#ifdef DEBUG
-BOOL DEBUG_LOG                = YES;
-#else
 BOOL DEBUG_LOG                = NO;
-#endif
 
 NSString* SOOM_SEC  = @"SINC_SSIEEKK";
 

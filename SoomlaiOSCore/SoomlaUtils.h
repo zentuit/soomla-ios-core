@@ -60,5 +60,7 @@
 
 + (BOOL)addSkipBackupAttributeToItemAtURL:(NSURL *)URL;
 
++ (void)setLoggingEnabled:(BOOL)logEnabled;
+
 @end
 

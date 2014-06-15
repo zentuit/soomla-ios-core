@@ -155,4 +155,8 @@ static NSString* TAG = @"SOOMLA StoreUtils";
     return success;
 }
 
++ (void)setLoggingEnabled:(BOOL)logEnabled {
+    DEBUG_LOG = logEnabled;
+}
+
 @end
