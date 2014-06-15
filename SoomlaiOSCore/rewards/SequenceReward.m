@@ -17,7 +17,6 @@
 #import "SequenceReward.h"
 #import "JSONConsts.h"
 #import "BadgeReward.h"
-//#import "VirtualItemReward.h"
 #import "RewardStorage.h"
 #import "SoomlaUtils.h"
 
@@ -25,10 +24,16 @@
 
 @synthesize rewards;
 
+static NSString* TYPE_NAME = @"sequence";
 static NSString* TAG = @"SOOMLA SequenceReward";
 
 - (id)initWithRewardId:(NSString *)oRewardId andName:(NSString *)oName andRewards:(NSArray *)oRewards {
     if (self = [super initWithRewardId:oRewardId andName:oName]) {
+        
+        if (![oRewards count]) {
+            LogError(TAG, @"this reward doesn't make sense without items");
+        }
+
         self.rewards = oRewards;
     }
     
@@ -40,19 +45,20 @@ static NSString* TAG = @"SOOMLA SequenceReward";
     if (self = [super initWithDictionary:dict]) {
         
         NSMutableArray* tmpRewards = [NSMutableArray array];
-        NSArray* rewardsArr = [dict objectForKey:BP_REWARDS];
+        NSArray* rewardsArr = dict[BP_REWARDS];
+        
+        if (!rewardsArr) {
+            LogDebug(TAG, @"reward has no meaning without children");
+            rewardsArr = [NSMutableArray array];
+        }
         
         // Iterate over all rewards in the JSON array and for each one create
         // an instance according to the reward type
         for (NSDictionary* rewardDict in rewardsArr) {
             
-            NSString* type = [rewardDict objectForKey:BP_TYPE];
-            if ([type isEqualToString:@"badge"]) {
-                [tmpRewards addObject:[[BadgeReward alloc] initWithDictionary:rewardDict]];
-//            } else if ([type isEqualToString:@"item"]) {
-//                [tmpRewards addObject:[[VirtualItemReward alloc] initWithDictionary:rewardDict]];
-            } else {
-                LogError(TAG, ([NSString stringWithFormat:@"Unknown reward type: %@", type]));
+            Reward* reward = [Reward fromDictionary:rewardDict];
+            if (reward) {
+                [tmpRewards addObject:reward];
             }
         }
         
@@ -71,8 +77,8 @@ static NSString* TAG = @"SOOMLA SequenceReward";
     }
     
     NSMutableDictionary* toReturn = [[NSMutableDictionary alloc] initWithDictionary:parentDict];
-    [toReturn setValue:rewardsArr forKey:BP_REWARDS];
-    [toReturn setValue:@"sequence" forKey:BP_TYPE];
+    [toReturn setObject:rewardsArr forKey:BP_REWARDS];
+    [toReturn setObject:TYPE_NAME forKey:BP_TYPE];
     
     return toReturn;
 }
@@ -112,5 +118,16 @@ static NSString* TAG = @"SOOMLA SequenceReward";
     [RewardStorage setLastSeqIdxGiven:(++idx) ForReward:self];
     return YES;
 }
+
+- (BOOL)takeInner {
+    int idx = [RewardStorage getLastSeqIdxGivenForReward:self];
+    if (idx <= 0) {
+        return NO; // all rewards in the sequence were taken
+    }
+    
+    [RewardStorage setLastSeqIdxGiven:(--idx) ForReward:self];
+    return YES;
+}
+
 
 @end

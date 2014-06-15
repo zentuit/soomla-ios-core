@@ -21,6 +21,7 @@
 
 @synthesize iconUrl;
 
+static NSString* TYPE_NAME = @"badge";
 
 - (id)initWithRewardId:(NSString *)oRewardId andName:(NSString *)oName andIconUrl:(NSString *)oIconUrl {
     if (self = [super initWithRewardId:oRewardId andName:oName]) {
@@ -32,7 +33,7 @@
 
 - (id)initWithDictionary:(NSDictionary *)dict {
     if (self = [super initWithDictionary:dict]) {
-        self.iconUrl = [dict objectForKey:BP_REWARD_ICONURL];
+        self.iconUrl = dict[BP_REWARD_ICONURL];
     }
     
     return self;
@@ -42,8 +43,8 @@
     NSDictionary* parentDict = [super toDictionary];
     
     NSMutableDictionary* toReturn = [[NSMutableDictionary alloc] initWithDictionary:parentDict];
-    [toReturn setValue:self.iconUrl forKey:BP_REWARD_ICONURL];
-    [toReturn setValue:@"badge" forKey:BP_TYPE];
+    [toReturn setObject:self.iconUrl forKey:BP_REWARD_ICONURL];
+    [toReturn setObject:TYPE_NAME forKey:BP_TYPE];
     
     return toReturn;
 }
@@ -54,5 +55,10 @@
     return YES;
 }
 
+- (BOOL)takeInner {
+    
+    // nothing to do here... the parent Reward takes in storage
+    return YES;
+}
 
 @end

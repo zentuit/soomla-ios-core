@@ -13,12 +13,13 @@
 @implementation SoomlaEventHandling
 
 + (void)postRewardGiven:(Reward *)reward {
-    NSDictionary *userInfo = [NSDictionary dictionaryWithObjectsAndKeys:
-                              reward, DICT_ELEMENT_REWARD,
-                              [NSNumber numberWithBool:[reward isKindOfClass:[BadgeReward class]]], DICT_ELEMENT_IS_BADGE,
-                              nil];
+    NSDictionary *userInfo = [NSDictionary dictionaryWithObject:reward forKey:DICT_ELEMENT_REWARD];
     [[NSNotificationCenter defaultCenter] postNotificationName:EVENT_BP_REWARD_GIVEN object:self userInfo:userInfo];
 }
 
++ (void)postRewardTaken:(Reward *)reward {
+    NSDictionary *userInfo = [NSDictionary dictionaryWithObject:reward forKey:DICT_ELEMENT_REWARD];
+    [[NSNotificationCenter defaultCenter] postNotificationName:EVENT_BP_REWARD_TAKEN object:self userInfo:userInfo];
+}
 
 @end

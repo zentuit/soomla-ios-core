@@ -34,13 +34,22 @@
 
 - (NSDictionary *)toDictionary;
 
-- (void)give;
+- (BOOL)give;
 
-- (void)take;
+- (BOOL)take;
 
 - (BOOL)isOwned;
 
-// Abstract method
+// Abstract methods
+
 - (BOOL)giveInner;
+
+- (BOOL)takeInner;
+
+// Static methods
+
++ (Reward *)fromDictionary:(NSDictionary *)dict;
+
++ (NSString *)getTypeName;
 
 @end

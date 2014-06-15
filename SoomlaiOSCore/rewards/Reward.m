@@ -18,12 +18,21 @@
 #import "JSONConsts.h"
 #import "RewardStorage.h"
 #import "SoomlaUtils.h"
+#import "BadgeReward.h"
+#import "RandomReward.h"
+#import "SequenceReward.h"
+#import "DictionaryFactory.h"
+#import "SoomlaEventHandling.h"
 
 @implementation Reward
 
 @synthesize rewardId, name, repeatable;
 
 static NSString* TAG = @"SOOMLA Reward";
+static NSString* TYPE_NAME = @"reward";
+static DictionaryFactory* dictionaryFactory;
+static NSDictionary* typeMap;
+
 
 - (id)initWithRewardId:(NSString *)oRewardId andName:(NSString *)oName {
     self = [super init];
@@ -47,9 +56,9 @@ static NSString* TAG = @"SOOMLA Reward";
     }
     
     if (self) {
-        self.rewardId = [dict objectForKey:BP_REWARD_REWARDID];
-        self.name = [dict objectForKey:BP_NAME];
-        self.repeatable = [[dict objectForKey:BP_REWARD_REPEAT] boolValue];
+        self.rewardId = dict[BP_REWARD_REWARDID];
+        self.name = dict[BP_NAME];
+        self.repeatable = [dict[BP_REWARD_REPEAT] boolValue];
     }
     
     return self;
@@ -63,19 +72,32 @@ static NSString* TAG = @"SOOMLA Reward";
             nil];
 }
 
-- (void)give {
+- (BOOL)give {
     if ([RewardStorage isRewardGiven:self] && !self.repeatable) {
         LogDebug(TAG, ([NSString stringWithFormat:@"Reward was already given and is not repeatable. id: %@", self.rewardId]));
-        return;
+        return NO;
     }
 
     if ([self giveInner]) {
         [RewardStorage setStatus:YES forReward:self];
+        return YES;
     }
+    
+    return NO;
 }
 
-- (void)take {
-    [RewardStorage setStatus:NO forReward:self];
+- (BOOL)take {
+    if ([RewardStorage isRewardGiven:self]) {
+        LogDebug(TAG, ([NSString stringWithFormat:@"Reward not give. id: %@", self.rewardId]));
+        return NO;
+    }
+    
+    if ([self takeInner]) {
+        [RewardStorage setStatus:NO forReward:self];
+        [SoomlaEventHandling postRewardTaken:self];
+        return YES;
+    }
+    return NO;
 }
 
 - (BOOL)isOwned {
@@ -89,6 +111,35 @@ static NSString* TAG = @"SOOMLA Reward";
                                  userInfo:nil];
 }
 
+- (BOOL)takeInner {
+    @throw [NSException exceptionWithName:NSInternalInconsistencyException
+                                   reason:[NSString stringWithFormat:@"You must override %@ in a subclass",
+                                           NSStringFromSelector(_cmd)]
+                                 userInfo:nil];
+}
+
+
+// Static methods
+
++ (Reward *)fromDictionary:(NSDictionary *)dict {
+    return (Reward *)[dictionaryFactory createObjectWithDictionary:dict andTypeMap:typeMap];
+}
+
++ (NSString *)getTypeName {
+    return TYPE_NAME;
+}
+
+
++ (void)initialize {
+    if (self == [Reward self]) {
+        dictionaryFactory = [[DictionaryFactory alloc] init];
+        typeMap = @{
+                    [BadgeReward getTypeName]       : [BadgeReward class],
+                    [RandomReward getTypeName]      : [RandomReward class],
+                    [SequenceReward getTypeName]    : [SequenceReward class]
+                    };
+    }
+}
 
 
 @end

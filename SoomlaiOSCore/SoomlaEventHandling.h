@@ -10,14 +10,15 @@
 
 // Events
 #define EVENT_BP_REWARD_GIVEN                   @"bp_reward_given"
+#define EVENT_BP_REWARD_TAKEN                   @"bp_reward_taken"
 
 
 #define DICT_ELEMENT_REWARD                     @"reward"
-#define DICT_ELEMENT_IS_BADGE                   @"isBadge"
 
 
 @interface SoomlaEventHandling : NSObject
 
 + (void)postRewardGiven:(Reward *)reward;
++ (void)postRewardTaken:(Reward *)reward;
 
 @end
