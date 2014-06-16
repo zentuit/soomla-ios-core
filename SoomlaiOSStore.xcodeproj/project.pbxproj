@@ -80,19 +80,8 @@
 		C097629C18FBF2D9000A4403 /* VirtualItemStorage.h in Headers */ = {isa = PBXBuildFile; fileRef = C0241340176F2512007BB351 /* VirtualItemStorage.h */; settings = {ATTRIBUTES = (Private, ); }; };
 /* End PBXBuildFile section */
 
-/* Begin PBXContainerItemProxy section */
-		C02334CF194C8C30005DE53A /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = C02334BB194B7407005DE53A /* SoomlaiOSCore.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = C0B3C5EF168C6D0C00161FAA;
-			remoteInfo = SoomlaiOSCore;
-		};
-/* End PBXContainerItemProxy section */
-
 /* Begin PBXFileReference section */
 		C018B47B160F5B23000FE817 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
-		C02334BB194B7407005DE53A /* SoomlaiOSCore.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SoomlaiOSCore.xcodeproj; path = "../../../../../../../../work/soomla/ios-store/submodules/soomla-ios-core/SoomlaiOSCore.xcodeproj"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C024132A176F2512007BB351 /* JSONConsts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONConsts.h; sourceTree = "<group>"; };
 		C024132B176F2512007BB351 /* JSONConsts.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSONConsts.m; sourceTree = "<group>"; };
 		C0241330176F2512007BB351 /* NonConsumableStorage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NonConsumableStorage.h; sourceTree = "<group>"; };
@@ -166,6 +155,7 @@
 		C054F21117FAB22A006F5B8E /* SoomlaVerification.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoomlaVerification.h; sourceTree = "<group>"; };
 		C054F21217FAB22A006F5B8E /* SoomlaVerification.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SoomlaVerification.m; sourceTree = "<group>"; };
 		C07DA3C216218309005792DD /* libsqlite3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.0.dylib; path = usr/lib/libsqlite3.0.dylib; sourceTree = SDKROOT; };
+		EF4CDCF8194F18D9008B1CF2 /* SoomlaiOSCore.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SoomlaiOSCore.xcodeproj; path = "submodules/soomla-ios-core/SoomlaiOSCore.xcodeproj"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -185,14 +175,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		C02334CC194C8C30005DE53A /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				C02334D0194C8C30005DE53A /* libSoomlaiOSCore.a */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 		C0241328176F2512007BB351 /* SoomlaiOSStore */ = {
 			isa = PBXGroup;
 			children = (
@@ -317,7 +299,7 @@
 		C02CEC37160DC870000AA0D2 = {
 			isa = PBXGroup;
 			children = (
-				C02334BB194B7407005DE53A /* SoomlaiOSCore.xcodeproj */,
+				EF4CDCF8194F18D9008B1CF2 /* SoomlaiOSCore.xcodeproj */,
 				C0241328176F2512007BB351 /* SoomlaiOSStore */,
 				C02CEC44160DC870000AA0D2 /* Frameworks */,
 				C02CEC43160DC870000AA0D2 /* Products */,
@@ -429,28 +411,12 @@
 			mainGroup = C02CEC37160DC870000AA0D2;
 			productRefGroup = C02CEC43160DC870000AA0D2 /* Products */;
 			projectDirPath = "";
-			projectReferences = (
-				{
-					ProductGroup = C02334CC194C8C30005DE53A /* Products */;
-					ProjectRef = C02334BB194B7407005DE53A /* SoomlaiOSCore.xcodeproj */;
-				},
-			);
 			projectRoot = "";
 			targets = (
 				C02CEC41160DC870000AA0D2 /* SoomlaiOSStore */,
 			);
 		};
 /* End PBXProject section */
-
-/* Begin PBXReferenceProxy section */
-		C02334D0194C8C30005DE53A /* libSoomlaiOSCore.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = libSoomlaiOSCore.a;
-			remoteRef = C02334CF194C8C30005DE53A /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-/* End PBXReferenceProxy section */
 
 /* Begin PBXShellScriptBuildPhase section */
 		C058877018FBD62D007EE0F3 /* ShellScript */ = {
