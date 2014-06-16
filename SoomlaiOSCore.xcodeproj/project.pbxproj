@@ -397,10 +397,7 @@
 				GCC_PREFIX_HEADER = "SoomlaiOSCore/SoomlaiOSCore-Prefix.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
 				HEADER_SEARCH_PATHS = "";
-				LIBRARY_SEARCH_PATHS = (
-					../../../Soomla/Assets/Plugins/iOS,
-					"$(USER_LIBRARY_DIR)/Developer/Xcode/DerivedData/SoomlaiOSStore-clnhbmzrwjohwlalusgueasqjdke/Build/Products/Release-iphoneos",
-				);
+				LIBRARY_SEARCH_PATHS = "$(USER_LIBRARY_DIR)/Developer/Xcode/DerivedData/SoomlaiOSStore-clnhbmzrwjohwlalusgueasqjdke/Build/Products/Release-iphoneos";
 				OTHER_LDFLAGS = "-ObjC";
 				PRIVATE_HEADERS_FOLDER_PATH = headers/private;
 				PRODUCT_NAME = SoomlaiOSCore;
@@ -417,10 +414,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "SoomlaiOSCore/SoomlaiOSCore-Prefix.pch";
 				HEADER_SEARCH_PATHS = "";
-				LIBRARY_SEARCH_PATHS = (
-					../../../Soomla/Assets/Plugins/iOS,
-					"$(USER_LIBRARY_DIR)/Developer/Xcode/DerivedData/SoomlaiOSStore-clnhbmzrwjohwlalusgueasqjdke/Build/Products/Release-iphoneos",
-				);
+				LIBRARY_SEARCH_PATHS = "$(USER_LIBRARY_DIR)/Developer/Xcode/DerivedData/SoomlaiOSStore-clnhbmzrwjohwlalusgueasqjdke/Build/Products/Release-iphoneos";
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "-ObjC";
 				PRIVATE_HEADERS_FOLDER_PATH = headers/private;
