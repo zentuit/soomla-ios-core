@@ -78,6 +78,8 @@
 		C097629B18FBF2D9000A4403 /* VirtualGoodStorage.h in Headers */ = {isa = PBXBuildFile; fileRef = C024133E176F2512007BB351 /* VirtualGoodStorage.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		C097629C18FBF2D9000A4403 /* VirtualItemStorage.h in Headers */ = {isa = PBXBuildFile; fileRef = C0241340176F2512007BB351 /* VirtualItemStorage.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		EF4CDD22194F1F8B008B1CF2 /* libSoomlaiOSCore.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EF4CDD1E194F1F28008B1CF2 /* libSoomlaiOSCore.a */; };
+		EF4CDD2F194F20C7008B1CF2 /* VirtualItemReward.h in Headers */ = {isa = PBXBuildFile; fileRef = EF4CDD2D194F20C7008B1CF2 /* VirtualItemReward.h */; };
+		EF4CDD30194F20C7008B1CF2 /* VirtualItemReward.m in Sources */ = {isa = PBXBuildFile; fileRef = EF4CDD2E194F20C7008B1CF2 /* VirtualItemReward.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -173,6 +175,8 @@
 		C054F21217FAB22A006F5B8E /* SoomlaVerification.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SoomlaVerification.m; sourceTree = "<group>"; };
 		C07DA3C216218309005792DD /* libsqlite3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.0.dylib; path = usr/lib/libsqlite3.0.dylib; sourceTree = SDKROOT; };
 		EF4CDCF8194F18D9008B1CF2 /* SoomlaiOSCore.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SoomlaiOSCore.xcodeproj; path = "submodules/soomla-ios-core/SoomlaiOSCore.xcodeproj"; sourceTree = "<group>"; };
+		EF4CDD2D194F20C7008B1CF2 /* VirtualItemReward.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VirtualItemReward.h; sourceTree = "<group>"; };
+		EF4CDD2E194F20C7008B1CF2 /* VirtualItemReward.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VirtualItemReward.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -195,6 +199,7 @@
 		C0241328176F2512007BB351 /* SoomlaiOSStore */ = {
 			isa = PBXGroup;
 			children = (
+				EF4CDD2C194F20C7008B1CF2 /* rewards */,
 				C0241329176F2512007BB351 /* data */,
 				C0241342176F2512007BB351 /* domain */,
 				C024135F176F2512007BB351 /* StoreEventHandling.h */,
@@ -353,6 +358,15 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		EF4CDD2C194F20C7008B1CF2 /* rewards */ = {
+			isa = PBXGroup;
+			children = (
+				EF4CDD2D194F20C7008B1CF2 /* VirtualItemReward.h */,
+				EF4CDD2E194F20C7008B1CF2 /* VirtualItemReward.m */,
+			);
+			path = rewards;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -364,6 +378,7 @@
 				C097629918FBF2D9000A4403 /* StoreInfo.h in Headers */,
 				C097627618FBF277000A4403 /* IStoreAssets.h in Headers */,
 				C097627818FBF277000A4403 /* StoreConfig.h in Headers */,
+				EF4CDD2F194F20C7008B1CF2 /* VirtualItemReward.h in Headers */,
 				C097627D18FBF27F000A4403 /* PurchaseWithMarket.h in Headers */,
 				C097627E18FBF27F000A4403 /* PurchaseWithVirtualItem.h in Headers */,
 				C097627918FBF277000A4403 /* StoreController.h in Headers */,
@@ -510,6 +525,7 @@
 				C02413DD176F2512007BB351 /* PurchaseType.m in Sources */,
 				C02413E0176F2512007BB351 /* PurchaseWithMarket.m in Sources */,
 				C02413E3176F2512007BB351 /* PurchaseWithVirtualItem.m in Sources */,
+				EF4CDD30194F20C7008B1CF2 /* VirtualItemReward.m in Sources */,
 				C02413E7176F2512007BB351 /* StoreConfig.m in Sources */,
 				C02413EA176F2512007BB351 /* StoreController.m in Sources */,
 				C02413ED176F2512007BB351 /* StoreInventory.m in Sources */,
