@@ -22,7 +22,7 @@
 
 @implementation SoomlaUtils
 
-static NSString* TAG = @"SOOMLA StoreUtils";
+static NSString* TAG = @"SOOMLA SoomlaUtils";
 
 + (void)LogDebug:(NSString*)tag withMessage:(NSString*)msg {
     if (DEBUG_LOG) {
