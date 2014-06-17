@@ -29,7 +29,6 @@
 #import "InsufficientFundsException.h"
 #import "NotEnoughGoodsException.h"
 #import "VirtualItemNotFoundException.h"
-#import "ObscuredNSUserDefaults.h"
 #import "MarketItem.h"
 #import "NonConsumableItem.h"
 #import "SoomlaUtils.h"
@@ -65,25 +64,15 @@ static NSString* TAG = @"SOOMLA StoreController";
 }
 
 
-- (BOOL)initializeWithStoreAssets:(id<IStoreAssets>)storeAssets andCustomSecret:(NSString*)secret {
-
-    if (secret && secret.length > 0) {
-        [ObscuredNSUserDefaults setString:secret forKey:@"ISU#LL#SE#REI"];
-    } else if ([[ObscuredNSUserDefaults stringForKey:@"ISU#LL#SE#REI" withDefaultValue:@""] isEqualToString:@""]){
-        LogError(TAG, @"secret is null or empty. can't initialize store !!");
-        return NO;
-    }
+- (BOOL)initializeWithStoreAssets:(id<IStoreAssets>)storeAssets {
 
     LogDebug(TAG, @"StoreController Initializing ...");
-
-    [ObscuredNSUserDefaults setInt:[storeAssets getVersion] forKey:@"SA_VER_NEW"];
 
     [StorageManager getInstance];
     [[StoreInfo getInstance] initializeWithIStoreAssets:storeAssets];
 
     if ([SKPaymentQueue canMakePayments]) {
         [[SKPaymentQueue defaultQueue] addTransactionObserver:self];
-
         [StoreEventHandling postBillingSupported];
     } else {
         [StoreEventHandling postBillingNotSupported];
@@ -138,7 +127,9 @@ static NSString* TAG = @"SOOMLA StoreController";
 }
 
 - (BOOL)transactionsAlreadyRestored {
-    return [ObscuredNSUserDefaults boolForKey:@"RESTORED" withDefaultValue:NO];
+    
+    // Defaults to NO
+    return [[NSUserDefaults standardUserDefaults] boolForKey:@"RESTORED"];
 }
 
 - (BOOL)isInitialized {
@@ -283,7 +274,10 @@ static NSString* TAG = @"SOOMLA StoreController";
 }
 
 - (void)paymentQueueRestoreCompletedTransactionsFinished:(SKPaymentQueue *)queue {
-    [ObscuredNSUserDefaults setBool:YES forKey:@"RESTORED"];
+    NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setBool:YES forKey:@"RESTORED"];
+    [defaults synchronize];
+    
     [StoreEventHandling postRestoreTransactionsFinished:YES];
 }
 

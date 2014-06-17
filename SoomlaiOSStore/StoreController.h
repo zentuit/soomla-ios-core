@@ -44,11 +44,9 @@
  This initializer also initializes `StoreInfo`.
  
  @param storeAssets The definition of your application specific assets.
- @param customSecret Your encryption secret (it's used to encrypt your data in
-    the database).
  @return YES if successful, NO otherwise.
  */
-- (BOOL)initializeWithStoreAssets:(id<IStoreAssets>)storeAssets andCustomSecret:(NSString*)secret;
+- (BOOL)initializeWithStoreAssets:(id<IStoreAssets>)storeAssets;
 
 /**
  Starts an in app purchase process in the App Store.

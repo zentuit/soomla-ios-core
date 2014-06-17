@@ -25,7 +25,6 @@
 #import "NonConsumableItem.h"
 #import "VirtualItemNotFoundException.h"
 #import "MarketItem.h"
-#import "ObscuredNSUserDefaults.h"
 #import "SoomlaUtils.h"
 #import "PurchaseType.h"
 #import "PurchaseWithMarket.h"
@@ -43,6 +42,7 @@
 @synthesize virtualCategories, virtualCurrencies, virtualCurrencyPacks, virtualGoods, nonConsumableItems, virtualItems, purchasableItems, goodsCategories, goodsUpgrades;
 
 static NSString* TAG = @"SOOMLA StoreInfo";
+static int currentAssetsVersion = 0;
 
 + (StoreInfo*)getInstance{
     static StoreInfo* _instance = nil;
@@ -208,6 +208,9 @@ static NSString* TAG = @"SOOMLA StoreInfo";
         return;
     }
     
+    currentAssetsVersion = [storeAssets getVersion];
+    [StoreInfo checkMetadataVersion];
+    
     // we prefer initialization from the database (storeAssets are only set on the first time the game is loaded)!
     if (![self initializeFromDB]){
         [self privInitializeWithIStoreAssets:storeAssets];
@@ -215,7 +218,11 @@ static NSString* TAG = @"SOOMLA StoreInfo";
 }
 
 - (BOOL)initializeFromDB{
-    NSString* storeInfoJSON = [KeyValueStorage getValueForKey:[StoreInfo keyMetaStoreInfo]];
+    
+    [StoreInfo checkMetadataVersion];
+    
+    NSString* key = [StoreInfo keyMetaStoreInfo];
+    NSString* storeInfoJSON = [KeyValueStorage getValueForKey:key];
     
     if(!storeInfoJSON || [storeInfoJSON length] == 0){
         LogDebug(TAG, @"store json is not in DB yet.")
@@ -455,12 +462,18 @@ static NSString* TAG = @"SOOMLA StoreInfo";
 }
 
 + (void)checkMetadataVersion {
-    int mt_ver = [ObscuredNSUserDefaults intForKey:@"MT_VER" withDefaultValue:0];
-    int sa_ver_old = [ObscuredNSUserDefaults intForKey:@"SA_VER_OLD" withDefaultValue:-1];
-    int sa_ver_new = [ObscuredNSUserDefaults intForKey:@"SA_VER_NEW" withDefaultValue:1];
-    if (mt_ver < METADATA_VERSION || sa_ver_old < sa_ver_new) {
-        [ObscuredNSUserDefaults setInt:METADATA_VERSION forKey:@"MT_VER"];
-        [ObscuredNSUserDefaults setInt:sa_ver_new forKey:@"SA_VER_OLD"];
+    NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
+    
+    int mt_ver = (int)[defaults integerForKey:@"MT_VER"]; // Defaults to 0
+    int sa_ver_old = (int)[defaults integerForKey:@"SA_VER_OLD"];
+    if (!sa_ver_old) {
+        sa_ver_old = -1;
+    }
+    
+    if (mt_ver < METADATA_VERSION || sa_ver_old < currentAssetsVersion) {
+        [defaults setInteger:METADATA_VERSION forKey:@"MT_VER"];
+        [defaults setInteger:currentAssetsVersion forKey:@"SA_VER_OLD"];
+        [defaults synchronize];
         
         [KeyValueStorage deleteValueForKey:[self keyMetaStoreInfo]];
     }

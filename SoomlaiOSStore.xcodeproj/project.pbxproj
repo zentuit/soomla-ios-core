@@ -11,7 +11,6 @@
 		C024137F176F2512007BB351 /* JSONConsts.m in Sources */ = {isa = PBXBuildFile; fileRef = C024132B176F2512007BB351 /* JSONConsts.m */; };
 		C0241388176F2512007BB351 /* NonConsumableStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = C0241331176F2512007BB351 /* NonConsumableStorage.m */; };
 		C024138E176F2512007BB351 /* StorageManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C0241335176F2512007BB351 /* StorageManager.m */; };
-		C0241391176F2512007BB351 /* StoreEncryptor.m in Sources */ = {isa = PBXBuildFile; fileRef = C0241337176F2512007BB351 /* StoreEncryptor.m */; };
 		C0241397176F2512007BB351 /* StoreInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = C024133B176F2512007BB351 /* StoreInfo.m */; };
 		C024139A176F2512007BB351 /* VirtualCurrencyStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = C024133D176F2512007BB351 /* VirtualCurrencyStorage.m */; };
 		C024139D176F2512007BB351 /* VirtualGoodStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = C024133F176F2512007BB351 /* VirtualGoodStorage.m */; };
@@ -72,7 +71,6 @@
 		C097629218FBF2D9000A4403 /* JSONConsts.h in Headers */ = {isa = PBXBuildFile; fileRef = C024132A176F2512007BB351 /* JSONConsts.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		C097629518FBF2D9000A4403 /* NonConsumableStorage.h in Headers */ = {isa = PBXBuildFile; fileRef = C0241330176F2512007BB351 /* NonConsumableStorage.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		C097629718FBF2D9000A4403 /* StorageManager.h in Headers */ = {isa = PBXBuildFile; fileRef = C0241334176F2512007BB351 /* StorageManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		C097629818FBF2D9000A4403 /* StoreEncryptor.h in Headers */ = {isa = PBXBuildFile; fileRef = C0241336176F2512007BB351 /* StoreEncryptor.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		C097629918FBF2D9000A4403 /* StoreInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = C024133A176F2512007BB351 /* StoreInfo.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C097629A18FBF2D9000A4403 /* VirtualCurrencyStorage.h in Headers */ = {isa = PBXBuildFile; fileRef = C024133C176F2512007BB351 /* VirtualCurrencyStorage.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		C097629B18FBF2D9000A4403 /* VirtualGoodStorage.h in Headers */ = {isa = PBXBuildFile; fileRef = C024133E176F2512007BB351 /* VirtualGoodStorage.h */; settings = {ATTRIBUTES = (Private, ); }; };
@@ -107,8 +105,6 @@
 		C0241331176F2512007BB351 /* NonConsumableStorage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NonConsumableStorage.m; sourceTree = "<group>"; };
 		C0241334176F2512007BB351 /* StorageManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StorageManager.h; sourceTree = "<group>"; };
 		C0241335176F2512007BB351 /* StorageManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StorageManager.m; sourceTree = "<group>"; };
-		C0241336176F2512007BB351 /* StoreEncryptor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StoreEncryptor.h; sourceTree = "<group>"; };
-		C0241337176F2512007BB351 /* StoreEncryptor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StoreEncryptor.m; sourceTree = "<group>"; };
 		C024133A176F2512007BB351 /* StoreInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StoreInfo.h; sourceTree = "<group>"; };
 		C024133B176F2512007BB351 /* StoreInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StoreInfo.m; sourceTree = "<group>"; };
 		C024133C176F2512007BB351 /* VirtualCurrencyStorage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VirtualCurrencyStorage.h; sourceTree = "<group>"; };
@@ -229,8 +225,6 @@
 				C0241331176F2512007BB351 /* NonConsumableStorage.m */,
 				C0241334176F2512007BB351 /* StorageManager.h */,
 				C0241335176F2512007BB351 /* StorageManager.m */,
-				C0241336176F2512007BB351 /* StoreEncryptor.h */,
-				C0241337176F2512007BB351 /* StoreEncryptor.m */,
 				C024133A176F2512007BB351 /* StoreInfo.h */,
 				C024133B176F2512007BB351 /* StoreInfo.m */,
 				C024133C176F2512007BB351 /* VirtualCurrencyStorage.h */,
@@ -406,7 +400,6 @@
 				C097628C18FBF2C5000A4403 /* LifetimeVG.h in Headers */,
 				C097628F18FBF2C5000A4403 /* UpgradeVG.h in Headers */,
 				C097629718FBF2D9000A4403 /* StorageManager.h in Headers */,
-				C097629818FBF2D9000A4403 /* StoreEncryptor.h in Headers */,
 				C097628D18FBF2C5000A4403 /* SingleUsePackVG.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -499,7 +492,6 @@
 				C024137F176F2512007BB351 /* JSONConsts.m in Sources */,
 				C0241388176F2512007BB351 /* NonConsumableStorage.m in Sources */,
 				C024138E176F2512007BB351 /* StorageManager.m in Sources */,
-				C0241391176F2512007BB351 /* StoreEncryptor.m in Sources */,
 				C0241397176F2512007BB351 /* StoreInfo.m in Sources */,
 				C024139A176F2512007BB351 /* VirtualCurrencyStorage.m in Sources */,
 				C024139D176F2512007BB351 /* VirtualGoodStorage.m in Sources */,

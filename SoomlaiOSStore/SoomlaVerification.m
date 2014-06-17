@@ -19,9 +19,8 @@
 #import "PurchasableVirtualItem.h"
 #import "StoreEventHandling.h"
 #import "StoreConfig.h"
-
 #import "FBEncryptorAES.h"
-#import "ObscuredNSUserDefaults.h"
+
 
 @implementation SoomlaVerification
 

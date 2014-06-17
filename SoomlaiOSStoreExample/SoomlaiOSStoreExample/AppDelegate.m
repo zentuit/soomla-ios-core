@@ -16,10 +16,10 @@
 
 #import "AppDelegate.h"
 #import "StoreController.h"
+#import "Soomla.h"
 #import "MuffinRushAssets.h"
 #import "StoreInventory.h"
 #import "VirtualCurrency.h"
-#import "ObscuredNSUserDefaults.h"
 
 @implementation AppDelegate
 
@@ -31,13 +31,15 @@
      We initialize StoreController when the application loads !
      */
     id<IStoreAssets> storeAssets = [[MuffinRushAssets alloc] init];
-    [[StoreController getInstance] initializeWithStoreAssets:storeAssets andCustomSecret:@"ChangeMe!!!"];
+    [Soomla initializeWithSecret:@"ChangeMe!!"];
+    [[StoreController getInstance] initializeWithStoreAssets:storeAssets];
     
     // Checking if it's a first run and adding 10000 currencies if it is.
     // OFCOURSE... THIS IS JUST FOR TESTING.
-    if (![ObscuredNSUserDefaults boolForKey:@"NotFirstLaunch" withDefaultValue:nil])
+    NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
+    if (![defaults boolForKey:@"NotFirstLaunch"])
     {
-        [ObscuredNSUserDefaults setBool:YES forKey:@"NotFirstLaunch"];
+        [defaults setBool:YES forKey:@"NotFirstLaunch"];
         [(VirtualCurrency*)[storeAssets.virtualCurrencies objectAtIndex:0] giveAmount:10000];
     }
 
