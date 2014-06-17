@@ -18,15 +18,13 @@
  This file holds soomla's configurations.
  */
 
+extern int SOOMLA_VERSION;
+
+
 /**
  Set to 'YES' if you want to print out debug messages
  */
 extern BOOL DEBUG_LOG;
-
-/** 
- CHANGE THIS SECRET NOW !
- */
-extern NSString* SOOM_SEC;
 
 extern NSString* DB_KEY_PREFIX;
 

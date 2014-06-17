@@ -17,7 +17,6 @@
 #import "SoomlaUtils.h"
 #import "SoomlaConfig.h"
 #import "OpenUDID.h"
-#import "ObscuredNSUserDefaults.h"
 #import <UIKit/UIKit.h>
 
 @implementation SoomlaUtils

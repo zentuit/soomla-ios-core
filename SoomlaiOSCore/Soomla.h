@@ -14,11 +14,12 @@
  limitations under the License.
  */
 
-#import "SoomlaConfig.h"
+#import <Foundation/Foundation.h>
 
+@interface Soomla : NSObject
 
-int SOOMLA_VERSION      = 1;
+extern NSString* SOOMLA_SECRET;
 
-BOOL DEBUG_LOG          = NO;
++ (void)initializeWithSecret:(NSString *)secret;
 
-NSString* DB_KEY_PREFIX = @"soomla.";
+@end

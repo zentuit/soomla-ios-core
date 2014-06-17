@@ -18,7 +18,6 @@
 #import "KeyValDatabase.h"
 #import "SoomlaEncryptor.h"
 #import "KeyValDatabase.h"
-#import "ObscuredNSUserDefaults.h"
 #import "SoomlaConfig.h"
 
 @implementation KeyValueStorage

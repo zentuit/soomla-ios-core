@@ -14,11 +14,14 @@
  limitations under the License.
  */
 
-#import "SoomlaConfig.h"
+#import "Soomla.h"
 
+@implementation Soomla
 
-int SOOMLA_VERSION      = 1;
+NSString* SOOMLA_SECRET = @"SOOMLA_SEC";
 
-BOOL DEBUG_LOG          = NO;
++ (void)initializeWithSecret:(NSString *)secret {
+    SOOMLA_SECRET = secret;
+}
 
-NSString* DB_KEY_PREFIX = @"soomla.";
+@end

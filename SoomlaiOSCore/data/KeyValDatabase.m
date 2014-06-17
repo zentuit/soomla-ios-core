@@ -16,7 +16,6 @@
 
 #import "KeyValDatabase.h"
 #import "SoomlaConfig.h"
-#import "ObscuredNSUserDefaults.h"
 #import "SoomlaUtils.h"
 
 #define DATABASE_NAME @"store.kv.db"
