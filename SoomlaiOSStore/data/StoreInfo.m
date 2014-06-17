@@ -17,7 +17,7 @@
 #import "StoreInfo.h"
 #import "StorageManager.h"
 #import "KeyValDatabase.h"
-#import "JSONConsts.h"
+#import "StoreJSONConsts.h"
 #import "VirtualCategory.h"
 #import "VirtualGood.h"
 #import "VirtualCurrency.h"

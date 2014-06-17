@@ -15,7 +15,7 @@
  */
 
 #import "MarketItem.h"
-#import "JSONConsts.h"
+#import "StoreJSONConsts.h"
 
 @implementation MarketItem
 

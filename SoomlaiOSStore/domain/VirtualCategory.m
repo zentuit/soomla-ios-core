@@ -15,7 +15,7 @@
  */
 
 #import "VirtualCategory.h"
-#import "JSONConsts.h"
+#import "StoreJSONConsts.h"
 
 @implementation VirtualCategory
 

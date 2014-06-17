@@ -15,7 +15,7 @@
  */
 
 #import "EquippableVG.h"
-#import "JSONConsts.h"
+#import "StoreJSONConsts.h"
 #import "StorageManager.h"
 #import "VirtualGoodStorage.h"
 #import "NotEnoughGoodsException.h"

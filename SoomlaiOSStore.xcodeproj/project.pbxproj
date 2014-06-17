@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		C018B64F16105F77000FE817 /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C018B47B160F5B23000FE817 /* CoreFoundation.framework */; };
-		C024137F176F2512007BB351 /* JSONConsts.m in Sources */ = {isa = PBXBuildFile; fileRef = C024132B176F2512007BB351 /* JSONConsts.m */; };
+		C024137F176F2512007BB351 /* StoreJSONConsts.m in Sources */ = {isa = PBXBuildFile; fileRef = C024132B176F2512007BB351 /* StoreJSONConsts.m */; };
 		C0241388176F2512007BB351 /* NonConsumableStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = C0241331176F2512007BB351 /* NonConsumableStorage.m */; };
 		C024138E176F2512007BB351 /* StorageManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C0241335176F2512007BB351 /* StorageManager.m */; };
 		C0241397176F2512007BB351 /* StoreInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = C024133B176F2512007BB351 /* StoreInfo.m */; };
@@ -68,7 +68,7 @@
 		C097628F18FBF2C5000A4403 /* UpgradeVG.h in Headers */ = {isa = PBXBuildFile; fileRef = C0241359176F2512007BB351 /* UpgradeVG.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C097629018FBF2C5000A4403 /* VirtualGood.h in Headers */ = {isa = PBXBuildFile; fileRef = C024135B176F2512007BB351 /* VirtualGood.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C097629118FBF2C5000A4403 /* VirtualItem.h in Headers */ = {isa = PBXBuildFile; fileRef = C024135D176F2512007BB351 /* VirtualItem.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		C097629218FBF2D9000A4403 /* JSONConsts.h in Headers */ = {isa = PBXBuildFile; fileRef = C024132A176F2512007BB351 /* JSONConsts.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		C097629218FBF2D9000A4403 /* StoreJSONConsts.h in Headers */ = {isa = PBXBuildFile; fileRef = C024132A176F2512007BB351 /* StoreJSONConsts.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		C097629518FBF2D9000A4403 /* NonConsumableStorage.h in Headers */ = {isa = PBXBuildFile; fileRef = C0241330176F2512007BB351 /* NonConsumableStorage.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		C097629718FBF2D9000A4403 /* StorageManager.h in Headers */ = {isa = PBXBuildFile; fileRef = C0241334176F2512007BB351 /* StorageManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C097629918FBF2D9000A4403 /* StoreInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = C024133A176F2512007BB351 /* StoreInfo.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -99,8 +99,8 @@
 
 /* Begin PBXFileReference section */
 		C018B47B160F5B23000FE817 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
-		C024132A176F2512007BB351 /* JSONConsts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONConsts.h; sourceTree = "<group>"; };
-		C024132B176F2512007BB351 /* JSONConsts.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSONConsts.m; sourceTree = "<group>"; };
+		C024132A176F2512007BB351 /* StoreJSONConsts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StoreJSONConsts.h; sourceTree = "<group>"; };
+		C024132B176F2512007BB351 /* StoreJSONConsts.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StoreJSONConsts.m; sourceTree = "<group>"; };
 		C0241330176F2512007BB351 /* NonConsumableStorage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NonConsumableStorage.h; sourceTree = "<group>"; };
 		C0241331176F2512007BB351 /* NonConsumableStorage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NonConsumableStorage.m; sourceTree = "<group>"; };
 		C0241334176F2512007BB351 /* StorageManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StorageManager.h; sourceTree = "<group>"; };
@@ -219,8 +219,8 @@
 		C0241329176F2512007BB351 /* data */ = {
 			isa = PBXGroup;
 			children = (
-				C024132A176F2512007BB351 /* JSONConsts.h */,
-				C024132B176F2512007BB351 /* JSONConsts.m */,
+				C024132A176F2512007BB351 /* StoreJSONConsts.h */,
+				C024132B176F2512007BB351 /* StoreJSONConsts.m */,
 				C0241330176F2512007BB351 /* NonConsumableStorage.h */,
 				C0241331176F2512007BB351 /* NonConsumableStorage.m */,
 				C0241334176F2512007BB351 /* StorageManager.h */,
@@ -396,7 +396,7 @@
 				C097627718FBF277000A4403 /* SoomlaVerification.h in Headers */,
 				C097628B18FBF2C5000A4403 /* EquippableVG.h in Headers */,
 				C097629C18FBF2D9000A4403 /* VirtualItemStorage.h in Headers */,
-				C097629218FBF2D9000A4403 /* JSONConsts.h in Headers */,
+				C097629218FBF2D9000A4403 /* StoreJSONConsts.h in Headers */,
 				C097628C18FBF2C5000A4403 /* LifetimeVG.h in Headers */,
 				C097628F18FBF2C5000A4403 /* UpgradeVG.h in Headers */,
 				C097629718FBF2D9000A4403 /* StorageManager.h in Headers */,
@@ -489,7 +489,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C024137F176F2512007BB351 /* JSONConsts.m in Sources */,
+				C024137F176F2512007BB351 /* StoreJSONConsts.m in Sources */,
 				C0241388176F2512007BB351 /* NonConsumableStorage.m in Sources */,
 				C024138E176F2512007BB351 /* StorageManager.m in Sources */,
 				C0241397176F2512007BB351 /* StoreInfo.m in Sources */,

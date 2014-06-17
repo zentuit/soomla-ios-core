@@ -15,7 +15,7 @@
  */
 
 #import "VirtualItem.h"
-#import "JSONConsts.h"
+#import "StoreJSONConsts.h"
 
 @implementation VirtualItem
 

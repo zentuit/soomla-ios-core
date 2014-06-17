@@ -14,7 +14,7 @@
  limitations under the License.
  */
 
-#import "JSONConsts.h"
+#import "StoreJSONConsts.h"
 
 NSString *const JSON_STORE_CURRENCIES         = @"currencies";
 NSString *const JSON_STORE_CURRENCYPACKS      = @"currencyPacks";

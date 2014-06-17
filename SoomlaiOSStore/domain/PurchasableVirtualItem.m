@@ -16,7 +16,7 @@
 
 #import "PurchasableVirtualItem.h"
 #import "PurchaseType.h"
-#import "JSONConsts.h"
+#import "StoreJSONConsts.h"
 #import "PurchaseWithMarket.h"
 #import "PurchaseWithVirtualItem.h"
 #import "MarketItem.h"

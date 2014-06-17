@@ -16,7 +16,7 @@
 
 #import "VirtualCurrencyPack.h"
 #import "VirtualCurrency.h"
-#import "JSONConsts.h"
+#import "StoreJSONConsts.h"
 #import "VirtualItemNotFoundException.h"
 #import "MarketItem.h"
 #import "SoomlaUtils.h"
