@@ -28,7 +28,7 @@
  
  This is the only class you need to initialize in order to use the SOOMLA SDK.
  */
-@interface StoreController : NSObject <SKProductsRequestDelegate, SKPaymentTransactionObserver>{
+@interface SoomlaStore : NSObject <SKProductsRequestDelegate, SKPaymentTransactionObserver>{
     @private
     BOOL initialized;
     SoomlaVerification* sv;
@@ -37,10 +37,10 @@
 @property BOOL initialized;
 
 
-+ (StoreController*)getInstance;
++ (SoomlaStore*)getInstance;
 
 /**
- Initializes `StoreController` from your implementation of `IStoreAssets`.
+ Initializes `SoomlaStore` from your implementation of `IStoreAssets`.
  This initializer also initializes `StoreInfo`.
  
  @param storeAssets The definition of your application specific assets.
@@ -83,7 +83,7 @@
 - (void)refreshMarketItemsDetails;
 
 /**
- Checks if `StoreController` has already been initialized.
+ Checks if `SoomlaStore` has already been initialized.
  
  @return YES if initialized, NO otherwise.
  */

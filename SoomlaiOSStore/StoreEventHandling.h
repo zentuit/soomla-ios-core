@@ -41,7 +41,7 @@
 #define EVENT_MARKET_PURCHASE_STARTED       @"MarketPurchaseProcessStarted"
 #define EVENT_RESTORE_TRANSACTIONS_FINISHED @"RestoreTransactionsFinished"
 #define EVENT_RESTORE_TRANSACTIONS_STARTED  @"RestoreTransactionsStarted"
-#define EVENT_STORECONTROLLER_INIT          @"StoreControllerInitialized"
+#define EVENT_SOOMLASTORE_INIT              @"SoomlaStoreInitialized"
 #define EVENT_MARKET_ITEMS_REFRESH_STARTED  @"MarketItemsRefreshStarted"
 #define EVENT_MARKET_ITEMS_REFRESH_FINISHED @"MarketItemsRefreshFinished"
 #define EVENT_UNEXPECTED_ERROR_IN_STORE     @"UnexpectedErrorInStore"
@@ -122,6 +122,6 @@
 
 + (void)postUnexpectedError:(int)code forObject:(id)object;
 
-+ (void)postStoreControllerInitialized;
++ (void)postSoomlaStoreInitialized;
 
 @end

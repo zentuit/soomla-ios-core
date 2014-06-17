@@ -79,7 +79,7 @@
 /**
  Initializes `StoreInfo` from the database.
  This action should be performed only once during the lifetime of a session of 
- the game. `StoreController` automatically initializes `StoreInfo`.
+ the game. `SoomlaStore` automatically initializes `StoreInfo`.
  Don't do it if you don't know what you're doing.
  
  @return YES if successful, NO otherwise.

@@ -19,7 +19,6 @@
 #import "StoreInfo.h"
 #import "VirtualGood.h"
 #import "VirtualGoodCell.h"
-#import "StoreController.h"
 #import "StoreEventHandling.h"
 #import "StoreInventory.h"
 #import "InsufficientFundsException.h"

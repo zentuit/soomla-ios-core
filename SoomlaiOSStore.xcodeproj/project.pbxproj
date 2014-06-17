@@ -36,7 +36,7 @@
 		C02413E0176F2512007BB351 /* PurchaseWithMarket.m in Sources */ = {isa = PBXBuildFile; fileRef = C0241372176F2512007BB351 /* PurchaseWithMarket.m */; };
 		C02413E3176F2512007BB351 /* PurchaseWithVirtualItem.m in Sources */ = {isa = PBXBuildFile; fileRef = C0241374176F2512007BB351 /* PurchaseWithVirtualItem.m */; };
 		C02413E7176F2512007BB351 /* StoreConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = C0241377176F2512007BB351 /* StoreConfig.m */; };
-		C02413EA176F2512007BB351 /* StoreController.m in Sources */ = {isa = PBXBuildFile; fileRef = C0241379176F2512007BB351 /* StoreController.m */; };
+		C02413EA176F2512007BB351 /* SoomlaStore.m in Sources */ = {isa = PBXBuildFile; fileRef = C0241379176F2512007BB351 /* SoomlaStore.m */; };
 		C02413ED176F2512007BB351 /* StoreInventory.m in Sources */ = {isa = PBXBuildFile; fileRef = C024137B176F2512007BB351 /* StoreInventory.m */; };
 		C02CEC46160DC870000AA0D2 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C02CEC45160DC870000AA0D2 /* Foundation.framework */; };
 		C02CEC79160DCA31000AA0D2 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C02CEC78160DCA31000AA0D2 /* StoreKit.framework */; };
@@ -47,7 +47,7 @@
 		C097627618FBF277000A4403 /* IStoreAssets.h in Headers */ = {isa = PBXBuildFile; fileRef = C024136D176F2512007BB351 /* IStoreAssets.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C097627718FBF277000A4403 /* SoomlaVerification.h in Headers */ = {isa = PBXBuildFile; fileRef = C054F21117FAB22A006F5B8E /* SoomlaVerification.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		C097627818FBF277000A4403 /* StoreConfig.h in Headers */ = {isa = PBXBuildFile; fileRef = C0241376176F2512007BB351 /* StoreConfig.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		C097627918FBF277000A4403 /* StoreController.h in Headers */ = {isa = PBXBuildFile; fileRef = C0241378176F2512007BB351 /* StoreController.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C097627918FBF277000A4403 /* SoomlaStore.h in Headers */ = {isa = PBXBuildFile; fileRef = C0241378176F2512007BB351 /* SoomlaStore.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C097627A18FBF277000A4403 /* StoreInventory.h in Headers */ = {isa = PBXBuildFile; fileRef = C024137A176F2512007BB351 /* StoreInventory.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C097627C18FBF27F000A4403 /* PurchaseType.h in Headers */ = {isa = PBXBuildFile; fileRef = C024136F176F2512007BB351 /* PurchaseType.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C097627D18FBF27F000A4403 /* PurchaseWithMarket.h in Headers */ = {isa = PBXBuildFile; fileRef = C0241371176F2512007BB351 /* PurchaseWithMarket.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -157,8 +157,8 @@
 		C0241375176F2512007BB351 /* SoomlaiOSStore-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SoomlaiOSStore-Prefix.pch"; sourceTree = "<group>"; };
 		C0241376176F2512007BB351 /* StoreConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StoreConfig.h; sourceTree = "<group>"; };
 		C0241377176F2512007BB351 /* StoreConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StoreConfig.m; sourceTree = "<group>"; };
-		C0241378176F2512007BB351 /* StoreController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StoreController.h; sourceTree = "<group>"; };
-		C0241379176F2512007BB351 /* StoreController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StoreController.m; sourceTree = "<group>"; };
+		C0241378176F2512007BB351 /* SoomlaStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoomlaStore.h; sourceTree = "<group>"; };
+		C0241379176F2512007BB351 /* SoomlaStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SoomlaStore.m; sourceTree = "<group>"; };
 		C024137A176F2512007BB351 /* StoreInventory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StoreInventory.h; sourceTree = "<group>"; };
 		C024137B176F2512007BB351 /* StoreInventory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StoreInventory.m; sourceTree = "<group>"; };
 		C02CEC42160DC870000AA0D2 /* libSoomlaiOSStore.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libSoomlaiOSStore.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -208,8 +208,8 @@
 				C0241375176F2512007BB351 /* SoomlaiOSStore-Prefix.pch */,
 				C0241376176F2512007BB351 /* StoreConfig.h */,
 				C0241377176F2512007BB351 /* StoreConfig.m */,
-				C0241378176F2512007BB351 /* StoreController.h */,
-				C0241379176F2512007BB351 /* StoreController.m */,
+				C0241378176F2512007BB351 /* SoomlaStore.h */,
+				C0241379176F2512007BB351 /* SoomlaStore.m */,
 				C024137A176F2512007BB351 /* StoreInventory.h */,
 				C024137B176F2512007BB351 /* StoreInventory.m */,
 			);
@@ -375,7 +375,7 @@
 				EF4CDD2F194F20C7008B1CF2 /* VirtualItemReward.h in Headers */,
 				C097627D18FBF27F000A4403 /* PurchaseWithMarket.h in Headers */,
 				C097627E18FBF27F000A4403 /* PurchaseWithVirtualItem.h in Headers */,
-				C097627918FBF277000A4403 /* StoreController.h in Headers */,
+				C097627918FBF277000A4403 /* SoomlaStore.h in Headers */,
 				C097627A18FBF277000A4403 /* StoreInventory.h in Headers */,
 				C097628218FBF292000A4403 /* InsufficientFundsException.h in Headers */,
 				C097628518FBF2C5000A4403 /* MarketItem.h in Headers */,
@@ -519,7 +519,7 @@
 				C02413E3176F2512007BB351 /* PurchaseWithVirtualItem.m in Sources */,
 				EF4CDD30194F20C7008B1CF2 /* VirtualItemReward.m in Sources */,
 				C02413E7176F2512007BB351 /* StoreConfig.m in Sources */,
-				C02413EA176F2512007BB351 /* StoreController.m in Sources */,
+				C02413EA176F2512007BB351 /* SoomlaStore.m in Sources */,
 				C02413ED176F2512007BB351 /* StoreInventory.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

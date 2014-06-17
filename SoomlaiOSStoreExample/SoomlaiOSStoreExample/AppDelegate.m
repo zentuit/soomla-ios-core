@@ -15,7 +15,7 @@
  */
 
 #import "AppDelegate.h"
-#import "StoreController.h"
+#import "SoomlaStore.h"
 #import "Soomla.h"
 #import "MuffinRushAssets.h"
 #import "StoreInventory.h"
@@ -28,11 +28,11 @@
     [[UIApplication sharedApplication]setStatusBarHidden:YES withAnimation:UIStatusBarAnimationNone];
     
     /**
-     We initialize StoreController when the application loads !
+     We initialize SoomlaStore when the application loads !
      */
     id<IStoreAssets> storeAssets = [[MuffinRushAssets alloc] init];
     [Soomla initializeWithSecret:@"ChangeMe!!"];
-    [[StoreController getInstance] initializeWithStoreAssets:storeAssets];
+    [[SoomlaStore getInstance] initializeWithStoreAssets:storeAssets];
     
     // Checking if it's a first run and adding 10000 currencies if it is.
     // OFCOURSE... THIS IS JUST FOR TESTING.

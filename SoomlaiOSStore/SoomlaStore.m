@@ -14,7 +14,7 @@
  limitations under the License.
  */
 
-#import "StoreController.h"
+#import "SoomlaStore.h"
 #import "StoreConfig.h"
 #import "StorageManager.h"
 #import "StoreInfo.h"
@@ -36,27 +36,27 @@
 
 #import "SoomlaVerification.h"
 
-@implementation StoreController
+@implementation SoomlaStore
 
 @synthesize initialized;
 
-static NSString* TAG = @"SOOMLA StoreController";
+static NSString* TAG = @"SOOMLA SoomlaStore";
 
 - (BOOL)checkInit {
     if (!self.initialized) {
-        LogDebug(TAG, @"You can't perform any of StoreController's actions before it was initialized. Initialize it once when your game loads.");
+        LogDebug(TAG, @"You can't perform any of SoomlaStore's actions before it was initialized. Initialize it once when your game loads.");
         return NO;
     }
 
     return YES;
 }
 
-+ (StoreController*)getInstance{
-    static StoreController* _instance = nil;
++ (SoomlaStore*)getInstance{
+    static SoomlaStore* _instance = nil;
 
     @synchronized( self ) {
         if( _instance == nil ) {
-            _instance = [[StoreController alloc] init];
+            _instance = [[SoomlaStore alloc] init];
         }
     }
 
@@ -66,7 +66,7 @@ static NSString* TAG = @"SOOMLA StoreController";
 
 - (BOOL)initializeWithStoreAssets:(id<IStoreAssets>)storeAssets {
 
-    LogDebug(TAG, @"StoreController Initializing ...");
+    LogDebug(TAG, @"SoomlaStore Initializing ...");
 
     [StorageManager getInstance];
     [[StoreInfo getInstance] initializeWithIStoreAssets:storeAssets];
@@ -81,7 +81,7 @@ static NSString* TAG = @"SOOMLA StoreController";
     [self refreshMarketItemsDetails];
 
     self.initialized = YES;
-    [StoreEventHandling postStoreControllerInitialized];
+    [StoreEventHandling postSoomlaStoreInitialized];
 
     return YES;
 }

@@ -19,7 +19,6 @@
 #import "StoreInfo.h"
 #import "StoreEventHandling.h"
 #import "StoreInventory.h"
-#import "StoreController.h"
 #import "VirtualCurrencyPack.h"
 #import "MarketItem.h"
 #import "VirtualItemNotFoundException.h"
