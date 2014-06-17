@@ -15,7 +15,7 @@
  */
 
 #import "BadgeReward.h"
-#import "CoreJSONConsts.h"
+#import "JSONConsts.h"
 
 @implementation BadgeReward
 

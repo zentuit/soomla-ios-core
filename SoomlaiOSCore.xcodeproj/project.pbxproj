@@ -26,8 +26,8 @@
 		C0233469194AF03A005DE53A /* OpenUDID.m in Sources */ = {isa = PBXBuildFile; fileRef = C0233467194AF03A005DE53A /* OpenUDID.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		C023346C194B055E005DE53A /* RewardStorage.h in Headers */ = {isa = PBXBuildFile; fileRef = C023346A194B055E005DE53A /* RewardStorage.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C023346D194B055E005DE53A /* RewardStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = C023346B194B055E005DE53A /* RewardStorage.m */; };
-		C0233470194B058C005DE53A /* CoreJSONConsts.h in Headers */ = {isa = PBXBuildFile; fileRef = C023346E194B058C005DE53A /* CoreJSONConsts.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		C0233471194B058C005DE53A /* CoreJSONConsts.m in Sources */ = {isa = PBXBuildFile; fileRef = C023346F194B058C005DE53A /* CoreJSONConsts.m */; };
+		C0233470194B058C005DE53A /* JSONConsts.h in Headers */ = {isa = PBXBuildFile; fileRef = C023346E194B058C005DE53A /* JSONConsts.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C0233471194B058C005DE53A /* JSONConsts.m in Sources */ = {isa = PBXBuildFile; fileRef = C023346F194B058C005DE53A /* JSONConsts.m */; };
 		C023347D194B05C0005DE53A /* BadgeReward.h in Headers */ = {isa = PBXBuildFile; fileRef = C0233473194B05C0005DE53A /* BadgeReward.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C023347E194B05C0005DE53A /* BadgeReward.m in Sources */ = {isa = PBXBuildFile; fileRef = C0233474194B05C0005DE53A /* BadgeReward.m */; };
 		C023347F194B05C0005DE53A /* RandomReward.h in Headers */ = {isa = PBXBuildFile; fileRef = C0233475194B05C0005DE53A /* RandomReward.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -78,8 +78,8 @@
 		C0233467194AF03A005DE53A /* OpenUDID.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OpenUDID.m; sourceTree = "<group>"; };
 		C023346A194B055E005DE53A /* RewardStorage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RewardStorage.h; sourceTree = "<group>"; };
 		C023346B194B055E005DE53A /* RewardStorage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RewardStorage.m; sourceTree = "<group>"; };
-		C023346E194B058C005DE53A /* CoreJSONConsts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreJSONConsts.h; sourceTree = "<group>"; };
-		C023346F194B058C005DE53A /* CoreJSONConsts.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoreJSONConsts.m; sourceTree = "<group>"; };
+		C023346E194B058C005DE53A /* JSONConsts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONConsts.h; sourceTree = "<group>"; };
+		C023346F194B058C005DE53A /* JSONConsts.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSONConsts.m; sourceTree = "<group>"; };
 		C0233473194B05C0005DE53A /* BadgeReward.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BadgeReward.h; sourceTree = "<group>"; };
 		C0233474194B05C0005DE53A /* BadgeReward.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BadgeReward.m; sourceTree = "<group>"; };
 		C0233475194B05C0005DE53A /* RandomReward.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RandomReward.h; sourceTree = "<group>"; };
@@ -116,8 +116,8 @@
 		C023342D194AEE5F005DE53A /* data */ = {
 			isa = PBXGroup;
 			children = (
-				C023346E194B058C005DE53A /* CoreJSONConsts.h */,
-				C023346F194B058C005DE53A /* CoreJSONConsts.m */,
+				C023346E194B058C005DE53A /* JSONConsts.h */,
+				C023346F194B058C005DE53A /* JSONConsts.m */,
 				C023346A194B055E005DE53A /* RewardStorage.h */,
 				C023346B194B055E005DE53A /* RewardStorage.m */,
 				C0233430194AEE5F005DE53A /* KeyValDatabase.h */,
@@ -234,7 +234,7 @@
 				C023342B194AEE40005DE53A /* SoomlaUtils.h in Headers */,
 				C0233429194AEE40005DE53A /* SoomlaConfig.h in Headers */,
 				C0233483194B05C0005DE53A /* SequenceReward.h in Headers */,
-				C0233470194B058C005DE53A /* CoreJSONConsts.h in Headers */,
+				C0233470194B058C005DE53A /* JSONConsts.h in Headers */,
 				EF9E24C81950528E007A3082 /* Soomla.h in Headers */,
 				C0233461194AEEB8005DE53A /* NSData-Base64.h in Headers */,
 				C0233448194AEE5F005DE53A /* KeyValueStorage.h in Headers */,
@@ -325,7 +325,7 @@
 				C0233460194AEEB8005DE53A /* FBEncryptorAES.m in Sources */,
 				C0233462194AEEB8005DE53A /* NSData-Base64.m in Sources */,
 				C0233484194B05C0005DE53A /* SequenceReward.m in Sources */,
-				C0233471194B058C005DE53A /* CoreJSONConsts.m in Sources */,
+				C0233471194B058C005DE53A /* JSONConsts.m in Sources */,
 				C0233480194B05C0005DE53A /* RandomReward.m in Sources */,
 				C023342A194AEE40005DE53A /* SoomlaConfig.m in Sources */,
 				EFC127D4194E046100CDA66B /* DictionaryFactory.m in Sources */,

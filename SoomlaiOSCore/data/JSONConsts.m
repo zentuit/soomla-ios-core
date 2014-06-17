@@ -14,7 +14,7 @@
  limitations under the License.
  */
 
-#import "CoreJSONConsts.h"
+#import "JSONConsts.h"
 
 
 /** Global **/

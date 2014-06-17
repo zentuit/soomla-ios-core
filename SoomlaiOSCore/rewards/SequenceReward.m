@@ -15,7 +15,7 @@
  */
 
 #import "SequenceReward.h"
-#import "CoreJSONConsts.h"
+#import "JSONConsts.h"
 #import "BadgeReward.h"
 #import "RewardStorage.h"
 #import "SoomlaUtils.h"
