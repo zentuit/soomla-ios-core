@@ -16,7 +16,6 @@
 
 #import "SoomlaUtils.h"
 #import "SoomlaConfig.h"
-#import "OpenUDID.h"
 #import <UIKit/UIKit.h>
 
 @implementation SoomlaUtils
@@ -37,7 +36,7 @@ static NSString* TAG = @"SOOMLA SoomlaUtils";
     if ([[UIDevice currentDevice] respondsToSelector:@selector(identifierForVendor)]) {
         return [[[UIDevice currentDevice] identifierForVendor] UUIDString];
     } else {
-        return [SOOM_OpenUDID value];
+        return @"SOOMLA_ID_1234567890";
     }
 }
 

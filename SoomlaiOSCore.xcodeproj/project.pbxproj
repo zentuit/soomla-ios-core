@@ -22,8 +22,6 @@
 		C0233461194AEEB8005DE53A /* NSData-Base64.h in Headers */ = {isa = PBXBuildFile; fileRef = C023345D194AEEB8005DE53A /* NSData-Base64.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		C0233462194AEEB8005DE53A /* NSData-Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = C023345E194AEEB8005DE53A /* NSData-Base64.m */; };
 		C0233464194AEF7D005DE53A /* SoomlaiOSCore-Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = C0233463194AEF7D005DE53A /* SoomlaiOSCore-Prefix.pch */; settings = {ATTRIBUTES = (Private, ); }; };
-		C0233468194AF03A005DE53A /* OpenUDID.h in Headers */ = {isa = PBXBuildFile; fileRef = C0233466194AF03A005DE53A /* OpenUDID.h */; settings = {ATTRIBUTES = (Private, ); }; };
-		C0233469194AF03A005DE53A /* OpenUDID.m in Sources */ = {isa = PBXBuildFile; fileRef = C0233467194AF03A005DE53A /* OpenUDID.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		C023346C194B055E005DE53A /* RewardStorage.h in Headers */ = {isa = PBXBuildFile; fileRef = C023346A194B055E005DE53A /* RewardStorage.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C023346D194B055E005DE53A /* RewardStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = C023346B194B055E005DE53A /* RewardStorage.m */; };
 		C0233470194B058C005DE53A /* JSONConsts.h in Headers */ = {isa = PBXBuildFile; fileRef = C023346E194B058C005DE53A /* JSONConsts.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -39,7 +37,6 @@
 		C0233489194B06C1005DE53A /* SoomlaEventHandling.h in Headers */ = {isa = PBXBuildFile; fileRef = C0233487194B06C1005DE53A /* SoomlaEventHandling.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C023348A194B06C1005DE53A /* SoomlaEventHandling.m in Sources */ = {isa = PBXBuildFile; fileRef = C0233488194B06C1005DE53A /* SoomlaEventHandling.m */; };
 		C0B3C5F3168C6D0C00161FAA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C0B3C5F2168C6D0C00161FAA /* Foundation.framework */; };
-		EF4CDD0E194F1D80008B1CF2 /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = EF4CDD0D194F1D80008B1CF2 /* libsqlite3.0.dylib */; };
 		EF9E24C81950528E007A3082 /* Soomla.h in Headers */ = {isa = PBXBuildFile; fileRef = EF9E24C61950528E007A3082 /* Soomla.h */; };
 		EF9E24C91950528E007A3082 /* Soomla.m in Sources */ = {isa = PBXBuildFile; fileRef = EF9E24C71950528E007A3082 /* Soomla.m */; };
 		EFC127D3194E046100CDA66B /* DictionaryFactory.h in Headers */ = {isa = PBXBuildFile; fileRef = EFC127D1194E046100CDA66B /* DictionaryFactory.h */; };
@@ -74,8 +71,6 @@
 		C023345D194AEEB8005DE53A /* NSData-Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData-Base64.h"; sourceTree = "<group>"; };
 		C023345E194AEEB8005DE53A /* NSData-Base64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData-Base64.m"; sourceTree = "<group>"; };
 		C0233463194AEF7D005DE53A /* SoomlaiOSCore-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SoomlaiOSCore-Prefix.pch"; sourceTree = "<group>"; };
-		C0233466194AF03A005DE53A /* OpenUDID.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpenUDID.h; sourceTree = "<group>"; };
-		C0233467194AF03A005DE53A /* OpenUDID.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OpenUDID.m; sourceTree = "<group>"; };
 		C023346A194B055E005DE53A /* RewardStorage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RewardStorage.h; sourceTree = "<group>"; };
 		C023346B194B055E005DE53A /* RewardStorage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RewardStorage.m; sourceTree = "<group>"; };
 		C023346E194B058C005DE53A /* JSONConsts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONConsts.h; sourceTree = "<group>"; };
@@ -105,7 +100,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EF4CDD0E194F1D80008B1CF2 /* libsqlite3.0.dylib in Frameworks */,
 				C0B3C5F3168C6D0C00161FAA /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -139,15 +133,6 @@
 				C023345E194AEEB8005DE53A /* NSData-Base64.m */,
 			);
 			path = FBEncryptor;
-			sourceTree = "<group>";
-		};
-		C0233465194AF03A005DE53A /* OpenUDID */ = {
-			isa = PBXGroup;
-			children = (
-				C0233466194AF03A005DE53A /* OpenUDID.h */,
-				C0233467194AF03A005DE53A /* OpenUDID.m */,
-			);
-			path = OpenUDID;
 			sourceTree = "<group>";
 		};
 		C0233472194B05C0005DE53A /* rewards */ = {
@@ -199,7 +184,6 @@
 				C0233487194B06C1005DE53A /* SoomlaEventHandling.h */,
 				C0233488194B06C1005DE53A /* SoomlaEventHandling.m */,
 				C0233472194B05C0005DE53A /* rewards */,
-				C0233465194AF03A005DE53A /* OpenUDID */,
 				C0233463194AEF7D005DE53A /* SoomlaiOSCore-Prefix.pch */,
 				C023345A194AEEB8005DE53A /* FBEncryptor */,
 				C023342D194AEE5F005DE53A /* data */,
@@ -243,7 +227,6 @@
 				C023347D194B05C0005DE53A /* BadgeReward.h in Headers */,
 				C023345F194AEEB8005DE53A /* FBEncryptorAES.h in Headers */,
 				C0233450194AEE5F005DE53A /* SoomlaEncryptor.h in Headers */,
-				C0233468194AF03A005DE53A /* OpenUDID.h in Headers */,
 				C0233464194AEF7D005DE53A /* SoomlaiOSCore-Prefix.pch in Headers */,
 				EFC127D3194E046100CDA66B /* DictionaryFactory.h in Headers */,
 				C023346C194B055E005DE53A /* RewardStorage.h in Headers */,
@@ -335,7 +318,6 @@
 				C023346D194B055E005DE53A /* RewardStorage.m in Sources */,
 				C023342C194AEE40005DE53A /* SoomlaUtils.m in Sources */,
 				EF9E24C91950528E007A3082 /* Soomla.m in Sources */,
-				C0233469194AF03A005DE53A /* OpenUDID.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
