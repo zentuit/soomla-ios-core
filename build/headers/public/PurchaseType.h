@@ -39,6 +39,6 @@
  @exception InsufficientFundsException Thrown if the user does not have enough 
  funds to buy.
  */
-- (void)buy;
+- (void)buyWithPayload:(NSString*)payload;
 
 @end

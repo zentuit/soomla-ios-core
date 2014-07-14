@@ -55,7 +55,7 @@
     the same in iTunes Connect.
  @return YES if successful, NO otherwise.
  */
-- (BOOL)buyInMarketWithMarketItem:(MarketItem*)marketItem;
+- (BOOL)buyInMarketWithMarketItem:(MarketItem*)marketItem andPayload:(NSString*)payload;
 
 /**
  Initiates the `restoreTransactions` process and the `refreshMarketItemDetails`

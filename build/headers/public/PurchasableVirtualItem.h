@@ -59,7 +59,7 @@
  @exception InsufficientFundsException if user does not have enough funds to buy
  the desired item.
  */
-- (void)buy;
+- (void)buyWithPayload:(NSString*)payload;
 
 /**
  Determines if the user is in a state that allows him/her to buy a specific

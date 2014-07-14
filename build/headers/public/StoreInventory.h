@@ -32,7 +32,7 @@
  @exception VirtualItemNotFoundException Thrown if the virtual item is not
     found.
  */
-+ (void)buyItemWithItemId:(NSString*)itemId;
++ (void)buyItemWithItemId:(NSString*)itemId andPayload:(NSString*)payload;
 
 
 /*VIRTUAL ITEMS **/
