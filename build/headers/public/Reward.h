@@ -16,13 +16,14 @@
 
 #import "SoomlaEntity.h"
 
+@class Schedule;
+
 // TODOL document abstract class
 @interface Reward : SoomlaEntity {
-    @private
-    BOOL repeatable;
+    Schedule* schedule;
 }
 
-@property (nonatomic) BOOL repeatable;
+@property (nonatomic) Schedule* schedule;
 
 
 - (id)initWithRewardId:(NSString *)oRewardId andName:(NSString *)oName;
