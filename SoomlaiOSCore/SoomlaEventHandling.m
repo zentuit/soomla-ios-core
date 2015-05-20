@@ -16,6 +16,7 @@
     [[NSNotificationCenter defaultCenter] addObserver:observer selector:selector name:EVENT_REWARD_GIVEN object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:observer selector:selector name:EVENT_REWARD_TAKEN object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:observer selector:selector name:EVENT_CUSTOM object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:observer selector:selector name:EVENT_KEYVALUE_CHANGE object:nil];
 }
 
 + (void)postRewardGiven:(NSString *)rewardId {
@@ -39,5 +40,14 @@
                                };
     [[NSNotificationCenter defaultCenter] postNotificationName:EVENT_CUSTOM object:self userInfo:userInfo];
 }
+
++ (void)postKeyValueStorageChange:(NSString *)val forKey:(NSString*)key {
+    NSDictionary* userInfo = @{
+                               DICT_ELEMENT_KEY: key,
+                               DICT_ELEMENT_VAL: val
+                               };
+    [[NSNotificationCenter defaultCenter] postNotificationName:EVENT_KEYVALUE_CHANGE object:self userInfo:userInfo];
+}
+
 
 @end
