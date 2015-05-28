@@ -1,7 +1,14 @@
-*This project is a part of The [SOOMLA](http://www.soom.la) Framework, which is a series of open source initiatives with a joint goal to help mobile game developers do more together. SOOMLA encourages better game design, economy modeling, social engagement, and faster development.*
+*This project is a fork of The [SOOMLA](http://www.soom.la) Framework, which is a series of open source initiatives with a joint goal to help mobile game developers do more together. SOOMLA encourages better game design, economy modeling, social engagement, and faster development.
+
+This is the fork that I use for my projects.*
 
 soomla-ios-core
 ===============
+
+*SOOMLA's Core Module for iOS*
+
+**May 28th, 2015**: Added OnChange events to KeyValStorage. Also made this my official fork for my projects.
+
 
 When using the SOOMLA framework, you always start by initializing the core module:
 ```objective-c
