@@ -42,29 +42,16 @@
 }
 
 + (NSString*)getValueForKey:(NSString*)key {
-//    NSString* plainKey = [NSMutableString stringWithString: key];
-    
     key = [SoomlaEncryptor encryptString:key];
     NSString* val = [[self kvDatabase] getValForKey:key];
     if (val && [val length]>0){
-        
-//        if ( ![plainKey hasPrefix:@"meta."]) {
-//            NSLog(@"getValueForKey: %@ -- %@", plainKey, [SoomlaEncryptor decryptToString:val]);
-//        }
-
         return [SoomlaEncryptor decryptToString:val];
     }
-
-//    NSLog(@"getValueForKey: %@ -- nothing found", plainKey);
-
+    
     return NULL;
 }
 
 + (void)setValue:(NSString*)val forKey:(NSString*)key {
-//    if ( ![key hasPrefix:@"meta."]) {
-//        NSLog(@"setValueForKey: key: %@ :: val: %@", key, val);
-//    }
-    
     NSString* plainKey = [NSMutableString stringWithString: key];
     key = [SoomlaEncryptor encryptString:key];
     [[self kvDatabase] setVal:[SoomlaEncryptor encryptString:val] forKey:key];
@@ -85,11 +72,7 @@
         if (val && [val length]>0){
             NSString* valDec = [SoomlaEncryptor decryptToString:val];
             if (valDec && [valDec length]>0){
-                
-                //*tj
-                NSString* dkey = [SoomlaEncryptor decryptToString:key];
-                
-                [results setObject:valDec forKey:dkey];
+                [results setObject:valDec forKey:key];
             }
         }
     }
@@ -158,7 +141,6 @@
 }
 
 + (void)setValue:(NSString*)val forNonEncryptedKey:(NSString*)key {
-    LogDebug(TAG, ([NSString stringWithFormat:@"setValue forNonEncryptedKey key: %@", key]));
     [[self kvDatabase] setVal:[SoomlaEncryptor encryptString:val] forKey:key];
 }
 
