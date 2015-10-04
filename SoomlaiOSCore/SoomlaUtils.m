@@ -21,6 +21,7 @@
 @implementation SoomlaUtils
 
 static NSString* TAG = @"SOOMLA SoomlaUtils";
+static NSString *const SOOMLA_DEVICE_KEY = @"soomlaDeviceId";
 
 + (void)LogDebug:(NSString*)tag withMessage:(NSString*)msg {
     if (DEBUG_LOG) {
@@ -33,11 +34,16 @@ static NSString* TAG = @"SOOMLA SoomlaUtils";
 }
 
 + (NSString*)deviceIdPreferVendor {
-    if ([[UIDevice currentDevice] respondsToSelector:@selector(identifierForVendor)]) {
-        return [[[UIDevice currentDevice] identifierForVendor] UUIDString];
-    } else {
-        return @"SOOMLA_ID_1234567890";
+    NSString *soomlaDeviceKey = [[NSUserDefaults standardUserDefaults] stringForKey:SOOMLA_DEVICE_KEY];
+    if (!soomlaDeviceKey) {
+        if ([[UIDevice currentDevice] respondsToSelector:@selector(identifierForVendor)]) {
+            soomlaDeviceKey = [[[UIDevice currentDevice] identifierForVendor] UUIDString];
+        } else {
+            soomlaDeviceKey = @"SOOMLA_ID_1234567890";
+        }
+        [[NSUserDefaults standardUserDefaults] setObject:soomlaDeviceKey forKey:SOOMLA_DEVICE_KEY];
     }
+    return soomlaDeviceKey;
 }
 
 /* We check for UDID_SOOMLA to support devices with older versions of ios-store */
